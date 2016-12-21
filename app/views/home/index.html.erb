@@ -1,0 +1,338 @@
+<header class="header">
+    <div class="header_container">
+        <div class="row logo_row">
+            <div class="col-md-3 col-sm-3 col-xs-3 logo_left">
+                <div class="logo">
+                    <a href="index.html"><%= image_tag "redmica_logo", alt: "Remedica Logo" %></a>
+                </div>
+            </div>
+            <div class="col-md-9 col-sm-9 col-xs-9 logo_right">
+                <div class="menu">
+                    <ul>
+                        <!--<li><a href="javascript:void(0)" class="treament_btn">Treatments</a></li>-->
+                        <li><a href="#" data-toggle="modal" data-target="#myModal" class="popupopen" onClick="ga('send', 'event', { eventCategory: 'contactUs', eventAction: 'clickContactButtonHeader'});">Contact us</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <section class="banner_sec">
+        <div class="container_info">
+            <div class="banner_cnt">
+                <h1>Consult a registered<br/>
+                    skin &amp; hair specialist<br/>
+                    from your phone</h1>
+                <p>Get a personal treatment plan &amp; prescription for only <span>Rs. 300</span>.</br>No appointment
+                    needed.</p>
+                <h5><a href="tel:8433849086"><i class="fa"><%= image_tag "whatsapp_logo", alt: "whatsapp_logo" %></i> on <span>8433 849 086</span></a>
+                </h5>
+                <span class="or_txt">OR</span>
+                <div class="btns_info"><a href="#" class="letus_btn popupopen" data-toggle="modal"
+                                          data-target="#myModal" onClick="ga('send', 'event', { eventCategory: 'contactUs', eventAction: 'clickContactButtonTop'});">Let us contact you <i class="fa fa-long-arrow-right" aria-hidden="true"></i> </a>
+                </div>
+            </div>
+        </div>
+        <div class="downarrow"><span><i class="fa fa-angle-down"></i></span></div>
+    </section>
+</header>
+<section class="qualif_derma" id="qualif_derma">
+    <div class="container_info">
+        <div class="qualif_dermainfo">
+            <div class="row qualifderma_row">
+                <div class="col-md-6 col-sm-12 col-xs-12 qualifderma_rght wow animated fadeInRight rightfloat">
+                    <h2>Experts in skin &amp; hair</h2>
+                    <p>Consult with a registered, certified dermatologist without having to visit a clinic. We can help you with almost any skin or hair condition, from eczema to hair fall.</p>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12 qualifderma_lft wow animated fadeInLeft leftfloat">
+                    <ul>
+                        <li>
+                            <div class="qualif_list qualif_lftsp">
+                                <div class="qualif_listimg"><%= image_tag "acne_img" %></div>
+                                <h5>Acne</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="qualif_list qualif_rghtsp">
+                                <div class="qualif_listimg"><%= image_tag "rash_img", alt: "rash_img" %>
+                                <h5>Rash, eczema</br>&amp; psoriasis</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="qualif_list">
+                                <div class="qualif_listimg"><%= image_tag "pigment_img", alt: "pigment_img" %>
+                                <h5>Pigmentation<br/>&amp; discolouration</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="qualif_list">
+                                <div class="qualif_listimg"><%= image_tag "stretch_img", alt: "stretch_img" %>
+                                <h5>Stretch marks</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="qualif_list">
+                                <div class="qualif_listimg"><%= image_tag "hairfall_img", alt: "hairfall_img" %>
+                                <h5>Hair fall &amp; <br/>thinning</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="qualif_list qualif_lftsp">
+                                <div class="qualif_listimg"><%= image_tag "dandruff_img", alt: "dandruff_img" %>
+                                <h5>Dandruff</h5>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="qualif_list qualif_rghtsp">
+                                <div class="qualif_listimg"><%= image_tag "skin_img", alt: "skin_img" %>
+                                <h5>Skin growths</h5>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="qualif_derma quickeasy">
+    <div class="container_info">
+        <div class="qualif_dermainfo">
+            <div class="row qualifderma_row">
+                <div class="col-md-6 col-sm-12 col-xs-12 qualifderma_rght wow animated fadeInLeft">
+                    <h2>Quick &amp; easy form</h2>
+                    <p>Answer a few questions, take some photos with your smartphone, and you're done. Start to finish
+                        in as little as 5 minutes.</p>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12 qualifderma_lft wow animated fadeInRight">
+                  <%= image_tag "quickeasy_img", alt: "quickeasy_img", class: "scale-image" %></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="qualif_derma comprehensive">
+    <div class="container_info">
+        <div class="qualif_dermainfo">
+            <div class="row qualifderma_row">
+                <div class="col-md-6 col-sm-12 col-xs-12 qualifderma_rght wow animated fadeInRight rightfloat">
+                    <h2>Personal treatment plan</h2>
+                    <p>You will get a detailed diagnosis, a personalised treatment plan, prescription, and
+                        follow-up advice for only Rs. 300.</p>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12 qualifderma_lft wow animated fadeInLeft leftfloat">
+                  <%= image_tag "comprehensive_img", alt: "comprehensive_img", class: "scale-image" %></div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="qualif_derma quickeasy">
+    <div class="container_info">
+        <div class="qualif_dermainfo">
+            <div class="row qualifderma_row">
+                <div class="col-md-6 col-sm-12 col-xs-12 qualifderma_rght wow animated fadeInLeft">
+                    <h2>Reminders &amp; follow up</h2>
+                    <p>Receive daily reminders &amp; regular follow-ups to
+                       make sure your skin and hair get healthier, faster.</p>
+                </div>
+                <div class="col-md-6 col-sm-12 col-xs-12 qualifderma_lft wow animated fadeInRight">
+                  <%= image_tag "mobile_graphic", alt: "mobile_graphic", class: "image-margin scale-image" %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="block-sec">
+    <h2>Feel 100% confident with Remedica</h2>
+    <div class="row">
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="box_trust">
+                <span><%= image_tag "confidential_icon", alt: "confidential_icon", class: "img-trust scale-image" %></span>
+                <h3 class="img-head">Confidential</h3>
+                <p class="desc">Your privacy is important — we won't share your information with anyone.</p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12 border">
+            <div class="box_trust">
+                <span><%= image_tag "fast_icon", alt: "fast_icon", class: "img-trust" %></span>
+                <h3 class="img-head">Fast Response</h3>
+                <p class="desc">Fill out a form within 5 minutes. Get a treatment plan within 48 hours.</p>
+            </div>
+        </div>
+        <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="box_trust">
+                <span><%= image_tag "expert_icon", alt: "expert_icon", class: "img-trust" %></span>
+                <h3 class="img-head">Experts</h3>
+                <p class="desc">Our qualified and experienced dermotologists are among the top in India.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="testi-sec">
+    <h2>Hear from our customers</h2>
+        <div class="row container_info">
+            <div class="col-md-6 col-sm-6 col-xs-12 table-sec">
+                <span class="table-cell"><%= image_tag "photo_1", alt: "photo_1" %>
+                <span class="testimonial">Thanks for the quick advice about my mole, which I hadn't had time to get checked. Saved me from visiting a clinic!"
+                  <p class="name-tag"> - Shivani, 38</p>
+                </span>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 table-sec">
+                <span class="table-cell"><%= image_tag "photo_2", alt: "photo_2" %>
+                <span class="testimonial">Impressed by the speed of this service. Filled the form at night, and next morning I received the advice & prescription. Was able to start treatment that day itself."
+                  <p class="name-tag"> - Pravin, 33</p>
+                </span>
+            </div>
+        </div>
+        <div class="row container_info">
+            <div class="col-md-6 col-sm-6 col-xs-12 table-sec">
+                <span class="table-cell"><%= image_tag "photo_3", alt: "photo_3" %>
+                <span class="testimonial">Only took a few minutes to fill in the form, very convenient. The doctor's advice about my hair issues also was thorough. Will use this again next time."
+                  <p class="name-tag"> - Neelam, 25</p>
+                </span>
+
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 table-sec">
+                <span class="table-cell"><%= image_tag "photo_4", alt: "photo_4" %>
+                <span class="testimonial">The diagnosis and suggested treatment were spot on (no pun intended!). Convenient and hassle-free, would recommend to anyone with a stubborn acne problem."
+                 <p class="name-tag"> - Aparna, 26</p>
+                </span>
+
+            </div>
+        </div>
+    </section>
+
+<footer>
+    <h2>Contact us for a quick & confidential consultation</h2>
+    <div class="ftbtn_center">
+        <h5><a href="tel:8433849086"><i class="fa"><%= image_tag "whatsapp_logo", alt: "whatsapp_logo" %></i> on
+            <span>8433 849 086</span></a></h5>
+        <span class="or_txt">OR</span>
+        <div class="btns_info">
+          <a href="#" class="letus_btn notealclr popupopen" data-toggle="modal" data-target="#myModal" onClick="ga('send', 'event', { eventCategory: 'contactUs', eventAction: 'clickContactButtonBottom'});">Let us contact you <i class="fa fa-long-arrow-right"></i></a>
+        </div>
+    </div>
+</footer>
+<div class="footer_bottom">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 privacy">
+                <a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a>
+            </div>
+            <div class="col-md-4 footer_logo">
+                <%= image_tag "footer_logo", alt: "footer_logo" %>
+                <div class="clearfix"></div>
+                <span>&copy; 2016 All rights reserved</span>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade contactpopup_info" role="dialog">
+    <div class="modal-dialog contact_dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="mainform_popup">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Let us contact you<span>If you'd like to consult a specialist, or just want more info, fill in your details and we'll contact you.</span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="https://formbox.es/NgH3bFiWYpY6HuPBRAMiXryt" method="post"
+                          class="ig-form">
+                        <div class="input-field form-group">
+                            <input type="text" class="form-control" name="name">
+                            <label>Name</label>
+                            <i class="fa fa-user"></i></div>
+                        <div class="input-field form-group">
+                            <input type="text" class="form-control" name="email">
+                            <label>Email</label>
+                            <i class="fa fa-envelope"></i></div>
+                        <div class="input-field form-group">
+                            <input type="text" class="form-control" name="mobile">
+                            <label>Mobile</label>
+                            <i class="fa fa-phone"></i></div>
+                        <div class="btns_info">
+                            <button type="submit" class="letus_btn text-center senddetails_btn"
+                                    onClick="ga('send', 'event', { eventCategory: 'contactUs', eventAction: 'submit'});">
+                                Send details
+                            </button>
+                        </div>
+                        <div class="thanks_msg"></div>
+                    </form>
+                </div>
+            </div>
+            <div class="thanksmsg_popup">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <h4>Thanks! <span>Our team will get in touch with you shortly...</span></h4>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+
+        $(".thanksmsg_popup").hide();
+        $('.ig-form').submit(function (e) {
+            e.preventDefault();
+            var url = $(this).attr('action');
+            var data = $(this).serialize()
+            console.log(data);
+            $.ajax({
+                type: 'post',
+                crossDomain: true,
+                jsonp: false,
+                url: url,
+                data: data,
+                success: function (response) {
+                    // console.log('done');
+                    console.log(response);
+                    $('.mainform_popup').hide();
+                    $(".thanksmsg_popup").show();
+                    setTimeout(function () {
+                        $('.thanksmsg_popup .close').trigger('click');
+                    }, 3000);
+                },
+                error: function (response) {
+                    // console.log('error');
+                    console.log(response);
+                    $('.mainform_popup').hide();
+                    $(".thanksmsg_popup").show();
+                    setTimeout(function () {
+                        $('.thanksmsg_popup .close').trigger('click');
+                    }, 3000);
+                }
+            });
+        });
+
+        // $(".popupopen").click(function(event) {
+        //     $(".mainform_popup").show();
+        //     $(".thanksmsg_popup").hide();
+        // });
+
+        // $(".senddetails_btn").click(function(event) {
+        //     $(".mainform_popup").hide();
+        //     $(".thanksmsg_popup").show();
+        //     var thisclose = $(this).parents("#myModal").find('.close');
+        //     setTimeout(function() {
+        //         thisclose.trigger('click');
+        //     }, 3000);
+
+        // });
+
+        // $("#senddetailsbtn").click(function() {
+        //     $("p").hide();
+        // });
+
+    });
+    wow = new WOW({
+        boxClass: 'wow', // default
+        animateClass: 'animated', // default
+        offset: 0, // default
+        mobile: false, // default
+        live: true // default
+    })
+    wow.init();
+</script>

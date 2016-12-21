@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]>
+<html class="ie ie6" lang="en-US"> <![endif]-->
+<!--[if IE 7 ]>
+<html class="ie ie7" lang="en-US"> <![endif]-->
+<!--[if IE 8 ]>
+<html class="ie ie8" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en-US">
+<!--<![endif]-->
+  <head>
+    <title>Remedica - consult hair & skin specialists, dermatologists from your phone</title>
+    <%= csrf_meta_tags %>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%= favicon_link_tag "fav.png" %>
+
+    <meta name="description"
+          content="Get confidential advice from the best certified dermatologists for acne, rash, psoriasis, eczema, skin discolouration, hair fall, and other skin & hair conditions">
+
+    <meta name="google-site-verification" content="lYRMhoNFg69AYc2DVfJ6rvf30M2Wq-cMJdC9iu7C850"/>
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script> -->
+
+    <%= yield :typeform_head %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%= yield :body_class %>">
+    <%= yield %>
+  </body>
+</html>

@@ -1,0 +1,565 @@
+@media (max-width: 1440px) {
+}
+
+@media (max-width: 1400px) {
+}
+
+@media (max-width: 1300px) {
+}
+
+@media (max-width: 1200px) {
+
+    .banner_cnt h2 {
+        font-size: 42px;
+        line-height: 48px;
+    }
+
+    .qualifderma_lft, .quickeasy .qualifderma_lft, .comprehensive .qualifderma_lft, .qualifderma_rght, .quickeasy .qualifderma_rght, .comprehensive .qualifderma_rght {
+        padding-right: 20px;
+        padding-left: 20px;
+    }
+
+    header {
+        background-position: -330px 0 !important;
+    }
+
+}
+
+@media (max-width: 980px) {
+
+    .qualifderma_rght h2, .qualifderma_rght p {
+        text-align: center;
+    }
+
+    .qualifderma_rght, .quickeasy .qualifderma_rght, .comprehensive .qualifderma_rght {
+        padding: 15px 30px;
+    }
+
+    .banner_cnt {
+        width: 100%;
+        padding-left: 15px;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .qualifderma_rght h2 {
+        font-size: 32px;
+    }
+
+    .qualif_dermainfo {
+        padding: 30px 0;
+    }
+
+    .quickeasy .qualif_dermainfo {
+        padding: 30px 0 40px 0;
+    }
+
+    .quickeasy .qualifderma_rght h2 {
+        margin-top: 0;
+    }
+
+    .banner_cnt h1, footer h2 {
+        font-size: 32px;
+        line-height: 44px;
+    }
+
+    .block-sec h2 {
+    line-height: 44px;
+    font-size: 32px;
+    }
+    .testi-sec h2{
+    line-height: 44px;
+    font-size: 32px;
+    }
+    header {
+        background-position: -550px 0 !important;
+    }
+
+    .inner_content .container {
+        width: 90%;
+    }
+
+    .footer_bottom .footer_logo, .privacy {
+        text-align: center;
+        padding: 0;
+    }
+
+    .inner_content .title {
+        padding: 25px 0;
+    }
+
+    .footer_bottom a {
+        margin: 15px 12px;
+    }
+
+}
+
+@media (max-width: 767px) {
+    .table-cell {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.table-sec{margin-bottom: 40px;}
+.testimonial {
+    vertical-align: top;
+    display: block;
+    width: 100%;
+}
+     .testi-sec h2 {
+    padding: 40px 0px 30px 0px;
+    text-align: center;
+    font-size: 24px;
+}
+    .block-sec h2 {
+        padding: 40px 0px 0px 0px;
+        text-align: center;
+        color: #fff;
+        font-size: 24px;
+    }
+
+    section.block-sec {
+        background-color: #17a6b0;
+        padding: 0px 90px;
+    }
+
+    .block-sec .box {
+        text-align: center;
+        padding: 40px 0px;
+        color: #fff;
+    }
+
+    .border {
+        border-top: 1px solid #fff;
+        border-bottom: 1px solid #fff;
+        border-left: none;
+        border-right: none;
+    }
+
+    .banner_cnt {
+        left: 5%;
+    }
+
+    p {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .banner_cnt {
+        width: 300px;
+    }
+
+    .banner_cnt p {
+        font-size: 18px;
+        line-height: 24px;
+    }
+
+    .qualifderma_rght h2 {
+        font-size: 24px;
+        margin-top: 10px;
+    }
+
+    .banner_cnt h1, footer h2 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .banner_cnt h5, footer h5, .letus_btn, .letus_btn:hover, .letus_btn:focus {
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .senddetails_btn, .senddetails_btn:hover, .senddetails_btn:focus {
+        padding: 12px 30px;
+    }
+
+    .downarrow {
+        display: none;
+    }
+
+    .contactpopup_info .modal-body {
+        padding: 0 20px 20px;
+    }
+
+    .contactpopup_info h4 {
+        font-size: 24px;
+        line-height: 30px;
+    }
+
+    .contactpopup_info h4 span {
+        font-size: 16px;
+    }
+
+    .contactpopup_info {
+        top: 0;
+    }
+
+    footer {
+        padding: 20px 0;
+        height: auto;
+    }
+
+    .banner_sec {
+        height: 380px;
+    }
+
+    .qualif_lftsp, .qualif_rghtsp {
+        padding: 0;
+    }
+
+    .quickeasy .qualifderma_lft img, .comprehensive .qualifderma_lft img {
+        width: 300px;
+    }
+
+    .or_txt {
+        margin: 20px auto;
+    }
+
+    header {
+        min-height: 535px;
+        background: url("mobile_bg") top right no-repeat !important;
+        background-size: cover !important;
+
+    }
+
+    .contact_dialog {
+        width: 96%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .qualifderma_rght, .quickeasy .qualifderma_rght, .comprehensive .qualifderma_rght {
+        padding-top: 0;
+    }
+
+    .quickeasy .qualifderma_rght h2 {
+        margin-top: 10px;
+    }
+
+    .banner_cnt h5, .letus_btn {
+        width: 100%;
+    }
+
+    .notealclr {
+        width: 328px;
+    }
+
+}
+
+@media (max-width: 640px) {
+    .or_txt {
+        padding-left: 125px;
+    }
+
+    .list_style li, .list_style_in li {
+        padding: 0 0 0 2em;
+    }
+}
+
+@media (max-width: 600px) {
+    .block-sec h2 {
+    line-height: 30px;
+    font-size: 26px;
+}
+    .testi-sec h2{font-size: 26px;}
+    .quickeasy .qualifderma_rght h2 {
+        margin-top: 0px;
+    }
+
+    .qualifderma_rght h2{
+        font-size: 26px;
+        margin-top: 20px;
+    }
+
+    /*	 .banner_cnt h5, footer h5, .letus_btn, .letus_btn:hover, .letus_btn:focus{
+        font-size:14px;
+        line-height:20px;
+    }*/
+    p, .list_style li, .list_style_in li {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    /*.banner_cnt p{ font-size:13px; line-height:18px;}*/
+    .banner_cnt p br {
+        display: none;
+    }
+
+    /*.qualifderma_lft li:nth-child(3), .qualifderma_lft li:nth-child(4), .qualifderma_lft li:nth-child(5) {
+        width:49%;
+    }*/
+    .qualifderma_lft li:nth-child(6), .qualifderma_lft li:nth-child(7) {
+        margin-bottom: 0;
+    }
+
+    .qualifderma_lft li {
+        width: 35%;
+    }
+
+    .qualif_listimg img {
+        width: 80px;
+    }
+
+    .qualifderma_lft li h5 {
+        font-size: 15px;
+    }
+
+    .qualifderma_rght, .quickeasy .qualifderma_rght, .comprehensive .qualifderma_rght {
+        padding: 0 15px;
+    }
+
+    .qualif_dermainfo {
+        padding: 30px 0 40px 0;
+    }
+
+    .quickeasy .qualif_dermainfo {
+        padding-top: 40px;
+    }
+
+    .banner_cnt h1, footer h2 {
+        font-size: 26px;
+        line-height: 30px;
+    }
+
+
+    .banner_cnt h1 br {
+        display: none;
+    }
+
+    .btns_info {
+        margin: 10px 0 20px 0;
+    }
+
+    .ftbtn_center .btns_info {
+        margin: 0;
+    }
+
+    .logo_left img {
+        max-width: 100px;
+    }
+
+    .logo_right .menu ul li {
+        margin: 12px 2px;
+    }
+
+    .contactpopup_info .modal-body {
+        padding: 0 15px 15px;
+    }
+
+    .contactpopup_info h4 {
+        font-size: 22px;
+        line-height: 28px;
+    }
+
+    .contactpopup_info h4 span {
+        font-size: 14px;
+    }
+
+    .banner_sec {
+        height: auto;
+    }
+
+    .quickeasy .qualifderma_lft img, .comprehensive .qualifderma_lft img {
+        width: 220px;
+    }
+
+    .or_txt {
+        font-size: 15px;
+        margin: 8px auto;
+        line-height: 16px;
+        text-align: center;
+        padding: 0;
+    }
+
+    header { /*min-height:inherit;*/
+    }
+
+    .banner_cnt h5, .letus_btn {
+        width: 100%;
+        display: block;
+        text-align: center;
+        width: 260px;
+    }
+
+    footer h5, .notealclr {
+        width: 260px;
+        margin: 0 auto;
+    }
+
+    .qualifderma_rght p {
+        color: #3f3f3f;
+        /*border-bottom: 1px solid #f1f1f1;*/
+        padding-bottom: 25px;
+        margin-bottom: 20px;
+        line-height: 26px;
+    }
+
+    .qualifderma_lft {
+        border: none;
+    }
+
+    .qualifderma_lft li {
+        margin-bottom: 20px;
+    }
+
+    .quickeasy .qualifderma_rght p, .comprehensive .qualifderma_rght p {
+        border-bottom: 0px solid #f1f1f1;
+        padding-bottom: 15px;
+    }
+
+    .banner_cnt {
+        width: 280px;
+        padding-top: 110px;
+    }
+
+    .logo {
+        width: 120px;
+    }
+
+    .logo_right .menu ul li > a {
+        font-size: 13px;
+        padding: 0px 13px;
+    }
+
+    .logo_right .menu ul li:last-child a {
+        padding-right: 0;
+    }
+
+    .logo_right .menu {
+        margin: 10px 0 0 0;
+    }
+
+    .banner_cnt h5 i.fa, footer h5 i.fa {
+        width: 28px;
+        vertical-align: middle;
+    }
+
+    .banner_cnt h5 span, footer h5 span {
+        vertical-align: middle;
+    }
+
+    .senddetails_btn {
+        line-height: 16px !important;
+        margin: 0px auto;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .testi-sec h2 {
+    padding: 40px 0px 50px 0px;
+}
+    section.testi-sec{padding-bottom: 40px;}
+
+    section.block-sec {
+        background-color: #17a6b0;
+        padding: 0px 37px;
+        padding-bottom: 20px !important;
+    }
+}
+
+@media (max-width: 400px) {
+    .qualifderma_rght h2 {
+    font-size: 22px;
+    }
+    .testi-sec h2 {
+    font-size: 22px;
+    line-height: 26px;
+    }
+    .block-sec h2 {
+        line-height: 26px;
+        font-size: 22px;
+    }
+
+    .logo_right .menu ul li > a {
+        padding: 0px 10px
+    }
+
+    .banner_cnt {
+        /*background: rgba(0,0,0,0.65);
+        padding: 5px 18px;
+        border-radius: 8px;*/
+        padding-left: 0;
+    }
+
+    .banner_sec {
+        height: 350px;
+    }
+
+    .banner_cnt h1, footer h2 {
+        font-size: 22px;
+        line-height: 26px;
+    }
+
+    .banner_cnt h1 {
+        margin-top: 20px;
+        font-size: 22px;
+        line-height: 26px;
+        width: 220px;
+    }
+
+    .banner_cnt p {
+        font-size: 16px;
+        line-height: 22px;
+    }
+
+    .banner_cnt p span {
+        font-size: 17px;
+    }
+
+    .banner_cnt p br {
+        display: block;
+    }
+
+    footer {
+        padding: 10px 0;
+    }
+
+    .contactpopup_info h4 {
+        font-size: 20px;
+        line-height: 26px;
+    }
+
+    .btns_info {
+        margin: 10px 0;
+    }
+
+    .banner_cnt h5, footer h5, .letus_btn, .letus_btn:hover, .letus_btn:focus {
+        font-size: 16px;
+        line-height: 22px;
+        padding-left: 10px;
+        padding-right: 10px;
+        width: 240px;
+    }
+
+    .or_txt {
+        text-align: left;
+        padding: 0 0 0 110px;
+    }
+
+    .ftbtn_center .or_txt {
+        text-align: center;
+        padding: 0;
+    }
+
+    .qualifderma_lft li h5 {
+        font-size: 13px;
+    }
+
+    .list_style li, .list_style_in li {
+        padding: 0 0 0 1.5em;
+    }
+
+}
+
+@media (max-width: 320px) {
+    section.block-sec {
+        background-color: #17a6b0;
+        padding: 0px 18px;
+    }
+}
