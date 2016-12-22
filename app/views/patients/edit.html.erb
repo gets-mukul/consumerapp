@@ -1,0 +1,15 @@
+<section class="inner_content">
+    <div class="container">
+        <div class="row contactpopup_info">
+            <div class="col-sm-12 box pad_0 margin_0">
+              <div class="row space_bottom">
+                <div class="col-sm-12"><h1 style="font-size: 38px;">Editing Patient</h1></div>
+                <div class="col-sm-12"><h4 style="font-size: 21px;">To begin a consultation, we need some details from you</h4></div>
+              </div>
+                <%= render 'form', patient: @patient %>
+            </div>
+        </div>
+        <%= link_to 'Show', @patient %> |
+        <%= link_to 'Back', patients_path %>
+    </div>
+</section>

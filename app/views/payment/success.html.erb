@@ -1,0 +1,137 @@
+<%= content_for :body_class, "inner_body white_back pad_15" %>
+<main class="margin_t_15">
+    <section class="inner_content">
+        <div class="container">
+            <div class="row contactpopup_info margin_t_15">
+                <div class="col-sm-12 box pad_0 margin_0">
+				<div class="row space_bottom">
+					<div class="col-sm-12 col-md-6 col-md-offset-3">
+						<div>
+							<div class="icon_circle_back_lg green_back">
+								<i class="fa fa-check"></i>
+							</div>
+						</div>
+						<div><h1 class="space_top">Payment Successfull</h1></div>
+						<div><p>
+							Thanks <span customer-name><%= current_user.name %></span>, we will get back within <strong>48 hours</strong> with your treatment plan.
+						</p></div>
+						<div class="space_top">
+							<p>If you have any questions, in the meantime, please contact us at:</p>
+						</div>
+						<div class="text-center font_h5 hidden-xs">
+		                    <span class="font_weight_med color_grey">
+		                        <i class="inline fa fa-envelope-o color_blue"></i>
+		                        consult@remedicahealth.com
+		                    </span>
+		                    <span class="font_weight_med color_grey space_left">
+		                        <i class="inline fa fa-whatsapp color_blue"></i>
+		                        8433 848 969
+		                    </span>
+		                </div>
+						<div class="text-center font_h5 visible-xs">
+		                    <div class="font_weight_med color_grey">
+		                        <i class="inline fa fa-envelope-o color_blue"></i>
+		                        consult@remedicahealth.com
+		                    </div>
+		                    <div class="font_weight_med color_grey">
+		                        <i class="inline fa fa-whatsapp color_blue"></i>
+		                        8433 848 969
+		                    </div>
+		                </div>
+					</div>
+	    		</div>
+				<div class="row">
+					<div class="col-sm-12 col-md-4 col-md-offset-4 space_top">
+						<div class="list_btn_dark space_bottom">
+							<i class="inline fa fa-commenting"></i>
+							TELL A FRIEND ABOUT US
+						</div>
+						<div class="list_btn_dark">
+							<i class="inline fa fa-facebook"></i>
+							VISIT OUT FACEBOOK PAGE
+						</div>
+					</div>
+				</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade contactpopup_info" role="dialog">
+    <div class="modal-dialog contact_dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="mainform_popup">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Hi there<span>If you'd like to consult a specialist, or just want more info, fill in your details and we'll contact you.</span></h4>
+                </div>
+                <div class="modal-body">
+                    <form role="form" action="https://formbox.es/NgH3bFiWYpY6HuPBRAMiXryt" method="post" class="ig-form">
+                        <div class="input-field form-group">
+                            <input type="text" class="form-control" name="name">
+                            <label>Name</label>
+                            <i class="fa fa-user"></i> </div>
+                        <div class="input-field form-group">
+                            <input type="text" class="form-control" name="email">
+                            <label>Email</label>
+                            <i class="fa fa-envelope"></i> </div>
+                        <div class="input-field form-group">
+                            <input type="text" class="form-control" name="mobile">
+                            <label>Mobile</label>
+                            <i class="fa fa-phone"></i> </div>
+                        <div class="btns_info">
+                            <button type="submit" class="letus_btn text-center senddetails_btn">Send details</button>
+                        </div>
+                        <div class="thanks_msg"></div>
+                    </form>
+                </div>
+            </div>
+            <div class="thanksmsg_popup">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <h4>Thanks! <span>Our team will get in touch with you shortly...</span></h4>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+  $(function() {
+      $(".thanksmsg_popup").hide();
+      $('.ig-form').submit(function(e) {
+          e.preventDefault();
+          var url = $(this).attr('action');
+          var data = $(this).serialize()
+          console.log(data);
+          $.ajax({
+              type: 'post',
+              crossDomain: true,
+              jsonp: false,
+              url: url,
+              data: data,
+              success: function(response) {
+                  // console.log('done');
+                   console.log(response);
+                  $('.mainform_popup').hide();
+                  $(".thanksmsg_popup").show();
+                  setTimeout(function() {
+                      $('.thanksmsg_popup .close').trigger('click');
+                  }, 3000);
+              },
+              error: function(response) {
+                  // console.log('error');
+                   console.log(response);
+                  $('.mainform_popup').hide();
+                  $(".thanksmsg_popup").show();
+                  setTimeout(function() {
+                      $('.thanksmsg_popup .close').trigger('click');
+                  }, 3000);
+              }
+          });
+      });
+  });
+</script>

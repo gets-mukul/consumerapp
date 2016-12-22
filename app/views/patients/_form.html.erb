@@ -1,0 +1,25 @@
+<%= form_for @patient do |f| %>
+    <div id="error_explanation"></div>
+
+  <div class="row">
+    <div class="col-sm-12 col-md-4 col-md-offset-4">
+      <div class="input-field form-group">
+        <%= f.text_field :name, class: "form-control" %>
+        <i class="fa fa-user"></i>
+      </div>
+      <div class="input-field form-group">
+        <%= f.text_field :email, class: "form-control" %>
+        <i class="fa fa-envelope"></i>
+      </div>
+      <div class="input-field form-group">
+        <%= f.text_field :mobile, class: "form-control" %>
+        <i class="fa fa-phone"></i>
+      </div>
+      <div class="btns_info text-center">
+        <div class="text-center">
+          <%= f.submit 'CONTINUE', class: "list_btn_dark space_bottom form-stepper-1" %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

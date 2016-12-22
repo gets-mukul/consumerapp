@@ -70,7 +70,7 @@
 				                <div id="agree_terms" class="text-center">
 				                    <input type="checkbox" name="agree_terms">
 				                    <label for="agree_terms"></label>
-				                    <span>I agree to the <a href="terms-of-use.html">Terms of Use</a> and <a href="privacy-policy.html">Privacy Policy</a?</span>
+				                    <span>I agree to the <a href="/terms-of-use.html">Terms of Use</a> and <a href="/privacy-policy.html">Privacy Policy</a?</span>
 				                </div>
 				                <div class="btns_info text-center">
 				                    <a class="ready_btn">
@@ -173,7 +173,7 @@
             var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
             console.log(checkbox.checked);
             if (!checkbox || !checkbox.checked) { return; }
-            window.location.href = "/consultation_form";
+            window.location.href = "/new_patient";
             ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
         });
     });

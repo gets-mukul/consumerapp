@@ -261,7 +261,7 @@ header.inner .logo_right .menu ul li > a{
 	font-weight: bold;
 }
 .inner_content .box h2 span{
-	background: url(../images/header_bullet.png) no-repeat;
+	background: url("header_bullet") no-repeat;
 	width: 33px;
 	height: 29px;
 	display: inline-block;
