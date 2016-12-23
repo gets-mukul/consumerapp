@@ -2,8 +2,6 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-#  $('strong:contains("Thank You")').click ->
-#    window.location.href = '/payment'
   $("#new_patient")
     .on("ajax:success", (e, data, status, xhr) ->
       $("#new_patient").append xhr.responseText)

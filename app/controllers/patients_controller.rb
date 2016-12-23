@@ -21,7 +21,7 @@ class PatientsController < ApplicationController
 
     respond_to do |format|
       if @patient.save
-        current_user= @patient
+        register @patient
         format.json { render json: "Patient was successfully created." }
       else
         format.json { render json: @patient.errors, status: :unprocessable_entity }
