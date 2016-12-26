@@ -12,23 +12,23 @@
             <div><p style="font-size: 18px;">How would you like to pay, <span customer-name><%= current_user.name %></span>?</p></div>
           </div>
           </div>
-        <div class="row">
+          <div class="row">
           <div class="col-sm-12">
+            <%= form_tag '/payment', method: :post do %>
             <div class="text-center">
-              <div class="list_btn_dark hover space_bottom">DEBIT CARD</div>
+              <%= submit_tag "DEBIT/CREDIT CARD", name: "type", class: "list_btn_dark hover space_bottom" %>
             </div>
             <div class="text-center">
-              <div class="list_btn_dark hover space_bottom">CREDIT CARD</div>
+              <%= submit_tag "NET BANKING", name: "type", class: "list_btn_dark hover space_bottom" %>
             </div>
-            <div class="text-center">
-              <div class="list_btn_dark hover">NET BANKING</div>
-            </div>
+            <% end %>
           </div>
-          <div class="col-sm-12 space_top">
-            <img src="" alt="Shield" style="display: inline-block; height: 24px; width: 24px; vertical-align: middle;">
-            <span style="margin-left: 4px; margin-right: 4px;">Secure payment powered by</span>
-            <img src="" alt="Paytm" style="display: inline-block; height: 15px; width: 15px;">
-          </div>
+        </div>
+
+        <div class="col-sm-12 space_top">
+          <img src="" alt="Shield" style="display: inline-block; height: 24px; width: 24px; vertical-align: middle;">
+          <span style="margin-left: 4px; margin-right: 4px;">Secure payment powered by</span>
+          <img src="https://test.payu.in/images/payu_logo.png" class="img-responsive" alt="PayU Biz" style="display: inline-block; height: 40px; width: 60px;">
         </div>
                 </div>
             </div>

@@ -7,17 +7,19 @@
 				<div class="row space_bottom">
 					<div class="col-sm-12 col-md-6 col-md-offset-3">
 						<div>
-							<div class="icon_circle_back_lg green_back">
-								<i class="fa fa-check"></i>
+							<div class="icon_circle_back_lg red_back">
+								<i class="fa fa-times"></i>
 							</div>
 						</div>
-						<div><h1 class="space_top">Payment Successfull</h1></div>
+						<div><h1 class="space_top">Payment Failure</h1></div>
 						<div><p>
-							Thanks <span customer-name><%= current_user.name %></span>, we will get back within <strong>48 hours</strong> with your treatment plan.
-						</p>
-            <p>
-              Your Transaction ID is: <%= @txnid %>
-            </p></div>
+							We are sorry <span customer-name><%= current_user.name %></span>, but there seems to be some problem with your payment. Please try again later.
+						</p></div>
+            <div >
+              <p>
+                <%= @error %>
+              </p>
+            </div>
 						<div class="space_top">
 							<p>If you have any questions, in the meantime, please contact us at:</p>
 						</div>

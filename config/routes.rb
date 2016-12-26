@@ -8,9 +8,13 @@ Rails.application.routes.draw do
   get '/consultation', to: 'consultation#welcome'
   get '/consultation_form/:condition', to: 'consultation#consultation_form'
   get '/new_patient', to: 'consultation#index'
-  get '/payment', to: 'payment#index'
-  get '/success', to: 'payment#success'
 
+  get '/payment', to: 'payment#index'
+  post '/payment', to: 'payment#issue_payment'
+  scope 'payment' do
+    post '/success', to: 'payment#success'
+    post '/failure', to: 'payment#failure'
+  end
   root 'home#index'
 
 end
