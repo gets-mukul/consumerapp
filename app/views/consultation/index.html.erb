@@ -128,37 +128,5 @@ $(function(){
           }
       });
   });
-
-	var formSteps = 2;
-	var currentFormStep = 1;
-	manageFormStepsVisibility();
-
-	$("#form-step-1 .form-stepper-1").on('click', function () {
-	/*	var name = $("#form-step-1 input[name='name']").val();
-		var email = $("#form-step-1 input[name='email']").val();
-		var mobile = $("#form-step-1 input[name='mobile']").val();
-		$("[customer-name]").html(name);
-
-		if (!name || !email || !mobile) { return; } */
-    console.log("First step clicked");
-		currentFormStep++;
-		manageFormStepsVisibility();
-	});
-
-	$("#form-step-2 .form-stepper-2").on('click', function () {
-    var condition = $(this).text();
-    console.log(condition);
-    window.location.href = '/consultation_form/' + condition
-	});
-
-	function manageFormStepsVisibility() {
-		for (var i = 1; i <= formSteps; i++) {
-			if (i === currentFormStep) {
-				$("#form-step-"+i).removeClass('hidden');
-			} else {
-				$("#form-step-"+i).addClass('hidden');
-			}
-		}
-	}
 });
 </script>

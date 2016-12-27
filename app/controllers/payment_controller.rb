@@ -40,7 +40,7 @@ class PaymentController < ApplicationController
 
     if checksum_hash != posted_hash
       @error = "Invalid Checksum!"
-      @patient.update({pay_status: "payment failed"})
+      @patient.update({pay_status: "payment failed"}.merge!(capture_params))
       render 'failure'
     else
       @patient.update({pay_status: "paid"}.merge!(capture_params))
@@ -50,7 +50,7 @@ class PaymentController < ApplicationController
 
   def failure
     @patient = Patient.find_by_name current_user.name
-    @patient.update({pay_status: "payment failed"})
+    @patient.update({pay_status: "payment failed"}.merge!(capture_params))
     @error = params['error_Message']
     render 'failure'
   end

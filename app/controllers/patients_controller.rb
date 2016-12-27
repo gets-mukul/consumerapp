@@ -11,7 +11,7 @@ class PatientsController < ApplicationController
     if @patient
       # Patient exists in local database. Log them in
       register @patient
-      render json: "Patient found. Loggin in.", :status => 200
+      render json: { :message =>"Patient found. Logging in." }, :status => 200
     else
       # If they don't, check remote database for
       # cases when remote database is updated and local isn't.
@@ -20,13 +20,13 @@ class PatientsController < ApplicationController
       if result
         # Patient exists in remote database.
         save_patient
-        render json: "Patient found. Logging in."
+        render json: { :message =>"Patient found. Logging in." }, :status => 200
       else
         # New Patient, update both local and remote databases.
         resp, data = send_new_patient_info patient_params
 
         if !resp.kind_of? Net::HTTPOK
-          render json: "An error ocurred. Please try again later.", status: :unprocessable_entity
+          render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
         else
           # Patient saved at remote database. We can start saving it at local as well.
           save_patient
@@ -47,7 +47,7 @@ class PatientsController < ApplicationController
       respond_to do |format|
         if @patient.save
           register @patient
-          format.json { render json: "Patient was successfully created." }
+          format.json { render json: { :message => "Patient found. Logging in." } }
         else
           format.json { render json: @patient.errors, status: :unprocessable_entity }
         end
