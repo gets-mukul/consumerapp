@@ -2,8 +2,7 @@ class PaymentController < ApplicationController
   require 'uri'
   require 'net/http'
   require 'net/https'
-  PAYU_IN_TEST_PAYMENT_URL = "https://test.payu.in/_payment.php"
-  PAYU_IN_LIVE_PAYMENT_URL = "https://secure.payu.in/_payment"
+  PAYU_IN_PAYMENT_URL = Rails.application.secrets.PAYMENT_URL
 
   include PaymentHelper
   before_action :check_current_user
@@ -11,7 +10,6 @@ class PaymentController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
-    #merge!( response["transaction_details"] && response["transaction_details"].size == 1 ? response["transaction_details"].values.first : ( response["transaction_details"] || { :status => response['msg'] } ) )
   end
 
   def issue_payment
@@ -22,15 +20,12 @@ class PaymentController < ApplicationController
 
     payment_params = build_payment_params mode
 
-    url = URI.parse(PAYU_IN_TEST_PAYMENT_URL)
-
+    url = URI.parse(PAYU_IN_PAYMENT_URL)
     con = Net::HTTP.new(url.host, url.port)
     con.use_ssl = true
-
     resp, data = con.post url.path, payment_params.to_query
 
     location = resp['location']
-
     redirect_to URI.parse(location).to_s
 
   end
@@ -48,7 +43,7 @@ class PaymentController < ApplicationController
       @patient.update({pay_status: "payment failed"})
       render 'failure'
     else
-      @patient.update({pay_status: "paid"})
+      @patient.update({pay_status: "paid"}.merge!(capture_params))
       render 'success'
     end
   end
@@ -71,7 +66,8 @@ class PaymentController < ApplicationController
   def capture_params
     mihpayid = params["mihpayid"] #	Unique reference no. created at PayUbiz’s end for each transaction.
     mode	= params["mode"]        # Payment category by which the transaction was completed/ attempted.
-    pg_type = params["PG_TYPE"]	  # Gives the information of payment gateway used for transaction.	 HDFCPG/SBIDI/INDUSPG
-    bank_ref_num = params["bank_ref_num"]	# For a successful transaction, this will give you the bank reference number generated at bank’s end	  116646101
+    pg_type = params["PG_TYPE"]	  # Gives the information of payment gateway used for transaction.
+    bank_ref_num = params["bank_ref_num"]	# For a successful transaction, this will give you the bank reference number generated at bank’s end.
+    { mihpayid: mihpayid, mode: mode, pg_type: pg_type, bank_ref_num: bank_ref_num }
   end
 end

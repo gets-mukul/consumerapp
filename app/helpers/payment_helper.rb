@@ -1,15 +1,18 @@
 module PaymentHelper
   require 'digest'
+  KEY = Rails.application.secrets.PAYU_IN_KEY
+  SALT = Rails.application.secrets.PAYU_IN_SALT
+
   def build_payment_params mode
     @txnid = build_transaction_id
     @desc = "Remedica treatment for #{current_user.name}"
     @amount = 300.round(2)
 
     sha512 = OpenSSL::Digest::SHA512.new
-    string = [ENV["TEST_KEY"], @txnid, @amount.to_s, @desc, current_user.name, current_user.email,"|||||||||", ENV["TEST_SALT"]].join("|")
+    string = [KEY, @txnid, @amount.to_s, @desc, current_user.name, current_user.email,"|||||||||", SALT].join("|")
     hash = sha512.hexdigest(string)
     {
-      :key	=> ENV["TEST_KEY"],
+      :key	=> KEY,
       :txnid	=> @txnid,
       :amount	=> @amount,
       :mode => mode,
@@ -26,9 +29,9 @@ module PaymentHelper
   def checksum status, add_charge
     sha512 = OpenSSL::Digest::SHA512.new
     if !add_charge.nil?
-      string = [add_charge, ENV["TEST_SALT"], status, "||||||||||", current_user.email, current_user.name, @desc, @amount.to_s, @txnid, ENV["TEST_KEY"]].join("|")
+      string = [add_charge, SALT, status, "||||||||||", current_user.email, current_user.name, @desc, @amount.to_s, @txnid, KEY].join("|")
     else
-      string = [ENV["TEST_SALT"], status, "||||||||||", current_user.email, current_user.name, @desc, @amount.to_s, @txnid, ENV["TEST_KEY"]].join("|")
+      string = [SALT, status, "||||||||||", current_user.email, current_user.name, @desc, @amount.to_s, @txnid, KEY].join("|")
     end
     sha512.hexdigest(string)
   end

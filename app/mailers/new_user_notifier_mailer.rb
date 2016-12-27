@@ -1,0 +1,2 @@
+class NewUserNotifierMailer < ApplicationMailer
+end

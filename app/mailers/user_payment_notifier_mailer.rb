@@ -1,0 +1,2 @@
+class UserPaymentNotifierMailer < ApplicationMailer
+end

@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  scope '/admin' do
-    resources :patients, except: [:new, :create]
-  end
 
   post '/patients' => 'patients#create', defaults: {format: 'json'}
 
@@ -15,6 +12,7 @@ Rails.application.routes.draw do
     post '/success', to: 'payment#success'
     post '/failure', to: 'payment#failure'
   end
+  
   root 'home#index'
 
 end

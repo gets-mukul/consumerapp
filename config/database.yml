@@ -82,4 +82,4 @@ production:
   <<: *default
   database: Remedica_production
   username: Remedica
-  password: <%= ENV['Remedica_DATABASE_PASSWORD'] %>
+  password: <%= ENV['REMEDICA_DATABASE_PASSWORD'] %>
