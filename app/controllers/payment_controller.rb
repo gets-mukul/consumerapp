@@ -14,11 +14,14 @@ class PaymentController < ApplicationController
 
   def issue_payment
     mode = case params[:type]
-    when "DEBIT/CREDIT CARD" then "CC"
-    when "NET BANKING" then "NB"
+    when "CREDIT CARD" then "credit"
+    when "DEBIT CARD" then "debit"
+    when "NET BANKING" then "netbanking"
     end
 
     payment_params = build_payment_params mode
+
+    current_user.payments.create(user_payment_params(payment_params))
 
     url = URI.parse(PAYU_IN_PAYMENT_URL)
     con = Net::HTTP.new(url.host, url.port)
@@ -26,31 +29,29 @@ class PaymentController < ApplicationController
     resp, data = con.post url.path, payment_params.to_query
 
     location = resp['location']
-    redirect_to URI.parse(location).to_s
+    redirect_to URI.parse(location).to_s + "##{mode}"
 
   end
 
   def success
-    add_charge = params["additionalCharges"]
-    status = params["status"]
     posted_hash = params["hash"]
 
-    checksum_hash = checksum status, add_charge
+    checksum_hash = checksum params
     @patient = Patient.find_by_name current_user.name
 
     if checksum_hash != posted_hash
       @error = "Invalid Checksum!"
-      @patient.update({pay_status: "payment failed"}.merge!(capture_params))
+      @patient.update({pay_status: "payment failed"})
       render 'failure'
     else
-      @patient.update({pay_status: "paid"}.merge!(capture_params))
+      @patient.update({pay_status: "paid"})
       render 'success'
     end
   end
 
   def failure
     @patient = Patient.find_by_name current_user.name
-    @patient.update({pay_status: "payment failed"}.merge!(capture_params))
+    @patient.update({pay_status: "payment failed"})
     @error = params['error_Message']
     render 'failure'
   end
@@ -61,6 +62,16 @@ class PaymentController < ApplicationController
     unless current_user
       redirect_to '/new_patient'
     end
+  end
+
+  def user_payment_params payment_params
+    {
+      :txnid => payment_params[:txnid],
+      :status => "Initiated",
+      :amount	=> payment_params[:amount],
+      :mode => payment_params[:mode],
+      :desc	=> payment_params[:productinfo]
+    }
   end
 
   def capture_params

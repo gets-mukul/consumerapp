@@ -16,7 +16,10 @@
           <div class="col-sm-12">
             <%= form_tag '/payment', method: :post do %>
             <div class="text-center">
-              <%= submit_tag "DEBIT/CREDIT CARD", name: "type", class: "list_btn_dark hover space_bottom" %>
+              <%= submit_tag "CREDIT CARD", name: "type", class: "list_btn_dark hover space_bottom" %>
+            </div>
+            <div class="text-center">
+              <%= submit_tag "DEBIT CARD", name: "type", class: "list_btn_dark hover space_bottom" %>
             </div>
             <div class="text-center">
               <%= submit_tag "NET BANKING", name: "type", class: "list_btn_dark hover space_bottom" %>

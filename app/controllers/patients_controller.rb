@@ -20,7 +20,6 @@ class PatientsController < ApplicationController
       if result
         # Patient exists in remote database.
         save_patient
-        render json: { :message =>"Patient found. Logging in." }, :status => 200
       else
         # New Patient, update both local and remote databases.
         resp, data = send_new_patient_info patient_params
@@ -47,7 +46,7 @@ class PatientsController < ApplicationController
       respond_to do |format|
         if @patient.save
           register @patient
-          format.json { render json: { :message => "Patient found. Logging in." } }
+          format.json { render json: { :message => "Patient found. Logging in." }, :status => 200}
         else
           format.json { render json: @patient.errors, status: :unprocessable_entity }
         end

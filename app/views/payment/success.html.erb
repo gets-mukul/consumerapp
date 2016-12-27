@@ -16,7 +16,7 @@
 							Thanks <span customer-name><%= current_user.name %></span>, we will get back within <strong>48 hours</strong> with your treatment plan.
 						</p>
             <p>
-              Your Transaction ID is: <%= @txnid %>
+              Your Transaction ID is: <%= session[:txnid] %>
             </p></div>
 						<div class="space_top">
 							<p>If you have any questions, in the meantime, please contact us at:</p>
