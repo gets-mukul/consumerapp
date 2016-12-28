@@ -43,13 +43,13 @@ class PatientsController < ApplicationController
 
     def save_patient
       @patient = Patient.new(patient_params)
-      respond_to do |format|
-        if @patient.save
-          register @patient
-          format.json { render json: { :message => "Patient found. Logging in." }, :status => 200}
-        else
-          format.json { render json: @patient.errors, status: :unprocessable_entity }
-        end
+      if @patient.save
+        register @patient
+        NewUserNotifierMailer.send_new_user_mail(@patient).deliver_later
+
+        render json: { :message => "Patient found. Logging in." }, :status => 200
+      else
+        render json: @patient.errors, status: :unprocessable_entity
       end
     end
 
