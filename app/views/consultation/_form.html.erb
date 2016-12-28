@@ -4,17 +4,19 @@
   <div class="row">
     <div class="col-sm-12 col-md-4 col-md-offset-4">
       <div class="input-field form-group">
-        <%= f.text_field :name, class: "form-control" %>
+        <%= f.text_field :name, class: "form-control", :required => true %>
         <%= f.label :name %>
         <i class="fa fa-user"></i>
       </div>
       <div class="input-field form-group">
-        <%= f.text_field :email, class: "form-control" %>
+        <%= f.email_field :email, class: "form-control", :required => true, :"data-validation-email-message" => "You need to enter the correct email format.", :"data-validation-required-message" => "You need to enter an email." %>
+        <p class="help-block"></p>
         <%= f.label :email %>
         <i class="fa fa-envelope"></i>
       </div>
       <div class="input-field form-group">
-        <%= f.text_field :mobile, class: "form-control" %>
+        <%= f.number_field :mobile, class: "form-control", :minlength => 10, :maxlength => 15, :required => true, :"data-validation-required-message" => "You need to enter an email." %>
+        <p class="help-block"></p>
         <%= f.label :mobile %>
         <i class="fa fa-phone"></i>
       </div>

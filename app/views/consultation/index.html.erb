@@ -96,6 +96,7 @@
 </div>
 <script>
 $(function(){
+  $("input").not("[type=submit]").jqBootstrapValidation();
   $(".thanksmsg_popup").hide();
   $('.ig-form').submit(function(e) {
       e.preventDefault();
