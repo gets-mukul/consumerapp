@@ -1,0 +1,27 @@
+Hi Ranjit,
+
+<%= @user.name %> just paid for their diagnosis
+===============================================
+The user payment details are as follows:
+
+Transaction ID : <%= @payment.txnid %>
+
+Patient Name : <%= @user.name %>
+
+Patient Email : <%= @user.email %>
+
+Patient Contact : <%= @user.mobile %>
+
+<td>Amount : <%= @payment.amount %>
+
+Status</td> : <%= @payment.status %>
+
+Additional Charges : <%= @payment.add_charge %>
+
+PayU Biz ID : <%= @payment.mihpayid %>
+
+Payment Mode : <%= @payment.mode %>
+
+PG Type : <%= @payment.pg_type %>
+
+Bank Ref # : <%= @payment.bank_ref_num %>

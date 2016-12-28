@@ -45,6 +45,7 @@ class PaymentController < ApplicationController
       render 'failure'
     else
       @patient.update({pay_status: "paid"})
+      UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_user.payments.find_by_txnid(session[:txnid])).deliver_later
       render 'success'
     end
   end
