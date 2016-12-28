@@ -20,10 +20,9 @@ $ ->
 
   $("#new_patient")
     .on("ajax:success", (e, data, status, xhr) ->
-      $('#form-step-1 .form-stepper-1').on 'click', ->
-        console.log 'First step clicked'
-        currentFormStep++
-        manageFormStepsVisibility()
+      console.log 'First step clicked'
+      currentFormStep++
+      manageFormStepsVisibility()
 
       $('#form-step-2 .form-stepper-2').on 'click', ->
         condition = $(this).text()
