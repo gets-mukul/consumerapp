@@ -13,6 +13,6 @@ Rails.application.routes.draw do
     post '/failure', to: 'payment#failure'
   end
 
-  root 'consultation#index'
+  root 'consultation#welcome'
 
 end
