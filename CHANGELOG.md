@@ -1,5 +1,11 @@
 # Change Log
-##15.2.4
+## 15.3.0
+**Implemented enhancements**
+- Added [jQueryBootstrapValidation](https://reactiveraven.github.io/jqBootstrapValidation/)
+for front end validations.
+- Added Rails model validations at local DB for patient model.
+
+## 15.2.4
 **Fixed bugs**
 - Fixed root page to show disclaimer rather than form.
 
