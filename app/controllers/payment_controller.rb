@@ -6,7 +6,7 @@ class PaymentController < ApplicationController
 
   include PaymentHelper
   before_action :check_current_user
-  before_action :capture_params, only: [:success, :failure]
+  after_action :update_payment, only: [:success, :failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
@@ -36,7 +36,7 @@ class PaymentController < ApplicationController
   def success
     posted_hash = params["hash"]
 
-    checksum_hash = checksum params
+    checksum_hash = checksum(params, current_payment)
     @patient = Patient.find_by_name current_user.name
 
     if checksum_hash != posted_hash
@@ -45,7 +45,7 @@ class PaymentController < ApplicationController
       render 'failure'
     else
       @patient.update({pay_status: "paid"})
-      UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_user.payments.find_by_txnid(session[:txnid])).deliver_later
+      UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       render 'success'
     end
   end
@@ -63,6 +63,14 @@ class PaymentController < ApplicationController
     unless current_user
       redirect_to '/new_patient'
     end
+  end
+
+  def update_payment
+    current_payment.update(capture_params)
+  end
+
+  def current_payment
+    current_user.payments.find_by_txnid(session[:txnid])
   end
 
   def user_payment_params payment_params

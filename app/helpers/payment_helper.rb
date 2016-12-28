@@ -26,10 +26,10 @@ module PaymentHelper
     }
   end
 
-  def checksum params
+  def checksum params, current_payment
     add_charge = params["additionalCharges"]
     status = params["status"]
-    payment = current_user.payments.find_by_txnid(session[:txnid]) if params["txnid"] == session[:txnid]
+    payment = current_payment if params["txnid"] == session[:txnid]
 
     sha512 = OpenSSL::Digest::SHA512.new
 
