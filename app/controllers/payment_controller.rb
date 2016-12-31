@@ -29,6 +29,7 @@ class PaymentController < ApplicationController
     resp, data = con.post url.path, payment_params.to_query
 
     location = resp['location']
+    logger.info resp.body
     redirect_to URI.parse(location).to_s + "##{mode}"
 
   end
