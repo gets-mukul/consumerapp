@@ -28,8 +28,14 @@ class PaymentController < ApplicationController
     con.use_ssl = true
     resp, data = con.post url.path, payment_params.to_query
 
-    location = resp['location']
-    redirect_to URI.parse(location).to_s + "##{mode}"
+    logger.info resp.body
+
+    if resp.kind_of? Net::HTTPSuccess
+      location = resp['location']
+      redirect_to URI.parse(location).to_s + "##{mode}"
+    else
+      redirect_to '/failure'
+    end
 
   end
 
