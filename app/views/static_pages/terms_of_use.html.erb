@@ -1,39 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="images/fav.png" />
-	<title>Terms of Use - Remedica</title>
-	<!--[if lt IE 9]>
-	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-    <link href="css/bootstrap.css" type="text/css" rel="stylesheet">
-    <link href="css/font-awesome.min.css" type="text/css" rel="stylesheet">
-    <link href="css/animate.css" type="text/css" rel="stylesheet">
-    <link href="css/style.css" type="text/css" rel="stylesheet">
-    <link href="css/responsive.css" type="text/css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.js"></script>
-    <script src="js/materialize.js"></script>
-    <script src="js/wow.min.js"></script>
-    <script src="js/script.js"></script>
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css" type="text/css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/js/bootstrap.min.js"></script> -->
-</head>
+<%= content_for :head do %>
+  <title>Terms of Use - Remedica</title>
+<% end %>
 <body class="inner_body">
 	<header class="inner">
         <div class="header_container">
             <div class="row logo_row">
                 <div class="col-md-3 col-sm-3 col-xs-3 logo_left">
                     <div class="logo">
-                        <a href="http://www.remedicahealth.com"><img src="images/redmica_logo.png" /></a>
+                        <a href="http://www.remedicahealth.com"><%= image_tag "remedica_logo.png" %></a>
                     </div>
                 </div>
                 <div class="col-md-9 col-sm-9 col-xs-9 logo_right">
                     <div class="menu">
-                        <ul>                            
+                        <ul>
                             <li><a href="#" data-toggle="modal" data-target="#myModal" class="popupopen">Contact us</a></li></li>
                         </ul>
                     </div>
@@ -64,7 +43,7 @@
 
 	    		<div class="col-md-12 box">
 	    			<h2><span><i>2</i></span>ELIGIBILITY </h2>
-	    			<p>The Website and Services shall only be used by persons above the age of 18. By using our Website or Services you represent and warrant that you are above the age of 18 and have the right, authority, and capacity to enter into and to abide by all of the terms and conditions set forth herein.</p>	    	    			
+	    			<p>The Website and Services shall only be used by persons above the age of 18. By using our Website or Services you represent and warrant that you are above the age of 18 and have the right, authority, and capacity to enter into and to abide by all of the terms and conditions set forth herein.</p>
 	    		</div>
 
 	    		<div class="col-md-12 box">
@@ -88,7 +67,7 @@
 	    				<li><span>Our Users agree not to access the Website or Services by any means other than through authorized interfaces</span></li>
 	    				<li><span>Our Users agree to not use the Website or Services in a manner that is inconsistent with the rights and restrictions as set forth in these Terms.</span></li>
 	    				<li><span>Remedica may in its sole discretion, close the User account, if any information provided during or after registration is found to be false or the information provided is not sufficient.</span></li>
-	    			</ul>	    	    			
+	    			</ul>
 	    		</div>
 
 	    		<div class="col-md-12 box">
@@ -100,7 +79,7 @@
 	    				<li><span>In no event whatsoever shall Remedica take any responsibility or liability for malfunctioning or defect in any payment procedure. Payment of the Fee shall be the sole responsibility of the User.</span></li>
 	    				<li><span>Remedica reserves the right to alter any and all Fees from time to time, without notice.</span></li>
 	    				<li><span>You may be liable to pay all applicable charges, fees, duties, taxes, levies and assessments for availing the Services. </span></li>
-	    			</ul>    	    			
+	    			</ul>
 	    		</div>
 
 	    		<div class="col-md-12 box">
@@ -108,7 +87,7 @@
 	    			<ul class="list_style">
 	    				<li><span>Cancellation shall be acceptable only if the User informs Remedica BEFORE the availed Service has been successfully performed by or through Remedica.</span></li>
 	    				<li><span>The refund amount will be sent to the respective debit card / credit card / account from where payment was made and amount will not be refundable by any other mode.</span></li>
-	    			</ul>    	    			
+	    			</ul>
 	    		</div>
 
 	    		<div class="col-md-12 box">
@@ -122,7 +101,7 @@
 								<li><span>that harasses or advocates harassment of another person.</span></li>
 							</ul>
 	    				</span></li>
-	    				<li><span>You are also prohibited from violating or attempting to violate the security of the Website, including, without limitation the following activities: 
+	    				<li><span>You are also prohibited from violating or attempting to violate the security of the Website, including, without limitation the following activities:
 							<ul class="list_style_in">
 								<li><span>accessing data not intended for you or logging into a server or account which you are not authorized to access;</span></li>
 								<li><span>attempting to probe, scan or test the vulnerability of a system or network or to breach security or authentication measures without proper authorization; </span></li>
@@ -157,10 +136,10 @@
 								<li><span>Impersonate any person or entity or otherwise misrepresent the User’s affiliation with a person or entity;</span></li>
 								<li><span>Develop any third-party applications that interact with content on the Website and / or Services without our prior written consent; and</span></li>
 								<li><span>Use the Website and / or Services for any purpose that is not personal, or is illegal, or is beyond the scope of their intended use, or is otherwise prohibited in these Terms or the terms of any third party that governs a particular Service</span></li>
-							</ul>						
+							</ul>
 	    				</span></li>
 	    				<li><span>Remedica shall be entitled to investigate such occurrences which may involve violations including but not limited to those enumerated above and may take appropriate legal action, involve and cooperate with law enforcement authorities in prosecuting persons who are involved in such violations.</span></li>
-	    			</ul>    	    			
+	    			</ul>
 	    		</div>
 
 	    		<div class="col-md-12 box">
@@ -169,7 +148,7 @@
 	    				<li><span>These Terms do not transfer from us to our Users any of our or any third party’s intellectual property, and all right, title and interest in and to such property will remain (as between the parties) solely with us. </span></li>
 	    				<li><span>Our logo, and all other trademarks, service marks, graphics and logos used in connection with the Website and / or Services are our trademarks or registered trademarks, or our licensors’. Other trademarks, service marks, graphics and logos used in connection with the Website and / or Services may be the trademarks of other third parties.</span></li>
 	    				<li><span>Our Users’ use of the Website and / or Services grants our Users no right or license to reproduce or otherwise use any of our or any third party’s trademarks. We retain the intellectual property rights in the content. </span></li>
-	    			</ul>    	    			
+	    			</ul>
 	    		</div>
 
 	    		<div class="col-md-12 box">
@@ -188,7 +167,7 @@
 	    				<li><span>Neither shall Remedica be responsible for the delay or inability to use the Website or Services, the provision of or failure to provide Services, or for any information, software, products, Services and related graphics obtained through the Website, or otherwise arising out of the use of the Website / Services, whether based on contract, tort, negligence, strict liability or otherwise. Further, Remedica shall not be held responsible for non-availability of the Website for reasons including but not limited to periodic maintenance operations or any unplanned suspension of access to the Website that may occur due to technical reasons or for any other reason whatsoever. You agree that any material and / or data downloaded or otherwise obtained through the Website is done entirely at your own discretion and risk, and you will be solely responsible for any damage to your computer systems or loss of data that results from the download of such material and/or data.</span></li>
 	    				<li><span>These limitations, disclaimer of warranties and exclusions apply without regard to whether the damages arise from (i) breach of contract, (ii) breach of warranty, (iii) negligence, or (iv) any other cause of action, to the extent such exclusion and limitations are not prohibited by applicable law.</span></li>
 	    				<li><span>Our Users represent and warrant that (i) The use of the Website and / or Services will be in strict accordance with the our Terms, Privacy Policy and with all applicable laws and regulations (including, without limitation, any local laws or regulations in their country, state, city, or other governmental area, regarding online conduct and acceptable content, and including all applicable laws regarding the transmission of technical data exported from the country in which our Users reside) and (ii) The use of the Website and / or Services will not infringe or misappropriate the intellectual property rights of any third party.</span></li>
-	    			</ul>    	    			
+	    			</ul>
 	    		</div>
 
 
@@ -239,7 +218,7 @@
 		                <a href="privacy-policy.html">Privacy Policy</a><a href="terms-of-use.html">Terms of Use</a>
 		            </div>
 		            <div class="col-md-4 footer_logo">
-		                <img src="images/footer_logo.png" alt="">
+		                <%= image_tag "footer_logo.png" %>
 		                <div class="clearfix"></div>
 		                <span>&copy; 2016 All rights reserved</span>
 		            </div>
@@ -323,10 +302,10 @@
                     }, 3000);
                 }
             });
-        });    
+        });
 
     });
 
-    </script>	
+    </script>
 </body>
 </html>
