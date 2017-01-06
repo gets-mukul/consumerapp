@@ -3,7 +3,7 @@ module PaymentHelper
   KEY = Rails.application.secrets.PAYU_IN_KEY
   SALT = Rails.application.secrets.PAYU_IN_SALT
 
-  def build_payment_params mode
+  def build_payment_params
     txnid = build_transaction_id
     desc = "Remedica treatment for #{current_user.name}"
     amount = 300.round(2)
@@ -13,16 +13,16 @@ module PaymentHelper
     hash = sha512.hexdigest(string)
     {
       :key	=> KEY,
+      :HASH => hash,
       :txnid	=> txnid,
       :amount	=> amount,
-      :mode => mode,
       :productinfo	=> desc,
       :firstname	=> current_user.name,
       :email => current_user.email,
       :phone	=> current_user.mobile,
-      :surl	=> 'http://localhost:3000/payment/success',
-      :furl	=> 'http://localhost:3000/payment/failure',
-      :HASH => hash
+      :surl	=> Rails.application.secrets.DOMAIN + '/payment/success',
+      :furl	=> Rails.application.secrets.DOMAIN + '/payment/failure',
+      :service_provider => 'payu_paisa'
     }
   end
 

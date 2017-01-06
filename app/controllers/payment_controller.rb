@@ -10,6 +10,10 @@ class PaymentController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
+    unless params[:redflagq].blank? && params[:age].to_i.between?(2,65) && params[:skincancer].blank?
+      @error = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
+      render 'failure'
+    end
   end
 
   def issue_payment
@@ -19,22 +23,24 @@ class PaymentController < ApplicationController
     when "NET BANKING" then "netbanking"
     end
 
-    payment_params = build_payment_params mode
+    payment_params = build_payment_params
 
     current_user.payments.create(user_payment_params(payment_params))
 
     url = URI.parse(PAYU_IN_PAYMENT_URL)
-    con = Net::HTTP.new(url.host, url.port)
+    con = Net::HTTP.new(url.host, url.port )
     con.use_ssl = true
-    resp, data = con.post url.path, payment_params.to_query
+    resp, data = con.post url.path, payment_params.to_query, 'Content-Type' => 'application/json'
 
-    logger.info resp.body
-
-    if resp.kind_of? Net::HTTPSuccess
+    case resp
+    when Net::HTTPRedirection then
       location = resp['location']
+      warn "redirected to #{location}"
       redirect_to URI.parse(location).to_s + "##{mode}"
     else
-      redirect_to '/failure'
+      @error = 'Error at Payment Gateway!'
+      failure
+      logger.info resp.body.strip
     end
 
   end
@@ -59,7 +65,7 @@ class PaymentController < ApplicationController
   def failure
     @patient = Patient.find_by_name current_user.name
     @patient.update({pay_status: "payment failed"})
-    @error = params['error_Message']
+    @error ||= params['error_Message']
     render 'failure'
   end
 
