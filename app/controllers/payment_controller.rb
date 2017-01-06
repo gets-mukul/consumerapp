@@ -10,7 +10,7 @@ class PaymentController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
-    unless params[:redflagq].blank? && params[:age].to_i.between?(3,65) && params[:skincancer].blank?
+    unless params[:redflagq].blank? && params[:age].to_i.between?(3,65) && ( params[:skincancer] == 'No' || params[:skincancer].blank? )
       @error = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
       render 'failure'
     end
