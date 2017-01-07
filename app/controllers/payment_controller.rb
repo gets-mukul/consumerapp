@@ -36,7 +36,7 @@ class PaymentController < ApplicationController
     when Net::HTTPRedirection then
       location = resp['location']
       warn "redirected to #{location}"
-      redirect_to URI.parse(location).to_s + "##{mode}"
+      redirect_to URI.parse(location).to_s
     else
       @error = 'Error at Payment Gateway!'
       failure
