@@ -1,4 +1,91 @@
 # Change Log
+##17.4.0
+**UI Refactor**
+- Added FontAwesome spinner before TypeForm loads.
+- Removed payment options button and put in single
+  'Pay Now' button.
+- Removed mode value setting based on button clicked
+  to accomodate the above change.
+
+##17.3.0
+**Refactor**
+- Added PayU 'unmappedstatus' param to error message
+  to allow more information on pay status. This contains
+  user specific actions that caused success/failure
+  while 'error_msg' contains PG specific actions.
+
+##17.2.0
+**Hotfix**
+- Add mode to user_payment_params, fixes ActiveRecord
+  validation error in prod env.
+
+
+## 17.1.0
+**Major fixes**
+- Removed mode attr presence validation to allow payments
+  search by txnid.
+
+**Refactor**
+- fixed user session persisting after payment by
+  setting @current_user to nil after update_payment.
+- added payment status update after failure/success
+
+## 17.0.0
+**Major fixes : PayU PG working**
+- Removed mode specific redirection based on
+  appending IDs to the location.
+- This *fixed PayU prod error*.
+  See commit fab4042fe218e07cf618c9c47c57f81cd596dd80
+
+## 16.2.1
+**Debug Deploy and Bug Fixes**
+- Added logging and case checks for prod env
+  debugging.
+- Success on HTTP 302 redirect and failure otherwise.
+  Added because PayU sends 200 OK even on failure.
+
+## 16.2.0
+**UI Refactor**
+- Fixed PayU icon dimensions on payment page.
+- Added FontAwesome shield icon for trust logo.
+
+## 16.1.3
+**HotFix**
+- Removed '.php' trailer from PayU urls.
+
+## 16.1.2
+**Hotfix**
+- Skincancer value check includes blank and 'Yes/No' values.
+
+## 16.1.1
+**Refactor**
+- Added reset_session after payment update.
+  Allows customer re-sessions.
+
+**HotFixes**
+- Fixed age check limits.
+
+## 16.0.0
+**Implemented Major enhancements**
+- Added parameter checking for payment url
+  to handle Typeform after-submit redirects.
+- Implemented redirects based on parameters.
+
+## 15.5.1
+**Fixed bugs**
+- Fixed hrefs for Terms of Use and Privacy Policy pages.
+- Fixed prod env asset not found error for above pages.
+
+## 15.5.0
+**Refactored Code**
+- Shifted Terms of Use and Privacy Policy pages from public
+  to controller to allow for better asset handling.
+
+## 15.4.1
+**Fixed bugs**
+- Fixed rails production environment font and asset not found error.
+- Switched css files to scss files to implement above fix.
+
 ## 15.4.0
 **Implemented enhancements**
 - Added hidden fields to typeform iframe src for passing patient details
