@@ -17,12 +17,7 @@ class PaymentController < ApplicationController
   end
 
   def issue_payment
-    mode = case params[:type]
-    when "CREDIT CARD" then "credit"
-    when "DEBIT CARD" then "debit"
-    when "NET BANKING" then "netbanking"
-    end
-
+    mode = "initiated"
     payment_params = build_payment_params
 
     current_user.payments.create(user_payment_params(payment_params, mode))

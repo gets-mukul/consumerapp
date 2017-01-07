@@ -2,6 +2,9 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
+  $('#typeform-full').onload = ->
+    $('.fa-spin').hide
+
   manageFormStepsVisibility = ->
     i = 1
     while i <= formSteps
