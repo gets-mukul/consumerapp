@@ -25,7 +25,7 @@ class PaymentController < ApplicationController
 
     payment_params = build_payment_params
 
-    current_user.payments.create(user_payment_params(payment_params))
+    current_user.payments.create(user_payment_params(payment_params, mode))
 
     url = URI.parse(PAYU_IN_PAYMENT_URL)
     con = Net::HTTP.new(url.host, url.port )
@@ -88,13 +88,14 @@ class PaymentController < ApplicationController
     current_user.payments.find_by_txnid(session[:txnid])
   end
 
-  def user_payment_params payment_params
+  def user_payment_params payment_params, mode
     {
       :txnid => payment_params[:txnid],
       :status => "Initiated",
       :amount	=> payment_params[:amount],
       :mode => payment_params[:mode],
-      :desc	=> payment_params[:productinfo]
+      :desc	=> payment_params[:productinfo],
+      :mode => mode
     }
   end
 
