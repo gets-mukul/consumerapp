@@ -11,7 +11,7 @@ class PaymentController < ApplicationController
 
   def index
     unless params[:redflagq].blank? && params[:age].to_i.between?(3,65) && ( params[:skincancer] == 'No' || params[:skincancer].blank? )
-      @error = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
+      @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
       render 'failure'
     end
   end
@@ -38,7 +38,8 @@ class PaymentController < ApplicationController
       warn "redirected to #{location}"
       redirect_to URI.parse(location).to_s
     else
-      @error = 'Error at Payment Gateway!'
+      @error_msg = 'Error at Payment Gateway!'
+      update_payment
       failure
       logger.info resp.body.strip
     end
@@ -52,7 +53,7 @@ class PaymentController < ApplicationController
     @patient = Patient.find_by_name current_user.name
 
     if checksum_hash != posted_hash
-      @error = "Invalid Checksum!"
+      @error_msg = "Invalid Checksum!"
       @patient.update({pay_status: "payment failed"})
       render 'failure'
     else
@@ -64,8 +65,8 @@ class PaymentController < ApplicationController
 
   def failure
     @patient = Patient.find_by_name current_user.name
-    @patient.update({pay_status: "payment failed"})
-    @error ||= params['error_Message']
+    @error_msg ||= params['error_Message']
+    @patient.update({pay_status: "payment failed : #{@error_msg}"})
     render 'failure'
   end
 
@@ -80,6 +81,7 @@ class PaymentController < ApplicationController
   def update_payment
     current_payment.update(capture_params)
     reset_session
+    unregister
   end
 
   def current_payment
@@ -101,6 +103,7 @@ class PaymentController < ApplicationController
     mode	= params["mode"]        # Payment category by which the transaction was completed/ attempted.
     pg_type = params["PG_TYPE"]	  # Gives the information of payment gateway used for transaction.
     bank_ref_num = params["bank_ref_num"]	# For a successful transaction, this will give you the bank reference number generated at bank’s end.
-    { mihpayid: mihpayid, mode: mode, pg_type: pg_type, bank_ref_num: bank_ref_num }
+    status = @error_msg.blank? ? "paid" : @error_msg
+    { mihpayid: mihpayid, mode: mode, pg_type: pg_type, bank_ref_num: bank_ref_num, status: status }
   end
 end

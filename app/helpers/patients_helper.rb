@@ -7,4 +7,8 @@ module PatientsHelper
     session[:user_id] = user.id
     logger.info "Registered #{user.name}"
   end
+
+  def unregister
+    @current_user = nil
+  end
 end

@@ -25,13 +25,13 @@ ActiveRecord::Schema.define(version: 20161227202201) do
   end
 
   create_table "payments", force: :cascade do |t|
-    t.string  "txnid"
-    t.string  "status"
-    t.string  "desc"
-    t.string  "amount"
+    t.string  "txnid",        null: false
+    t.string  "status",       null: false
+    t.string  "desc",         null: false
+    t.string  "amount",       null: false
     t.string  "add_charge"
     t.string  "mihpayid"
-    t.string  "mode"
+    t.string  "mode",         null: false
     t.string  "pg_type"
     t.string  "bank_ref_num"
     t.integer "patient_id"
