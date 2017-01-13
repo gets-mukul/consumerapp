@@ -45,7 +45,7 @@ class PatientsController < ApplicationController
       @patient = Patient.new(patient_params)
       if @patient.save
         register @patient
-        # NewUserNotifierMailer.send_new_user_mail(@patient).deliver_later
+        NewUserNotifierMailer.send_new_user_mail(@patient).deliver_later
 
         render json: { :message => "Patient found. Logging in." }, :status => 200
       else
