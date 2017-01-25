@@ -47,6 +47,7 @@ class PaymentController < ApplicationController
     checksum_hash = checksum(params, current_payment)
     @patient = Patient.find_by_name current_user.name
 
+    logger.info "Checksum hash: #{checksum_hash}, posted_hash: #{posted_hash}"
     if checksum_hash != posted_hash
       @error_msg = "Invalid Checksum!"
       @patient.update({pay_status: "payment failed"})
