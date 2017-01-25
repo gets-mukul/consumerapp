@@ -6,7 +6,7 @@ class PaymentController < ApplicationController
 
   include PaymentHelper
   before_action :check_current_user
-  after_action :update_payment, only: [:success, :failure]
+  after_action :update_payment, :unregister, only: [:success, :failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
@@ -51,12 +51,10 @@ class PaymentController < ApplicationController
     if checksum_hash != posted_hash
       @error_msg = "Invalid Checksum!"
       @patient.update({pay_status: "payment failed"})
-      unregister
       render 'failure'
     else
       @patient.update({pay_status: "paid"})
       UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
-      unregister
       render 'success'
     end
   end
@@ -65,7 +63,6 @@ class PaymentController < ApplicationController
     @patient = Patient.find_by_name current_user.name
     @error_msg ||= params['error_Message'] + "|" + params['unmappedstatus']
     @patient.update({pay_status: "payment failed : #{@error_msg}"})
-    unregister
     render 'failure'
   end
 
