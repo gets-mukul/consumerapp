@@ -9,7 +9,8 @@ module PatientsHelper
   end
 
   def unregister
-    reset_session
+    Rails.logger.debug { "In unregister" }
     @current_user = nil
+    reset_session
   end
 end
