@@ -51,10 +51,12 @@ class PaymentController < ApplicationController
     if checksum_hash != posted_hash
       @error_msg = "Invalid Checksum!"
       @patient.update({pay_status: "payment failed"})
+      unregister
       render 'failure'
     else
       @patient.update({pay_status: "paid"})
       UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
+      unregister
       render 'success'
     end
   end
@@ -63,6 +65,7 @@ class PaymentController < ApplicationController
     @patient = Patient.find_by_name current_user.name
     @error_msg ||= params['error_Message'] + "|" + params['unmappedstatus']
     @patient.update({pay_status: "payment failed : #{@error_msg}"})
+    unregister
     render 'failure'
   end
 
@@ -76,8 +79,6 @@ class PaymentController < ApplicationController
 
   def update_payment
     current_payment.update(capture_params)
-    reset_session
-    unregister
   end
 
   def current_payment
@@ -97,7 +98,7 @@ class PaymentController < ApplicationController
 
   def capture_params
     mihpayid = params["mihpayid"] #	Unique reference no. created at PayUbiz’s end for each transaction.
-    mode	= params["mode"]        # Payment category by which the transaction was completed/ attempted.
+    mode	= params["mode"].nil? ? "failed" : params[:mode]        # Payment category by which the transaction was completed/ attempted.
     pg_type = params["PG_TYPE"]	  # Gives the information of payment gateway used for transaction.
     bank_ref_num = params["bank_ref_num"]	# For a successful transaction, this will give you the bank reference number generated at bank’s end.
     status = @error_msg.blank? ? "paid" : @error_msg

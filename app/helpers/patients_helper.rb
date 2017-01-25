@@ -9,6 +9,7 @@ module PatientsHelper
   end
 
   def unregister
+    reset_session
     @current_user = nil
   end
 end
