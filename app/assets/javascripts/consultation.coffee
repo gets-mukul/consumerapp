@@ -2,8 +2,28 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 $ ->
-  $('#typeform-full').onload = ->
-    $('.fa-spin').hide
+
+  opts =
+    lines: 15,
+    length: 2.3,
+    width: 2.5,
+    radius: 13,
+    color: '#000',
+    speed: 2.1,
+    trail: 60,
+    shadow: !1,
+    hwaccel: !1
+    className: 'spinner'
+    top: '50%'
+    left: '50%'
+    position: 'absolute'
+
+  target = $('.loader')[0];
+  spinner = new Spinner(opts).spin(target)
+
+  $('#typeform-full').on 'load', ->
+    console.log "Typeform loaded"
+    spinner.stop()
 
   manageFormStepsVisibility = ->
     i = 1
