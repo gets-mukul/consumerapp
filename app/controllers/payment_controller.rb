@@ -10,9 +10,11 @@ class PaymentController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
-    unless params[:redflagq].blank? && params[:age].to_i.between?(3,65) && ( params[:skincancer] == 'No' || params[:skincancer].blank? )
-      @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
-      failure
+    unless params[:age].to_i.between?(3,65) && ( params[:skincancer] == 'No' || params[:skincancer].blank? )
+      if check_red_flags
+        @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
+        failure
+      end
     end
   end
 
@@ -71,37 +73,13 @@ class PaymentController < ApplicationController
 
   private
 
-  def check_current_user
-    if current_user.nil?
-      redirect_to '/new_patient'
-    end
+  def current_payment
+    current_user.payments.find_by_txnid(session[:txnid])
   end
-
+  
   def update_payment
     current_payment.update(capture_params)
     unregister
   end
 
-  def current_payment
-    current_user.payments.find_by_txnid(session[:txnid])
-  end
-
-  def user_payment_params payment_params, mode
-    {
-      :txnid => payment_params[:txnid],
-      :status => "Initiated",
-      :amount	=> payment_params[:amount],
-      :desc	=> payment_params[:productinfo],
-      :mode => mode
-    }
-  end
-
-  def capture_params
-    mihpayid = params["mihpayid"] #	Unique reference no. created at PayUbiz’s end for each transaction.
-    mode	= params["mode"].nil? ? "failed" : params[:mode]        # Payment category by which the transaction was completed/ attempted.
-    pg_type = params["PG_TYPE"]	  # Gives the information of payment gateway used for transaction.
-    bank_ref_num = params["bank_ref_num"]	# For a successful transaction, this will give you the bank reference number generated at bank’s end.
-    status = @error_msg.blank? ? "paid" : @error_msg
-    { mihpayid: mihpayid, mode: mode, pg_type: pg_type, bank_ref_num: bank_ref_num, status: status }
-  end
 end

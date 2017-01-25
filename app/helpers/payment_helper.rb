@@ -49,4 +49,33 @@ module PaymentHelper
       txnid = "RE" + sha256.hexdigest(key).to_s[1..16] + Time.now.to_s.gsub(/-|\s|\:|\+/,'')
       session[:txnid] = txnid
     end
+
+    def check_current_user
+      if current_user.nil?
+        redirect_to '/new_patient'
+      end
+    end
+
+    def user_payment_params payment_params, mode
+      {
+        :txnid => payment_params[:txnid],
+        :status => "Initiated",
+        :amount	=> payment_params[:amount],
+        :desc	=> payment_params[:productinfo],
+        :mode => mode
+      }
+    end
+
+    def capture_params
+      mihpayid = params["mihpayid"] #	Unique reference no. created at PayUbiz’s end for each transaction.
+      mode	= params["mode"].nil? ? "failed" : params[:mode]        # Payment category by which the transaction was completed/ attempted.
+      pg_type = params["PG_TYPE"]	  # Gives the information of payment gateway used for transaction.
+      bank_ref_num = params["bank_ref_num"]	# For a successful transaction, this will give you the bank reference number generated at bank’s end.
+      status = @error_msg.blank? ? "paid" : @error_msg
+      { mihpayid: mihpayid, mode: mode, pg_type: pg_type, bank_ref_num: bank_ref_num, status: status }
+    end
+
+    def check_red_flags
+      true
+    end
 end
