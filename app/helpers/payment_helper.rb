@@ -34,9 +34,9 @@ module PaymentHelper
     sha512 = OpenSSL::Digest::SHA512.new
 
     if !add_charge.nil?
-      string = [add_charge, SALT, status, "|||||||||", current_user.email, current_user.name, payment.desc, '%.2f' % payment.amount, payment.txnid, KEY].join("|")
+      string = [add_charge, SALT, status, "|||||||||", current_user.email, current_user.name, payment.desc,'%.1f' % payment.amount, payment.txnid, KEY].join("|")
     else
-      string = [SALT, status, "|||||||||", current_user.email, current_user.name, payment.desc, '%.2f' % payment.amount, payment.txnid, KEY].join("|")
+      string = [SALT, status, "|||||||||", current_user.email, current_user.name, payment.desc,'%.1f' % payment.amount, payment.txnid, KEY].join("|")
     end
     sha512.hexdigest(string)
   end
