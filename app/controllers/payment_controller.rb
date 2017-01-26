@@ -10,11 +10,9 @@ class PaymentController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
-    unless params[:age].to_i.between?(3,65) && ( params[:skincancer] == 'No' || params[:skincancer].blank? )
-      if check_red_flags
+    unless params[:age].to_i.between?(3,65) && ( params[:skincancer] == 'No' || params[:skincancer].blank? ) && !red_flags
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
         failure
-      end
     end
   end
 
@@ -76,7 +74,7 @@ class PaymentController < ApplicationController
   def current_payment
     current_user.payments.find_by_txnid(session[:txnid])
   end
-  
+
   def update_payment
     current_payment.update(capture_params)
     unregister

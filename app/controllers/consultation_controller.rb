@@ -20,6 +20,7 @@ class ConsultationController < ApplicationController
                 }
 
     @condition_form = typeform[@condition] << "?email=#{current_user.email}&mobile=#{current_user.mobile}&name=#{current_user.name}"
+    session[:typeform_uid] = typeform[@condition].scan(/\/([\w]*)\?/)[0][0]
   end
 
   def welcome
