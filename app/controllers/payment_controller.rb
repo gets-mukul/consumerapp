@@ -46,7 +46,6 @@ class PaymentController < ApplicationController
     checksum_hash = checksum(params, current_payment)
     @patient = Patient.find_by_name current_user.name
 
-    logger.info "Checksum hash: #{checksum_hash}, posted_hash: #{posted_hash}"
     if checksum_hash != posted_hash
       @error_msg = "Invalid Checksum!"
       @patient.update({pay_status: "payment failed|invalid checksum"})
@@ -54,6 +53,7 @@ class PaymentController < ApplicationController
     else
       @patient.update({pay_status: "paid"})
       CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
+      UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       render 'success'
     end
   end

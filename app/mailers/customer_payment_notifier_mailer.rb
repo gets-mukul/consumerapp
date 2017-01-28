@@ -6,5 +6,5 @@ class CustomerPaymentNotifierMailer < ApplicationMailer
     mail( :to => Rails.application.secrets.ADMIN_EMAIL,
     :subject => "Remedica: User payment notice." )
   end
-  
+
 end
