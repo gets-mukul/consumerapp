@@ -1,4 +1,52 @@
 # Change Log
+##20.0.1
+**UI Changes**
+- Typo fixes, css styling changes.
+
+##20.0.0
+**Payment Checksum Production Fix**
+- Logged live error and referred latest docs to fix checsum mismatch errors.
+- *This fixed live checksum error*
+ See commit 3ff158c6fb00ecfde980d31749b300ea774d3daa
+
+##19.0.1
+**UI Refactor**
+- Changed PayU logo from PayU Biz to PayU Money.
+
+##19.0.0
+**Added Typeform API to check for Red flags.**
+- Add API lookup to check for red flag logic.
+- See commit 1e6580b316b04c122a82b585743ad6ed067b272c
+
+##18.1.0
+**Prod Refactor**
+- Moved payment controller helper functions to Payment helper.
+
+##18.0.0
+**User session fixes**
+- Fixed user session destroy bugs.
+- See commit b9bfe230f002ecf62f66ba33f8c6c5eddc83cfd9
+
+##17.5.0
+**Social Media Widget**
+- Added social media widget on Share button click
+  using jssocials.min.js library in vendor/assets/javascripts.
+
+##17.4.2
+**UI Changes**
+- Changed form pre-load spinner to match Typeform spinner
+  using spin.js library in vendor/assets/javascripts
+
+##17.4.2
+**Hotfix**
+- Fb Link button styling fixed.
+- Pigmentation or Discolouration broken link fixed.
+
+##17.4.1
+**Hotfix**
+- Add Fb Link to final payments page.
+- Enable New User mailer
+
 ##17.4.0
 **UI Refactor**
 - Added FontAwesome spinner before TypeForm loads.
