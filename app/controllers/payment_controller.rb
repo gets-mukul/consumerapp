@@ -53,7 +53,7 @@ class PaymentController < ApplicationController
       failure
     else
       @patient.update({pay_status: "paid"})
-      UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
+      CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       render 'success'
     end
   end
