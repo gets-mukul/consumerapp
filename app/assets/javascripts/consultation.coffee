@@ -50,7 +50,7 @@ $ ->
       $('#form-step-2 .form-stepper-2').on 'click', ->
         condition = $(this).text()
         console.log condition
-        window.location.href = '/consultation_form/' + condition
+        window.location.href = '/consult/consultation_form/' + condition
 
     ).on "ajax:error", (e, xhr, status, error) ->
       $("#error_explanation").text "An error occurred. Please try again later."

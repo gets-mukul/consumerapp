@@ -52,7 +52,7 @@ module PaymentHelper
 
     def check_current_user
       if current_user.nil?
-        redirect_to '/new_patient'
+        redirect_to '/consult/new_patient'
       end
     end
 

@@ -856,3 +856,10 @@ No such file or directory - connect(2) for /tmp/puma-status-1485968474856-17998
 [21174] - Gracefully shutting down workers...
 [21174] === puma shutdown: 2017-02-01 18:21:03 +0000 ===
 [21174] - Goodbye!
+=== puma startup: 2017-02-02 00:15:36 +0530 ===
+[18915] * Starting control server on unix:///tmp/puma-status-1485974736931-18915
+[18957] + Gemfile in context: /media/ishaan/CC66323C6632281A/Ishaan/Projects/Remedica/Remedica-patient/Gemfile
+[18915] - Worker 0 (pid: 18957) booted, phase: 0
+[18915] - Gracefully shutting down workers...
+[18915] === puma shutdown: 2017-02-02 00:15:49 +0530 ===
+[18915] - Goodbye!
