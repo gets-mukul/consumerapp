@@ -1,0 +1,4 @@
+---
+pid: 21174
+control_url: unix:///tmp/puma-status-1485973244005-21169
+control_auth_token: 7a4557b7957d3316a11f9ce6a1342c36

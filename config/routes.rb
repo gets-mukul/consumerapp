@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   post '/patients' => 'patients#create', defaults: {format: 'json'}
 
   get '/consultation', to: 'consultation#welcome'
@@ -17,5 +16,4 @@ Rails.application.routes.draw do
   get '/terms_of_use', to: 'static_pages#terms_of_use'
 
   root 'consultation#welcome'
-
 end
