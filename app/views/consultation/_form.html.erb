@@ -14,7 +14,7 @@
         <i class="fa fa-envelope"></i>
       </div>
       <div class="control-group input-field form-group">
-          <%= f.number_field :mobile, class: "form-control", :minlength => 10, :maxlength => 15, :required => true, :"data-validation-required-message" => "You need to enter a mobile no." %>
+          <%= f.telephone_field :mobile, class: "form-control", :minlength => 10, :maxlength => 15, :required => true, :"data-validation-required-message" => "You need to enter a mobile no." %>
           <p class="help-block"></p>
           <%= f.label :mobile %>
           <i class="fa fa-phone"></i>
