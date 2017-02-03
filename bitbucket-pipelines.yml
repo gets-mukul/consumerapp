@@ -9,7 +9,5 @@ pipelines:
   default:
     - step:
         script: # Modify the commands below to build your repository.
-          - pumactl stop
           - bundler --version
           - bundle install
-          - puma -d
