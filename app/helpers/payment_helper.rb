@@ -88,15 +88,22 @@ module PaymentHelper
             if response["hidden"]["email"] == current_user.email
               logger.info { "Record for #{current_user.email} found" }
               if response["answers"].count > 8
+                logger.info { "#{current_user.email} has more than 8 answers. No Red flags." }
                 return false
+              else
+                logger.info { "#{current_user.email} has less than 8 answers. Red flags presumed." }
+                return true
               end
             end
           end
+          logger.info { "#{current_user.email} entry not found. Red flags presumed." }
           return true
         else
+          logger.info { "Typeform responses = 0. Red flags presumed." }
           return true
         end
       else
+        logger.info { "Typeform did not return 200 OK." }
         return true
       end
     end
