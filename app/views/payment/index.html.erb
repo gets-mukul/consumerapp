@@ -6,17 +6,17 @@
                 <div class="col-sm-12 box pad_0 margin_0">
         <div class="row space_bottom">
           <div class="col-sm-12 col-md-6 col-md-offset-3">
-            <div><h1 style="font-size: 38px;">Almost done <span customer-name><%= current_user.name %></span>!</h1></div>
-            <div><p style="font-size: 18px;">The final step is payment. We need to ask for payment now so our dermatologist can prepare your treatment plan.</p></div>
+            <div><h1 style="font-size: 28px;">Almost done, <span customer-name><%= current_user.name %></span>!</h1></div>
+            <div><p style="font-size: 16px; line-height: 1.2; margin-top: 20px">The final step is payment. We need to ask for payment now so our dermatologist can prepare your treatment plan.</p></div>
             <hr class="border_transparent space_top space_bottom"></hr>
-            <div><p style="font-size: 14px;">You can pay by Credit Card, Debit Card or Net Banking.</p></div>
+            <div><p style="font-size: 16px; line-height: 1.2">You can pay by Credit Card, Debit Card or Net Banking.</p></div>
           </div>
           </div>
           <div class="row">
           <div class="col-sm-12">
             <%= form_tag '/consult/payment', method: :post do %>
             <div class="text-center">
-              <%= submit_tag "PAY NOW", name: "type", class: "list_btn_dark hover space_bottom" %>
+              <%= submit_tag "PAY NOW", name: "type", class: "list_btn_dark hover" %>
             </div>
             <% end %>
           </div>

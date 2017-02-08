@@ -23,7 +23,7 @@ development:
   <<: *default
   database: Remedica_development
   username: postgres
-  password: <%= ENV["POSTGRES_PASS"] %>
+  password: test
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
