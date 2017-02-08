@@ -15,7 +15,7 @@
 						<% if @error_msg.include? 'nearby hospital' %>
 						<!-- Red Flag block -->
 						<div><h1 class="space_top" style="font-size:28px">We're sorry ...</h1></div>
-						<div><p>
+						<div><p style="font-size: 16px">
 							We are sorry <span customer-name><%= current_user.name %></span>, but based on the information you have provided, we are unable to proceed with your consultation. We recommend that you see a doctor in person as soon as possible.
 						</p></div>
 						
@@ -23,7 +23,7 @@
 						<!-- Payment Failure Block-->
 						
 						<div><h1 class="space_top">Payment Failure</h1></div>
-						<div><p>
+						<div><p style="font-size: 16px">
 							We are sorry <span customer-name><%= current_user.name %></span>, but there seems to be some problem with your payment. Please contact us by email or WhatsApp below for help.
 						</p></div>
 						
@@ -35,24 +35,24 @@
                         <!--</div>-->
                         
 						<div class="space_top">
-							<p>You can contact us for any questions or help at:</p>
+							<p style="font-size: 16px">You can contact us for any questions or help at:</p>
 						</div>
 						<div class="text-center font_h5 hidden-xs">
-		                    <span class="font_weight_med color_grey">
+		                    <span class="font_weight_med color_blue">
 		                        <i class="inline fa fa-envelope-o color_blue"></i>
 		                        consult@remedicahealth.com
 		                    </span>
-		                    <span class="font_weight_med color_grey space_left">
+		                    <span class="font_weight_med color_blue space_left">
 		                        <i class="inline fa fa-whatsapp color_blue"></i>
 		                        <nobr>8433 848 969</nobr>
 		                    </span>
 		                </div>
 						<div class="text-center font_h5 visible-xs">
-		                    <div class="font_weight_med color_grey">
+		                    <div class="font_weight_med color_blue">
 		                        <i class="inline fa fa-envelope-o color_blue"></i>
 		                        consult@remedicahealth.com
 		                    </div>
-		                    <div class="font_weight_med color_grey">
+		                    <div class="font_weight_med color_blue">
 		                        <i class="inline fa fa-whatsapp color_blue"></i>
 		                        8433 848 969
 		                    </div>
