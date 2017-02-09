@@ -12,7 +12,7 @@ class ConsultationController < ApplicationController
     typeform = {
       "Acne" => "https://remedica.typeform.com/to/Eb3Oby",
       "Hairfall or Hair Thinning" => "https://remedica.typeform.com/to/WqEAeB",
-      "Pigmentation or Coloration" => "https://remedica.typeform.com/to/RgTtE0",
+      "Pigmentation & Discolouration" => "https://remedica.typeform.com/to/RgTtE0",
       "Dandruff" => "https://remedica.typeform.com/to/WqEAeB",
       "Eczema, Psoriasis & Rash" => "https://remedica.typeform.com/to/VuHuwt",
       "Stretch Marks" => "https://remedica.typeform.com/to/lSTMhj",
