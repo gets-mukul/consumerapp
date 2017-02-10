@@ -9,9 +9,17 @@ class PaymentController < ApplicationController
   after_action :update_payment, only: [:success, :failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
+  # def index
+  #   @error_msg = ""
+  #   unless params[:age].to_i.between?(3,65) && ( params[:skincancer] == 'No' || params[:skincancer].blank? ) && !red_flags
+  #       @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
+  #       failure
+  #   end
+  # end
+  
   def index
     @error_msg = ""
-    unless params[:age].to_i.between?(3,65) && ( params[:skincancer] == 'No' || params[:skincancer].blank? ) && !red_flags
+    unless params[:city] != blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
         failure
     end
