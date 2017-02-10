@@ -19,7 +19,7 @@ class PaymentController < ApplicationController
   
   def index
     @error_msg = ""
-    unless params[:city] != blank?
+    unless !params[:city].blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
         failure
     end
