@@ -6,7 +6,7 @@ module PaymentHelper
   def build_payment_params
     txnid = build_transaction_id
     desc = "Remedico treatment for #{current_user.name}"
-    amount = 400.round(2)
+    amount = 350.round(2)
 
     sha512 = OpenSSL::Digest::SHA512.new
     string = [KEY,txnid,amount.to_s,desc,current_user.name,current_user.email,"|||||||||",SALT].join("|")
