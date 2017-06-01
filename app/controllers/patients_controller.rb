@@ -16,15 +16,14 @@ class PatientsController < ApplicationController
       # If they don't, check remote database for
       # cases when remote database is updated and local isn't.
       result = patient_exists? params[:patient][:email]
-
       if result
         # Patient exists in remote database.
         save_patient
       else
         # New Patient, update both local and remote databases.
         resp, data = send_new_patient_info patient_params
-
         if !resp.kind_of? Net::HTTPOK
+		  logger.debug resp.body
           render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
         else
           # Patient saved at remote database. We can start saving it at local as well.
@@ -66,6 +65,7 @@ class PatientsController < ApplicationController
 
       url = URI.parse(REMEDICA_PATIENTS_ENDPOINT + "/find")
       con = Net::HTTP.new(url.host, url.port)
+	  con.use_ssl = true
       resp = con.post url.path, post_params.to_query
 
       if resp.kind_of? Net::HTTPFound
@@ -88,6 +88,7 @@ class PatientsController < ApplicationController
 
       url = URI.parse(REMEDICA_PATIENTS_ENDPOINT + "/create")
       con = Net::HTTP.new(url.host, url.port)
+	  con.use_ssl = true
       con.post url.path, post_params.to_query
     end
 end
