@@ -1,4 +1,5 @@
 class PatientsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
   REMEDICA_PATIENTS_ENDPOINT = Rails.application.secrets.PATIENTS_ENDPOINT
   require 'uri'
