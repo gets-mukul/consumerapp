@@ -3,6 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 #= require jssocials.min.js
 $ ->
+
   opts =
     lines: 15,
     length: 2.3,
@@ -35,9 +36,10 @@ $ ->
       i++
     return
 
+
   $('.thanksmsg_popup').hide()
 
-  formSteps = 2
+  formSteps = 3
   currentFormStep = 1
   manageFormStepsVisibility()
 
@@ -47,7 +49,7 @@ $ ->
       currentFormStep++
       manageFormStepsVisibility()
 
-      $('#form-step-2 .form-stepper-2').on 'click', ->
+      $('#form-step-3 .form-stepper-2').on 'click', ->
         condition = $(this).text()
         console.log condition
         window.location.href = '/consult/consultation_form/' + condition
