@@ -189,7 +189,8 @@
             var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
             console.log(checkbox.checked);
             if (!checkbox || !checkbox.checked) { return; }
-            window.location.href = "/consult/new_patient";
+            $('#form-step-3').removeClass('hidden');
+            $('#form-step-2').addClass('hidden');
             ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
         });
     });
