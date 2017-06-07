@@ -15,7 +15,8 @@ Rails.application.routes.draw do
 
     get '/privacy_policy', to: 'static_pages#privacy_policy'
     get '/terms_of_use', to: 'static_pages#terms_of_use'
+    #root 'consultation#welcome'
+    get '/', to: 'consultation#index'
 
-    root 'consultation#welcome'
   end
 end
