@@ -33,6 +33,6 @@ config/initializers/secret_token.rb
 ## Environment normalization:
 /.bundle
 /vendor/bundle
-config/puma.rb
+#config/puma.rb
 shared
 *.swp
