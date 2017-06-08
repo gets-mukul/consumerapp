@@ -34,3 +34,5 @@ config/initializers/secret_token.rb
 /.bundle
 /vendor/bundle
 config/puma.rb
+shared
+*.swp
