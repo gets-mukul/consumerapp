@@ -5,6 +5,7 @@ class PaymentController < ApplicationController
   PAYU_IN_PAYMENT_URL = Rails.application.secrets.PAYMENT_URL
 
   include PaymentHelper
+  include PaytmHelper
   before_action :check_current_user
   after_action :update_payment, only: [:success, :failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
@@ -16,7 +17,7 @@ class PaymentController < ApplicationController
   #       failure
   #   end
   # end
-  
+
   def index
     @error_msg = ""
     unless !params[:city].blank?
@@ -27,25 +28,31 @@ class PaymentController < ApplicationController
 
   def issue_payment
     mode = "pending"
-    payment_params = build_payment_params
-
+    payment_params = build_paytm_params
+    checksum = new_pg_encrypt payment_params
     current_user.payments.create(user_payment_params(payment_params, mode))
 
-    url = URI.parse(PAYU_IN_PAYMENT_URL)
-    con = Net::HTTP.new(url.host, url.port )
+    url = URI.parse("https://pguat.paytm.com/oltp-web/processTransaction")
+    con = Net::HTTP.new(url.host, url.port)
     con.use_ssl = true
-    resp, data = con.post url.path, payment_params.to_query, 'Content-Type' => 'application/json'
-
-    case resp
-    when Net::HTTPRedirection then
-      location = resp['location']
-      warn "redirected to #{location}"
-      redirect_to URI.parse(location).to_s
-    else
-      @error_msg = 'Error at Payment Gateway!'
-      failure
-      logger.info resp.body.strip
-    end
+    resp, data = con.get url.path, payment_params.to_query
+    p resp
+    p data
+    # url = URI.parse(PAYU_IN_PAYMENT_URL)
+    # con = Net::HTTP.new(url.host, url.port )
+    # con.use_ssl = true
+    # resp, data = con.post url.path, payment_params.to_query, 'Content-Type' => 'application/json'
+    #
+    # case resp
+    # when Net::HTTPRedirection then
+    #   location = resp['location']
+    #   warn "redirected to #{location}"
+    #   redirect_to URI.parse(location).to_s
+    # else
+    #   @error_msg = 'Error at Payment Gateway!'
+    #   failure
+    #   logger.info resp.body.strip
+    # end
 
   end
 

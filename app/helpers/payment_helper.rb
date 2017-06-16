@@ -26,6 +26,25 @@ module PaymentHelper
     }
   end
 
+  def build_paytm_params
+    txnid = build_transaction_id
+    amount = 350.round(2)
+    {
+      :MERCHANT_KEY	=> "1HmXDh!#8ODH7FO6",
+      :MID => "Remedy24705119328083",
+      :txnid	=> txnid,
+      :CHANNEL_ID => "WEB",
+      :TXN_AMOUNT	=> amount,
+      :INDUSTRY_TYPE_ID => "Retail",
+      :WEBSITE => "WEB_STAGING",
+      :CUST_ID => current_user.id,
+      :ORDER_ID => "",
+      :EMAIL => current_user.email,
+      :MOBILE_NO	=> current_user.mobile,
+      :CALLBACK_URL => "localhost:3000"
+    }
+  end
+
   def checksum params, current_payment
     add_charge = params["additionalCharges"]
     status = params["status"]
