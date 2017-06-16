@@ -6,3 +6,13 @@
 a:hover {
   text-decoration: none;
 }
+
+.paymentProgressImage {
+    content:(url("progress_bar_web.png"))
+}
+
+@media only screen  and (max-device-width:480px) {
+  .paymentProgressImage {
+      content:(url("progress_bar_mobile.png"))
+  }
+}
