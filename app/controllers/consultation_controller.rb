@@ -1,6 +1,10 @@
 class ConsultationController < ApplicationController
+  include PatientsHelper
+  before_action :check_current_user
+
   def index
     @patient = Patient.new
+    @condition = session[:condition]
   end
 
   def consultation_form

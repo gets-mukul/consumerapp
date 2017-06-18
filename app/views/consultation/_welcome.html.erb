@@ -14,9 +14,7 @@
       </div>
 		</section>
 		<hr class="border_transparent">
-		<section class="row light_grey_back" style="margin-bottom: 30px">
-			
-		</section>
+
 		<section class="space_bottom text-center">
         <div class="row space_top_sm">
             <h4 style="font-weight: normal">Once you're ready to begin, indicate you agree to our terms & policies, and select "Get Started" below.</h4>
@@ -156,8 +154,10 @@ $("a.ready_btn").on('click', function () {
     var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
     console.log(checkbox.checked);
     if (!checkbox || !checkbox.checked) { return; }
-    $('#form-step-3').removeClass('hidden');
-    $('#form-step-2').addClass('hidden');
+    // $('#form-step-3').removeClass('hidden');
+    // $('#form-step-2').addClass('hidden');
+
+    location.href = "/consult/consultation_form/<%= @condition %>";
     ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
 });
 });
