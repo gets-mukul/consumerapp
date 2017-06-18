@@ -156,8 +156,11 @@ $("a.ready_btn").on('click', function () {
     if (!checkbox || !checkbox.checked) { return; }
     // $('#form-step-3').removeClass('hidden');
     // $('#form-step-2').addClass('hidden');
-
-    location.href = "/consult/consultation_form/<%= @condition %>";
+    <% if @condition %>
+      location.href = "/consult/consultation_form/<%= @condition %>";
+    <% else %>
+      location.href= "/"
+    <% end %>
     ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
 });
 });
