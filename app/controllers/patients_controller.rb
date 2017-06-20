@@ -11,7 +11,7 @@ class PatientsController < ApplicationController
     unless conditions.include? params[:condition]
       return redirect_to "/"
     end
-    @patient = Patient.find_by_email(patient_params[:email])
+    @patient = Patient.find_by_mobile(patient_params[:mobile])
     if @patient
       # Patient exists in local database. Log them in
       register @patient
@@ -20,7 +20,7 @@ class PatientsController < ApplicationController
     else
       # If they don't, check remote database for
       # cases when remote database is updated and local isn't.
-      result = patient_exists? patient_params[:email]
+      result = patient_exists? patient_params[:mobile]
       if result
         # Patient exists in remote database.
         save_patient
@@ -80,15 +80,16 @@ class PatientsController < ApplicationController
       # params.require(:patient).permit(:name, :email, :mobile)
     end
 
-    def patient_exists? email
+    def patient_exists? mobile
       post_params = {
-                      :email => email,
+                      :phone_no => mobile,
                       :token => Rails.application.secrets.REMEDICA_PATIENTS_API_KEY
                     }
 
       url = URI.parse(REMEDICA_PATIENTS_ENDPOINT + "/find")
       con = Net::HTTP.new(url.host, url.port)
-	    con.use_ssl = true
+      #TODO: uncomment for production
+	    # con.use_ssl = true
       resp = con.post url.path, post_params.to_query
 
       if resp.kind_of? Net::HTTPFound
@@ -111,7 +112,8 @@ class PatientsController < ApplicationController
 
       url = URI.parse(REMEDICA_PATIENTS_ENDPOINT + "/create")
       con = Net::HTTP.new(url.host, url.port)
-	    con.use_ssl = true
+      #TODO: uncomment for production
+	    # con.use_ssl = true
       con.post url.path, post_params.to_query
     end
 end

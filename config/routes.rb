@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   scope '/consult' do
     post '/patients' => 'patients#create', defaults: {format: 'json'}
+    get '/patients' => 'patients#create', defaults: {format: 'json'}
 
     get '/consultation', to: 'consultation#welcome'
     get '/consultation_form/:condition', to: 'consultation#consultation_form'
@@ -17,6 +18,5 @@ Rails.application.routes.draw do
     get '/terms_of_use', to: 'static_pages#terms_of_use'
     #root 'consultation#welcome'
     get '/', to: 'consultation#index'
-
   end
 end
