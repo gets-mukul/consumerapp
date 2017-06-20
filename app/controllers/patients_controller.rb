@@ -8,9 +8,6 @@ class PatientsController < ApplicationController
   # POST /patients
   def create
     # Check if patient exists in database
-    unless conditions.include? params[:condition]
-      return redirect_to "/"
-    end
     @patient = Patient.find_by_mobile(patient_params[:mobile])
     if @patient
       # Patient exists in local database. Log them in

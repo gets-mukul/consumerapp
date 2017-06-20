@@ -27,7 +27,8 @@
 <main id="form-step-1">
 	<%= render 'welcome' %>
 </main>
-<!-- <main id="form-step-2">
+<%unless @condition %>
+<main id="form-step-2">
     <section class="inner_content">
         <div class="container">
             <div class="row contactpopup_info">
@@ -66,7 +67,8 @@
     <hr class="border_transparent">
         </div>
     </section>
-</main> -->
+</main>
+<%end%>
 <!-- Modal -->
 <div id="myModal" class="modal fade contactpopup_info" role="dialog">
     <div class="modal-dialog contact_dialog">

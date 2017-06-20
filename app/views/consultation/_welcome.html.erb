@@ -154,12 +154,12 @@ $("a.ready_btn").on('click', function () {
     var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
     console.log(checkbox.checked);
     if (!checkbox || !checkbox.checked) { return; }
-    // $('#form-step-3').removeClass('hidden');
-    // $('#form-step-2').addClass('hidden');
+
     <% if @condition %>
       location.href = "/consult/consultation_form/<%= @condition %>";
     <% else %>
-      location.href= "/"
+      $('#form-step-2').removeClass('hidden');
+      $('#form-step-1').addClass('hidden');
     <% end %>
     ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
 });
