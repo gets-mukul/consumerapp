@@ -88,8 +88,7 @@ class PatientsController < ApplicationController
 
       url = URI.parse(REMEDICA_PATIENTS_ENDPOINT + "/find")
       con = Net::HTTP.new(url.host, url.port)
-      #TODO: uncomment for production
-	    # con.use_ssl = true
+	    con.use_ssl = true if Rails.env.production?
       resp = con.post url.path, post_params.to_query
 
       if resp.kind_of? Net::HTTPFound
@@ -112,8 +111,7 @@ class PatientsController < ApplicationController
 
       url = URI.parse(REMEDICA_PATIENTS_ENDPOINT + "/create")
       con = Net::HTTP.new(url.host, url.port)
-      #TODO: uncomment for production
-	    # con.use_ssl = true
+	    con.use_ssl = true if Rails.env.production?
       con.post url.path, post_params.to_query
     end
 end
