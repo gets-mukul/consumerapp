@@ -8,6 +8,7 @@ class Patient < ApplicationRecord
   has_many :payments
 
   def set_defaults
+	self.email ||= ''
     self.pay_status ||= 'payment pending'
   end
 end
