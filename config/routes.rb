@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   scope '/consult' do
+    get '/promo/:promo_code' => 'coupon#apply'
+
     post '/patients' => 'patients#create', defaults: {format: 'json'}
     get '/patients' => 'patients#create', defaults: {format: 'json'}
 
