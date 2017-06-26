@@ -23,7 +23,7 @@ class ConsultationController < ApplicationController
       "Skin Growth (Moles, Warts)" => "https://remedica.typeform.com/to/qs6Oc7"
     }
 
-    @condition_form = typeform[@condition] << "?email=#{current_user.email}&mobile=#{current_user.mobile}&name=#{current_user.name}"
+    @condition_form = typeform[@condition] << "?mobile=#{current_user.mobile}&name=#{current_user.name}"
     session[:typeform_uid] = typeform[@condition].scan(/\/([\w]*)\?/)[0][0]
   end
 
