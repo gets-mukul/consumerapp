@@ -17,8 +17,10 @@ class ConsultationController < ApplicationController
       "Acne" => "https://remedica.typeform.com/to/Eb3Oby",
       "Hairfall or Hair Thinning" => "https://remedica.typeform.com/to/WqEAeB",
       "Pigmentation & Dark Circles" => "https://remedica.typeform.com/to/RgTtE0",
+      "Pigmentation and Dark Circles" => "https://remedica.typeform.com/to/RgTtE0",
       "Dandruff" => "https://remedica.typeform.com/to/WqEAeB",
       "Eczema, Psoriasis & Rash" => "https://remedica.typeform.com/to/VuHuwt",
+      "Eczema, Psoriasis and Rash" => "https://remedica.typeform.com/to/VuHuwt",
       "Stretch Marks" => "https://remedica.typeform.com/to/lSTMhj",
       "Skin Growth (Moles, Warts)" => "https://remedica.typeform.com/to/qs6Oc7"
     }
