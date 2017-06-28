@@ -7,7 +7,7 @@ module PaymentHelper
     txnid = build_transaction_id
     desc = "Remedico treatment for #{current_user.name}"
     if session[:coupon_applied] 
-      amount = 150.round(2)
+      amount = 200.round(2)
     else
       amount = 350.round(2)
     end

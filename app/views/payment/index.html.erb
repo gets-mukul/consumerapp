@@ -9,7 +9,7 @@
             <div><h1 style="font-size: 28px;">Almost done, <span customer-name><%= current_user.name %></span>!</h1></div>
             <div>
               <p style="font-size: 16px; line-height: 1.2; margin-top: 20px">
-                The final step is payment of the consultation fee of Rs 350.<br>
+			  The final step is payment of the consultation fee of Rs <%= @amount %>.<br>
                 You will then receive your treatment plan within 48 hours.
               </p>
             </div>
@@ -19,7 +19,7 @@
               </div>
             </div>
             <hr class="border_transparent space_top space_bottom"></hr>
-            <div><p style="font-size: 16px; line-height: 1.2"><b>Total payment: Rs. 350</b></p></div>
+			<div><p style="font-size: 16px; line-height: 1.2"><b>Total payment: Rs. <%= @amount %></b></p></div>
           </div>
           </div>
           <div class="row">
