@@ -43,13 +43,18 @@ $ ->
   currentFormStep = 1
   manageFormStepsVisibility()
 
+  $('#form-step-2 .form-stepper-2').on 'click', ->
+    condition = $(this).text()
+    console.log condition
+    window.location.href = '/consult/consultation_form/' + condition
+    
   $("#new_patient")
     .on("ajax:success", (e, data, status, xhr) ->
       console.log 'First step clicked'
       currentFormStep++
       manageFormStepsVisibility()
 
-      $('#form-step-3 .form-stepper-2').on 'click', ->
+      $('#form-step-2 .form-stepper-2').on 'click', ->
         condition = $(this).text()
         console.log condition
         window.location.href = '/consult/consultation_form/' + condition

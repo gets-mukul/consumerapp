@@ -19,6 +19,10 @@ class PaymentController < ApplicationController
   # end
 
   def index
+	@amount = 350
+    if session[:coupon_applied]
+    	@amount = 200
+	end
     @error_msg = ""
     unless !params[:city].blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'

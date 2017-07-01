@@ -7,42 +7,18 @@
         <%= image_tag "remedico1.png", style: "height:30px" %>
     	</div>
       <div class="row space_top_sm">
-          <h4 style="font-weight: normal">Welcome to your consultation. Below are the steps we will take to help you achieve better skin and hair.</h4>
+          <h4 style="font-weight: normal">Welcome to your consultation. </h4>
       </div>
       <div class="row space_top_sm">
           <h4 style="font-weight: normal">Please note that Remedico is designed for non-urgent skin and hair conditions only. If you require urgent attention, please see your doctor as soon as possible.</h4>
       </div>
 		</section>
 		<hr class="border_transparent">
-		<section class="row light_grey_back" style="margin-bottom: 30px">
-			<div class="col-sm-12 pad_15">
-				<h2><span><i>1</i></span>Questionnaire</h2>
-				<p class="bullet_pad">
-					We will ask you a few questions about you and your condition. We will also ask you for some photos of your symptoms. This will take 5-7 minutes.
-					<br /><br />
-					We will also ask you to make payment for the treatment plan.
-				</p>
-				<hr class="border_transparent">
-				<h2><span><i>2</i></span>Treatment Plan</h2>
-				<p class="bullet_pad">
-					One of our dermatologists will prepare a personalized treatment plan for you within 48 hours.
-					<br /><br />
-					They will diagnose your condition, provide advice, and prescribe medications & other products as required.
-				</p>
-				<hr class="border_transparent">
-				<h2><span><i>3</i></span>Reminders & Follow-up</h2>
-				<p class="bullet_pad">
-					We will provide you customised daily reminders for what to do, and an extra follow-up consultation, to ensure your treatment provides the best possible result.
-				</p>
-			</div>
-		</section>
+
 		<section class="space_bottom text-center">
-		    <div class="row space_top_sm">
-                  <h4 style="font-weight: normal">Before you start the questionnaire, it's best if you are accessing this on your mobile, and if you are in an area with plenty of light, so you can take clear photos of your symptoms.</h4>
-              </div>
-              <div class="row space_top_sm">
-                  <h4 style="font-weight: normal">Once you're ready to begin, indicate you agree to our terms & policies, and select "Get Started" below.</h4>
-              </div>
+        <div class="row space_top_sm">
+            <h4 style="font-weight: normal">Once you're ready to begin, indicate you agree to our terms & policies, and select "Get Started" below.</h4>
+        </div>
 		    <!--<div class="row space_top_sm">-->
      <!--             <h4>If you have any questions in the meantime, please contact us at:</h4>-->
      <!--         </div>-->
@@ -178,8 +154,13 @@ $("a.ready_btn").on('click', function () {
     var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
     console.log(checkbox.checked);
     if (!checkbox || !checkbox.checked) { return; }
-    $('#form-step-3').removeClass('hidden');
-    $('#form-step-2').addClass('hidden');
+
+    <% if @condition %>
+      location.href = "/consult/consultation_form/<%= @condition %>";
+    <% else %>
+      $('#form-step-2').removeClass('hidden');
+      $('#form-step-1').addClass('hidden');
+    <% end %>
     ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
 });
 });

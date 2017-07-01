@@ -10,16 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227202201) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20170620042706) do
 
   create_table "patients", force: :cascade do |t|
-    t.string   "name"
+    t.string   "name",       null: false
     t.string   "email"
-    t.string   "mobile"
-    t.string   "pay_status"
+    t.string   "mobile",     null: false
+    t.string   "pay_status", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -35,7 +32,7 @@ ActiveRecord::Schema.define(version: 20161227202201) do
     t.string  "pg_type"
     t.string  "bank_ref_num"
     t.integer "patient_id"
-    t.index ["patient_id"], name: "index_payments_on_patient_id", using: :btree
+    t.index ["patient_id"], name: "index_payments_on_patient_id"
   end
 
 end

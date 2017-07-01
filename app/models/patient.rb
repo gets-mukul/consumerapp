@@ -1,6 +1,6 @@
 class Patient < ApplicationRecord
   alias_attribute :phone_no, :mobile
-  validates :email, :presence => true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
+  #validates :email, :presence => true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
   validates :mobile, :presence => true,
                      :numericality => true,
                      :length => { :minimum => 10, :maximum => 15 }
@@ -8,6 +8,7 @@ class Patient < ApplicationRecord
   has_many :payments
 
   def set_defaults
+	self.email ||= ''
     self.pay_status ||= 'payment pending'
   end
 end
