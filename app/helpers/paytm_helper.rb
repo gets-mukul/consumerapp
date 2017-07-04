@@ -17,7 +17,6 @@ module PaytmHelper
     if (paytmparams.class != Hash) || (paytmparams.keys == [])
       return false
     end
-    p '--valid hash-'
     if !paytmparams.has_key?(:key)
       return false
     end
@@ -234,6 +233,8 @@ module PaytmHelper
     rescue Exception => e
       return false
     end
+    p 'generated_check_sum: ' + generated_check_sum
+    p 'check_sum: ' + check_sum
     if check_sum == generated_check_sum
       return true
     else

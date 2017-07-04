@@ -6,7 +6,7 @@ module PaymentHelper
   def build_payment_params
     txnid = build_transaction_id
     desc = "Remedico treatment for #{current_user.name}"
-    if session[:coupon_applied] 
+    if session[:coupon_applied]
       amount = 200.round(2)
     else
       amount = 350.round(2)
@@ -34,18 +34,16 @@ module PaymentHelper
     txnid = build_transaction_id
     amount = 350.round(2)
     {
-      :MERCHANT_KEY	=> "1HmXDh!#8ODH7FO6",
       :MID => "Remedy24705119328083",
-      :txnid	=> txnid,
       :CHANNEL_ID => "WEB",
-      :TXN_AMOUNT	=> amount,
+      :TXN_AMOUNT	=> amount.to_s,
       :INDUSTRY_TYPE_ID => "Retail",
       :WEBSITE => "WEB_STAGING",
       :CUST_ID => current_user.id,
-      :ORDER_ID => "",
-      :EMAIL => current_user.email,
+      :ORDER_ID => txnid,
+      :EMAIL => "",
       :MOBILE_NO	=> current_user.mobile,
-      :CALLBACK_URL => "localhost:3000"
+      :CALLBACK_URL => Rails.application.secrets.DOMAIN + '/payment/success'
     }
   end
 
@@ -79,13 +77,22 @@ module PaymentHelper
       end
     end
 
-    def user_payment_params payment_params, mode
+    def user_payment_params payment_params, mode, gateway
+      if gateway == 'PAYTM'
+        txn_id = payment_params[:ORDER_ID]
+        amount = payment_params[:TXN_AMOUNT]
+      else
+        txn_id = payment_params[:txnid]
+        amount = payment_params[:amount]
+      end
       {
-        :txnid => payment_params[:txnid],
+        :txnid =>  txn_id,
         :status => "Initiated",
-        :amount	=> payment_params[:amount],
-        :desc	=> payment_params[:productinfo],
-        :mode => mode
+        :amount	=> amount,
+        :desc	=> "Remedico treatment for #{current_user.name}",
+        :mode => mode,
+        :pg_type => gateway
+
       }
     end
 
