@@ -49,16 +49,12 @@ class PaymentController < ApplicationController
 
   def success
     posted_hash = params["hash"]
-
     paytm_params = Hash.new
-
     params.keys.each do |k|
-      p k
       unless ["CHECKSUMHASH", "action", "controller"].include? k
         paytm_params[k] = params[k]
       end
     end
-
     checksum_hash = params["CHECKSUMHASH"]
 
     @patient = Patient.find_by_id current_user.id
