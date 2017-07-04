@@ -21,7 +21,7 @@ class PaymentController < ApplicationController
   # end
 
   def index
-	@amount = 50
+	@amount = 350
     if session[:coupon_applied]
     	@amount = 200
 	end
