@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170620042706) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "patients", force: :cascade do |t|
     t.string   "name",       null: false
     t.string   "email"
@@ -32,7 +35,7 @@ ActiveRecord::Schema.define(version: 20170620042706) do
     t.string  "pg_type"
     t.string  "bank_ref_num"
     t.integer "patient_id"
-    t.index ["patient_id"], name: "index_payments_on_patient_id"
+    t.index ["patient_id"], name: "index_payments_on_patient_id", using: :btree
   end
 
 end
