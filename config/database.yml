@@ -14,22 +14,19 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
+
 default: &default
   #adapter: postgresql
   adapter: sqlite3
   encoding: unicode
-  host: localhost # remove this
-  username: postgres # remove this
-  password: test # remove this
-  pool: 10 # remove this
-
-  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: Remedica_development
-  username: postgres
-  password: test
+  database: Remedica_production
+  username: Remedica
+  password: <%= ENV['REMEDICA_DATABASE_PASSWORD'] %>
+  # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
