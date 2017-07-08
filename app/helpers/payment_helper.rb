@@ -32,13 +32,13 @@ module PaymentHelper
 
   def build_paytm_params
     txnid = build_transaction_id
-    amount = 350.round(2)
+    amount = 2.round(2)
     {
-      :MID => "Remedy24705119328083",
+      :MID => Rails.application.secrets.MID,
       :CHANNEL_ID => "WEB",
       :TXN_AMOUNT	=> amount.to_s,
-      :INDUSTRY_TYPE_ID => "Retail",
-      :WEBSITE => "WEB_STAGING",
+      :INDUSTRY_TYPE_ID => Rails.application.secrets.INDUSTRY_TYPE_ID,
+      :WEBSITE => Rails.application.secrets.WEBSITE,
       :CUST_ID => current_user.id,
       :ORDER_ID => txnid,
       :EMAIL => "",

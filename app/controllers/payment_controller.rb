@@ -36,7 +36,6 @@ class PaymentController < ApplicationController
     mode = "pending"
     payment_params = build_paytm_params
     checksum_hash = new_pg_checksum(payment_params, PAYTM_MERCHANT_KEY).gsub("\n",'')
-    p user_payment_params(payment_params, mode, "PAYTM")
     current_user.payments.create(user_payment_params(payment_params, mode, "PAYTM"))
     @content_paytm = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-I\"><title>Paytm</title></head><body><center><h2>Redirecting to Paytm </h2><br /><h1>Please do not refresh this page...</h1></center><form method=\"post\" action=\"#{PAYTM_INITIAL_TRASACTION_URL}\" name=\"f1\">"
       keys = payment_params.keys
@@ -56,13 +55,31 @@ class PaymentController < ApplicationController
       end
     end
     checksum_hash = params["CHECKSUMHASH"]
-
     @patient = Patient.find_by_id current_user.id
     unless new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
       @error_msg = "Invalid Checksum!"
       @patient.update({pay_status: "payment failed|invalid checksum"})
       failure
     else
+
+      url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
+      con = Net::HTTP.new(url.host, url.port )
+      con.use_ssl = true
+      request_data = {"MID": params["MID"], "ORDERID": params["ORDERID"]}
+      new_checksum_hash = new_pg_checksum(request_data, PAYTM_MERCHANT_KEY).gsub("\n",'')
+      request_data["CHECKSUMHASH"] = new_checksum_hash
+      resp, data = con.get url.path + "?JsonData=" + request_data.to_json
+      logger.info resp.body
+      # case resp
+      # when Net::HTTPRedirection then
+      #   location = resp['location']
+      #   warn "redirected to #{location}"
+      #   redirect_to URI.parse(location).to_s
+      # else
+      #   @error_msg = 'Error at Payment Gateway!'
+      #   failure
+      #   logger.info resp.body.strip
+      # end
       @patient.update({pay_status: "paid"})
       CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
