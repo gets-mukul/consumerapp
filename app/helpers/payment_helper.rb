@@ -32,7 +32,11 @@ module PaymentHelper
 
   def build_paytm_params
     txnid = build_transaction_id
-    amount = 2.round(2)
+    if session[:coupon_applied]
+      amount = 200.round(2)
+    else
+      amount = 350.round(2)
+    end
     {
       :MID => Rails.application.secrets.MID,
       :CHANNEL_ID => "WEB",
