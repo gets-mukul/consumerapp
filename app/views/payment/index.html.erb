@@ -13,11 +13,20 @@
                   You will then receive your treatment plan within 24 hours.
                 </p>
               </div>
-              <div class="row">
+
+
+              <div class="row desktop">
                 <div class="col-md-12 margin_t_25">
-                  <image class="paymentProgressImage"/>
+                  <img src="<%= asset_path("progress_bar_web.png") %>" />
                 </div>
               </div>
+
+              <div class="row mobile">
+                <div class="col-md-12 margin_t_25">
+                  <img src="<%= asset_path("progress_bar_mobile.png") %>" />
+                </div>
+              </div>
+
               <hr class="pad_0 margin_25" />
               <div class="left-align">
                 <h5 class="sub-title space_top">Who will provide my treatment plan?</h5>
@@ -164,6 +173,7 @@
         <% end %>
       </div>
 
+
     </div>
   </section>
 
@@ -171,9 +181,21 @@
     <div class="col-sm-12 space_top space_bottom text-center no-scroll" style="padding-top: 15px;" id="fixed-footer">
       <h5 class="sub-title"">Still have questions?</h5>
         <p class="p_16" style="margin-bottom: 5px">
-          Feel free to contact us at <span><nobr><a href=""> &nbsp; <span class="fa fa-whatsapp icon-blue"></span>&nbsp;08433 848 969</a></nobr></span>
+          Feel free to contact us at <span><nobr><a href="tel:+918433484696"> &nbsp; <span class="fa fa-whatsapp icon-blue"></span>&nbsp;08433 848 969</a></nobr></span>
         </p>
     </div> 
   </section>
 
 </main>
+
+
+<script type="text/javascript">
+  
+
+$(function() {
+  $("button.list_btn_dark").on('click', function () {
+      ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton'});
+  });
+});
+
+</script>

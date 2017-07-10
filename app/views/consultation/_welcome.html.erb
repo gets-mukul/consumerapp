@@ -152,7 +152,7 @@ $("#agree_terms").on('click', function() {
 
 $("a.ready_btn").on('click', function () {
     var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
-    console.log(checkbox.checked);
+    // console.log(checkbox.checked);
     if (!checkbox || !checkbox.checked) { return; }
 
     <% if @condition %>
