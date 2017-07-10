@@ -43,10 +43,12 @@ class PaymentController < ApplicationController
       	@content_paytm +=  "<input type=\"hidden\" name=\"#{k}\" value=\"#{payment_params[k]}\">"
       end
     @content_paytm = @content_paytm + "<input type=\"hidden\" name=\"CHECKSUMHASH\" value=\"#{checksum_hash}\"></form><script type=\"text/javascript\">document.f1.submit();</script></body></html>"
+    logger.info "patient: #{current_user.name} redirected to paytm"
     return render html: @content_paytm.html_safe
   end
 
   def success
+    logger.info params
     posted_hash = params["hash"]
     paytm_params = Hash.new
     params.keys.each do |k|
@@ -56,12 +58,14 @@ class PaymentController < ApplicationController
     end
     checksum_hash = params["CHECKSUMHASH"]
     @patient = Patient.find_by_id current_user.id
+
     unless new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
       @error_msg = "Invalid Checksum!"
+      log.error "invalid checksum for #{@patient.name}"
       @patient.update({pay_status: "payment failed|invalid checksum"})
+      ErrorEmailer.error_email("invalid checksum for " + @patient.name).deliver
       failure
     else
-
       url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
       con = Net::HTTP.new(url.host, url.port )
       con.use_ssl = true
