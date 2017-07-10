@@ -92,6 +92,7 @@ class PaymentController < ApplicationController
   end
 
   def failure
+    logger.error "payment failure for patient: #{current_user.name}"
     @patient = Patient.find_by_id current_user.id
     @error_msg ||= params['error_Message'] + "|" + params['unmappedstatus']
     @patient.update({pay_status: "payment failed : #{@error_msg}"})
