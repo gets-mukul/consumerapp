@@ -264,6 +264,10 @@
     .mobile {
         display: none;  
     }
+
+    .payment-amount {
+        float: left;
+    }
 }
 @media (max-width: 600px) {
     .block-sec h2 {
@@ -478,6 +482,10 @@
 
     .no-scroll {
         background-color: #f7f7f7;
+    }
+
+    .payment-amount {
+        float: right;
     }
 
 }

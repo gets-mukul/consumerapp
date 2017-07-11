@@ -142,8 +142,10 @@ input[type=checkbox]:checked + label:before {
 	color: white;
 	border-color: #17a6b0;
 	background-color: #17a6b0;
-	line-height: 20px;
+	line-height: 18px;
 }
+
+
 a { color: #17a6b0; }
 #agree_terms span { margin-left: 10px; }
 
@@ -832,4 +834,9 @@ h5.sub-title {
 	.slider .carousel-img-details {
 		width: 76%;
 	}
+}
+
+.payment-total {
+	float: left;
+	padding-right: 15px;
 }
