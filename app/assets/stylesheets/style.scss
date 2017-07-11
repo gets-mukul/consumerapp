@@ -142,8 +142,10 @@ input[type=checkbox]:checked + label:before {
 	color: white;
 	border-color: #17a6b0;
 	background-color: #17a6b0;
-	line-height: 20px;
+	line-height: 18px;
 }
+
+
 a { color: #17a6b0; }
 #agree_terms span { margin-left: 10px; }
 
@@ -695,10 +697,11 @@ p.name-tag {
 	padding: 0;
 }
 
-.list_btn_dark.sticky-footer.hover:hover {    
+.list_btn_dark.sticky-footer.hover:hover, .list_btn_dark.sticky-footer.hover:focus {    
     border:1px solid #17b06e;
     background-color:#17b06e;
     color: #ffffff;
+    outline: 0;
 }
 
 .no-scroll h3 {
@@ -819,4 +822,21 @@ p.name-tag {
 h5.sub-title {
 	font-weight: 600;
 	font-size: 18px;
+}
+
+@media only screen and (max-width: 600px) {
+	.slider .carousel-img-details {
+		width: 320px;
+	}
+}
+
+@media only screen and (max-width: 470px) {
+	.slider .carousel-img-details {
+		width: 76%;
+	}
+}
+
+.payment-total {
+	float: left;
+	padding-right: 15px;
 }

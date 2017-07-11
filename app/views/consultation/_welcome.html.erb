@@ -1,25 +1,23 @@
 <article class="inner_content">
-    <div class="container" style="max-width: 800px">
+    <div class="container" style="max-width: 800px;">
         <div class="row">
             <div class="col-sm-12 box pad_0 margin_0">
-		<section class="space_bottom text-center">
-			<div class="row" style="margin-bottom:20px;margin-top:20px;">
+    <section class="space_bottom text-center">
+      <div class="row" style="margin-bottom:20px;margin-top:20px;">
         <%= image_tag "remedico1.png", style: "height:30px" %>
-    	</div>
+      </div>
       <div class="row space_top_sm">
           <h4 style="font-weight: normal">Welcome to your consultation. </h4>
       </div>
       <div class="row space_top_sm">
-          <h4 style="font-weight: normal">Please note that Remedico is designed for non-urgent skin and hair conditions only. If you require urgent attention, please see your doctor as soon as possible.</h4>
+          <h4 style="font-weight: normal; line-height: 1.4;">Please note that Remedico is designed for non-urgent skin and hair conditions only. If you require urgent attention, please see your doctor as soon as possible.</h4>
       </div>
-		</section>
-		<hr class="border_transparent">
-
-		<section class="space_bottom text-center">
+    </section>
+    <section class="space_bottom text-center">
         <div class="row space_top_sm">
-            <h4 style="font-weight: normal">Once you're ready to begin, indicate you agree to our terms & policies, and select "Get Started" below.</h4>
+            <h4 style="font-weight: normal; line-height: 1.4;">Once you're ready to begin, indicate you agree to our terms & policies, and select "Get Started" below.</h4>
         </div>
-		    <!--<div class="row space_top_sm">-->
+        <!--<div class="row space_top_sm">-->
      <!--             <h4>If you have any questions in the meantime, please contact us at:</h4>-->
      <!--         </div>-->
      <!--         <div class="row text-center font_h5 hidden-xs">-->
@@ -152,7 +150,7 @@ $("#agree_terms").on('click', function() {
 
 $("a.ready_btn").on('click', function () {
     var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
-    console.log(checkbox.checked);
+    // console.log(checkbox.checked);
     if (!checkbox || !checkbox.checked) { return; }
 
     <% if @condition %>

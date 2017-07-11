@@ -264,6 +264,10 @@
     .mobile {
         display: none;  
     }
+
+    .payment-amount {
+        float: left;
+    }
 }
 @media (max-width: 600px) {
     .block-sec h2 {
@@ -464,7 +468,8 @@
         padding: 0;
     }
 
-    .list_btn_dark.sticky-footer {
+
+    .list_btn_dark.sticky-footer, .list_btn_dark.sticky-footer:focus, .list_btn_dark.sticky-footer:hover {
         width: 100%;
         bottom: 0;
         left: 0;
@@ -472,10 +477,15 @@
         position: fixed;
         padding: 20px;
         border-radius: 0;
+        outline: 0;
     }
 
     .no-scroll {
         background-color: #f7f7f7;
+    }
+
+    .payment-amount {
+        float: right;
     }
 
 }
