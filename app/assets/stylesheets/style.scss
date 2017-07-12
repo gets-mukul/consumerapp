@@ -409,7 +409,7 @@ font-family: 'pt_sansbold';
 	color:#fff;
 }
 
-.list_btn_dark, .list_btn_dark:focus{
+.list_btn_dark, .list_btn_dark:hover, .list_btn_dark:focus{
 	cursor: pointer;
 	-webkit-border-radius:30px;
 	-moz-border-radius:30px;
@@ -840,3 +840,10 @@ h5.sub-title {
 	float: left;
 	padding-right: 15px;
 }
+
+a.contact-us:hover, a.contact-us:focus {
+	color: #17a6b0;
+	text-decoration: none;
+}
+
+
