@@ -56,12 +56,19 @@ class PaymentController < ApplicationController
         paytm_params[k] = params[k]
       end
     end
+
     checksum_hash = params["CHECKSUMHASH"]
     @patient = Patient.find_by_id current_user.id
 
-    unless new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
+    if params["STATUS"] == "TXN_FAILURE"
+      @error_msg = "#{@patient.name} has cancelled the payment"
+      logger.error "looks like #{@patient.name} has cancelled the payment"
+      @patient.update({pay_status: "payment cancelled by patient"})
+      ErrorEmailer.error_email(@error_msg).deliver
+      failure
+    elsif not new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
       @error_msg = "Invalid Checksum!"
-      log.error "invalid checksum for #{@patient.name}"
+      logger.error "invalid checksum for #{@patient.name}"
       @patient.update({pay_status: "payment failed|invalid checksum"})
       ErrorEmailer.error_email("invalid checksum for " + @patient.name).deliver
       failure
