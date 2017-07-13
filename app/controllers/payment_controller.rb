@@ -64,7 +64,7 @@ class PaymentController < ApplicationController
       @error_msg = "#{@patient.name} has cancelled the payment"
       logger.error "looks like #{@patient.name} has cancelled the payment"
       @patient.update({pay_status: "payment cancelled by patient"})
-      ErrorEmailer.error_email(@error_msg).deliver
+      #ErrorEmailer.error_email(@error_msg).deliver
       failure
     elsif not new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
       @error_msg = "Invalid Checksum!"
