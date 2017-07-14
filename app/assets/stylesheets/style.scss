@@ -80,6 +80,7 @@ body {
 .color_grey { color: #aaa; }
 .color_blue { color: #17a6b0; }
 
+
 .green_back { background-color: #00C853; }
 .red_back { background-color: #c80011; }
 .white_back { background-color: #ffffff !important; }
@@ -714,6 +715,13 @@ p.name-tag {
 	margin: 0;
 }
 
+div#fixed-footer.no-scroll {
+    background-color: #f7f7f7;
+    padding-top: 15px;
+    color: #708090;
+}
+
+
 /* carousel image slider docs */
 
 .carousel .item {
@@ -734,14 +742,14 @@ p.name-tag {
     height: auto;
     overflow-x:auto;
     overflow-y:hidden;
-    padding-left: 5%;
+/*    padding-left: 5%; */
     padding-right: 5%;
     margin: auto;
 }
 
 .slider > .holder {
 	position:relative;
-	padding-left: 5%;
+/*	padding-left: 5%; */
     overflow-x: scroll;
     white-space: nowrap;
 
@@ -830,9 +838,9 @@ h5.sub-title {
 	}
 }
 
-@media only screen and (max-width: 470px) {
+@media only screen and (max-width: 430px) {
 	.slider .carousel-img-details {
-		width: 76%;
+		width: 80%;
 	}
 }
 

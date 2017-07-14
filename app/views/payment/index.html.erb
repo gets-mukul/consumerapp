@@ -33,7 +33,7 @@
                 <p class="p_16 margin_b_25 space_top_sm">
                   One of the available doctors below will prepare your treatment plan.
                 </p>
-                <div class="slider mobile" id="slider">
+                <div class="slider mobile" id="slider" style="padding-left: -15px;">
                   <div class="holder">
                     <div class="slide">
                       <img src="<%= asset_path("abhishek.jpg") %>" alt="Dr. Abhishek Omchery">
@@ -138,10 +138,12 @@
                         </p>
                       </div>
                       <div>
-                        <p style="font-size: 14px; line-height: 1.2;"><b>
-                          <span class="payment-total">Total payment: </span>
-                          <span class="payment-amount">Rs. <%= @amount %></span>
-                        </b></p>
+                        <p class="p_16" style="padding-top: 20px;">
+                          <b>
+                            <span class="payment-total">Total payment: </span>
+                            <span class="payment-amount">Rs. <%= @amount %></span>
+                          </b>
+                        </p>
                       </div>
                   </div>
                 </div>
@@ -156,10 +158,9 @@
     <div class="row">
 
       <div class="col-sm-12 text-center" style="margin-bottom: 15px; margin-top: 30px;">
-              
         <i class="fa fa-shield" style="display: inline-block; vertical-align: middle;" aria-hidden="true"></i>
         <span style="margin-left: 4px; margin-right: 4px;">Secure payment powered by</span>
-        <img src="<%= asset_path("paytm.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 25px; margin-top: -10px">
+        <img src="<%= asset_path("paytm.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 25px; margin-top: -10px;">
       </div>
 
       <div class="col-sm-12 sticky-footer">
@@ -178,10 +179,10 @@
   </section>
 
   <section>
-    <div class="col-sm-12 space_top space_bottom text-center no-scroll" style="padding-top: 15px;" id="fixed-footer">
-      <h5 class="sub-title"">Still have questions?</h5>
-        <p class="p_16" style="margin-bottom: 5px">
-          Feel free to contact us at <span><nobr><a href="tel:+918433484696"> &nbsp; <span class="fa fa-whatsapp icon-blue"></span>&nbsp;08433 848 969</a></nobr></span>
+    <div class="col-sm-12 space_top space_bottom text-center no-scroll" style="" id="fixed-footer">
+      <h5 class="sub-title">Still have questions?</h5>
+        <p class="p_16">
+          Feel free to contact us at <span><nobr><a href="tel:+918433484696"> &nbsp; <span class="fa fa-whatsapp icon-blue"></span>&nbsp;+91 8433 848 969</a></nobr></span>
         </p>
     </div> 
   </section>
