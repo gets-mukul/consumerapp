@@ -9,7 +9,7 @@ class PaymentController < ApplicationController
   include PaymentHelper
   include PaytmHelper
   before_action :check_current_user
-  after_action :update_payment, only: [:success, :failure]
+  after_action :update_payment, only: [:failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   # def index
@@ -59,12 +59,12 @@ class PaymentController < ApplicationController
 
     checksum_hash = params["CHECKSUMHASH"]
     @patient = Patient.find_by_id current_user.id
-
     if params["STATUS"] == "TXN_FAILURE"
       @error_msg = "#{@patient.name} has cancelled the payment"
       logger.error "looks like #{@patient.name} has cancelled the payment"
       @patient.update({pay_status: "payment cancelled by patient"})
-      #ErrorEmailer.error_email(@error_msg).deliver
+	  current_payment.update({mode: '', status: 'cancelled_by_customer', bank_ref_num: params['BANKTXNID']})
+      ErrorEmailer.error_email(@error_msg).deliver
       failure
     elsif not new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
       @error_msg = "Invalid Checksum!"
@@ -92,9 +92,11 @@ class PaymentController < ApplicationController
       #   logger.info resp.body.strip
       # end
       @patient.update({pay_status: "paid"})
+	  current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
       CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       render 'success'
+	  unregister
     end
   end
 
