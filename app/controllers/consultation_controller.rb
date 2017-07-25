@@ -10,6 +10,7 @@ class ConsultationController < ApplicationController
   def consultation_form
     if params[:condition]
       @condition = params[:condition]
+      session[:condition] = @condition = params[:condition]
     else
       redirect_to :new_patient_path
     end
