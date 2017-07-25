@@ -698,11 +698,12 @@ p.name-tag {
 	padding: 0;
 }
 
-.list_btn_dark.sticky-footer.hover:hover, .list_btn_dark.sticky-footer.hover:focus {    
+.list_btn_dark.sticky-footer.hover, .list_btn_dark.sticky-footer.hover:hover, .list_btn_dark.sticky-footer.hover:focus {    
     border:1px solid #17b06e;
     background-color:#17b06e;
     color: #ffffff;
     outline: 0;
+    font-size: 16px;
 }
 
 .no-scroll h3 {
@@ -756,8 +757,8 @@ div#fixed-footer.no-scroll {
 }
 .slider > .holder > .slide {
     display: inline-block;
-    width:80%;
-    height:80%;
+    width:50%;
+    height:50%;
     margin-left:4%;
     margin-right:4%;
 }
@@ -766,17 +767,17 @@ div#fixed-footer.no-scroll {
 	max-width: 100%;
 	max-height: 100%;
 }
-
+/*
 .slider > .holder > .slide:first-of-type {
-	margin-left: 0;
+	margin-left: 30px;
 }
-
+*/
 .slider > .holder > .slide:last-of-type {
 	margin-right: 20%;
 }
 
 .slider .carousel-img-details {
-	width: 76%;
+	width: 50%;
 }
 
 .carousel-img-details {
@@ -832,18 +833,6 @@ h5.sub-title {
 	font-size: 18px;
 }
 
-@media only screen and (max-width: 600px) {
-	.slider .carousel-img-details {
-		width: 320px;
-	}
-}
-
-@media only screen and (max-width: 430px) {
-	.slider .carousel-img-details {
-		width: 80%;
-	}
-}
-
 .payment-total {
 	float: left;
 	padding-right: 15px;
@@ -855,3 +844,127 @@ a.contact-us:hover, a.contact-us:focus {
 }
 
 
+.row.icon-set-container {
+	box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+	padding-bottom: 15px;
+	margin-left: 0;
+	margin-right: 0;
+	margin: 0 0 30px;
+}
+
+.icon-set-container .row {
+	display: inline-block;
+	margin: 0;
+	margin-bottom: 5%;
+	width: 100%;
+}
+
+.item-icon {
+	float: left;
+	display: block;
+	width: 25%;
+}
+
+.item-content {
+	margin-left: 27%;
+	margin-right: 4%;
+	margin-top: 4%;
+	text-align: left;
+}
+
+.item-content h4 {
+	font-size: 14px;
+	font-family: pt_sansbold;
+	letter-spacing: 0.2px;
+	color: #17a6b0;
+	margin-bottom: 2px;
+	text-align: left;
+	line-height: 14px;
+}
+
+.item-content p {
+	font-size: 12px!important;
+	line-height: 14px;
+}
+
+.washing {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+}
+.vitamin_supplements {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 300% 0;
+}
+.diet_lifestyle {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 200% 0;
+}
+.sun_protection {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 100% 0;	
+}
+.topical_applications {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 0 50%;
+}
+.procedures {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 300% 50%;
+}
+.tests_reports {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 200% 50%;
+}
+.oral_medication {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 100% 50%;
+}
+.removal_options {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 0% 100%;
+}
+.diagnosis {
+	background: image-url("icon-set.png");
+	background-size:  400% 300%;
+	background-position: 300% 100%;
+}
+
+.collapsible-section h5.sub-title {
+	width: 100%;
+	cursor: pointer;
+	font-weight: 600;
+	font-size: 18px;
+	margin: 0;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.collapsible-section h5 .fa {
+	float: right;
+	color: #555;
+}
+
+.hidden-content-wrapper {
+	display: none;
+}
+.payment-option-icon {
+	display: inline-block;
+}
+.payment-option-icon span {
+	font-size: 40px;
+	color: #555;
+	color: #1c9aa8;
+}
+.payment-option-text {
+	font-size: 16px;
+	line-height: 18px;
+	padding: 10px;
+}

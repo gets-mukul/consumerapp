@@ -46,8 +46,19 @@ $ ->
   $('#form-step-2 .form-stepper-2').on 'click', ->
     condition = $(this).text()
     console.log condition
+    btnname = 'click'    
+    switch condition
+      when 'Eczema, Psoriasis & Rash' then btnname += 'Rash'
+      when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
+      when 'Stretch Marks' then btnname += 'StretchMarks'
+      when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
+      when 'Pigmentation & Dark Circles' then btnname += 'Pigmentation'
+      else btnname += condition
+    btnname += 'Button'
+    ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
     window.location.href = '/consult/consultation_form/' + condition
     
+
   $("#new_patient")
     .on("ajax:success", (e, data, status, xhr) ->
       console.log 'First step clicked'
@@ -57,6 +68,16 @@ $ ->
       $('#form-step-2 .form-stepper-2').on 'click', ->
         condition = $(this).text()
         console.log condition
+        btnname = 'click'
+        switch condition
+          when 'Eczema, Psoriasis & Rash' then btnname += 'Rash'
+          when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
+          when 'Stretch Marks' then btnname += 'StretchMarks'
+          when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
+          when 'Pigmentation & Dark Circles' then btnname += 'Pigmentation'
+          else btnname += condition
+        btnname += 'Button'
+        ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
         window.location.href = '/consult/consultation_form/' + condition
 
     ).on "ajax:error", (e, xhr, status, error) ->
