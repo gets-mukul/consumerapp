@@ -141,6 +141,12 @@ $('.ig-form').submit(function(e) {
     });
 });
 
+
+mixpanel.track("Page Loaded", {
+  "Page Name": "Welcome Page",
+  "Condition Name": 'n/a',
+});
+
 // For "I agree Terms of Use and Privacy Policy"
 $("#agree_terms").on('click', function() {
     var checkbox = $(this).find("input[name=agree_terms]")[0];
@@ -160,6 +166,12 @@ $("a.ready_btn").on('click', function () {
       $('#form-step-1').addClass('hidden');
     <% end %>
     ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
+
+    mixpanel.track("Button Clicked", {
+      "Button Name": "Ready Button",
+      "Condition Name": "n/a",
+      "Page URL": "consult/",
+    });
 });
 });
 
