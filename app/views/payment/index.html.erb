@@ -698,15 +698,12 @@ $(function() {
 
   $("button.list_btn_dark").on('click', function () {
       ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton'});
-
+      mixpanel.track("Button Clicked", {
+        "Button Name": "Payment Button",
+        "Condition Name": "n/a",
+        "Page URL": "payment/index",
+      });
   });
-
-  mixpanel.track_links("#payBtn", "Button Clicked", {
-    "Button Name": "Payment Button",
-    "Condition Name": "n/a",
-    "Page URL": "payment/index",
-  });
-
 
   $(".collapsible-section h5").click(function(e) {
 
