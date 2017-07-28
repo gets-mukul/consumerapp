@@ -56,8 +56,25 @@ $ ->
       else btnname += condition
     btnname += 'Button'
     ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
-    window.location.href = '/consult/consultation_form/' + condition
+
+    btnname2 = ''
+    switch condition
+      when 'Eczema, Psoriasis & Rash' then btnname2 += 'Eczema, Rash'
+      when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
+      when 'Stretch Marks' then btnname2 += 'Stretch Marks'
+      when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
+      when 'Pigmentation & Dark Circles' then btnname2 += 'Pigmentation'
+      else btnname2 += condition
+    btnname2 += ' Button'
     
+    mixpanel.track("Button Clicked", {
+      "Button Name": "Conditon Button",
+      "Condition Name": btnname2,
+      "Page URL": "consult/",
+    });
+    
+
+    window.location.href = '/consult/consultation_form/' + condition
 
   $("#new_patient")
     .on("ajax:success", (e, data, status, xhr) ->
@@ -78,6 +95,23 @@ $ ->
           else btnname += condition
         btnname += 'Button'
         ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
+
+        btnname2 = ''
+        switch condition
+          when 'Eczema, Psoriasis & Rash' then btnname2 += 'Rash'
+          when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
+          when 'Stretch Marks' then btnname2 += 'Stretch Marks'
+          when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
+          when 'Pigmentation & Dark Circles' then btnname2 += 'Pigmentation'
+          else btnname2 += condition
+        btnname2 += ' Button'
+
+        mixpanel.track("Button Clicked", {
+          "Button Name": "Conditon Button",
+          "Condition Name": btnname2,
+          "Page URL": "consult/",
+        });
+
         window.location.href = '/consult/consultation_form/' + condition
 
     ).on "ajax:error", (e, xhr, status, error) ->

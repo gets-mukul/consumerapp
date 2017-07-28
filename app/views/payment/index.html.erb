@@ -663,7 +663,7 @@
       <div class="col-sm-12 sticky-footer">
         <%= form_tag '/consult/payment', method: :post do %>
         <div class="text-center">
-            <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer") do %>
+            <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
                PAY FOR YOUR TREATMENT PLAN
             <% end %>
         </div>
@@ -690,8 +690,19 @@
   
 
 $(function() {
+
+  mixpanel.track("Page Loaded", {
+    "Page Name": "Payments Index Page",
+    "Condition Name": 'n/a',
+  });
+
   $("button.list_btn_dark").on('click', function () {
       ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton'});
+      mixpanel.track("Button Clicked", {
+        "Button Name": "Payment Button",
+        "Condition Name": "n/a",
+        "Page URL": "payment/index",
+      });
   });
 
   $(".collapsible-section h5").click(function(e) {
