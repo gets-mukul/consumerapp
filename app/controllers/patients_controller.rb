@@ -25,7 +25,7 @@ class PatientsController < ApplicationController
         # New Patient, update both local and remote databases.
         resp, data = send_new_patient_info patient_params
         if !resp.kind_of? Net::HTTPOK
-		      logger.debug resp.body
+          logger.debug resp.body
           redirect_to "/"
           # render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
         else
@@ -59,6 +59,7 @@ class PatientsController < ApplicationController
       if @patient.save
         register @patient
         NewUserNotifierMailer.send_new_user_mail(@patient).deliver_later
+        
         return redirect_to "/consult"
         # render json: { :message => "Patient found. Logging in." }, :status => 200
       else
@@ -85,7 +86,7 @@ class PatientsController < ApplicationController
 
       url = URI.parse(REMEDICA_PATIENTS_ENDPOINT + "/find")
       con = Net::HTTP.new(url.host, url.port)
-	    con.use_ssl = true if Rails.env.production?
+      con.use_ssl = true if Rails.env.production?
       resp = con.post url.path, post_params.to_query
 
       if resp.kind_of? Net::HTTPFound
@@ -108,7 +109,7 @@ class PatientsController < ApplicationController
 
       url = URI.parse(REMEDICA_PATIENTS_ENDPOINT + "/create")
       con = Net::HTTP.new(url.host, url.port)
-	    con.use_ssl = true if Rails.env.production?
+      con.use_ssl = true if Rails.env.production?
       con.post url.path, post_params.to_query
     end
 end
