@@ -261,7 +261,11 @@
         .btn-primary a:hover {
           background-color: #34495e !important;
           border-color: #34495e !important; } }
-
+        .no-style, .no-style a, .no-style * {
+          border: none;
+          background-color: white;
+          color: black;
+        }
     </style>
   </head>
   <body class="">
@@ -304,7 +308,7 @@
                                       <td><%= @user.name %></td>
                                       <td><%= @user.email %><span></td>
                                       <td><%= @user.mobile %></td>
-                                      <td style="border: none; background-color: initial; color: initial;"><%= @referrer %></td>
+                                      <td class="no-style"><%= @referrer %></td>
                                     </tr>
                                     <br><br>
                                     <tr>

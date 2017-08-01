@@ -4,8 +4,8 @@ class NewUserNotifierMailer < ApplicationMailer
     @user = user
     @referrer = referrer.to_s;
     # mail( :to => Rails.application.secrets.ADMIN_EMAIL,
-    # mail( :to => [Rails.application.secrets.ADMIN_EMAIL, "jesse.dhara@gmail.com"],
-    mail( :to => "jesse.dhara@gmail.com",
+    mail( :to => [Rails.application.secrets.ADMIN_EMAIL, "jesse.dhara@gmail.com"],
+    # mail( :to => "jesse.dhara@gmail.com",
     :subject => "Remedica: New user sign up." )
   end
 end
