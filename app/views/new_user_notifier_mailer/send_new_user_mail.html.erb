@@ -282,7 +282,7 @@
                     <tr>
                       <td>
                         <p><img src="<%= image_url("/assets/remedica_logo.png") %>" alt="Remedica Logo" /></p>
-                        <p>Hi Ranjit,</p><%= @referrer %>
+                        <p>Hi Ranjit,</p>
                         <p>A new user just signed up on your platform!</p>
                         <p>The user details are as follows: </p>
                         <table border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
@@ -295,6 +295,7 @@
                                       <td>Name</td>
                                       <td>Email</td>
                                       <td>Mobile</td>
+                                      <td>Referrer</td>
                                     </tr>
                                   </thead>
                                   <br>
@@ -303,6 +304,7 @@
                                       <td><%= @user.name %></td>
                                       <td><%= @user.email %><span></td>
                                       <td><%= @user.mobile %></td>
+                                      <td><%= @referrer %></td>
                                     </tr>
                                     <br><br>
                                     <tr>
