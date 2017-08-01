@@ -23,13 +23,9 @@ default: &default
 
 development:
   <<: *default
-
   database: Remedica_production
-  username: remedica
-  password: Remedica
-  pool: 10
-  timeout: 5000
-  # password: <%= ENV['REMEDICA_DATABASE_PASSWORD'] %>
+  username: Remedica
+  password: <%= ENV['REMEDICA_DATABASE_PASSWORD'] %>
   # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
   # The specified database role being used to connect to postgres.
@@ -65,8 +61,6 @@ development:
 test:
   <<: *default
   database: Remedica_test
-  username: remedica
-  password: Remedica
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -90,5 +84,5 @@ test:
 production:
   <<: *default
   database: Remedica_production
-  username: remedica
+  username: Remedica
   password: <%= ENV['REMEDICA_DATABASE_PASSWORD'] %>
