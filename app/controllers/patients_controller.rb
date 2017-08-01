@@ -59,7 +59,7 @@ class PatientsController < ApplicationController
       @patient = Patient.new(patient_params)
       if @patient.save
         register @patient
-        NewUserNotifierMailer.send_new_user_mail(@patient).deliver_later
+        NewUserNotifierMailer.send_new_user_mail(@patient, params[:referrer]).deliver_later
         
         return redirect_to "/consult"
         # render json: { :message => "Patient found. Logging in." }, :status => 200
