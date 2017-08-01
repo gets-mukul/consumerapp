@@ -7,6 +7,9 @@ class PatientsController < ApplicationController
 
   # POST /patients
   def create
+
+    session[:referrer] = params[:referrer]
+
     # Check if patient exists in database
     @patient = Patient.find_by_mobile(patient_params[:mobile])
     if @patient
