@@ -166,7 +166,7 @@ $("a.ready_btn").on('click', function () {
       $('#form-step-1').addClass('hidden');
     <% end %>
     ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
-
+    window._fbq.push(['track', 'Ready Button Clicked', {'Page URL': 'consult/'}]);
     mixpanel.track("Button Clicked", {
       "Button Name": "Ready Button",
       "Condition Name": "n/a",

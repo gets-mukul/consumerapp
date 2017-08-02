@@ -682,12 +682,10 @@
         </p>
     </div> 
   </section>
-
+  
 </main>
 
-
 <script type="text/javascript">
-  
 
 $(function() {
 
@@ -695,6 +693,7 @@ $(function() {
     "Page Name": "Payments Index Page",
     "Condition Name": 'n/a',
   });
+  window._fbq.push(['track', 'Payments Page Load',{'Page URL':'payment/index'}]);
 
   $("button.list_btn_dark").on('click', function () {
       ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton'});
@@ -703,6 +702,7 @@ $(function() {
         "Condition Name": "n/a",
         "Page URL": "payment/index",
       });
+      window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
   });
 
   $(".collapsible-section h5").click(function(e) {
@@ -718,7 +718,6 @@ $(function() {
       }
       
     });
-
 
 });
 
