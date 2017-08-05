@@ -27,9 +27,11 @@ class PaymentController < ApplicationController
       @coupon.increment!(:count, 1)
       @coupon.update(status: 'coupon used')
     end
-
     @amount = 350
-    if session[:coupon_applied]
+    # if session[:coupon_applied]
+    #   @amount = 200
+    # end
+    if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
       @amount = 200
     end
     @error_msg = ""
