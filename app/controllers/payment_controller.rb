@@ -25,6 +25,7 @@ class PaymentController < ApplicationController
     if session[:promo_code] and session[:promo_code].starts_with? "SODELHI"
       @coupon = Coupon.find_by coupon_code: session[:promo_code]
       @coupon.increment!(:count, 1)
+      @coupon.update(status: 'coupon used'
     end
 
     @amount = 350
