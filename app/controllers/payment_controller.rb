@@ -21,10 +21,19 @@ class PaymentController < ApplicationController
   # end
 
   def index
-	@amount = 350
-    if session[:coupon_applied]
-    	@amount = 200
-	end
+
+    if session[:promo_code] and session[:promo_code].starts_with? "SODELHI"
+      @coupon = Coupon.find_by coupon_code: session[:promo_code]
+      @coupon.increment!(:count, 1)
+      @coupon.update(status: 'coupon used')
+    end
+    @amount = 350
+    # if session[:coupon_applied]
+    #   @amount = 200
+    # end
+    if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
+      @amount = 200
+    end
     @error_msg = ""
     unless !params[:city].blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
@@ -40,7 +49,7 @@ class PaymentController < ApplicationController
     @content_paytm = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-I\"><title>Paytm</title></head><body><center><h2>Redirecting to Paytm </h2><br /><h1>Please do not refresh this page...</h1></center><form method=\"post\" action=\"#{PAYTM_INITIAL_TRASACTION_URL}\" name=\"f1\">"
       keys = payment_params.keys
       keys.each do |k|
-      	@content_paytm +=  "<input type=\"hidden\" name=\"#{k}\" value=\"#{payment_params[k]}\">"
+        @content_paytm +=  "<input type=\"hidden\" name=\"#{k}\" value=\"#{payment_params[k]}\">"
       end
     @content_paytm = @content_paytm + "<input type=\"hidden\" name=\"CHECKSUMHASH\" value=\"#{checksum_hash}\"></form><script type=\"text/javascript\">document.f1.submit();</script></body></html>"
     logger.info "patient: #{current_user.name} redirected to paytm"

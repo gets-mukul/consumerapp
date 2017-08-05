@@ -10,10 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170620042706) do
+ActiveRecord::Schema.define(version: 20170805050624) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "Coupons_Patients", id: false, force: :cascade do |t|
+    t.integer "coupon_id",  null: false
+    t.integer "patient_id", null: false
+  end
+
+  create_table "coupons", force: :cascade do |t|
+    t.text     "coupon_code",     null: false
+    t.float    "discount_amount", null: false
+    t.string   "status",          null: false
+    t.datetime "expires_on"
+    t.integer  "count",           null: false
+    t.integer  "max_count",       null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
 
   create_table "patients", force: :cascade do |t|
     t.string   "name",       null: false
@@ -36,6 +52,13 @@ ActiveRecord::Schema.define(version: 20170620042706) do
     t.string  "bank_ref_num"
     t.integer "patient_id"
     t.index ["patient_id"], name: "index_payments_on_patient_id", using: :btree
+  end
+
+  create_table "resumes", force: :cascade do |t|
+    t.text     "desc"
+    t.string   "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

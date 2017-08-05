@@ -38,6 +38,56 @@ class PatientsController < ApplicationController
 
   end
 
+
+  # POST /patients
+  def create_with_coupon
+    if params[:coupon] == "SODELHI"
+      logger.info "USER SET COUPON PREVIOUSLY"
+
+      @coupon = Coupon.find_by coupon_code: session[:promo_code]
+
+      if @coupon
+        # Check if patient exists in database
+        @patient = Patient.find_by_mobile(patient_params[:mobile])
+        if @patient
+          # Patient exists in local database. Log them in
+          register @patient
+          @coupon.update(status: 'coupon attached')
+
+          logger.info 'RETURN SUCCESS'
+          render :json => { :value => "success" }
+          # redirect_to "/?applied=FREE"
+        else
+          # If they don't, check remote database for
+          # cases when remote database is updated and local isn't.
+          result = patient_exists? patient_params[:mobile]
+          if result
+            # Patient exists in remote database.
+            save_patient_with_coupon
+          else
+            # New Patient, update both local and remote databases.
+            resp, data = send_new_patient_info patient_params
+            if !resp.kind_of? Net::HTTPOK
+              logger.debug resp.body
+              logger.info 'RETURN FAILURE'
+              render :json => { :value => "failure" }
+              # redirect_to "/?applied=false"
+              # redirect_to "/"
+              # render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
+            else
+              # Patient saved at remote database. We can start saving it at local as well.
+              save_patient_with_coupon
+            end
+          end
+        end
+      else
+        logger.info 'NOT EXISTS'
+        render :json => { :value => "failure" }
+        # redirect_to "/?applied=false"
+      end
+    end
+  end
+
   private
     def conditions
       [
@@ -66,6 +116,26 @@ class PatientsController < ApplicationController
       else
         # render json: @patient.errors, status: :unprocessable_entity
         return redirect_to "/"
+      end
+    end
+
+    def save_patient_with_coupon
+      @patient = Patient.new(patient_params)
+      if @patient.save
+        register @patient
+        NewUserNotifierMailer.send_new_user_mail_with_insta(@patient, params[:referrer], params[:insta], session[:promo_code]).deliver_later
+        @coupon.update(status: 'coupon attached')
+        logger.info 'RETURN SUCCESS'
+        render :json => { :value => "success" }
+        # redirect_to "/?applied=FREE"
+        # return redirect_to "/consult"
+        # render json: { :message => "Patient found. Logging in." }, :status => 200
+      else
+        # render json: @patient.errors, status: :unprocessable_entity
+        logger.info 'RETURN FAILURE'
+        render :json => { :value => "failure" }
+        # redirect_to "/?applied=false"
+        # return redirect_to "/"
       end
     end
 
@@ -114,3 +184,5 @@ class PatientsController < ApplicationController
       con.post url.path, post_params.to_query
     end
 end
+
+
