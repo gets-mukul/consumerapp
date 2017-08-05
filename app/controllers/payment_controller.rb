@@ -21,10 +21,10 @@ class PaymentController < ApplicationController
   # end
 
   def index
-	@amount = 350
+    @amount = 350
     if session[:coupon_applied]
-    	@amount = 200
-	end
+      @amount = 200
+    end
     @error_msg = ""
     unless !params[:city].blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
@@ -40,7 +40,7 @@ class PaymentController < ApplicationController
     @content_paytm = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-I\"><title>Paytm</title></head><body><center><h2>Redirecting to Paytm </h2><br /><h1>Please do not refresh this page...</h1></center><form method=\"post\" action=\"#{PAYTM_INITIAL_TRASACTION_URL}\" name=\"f1\">"
       keys = payment_params.keys
       keys.each do |k|
-      	@content_paytm +=  "<input type=\"hidden\" name=\"#{k}\" value=\"#{payment_params[k]}\">"
+        @content_paytm +=  "<input type=\"hidden\" name=\"#{k}\" value=\"#{payment_params[k]}\">"
       end
     @content_paytm = @content_paytm + "<input type=\"hidden\" name=\"CHECKSUMHASH\" value=\"#{checksum_hash}\"></form><script type=\"text/javascript\">document.f1.submit();</script></body></html>"
     logger.info "patient: #{current_user.name} redirected to paytm"

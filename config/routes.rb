@@ -5,6 +5,9 @@ Rails.application.routes.draw do
     post '/patients' => 'patients#create', defaults: {format: 'json'}
     get '/patients' => 'patients#create', defaults: {format: 'json'}
 
+    post '/patients/:coupon' => 'patients#create_with_coupon', defaults: {format: 'json'}
+    get '/patients/:coupon' => 'patients#create_with_coupon', defaults: {format: 'json'}
+
     get '/consultation', to: 'consultation#welcome'
     get '/consultation_form/:condition', to: 'consultation#consultation_form'
     get '/new_patient', to: 'consultation#index'

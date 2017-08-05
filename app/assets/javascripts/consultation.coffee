@@ -110,7 +110,7 @@ $ ->
           "Condition Name": btnname2,
           "Page URL": "consult/",
         });
-
+        window._fbq.push(['track', 'Conditon Button Clicked',{'Condition Name':btnname2,'Page URL':'consult/'}]);
         window.location.href = '/consult/consultation_form/' + condition
 
     ).on "ajax:error", (e, xhr, status, error) ->
