@@ -305,6 +305,12 @@
                                       <td>Email</td>
                                       <td>Mobile</td>
                                       <td>Referrer</td>
+                                      <% if @insta %>
+                                        <td>Insta</td>
+                                      <% end %>
+                                      <% if @promo_code %>
+                                        <td>Promo</td>
+                                      <% end %>
                                     </tr>
                                   </thead>
                                   <br>
@@ -314,6 +320,12 @@
                                       <td><%= @user.email %><span></td>
                                       <td><%= @user.mobile %></td>
                                       <td class="no-style"><%= @referrer %></td>
+                                      <% if @insta %>
+                                        <td class="no-style"><%= @insta %></td>
+                                      <% end %>
+                                      <% if @promo_code %>
+                                        <td class="no-style"><%= @promo_code %></td>
+                                      <% end %>
                                     </tr>
                                     <br><br>
                                     <tr>

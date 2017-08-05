@@ -14,22 +14,22 @@ class CouponController < ApplicationController
 			if @coupon
 				session[:coupon_applied] = true
 				if @coupon.status == 'coupon used'
-					render :json => { :value => "invalid" }
 					logger.info 'RETURN FAILURE'
+					render :json => { :value => "invalid" }
 				else
 					if @coupon.count < @coupon.max_count
 						@coupon.update(status: 'coupon entered')
 						session[:promo_code] = coupon_name
-						render :json => { :value => "success" }
 						logger.info 'RETURN SUCCESS'
+						render :json => { :value => "success" }
 					else
-						render :json => { :value => "invalid" }
 						logger.info 'RETURN FAILURE'
+						render :json => { :value => "invalid" }
 					end
 				end
 			else
-				render :json => { :value => "not exists" }
 				logger.info 'NOT EXISTS'
+				render :json => { :value => "not exists" }
 			end
 		else
 			return redirect_to '/'

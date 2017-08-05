@@ -8,3 +8,11 @@ Name : <%= @user.name %>
 Email : <%= @user.email %>
 Mobile : <%= @user.mobile %>
 Referrer : <%= @referrer %>
+
+<% if @insta %>
+Insta : <%= @insta %>
+<% end %>
+
+<% if @promo_code %>
+Promo : <%= @promo_code %>
+<% end %>

@@ -43,8 +43,7 @@ class PatientsController < ApplicationController
   def create_with_coupon
     if params[:coupon] == "SODELHI"
       logger.info "USER SET COUPON PREVIOUSLY"
-      puts session[:promo_code]
-      puts "SESSION PRINTED"
+
       @coupon = Coupon.find_by coupon_code: session[:promo_code]
 
       if @coupon
@@ -56,7 +55,8 @@ class PatientsController < ApplicationController
           @coupon.update(status: 'coupon attached')
 
           logger.info 'RETURN SUCCESS'
-          redirect_to "/?applied=FREE"
+          render :json => { :value => "success" }
+          # redirect_to "/?applied=FREE"
         else
           # If they don't, check remote database for
           # cases when remote database is updated and local isn't.
@@ -70,7 +70,8 @@ class PatientsController < ApplicationController
             if !resp.kind_of? Net::HTTPOK
               logger.debug resp.body
               logger.info 'RETURN FAILURE'
-              redirect_to "/?applied=false"
+              render :json => { :value => "failure" }
+              # redirect_to "/?applied=false"
               # redirect_to "/"
               # render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
             else
@@ -81,7 +82,8 @@ class PatientsController < ApplicationController
         end
       else
         logger.info 'NOT EXISTS'
-        redirect_to "/?applied=false"
+        render :json => { :value => "failure" }
+        # redirect_to "/?applied=false"
       end
     end
   end
@@ -121,16 +123,18 @@ class PatientsController < ApplicationController
       @patient = Patient.new(patient_params)
       if @patient.save
         register @patient
-        NewUserNotifierMailer.send_new_user_mail(@patient, params[:referrer]).deliver_later
+        NewUserNotifierMailer.send_new_user_mail_with_insta(@patient, params[:referrer], params[:insta], session[:promo_code]).deliver_later
         @coupon.update(status: 'coupon attached')
         logger.info 'RETURN SUCCESS'
-        redirect_to "/?applied=FREE"
+        render :json => { :value => "success" }
+        # redirect_to "/?applied=FREE"
         # return redirect_to "/consult"
         # render json: { :message => "Patient found. Logging in." }, :status => 200
       else
         # render json: @patient.errors, status: :unprocessable_entity
         logger.info 'RETURN FAILURE'
-        redirect_to "/?applied=false"
+        render :json => { :value => "failure" }
+        # redirect_to "/?applied=false"
         # return redirect_to "/"
       end
     end
