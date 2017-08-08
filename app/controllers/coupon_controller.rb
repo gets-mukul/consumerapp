@@ -1,11 +1,15 @@
 class CouponController < ApplicationController
 
 	def apply
-
+		logger.info 'HIT COUPON APPLY'
 		if ['SOCIAL150', 'REFER150'].include? params[:promo_code]
 			session[:coupon_applied] = true
 			session[:promo_code] = params[:promo_code]
-			return redirect_to '/?applied=true&promo=' + params[:promo_code].downcase
+			logger.info 'PROMO 150 APPLIED'
+			logger.info session[:promo_code]
+			# logger.info session[:coupon_applied]
+			render :json => { :value => "success", :discount_price => '200' }
+			# return redirect_to '/?applied=true&promo=' + params[:promo_code].downcase
 		elsif params[:promo_code] == "SODELHI"
 			coupon_name = "SODELHI" + params[:coupon].upcase
 
@@ -21,7 +25,7 @@ class CouponController < ApplicationController
 						@coupon.update(status: 'coupon entered')
 						session[:promo_code] = coupon_name
 						logger.info 'RETURN SUCCESS'
-						render :json => { :value => "success" }
+						render :json => { :value => "success", :discount_price => 'FREE' }
 					else
 						logger.info 'RETURN FAILURE'
 						render :json => { :value => "invalid" }
@@ -32,10 +36,9 @@ class CouponController < ApplicationController
 				render :json => { :value => "not exists" }
 			end
 		else
-			return redirect_to '/'
+			render :json => { :value => "failure" }
+			# return redirect_to '/'
 		end
 
 	end
-
-
 end

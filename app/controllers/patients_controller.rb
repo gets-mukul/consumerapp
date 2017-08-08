@@ -8,6 +8,9 @@ class PatientsController < ApplicationController
   # POST /patients
   def create
 
+      logger.info 'PATIENTS'
+      logger.info session[:promo_code]
+
     # Check if patient exists in database
     @patient = Patient.find_by_mobile(patient_params[:mobile])
     if @patient
