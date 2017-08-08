@@ -11,7 +11,7 @@ class CouponController < ApplicationController
 			render :json => { :value => "success", :discount_price => '200' }
 			# return redirect_to '/?applied=true&promo=' + params[:promo_code].downcase
 		elsif params[:promo_code] == "SODELHI"
-			coupon_name = "SODELHI" + params[:coupon].upcase
+			coupon_name = "SODELHI" + params[:coupon]
 
 			@coupon = Coupon.find_by coupon_code: coupon_name
 
