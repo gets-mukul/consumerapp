@@ -58,7 +58,7 @@ class PatientsController < ApplicationController
           @coupon.update(status: 'coupon attached')
 
           logger.info 'RETURN SUCCESS'
-          render :json => { :value => "success" }
+          render :json => { :value => "success", :discount_price => 'FREE' }
           # redirect_to "/?applied=FREE"
         else
           # If they don't, check remote database for
@@ -129,7 +129,7 @@ class PatientsController < ApplicationController
         NewUserNotifierMailer.send_new_user_mail_with_insta(@patient, params[:referrer], params[:insta], session[:promo_code]).deliver_later
         @coupon.update(status: 'coupon attached')
         logger.info 'RETURN SUCCESS'
-        render :json => { :value => "success" }
+        render :json => { :value => "success", :discount_price => 'FREE' }
         # redirect_to "/?applied=FREE"
         # return redirect_to "/consult"
         # render json: { :message => "Patient found. Logging in." }, :status => 200

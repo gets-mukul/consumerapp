@@ -25,7 +25,7 @@ class CouponController < ApplicationController
 						@coupon.update(status: 'coupon entered')
 						session[:promo_code] = coupon_name
 						logger.info 'RETURN SUCCESS'
-						render :json => { :value => "success", :discount_price => 'FREE' }
+						render :json => { :value => "success" }
 					else
 						logger.info 'RETURN FAILURE'
 						render :json => { :value => "invalid" }
