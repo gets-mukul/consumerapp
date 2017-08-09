@@ -21,7 +21,8 @@ class PaymentController < ApplicationController
   # end
 
   def index
-
+    logger.info 'SESSION'
+    logger.info session[:promo_code]
     if session[:promo_code] and session[:promo_code].starts_with? "SODELHI"
       @coupon = Coupon.find_by coupon_code: session[:promo_code]
       @coupon.increment!(:count, 1)
