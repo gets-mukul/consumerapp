@@ -23,23 +23,45 @@ class PaymentController < ApplicationController
   def index
     logger.info 'SESSION'
     logger.info session[:promo_code]
-    if session[:promo_code] and session[:promo_code].starts_with? "SODELHI"
-      @coupon = Coupon.find_by coupon_code: session[:promo_code]
-      @coupon.increment!(:count, 1)
-      @coupon.update(status: 'coupon used')
-    end
-    @amount = 350
-    # if session[:coupon_applied]
-    #   @amount = 200
-    # end
-    if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
-      @amount = 200
-    end
+
     @error_msg = ""
     unless !params[:city].blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
         failure
     end
+
+    @amount = 350
+    if session[:promo_code]
+      if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
+        @amount = 200
+      else
+        @coupon = Coupon.find_by coupon_code: session[:promo_code]
+        @coupon.increment!(:count, 1)
+        if @coupon.count >= @coupon.max_count
+          @coupon.update(status: 'coupon used')
+        end
+        @amount = @amount - @coupon.discount_amount
+      end
+    end
+
+
+    # if session[:promo_code] and session[:promo_code].starts_with? "SODELHI"
+    #   @coupon = Coupon.find_by coupon_code: session[:promo_code]
+    #   @coupon.increment!(:count, 1)
+    #   @coupon.update(status: 'coupon used')
+    # end
+    # @amount = 350
+    # # if session[:coupon_applied]
+    # #   @amount = 200
+    # # end
+    # if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
+    #   @amount = 200
+    # end
+    # @error_msg = ""
+    # unless !params[:city].blank?
+    #     @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
+    #     failure
+    # end
   end
 
   def issue_payment
