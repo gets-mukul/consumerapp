@@ -26,24 +26,9 @@ $ ->
     console.log "Typeform loaded"
     spinner.stop()
 
-  manageFormStepsVisibility = ->
-    i = 1
-    while i <= formSteps
-      if i == currentFormStep
-        $('#form-step-' + i).removeClass 'hidden'
-      else
-        $('#form-step-' + i).addClass 'hidden'
-      i++
-    return
-
-
   $('.thanksmsg_popup').hide()
 
-  formSteps = 3
-  currentFormStep = 1
-  manageFormStepsVisibility()
-
-  $('#form-step-2 .form-stepper-2').on 'click', ->
+  $('#my-form-step .form-stepper-2').on 'click', ->
     condition = $(this).text()
     console.log condition
     btnname = 'click'    
@@ -81,7 +66,7 @@ $ ->
       currentFormStep++
       manageFormStepsVisibility()
 
-      $('#form-step-2 .form-stepper-2').on 'click', ->
+      $('#my-form-step .form-stepper-2').on 'click', ->
         condition = $(this).text()
         console.log condition
         btnname = 'click'

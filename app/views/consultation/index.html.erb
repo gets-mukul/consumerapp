@@ -24,11 +24,14 @@
         </div>
     </section>
 </main> -->
-<main id="form-step-1">
-	<%= render 'welcome' %>
-</main>
-<%unless @condition %>
-<main id="form-step-2">
+
+<%if @condition %>
+  <% logger.info "CONDITION ALREADY SELECTED" %>
+  <script type="text/javascript">
+    location.href = "/consult/consultation_form/<%= @condition %>";
+  </script>
+<%else %>
+<main id="my-form-step">
     <section class="inner_content">
         <div class="container">
             <div class="row contactpopup_info">
@@ -68,7 +71,10 @@
         </div>
     </section>
 </main>
-<%end%>
+
+<%end %>
+
+
 <!-- Modal -->
 <div id="myModal" class="modal fade contactpopup_info" role="dialog">
     <div class="modal-dialog contact_dialog">
