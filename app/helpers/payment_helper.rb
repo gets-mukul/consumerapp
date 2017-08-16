@@ -6,11 +6,25 @@ module PaymentHelper
   def build_payment_params
     txnid = build_transaction_id
     desc = "Remedico treatment for #{current_user.name}"
-    if session[:coupon_applied]
-      amount = 200.round(2)
-    else
-      amount = 350.round(2)
+    
+    # if session[:coupon_applied]
+    #   amount = 200.round(2)
+    # else
+    #   amount = 350.round(2)
+    # end
+
+    amount = 350.round(2)
+    if session[:promo_code]
+      if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
+        amount = 200.round(2)
+      else
+        @coupon = Coupon.find_by coupon_code: session[:promo_code]
+        amount = (amount - @coupon.discount_amount).round(2)
+      end
     end
+    logger.info "HELPER"
+    logger.info amount
+
 
     sha512 = OpenSSL::Digest::SHA512.new
     string = [KEY,txnid,amount.to_s,desc,current_user.name,current_user.email,"|||||||||",SALT].join("|")
@@ -32,11 +46,26 @@ module PaymentHelper
 
   def build_paytm_params
     txnid = build_transaction_id
-    if session[:coupon_applied]
-      amount = 200.round(2)
-    else
-      amount = 350.round(2)
+
+    # if session[:coupon_applied]
+    #   amount = 200.round(2)
+    # else
+    #   amount = 350.round(2)
+    # end
+
+    amount = 350.round(2)
+    if session[:promo_code]
+      if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
+        amount = 200.round(2)
+      else
+        @coupon = Coupon.find_by coupon_code: session[:promo_code]
+        amount = (amount - @coupon.discount_amount).round(2)
+      end
     end
+    logger.info "HELPER2"
+    logger.info amount
+
+
     {
       :MID => Rails.application.secrets.MID,
       :CHANNEL_ID => "WEB",
