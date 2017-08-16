@@ -1,4 +1,4 @@
-[Bclass PaymentController < ApplicationController
+class PaymentController < ApplicationController
   require 'uri'
   require 'net/http'
   require 'net/https'
@@ -21,6 +21,7 @@
   # end
 
   def index
+    typeform_uid = session[:typeform_uid]
     response = HTTParty.get("https://api.typeform.com/v1/form/" + typeform_uid + "?key=#{Rails.application.secrets.TYPEFORM_API_KEY}&until=#{Time.now.to_i}&limit=10&order_by[]=date_submit,desc")
     logger.info "PAYMENTS SCREEN"
     logger.info response
