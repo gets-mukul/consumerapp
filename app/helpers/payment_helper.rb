@@ -22,9 +22,6 @@ module PaymentHelper
         amount = (amount - @coupon.discount_amount).round(2)
       end
     end
-    logger.info "HELPER"
-    logger.info amount
-
 
     sha512 = OpenSSL::Digest::SHA512.new
     string = [KEY,txnid,amount.to_s,desc,current_user.name,current_user.email,"|||||||||",SALT].join("|")
@@ -62,9 +59,6 @@ module PaymentHelper
         amount = (amount - @coupon.discount_amount).round(2)
       end
     end
-    logger.info "HELPER2"
-    logger.info amount
-
 
     {
       :MID => Rails.application.secrets.MID,

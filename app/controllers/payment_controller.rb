@@ -21,7 +21,10 @@ class PaymentController < ApplicationController
   # end
 
   def index
-    
+    typeform_uid = session[:typeform_uid]
+    response = HTTParty.get("https://api.typeform.com/v1/form/" + typeform_uid + "?key=#{Rails.application.secrets.TYPEFORM_API_KEY}&until=#{Time.now.to_i}&limit=10&order_by[]=date_submit,desc")
+    logger.info "PAYMENTS SCREEN"
+    logger.info response
     @error_msg = ""
     unless !params[:city].blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
