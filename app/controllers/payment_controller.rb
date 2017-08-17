@@ -23,8 +23,6 @@ class PaymentController < ApplicationController
   def index
     typeform_uid = session[:typeform_uid]
     response = HTTParty.get("https://api.typeform.com/v1/form/" + typeform_uid + "?key=#{Rails.application.secrets.TYPEFORM_API_KEY}&until=#{Time.now.to_i}&limit=10&order_by[]=date_submit,desc")
-    logger.info "PAYMENTS SCREEN"
-    logger.info response
     @error_msg = ""
     unless !params[:city].blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
@@ -124,11 +122,30 @@ class PaymentController < ApplicationController
       #   logger.info resp.body.strip
       # end
       @patient.update({pay_status: "paid"})
-	  current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
+      # get email of the current user from typeform responses
+      begin
+        typeform_uid = session[:typeform_uid]
+        if typeform_uid
+          response = HTTParty.get("https://api.typeform.com/v1/form/" + typeform_uid + "?key=#{Rails.application.secrets.TYPEFORM_API_KEY}&until=#{Time.now.to_i}&limit=10&order_by[]=date_submit,desc")
+          response = JSON.parse(response.body)
+          responses = response["responses"]
+          mobile_nos = responses.collect { |x| x["hidden"]["mobile"] }
+          @patient = Patient.find_by_id current_user.id
+          idx = mobile_nos.index(@patient.mobile)
+          mail = responses[idx]["answers"]["email_58205238"] || responses[idx]["answers"]["email_58205344"] || responses[idx]["answers"]["email_58205331"] || responses[idx]["answers"]["email_58205400"] || responses[idx]["answers"]["email_58205374"] || responses[idx]["answers"]["email_58205430"]
+          if mail
+            @patient.update(email: mail)
+            UserPaymentNotifierMailer.send_user_payment_mail(@patient, current_payment).deliver_later
+          end
+        end
+      rescue
+      end
+
+  	  current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
       CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
-      UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
+      # UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       render 'success'
-	  unregister
+      unregister
     end
   end
 
