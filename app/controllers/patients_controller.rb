@@ -8,9 +8,6 @@ class PatientsController < ApplicationController
   # POST /patients
   def create
 
-      logger.info 'PATIENTS'
-      logger.info session[:promo_code]
-
     # Check if patient exists in database
     @patient = Patient.find_by_mobile(patient_params[:mobile])
     if @patient
@@ -38,9 +35,7 @@ class PatientsController < ApplicationController
         end
       end
     end
-
   end
-
 
   # POST /patients
   def create_with_coupon
@@ -147,7 +142,8 @@ class PatientsController < ApplicationController
       {
         email: params[:email],
         mobile: params[:mobile],
-        name: params[:name]
+        name: params[:name].downcase.titleize,
+        referrer: params[:referrer]
       }
       # params.require(:patient).permit(:name, :email, :mobile)
     end
