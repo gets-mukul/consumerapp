@@ -714,13 +714,16 @@ coupon_list = [
 	# [ "DJS50", 50, 'coupon unused', 0, 2147483647 ],
 	# [ "DJS100", 100, 'coupon unused', 0, 2147483647 ],
 	# [ "DJS150", 150, 'coupon unused', 0, 2147483647 ],
-	[ "DJS350", 350, 'coupon unused', 0, 2147483647 ]
+	# [ "DJS350", 350, 'coupon unused', 0, 2147483647 ]
+	[ "RBFJ3Y", 350, 'coupon unused', 0, 1 ]
 
 ]
 
+i=0
 coupon_list.each do |coupon_code, discount_amount, status, count, max_count|
   Coupon.create( coupon_code: coupon_code, discount_amount: discount_amount, status: status, count: count, max_count: max_count)
+  i = i + 1
 end
 
-print Coupon.count
+print i
 puts " entries created"
