@@ -1,7 +1,6 @@
 <%= content_for :body_class, "inner_body white_back" %>
 
-<% if session[:promo_code] and session[:promo_code].starts_with? "SODELHI" %>
-
+<% if session[:promo_code].present? and (session[:promo_code].starts_with? "SODELHI" or @amount===0) %>
 <% session[:promo_code] = "" %>
 <main class="margin_t_15">
     <section class="inner_content">
@@ -82,7 +81,7 @@
           <div class="row space_bottom">
             <div class="col-sm-12 col-md-6 col-md-offset-3">
 
-              <div><h1 style="font-size: 28px;">Almost done, <span customer-name><%= current_user.name.titleize %></span>!</h1></div>
+              <div><h1 style="font-size: 28px;">Almost done, <span customer-name><%= current_user.name %></span>!</h1></div>
               <div>
                 <p class="p_16 margin_t_25">
                  <!-- The final step is payment of the consultation fee of Rs <%= @amount %>. 

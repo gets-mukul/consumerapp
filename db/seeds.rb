@@ -710,10 +710,12 @@ coupon_list = [
 	# [ "SODELHIHFLQ", 350, 'coupon unused', 0, 1 ],
 	# [ "SODELHIX5UA", 350, 'coupon unused', 0, 1 ],
 	# [ "SODELHI57PU", 350, 'coupon unused', 0, 1 ],
-	# [ "SODELHIFJ3Y", 350, 'coupon unused', 0, 1 ]
-	[ "DJS50", 50, 'coupon unused', 0, 2147483647 ],
-	[ "DJS100", 100, 'coupon unused', 0, 2147483647 ],
-	[ "DJS150", 150, 'coupon unused', 0, 2147483647 ]
+	# [ "SODELHIFJ3Y", 350, 'coupon unused', 0, 1 ],
+	# [ "DJS50", 50, 'coupon unused', 0, 2147483647 ],
+	# [ "DJS100", 100, 'coupon unused', 0, 2147483647 ],
+	# [ "DJS150", 150, 'coupon unused', 0, 2147483647 ],
+	[ "DJS350", 350, 'coupon unused', 0, 2147483647 ]
+
 ]
 
 coupon_list.each do |coupon_code, discount_amount, status, count, max_count|

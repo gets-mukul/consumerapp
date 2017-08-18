@@ -30,7 +30,7 @@ class PaymentController < ApplicationController
     end
 
     @amount = 350
-    if session[:promo_code]
+    if session[:promo_code].present?
       if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
         @amount = 200
       else
