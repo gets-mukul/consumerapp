@@ -37,7 +37,8 @@ $ ->
       when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
       when 'Stretch Marks' then btnname += 'StretchMarks'
       when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
-      when 'Pigmentation & Dark Circles' then btnname += 'Pigmentation'
+      when 'Pigmentation, Tanning & Dark Circles' then btnname += 'Pigmentation'
+      when 'Acne & Pimples' then btnname += 'Acne'
       else btnname += condition
     btnname += 'Button'
     ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
@@ -48,7 +49,8 @@ $ ->
       when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
       when 'Stretch Marks' then btnname2 += 'Stretch Marks'
       when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
-      when 'Pigmentation & Dark Circles' then btnname2 += 'Pigmentation'
+      when 'Pigmentation, Tanning & Dark Circles' then btnname2 += 'Pigmentation'
+      when 'Acne & Pimples' then btnname2 += 'Acne'
       else btnname2 += condition
     btnname2 += ' Button'
     
@@ -75,7 +77,8 @@ $ ->
           when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
           when 'Stretch Marks' then btnname += 'StretchMarks'
           when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
-          when 'Pigmentation & Dark Circles' then btnname += 'Pigmentation'
+          when 'Pigmentation, Tanning & Dark Circles' then btnname += 'Pigmentation'
+          when 'Acne & Pimples' then btnname += 'Acne'
           else btnname += condition
         btnname += 'Button'
         ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
