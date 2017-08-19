@@ -24,9 +24,7 @@
         </div>
     </section>
 </main> -->
-
-<%if @condition %>
-  <% logger.info "CONDITION ALREADY SELECTED" %>
+<%if params[:conditon] %>
   <script type="text/javascript">
     location.href = "/consult/consultation_form/<%= @condition %>";
   </script>
