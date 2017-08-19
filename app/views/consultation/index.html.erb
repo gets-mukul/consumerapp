@@ -24,11 +24,12 @@
         </div>
     </section>
 </main> -->
-<%if @conditon %>
+<%if @condition %>
   <script type="text/javascript">
     location.href = "/consult/consultation_form/<%= @condition %>";
   </script>
 <%else %>
+
 <main id="my-form-step">
     <section class="inner_content">
         <div class="container">
