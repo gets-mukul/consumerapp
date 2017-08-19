@@ -89,7 +89,8 @@ $ ->
           when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
           when 'Stretch Marks' then btnname2 += 'Stretch Marks'
           when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
-          when 'Pigmentation & Dark Circles' then btnname2 += 'Pigmentation'
+          when 'Pigmentation, Tanning & Dark Circles' then btnname2 += 'Pigmentation'
+          when 'Acne & Pimples' then btnname += 'Acne'
           else btnname2 += condition
         btnname2 += ' Button'
 
