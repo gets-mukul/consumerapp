@@ -183,5 +183,3 @@ class PatientsController < ApplicationController
       con.post url.path, post_params.to_query
     end
 end
-
-
