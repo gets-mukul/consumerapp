@@ -33,24 +33,24 @@ $ ->
     console.log condition
     btnname = 'click'    
     switch condition
+      when 'Acne & Pimples' then btnname += 'Acne'
       when 'Eczema, Psoriasis & Rash' then btnname += 'Rash'
       when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
       when 'Stretch Marks' then btnname += 'StretchMarks'
       when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
       when 'Pigmentation, Tanning & Dark Circles' then btnname += 'Pigmentation'
-      when 'Acne & Pimples' then btnname += 'Acne'
       else btnname += condition
     btnname += 'Button'
     ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
 
     btnname2 = ''
     switch condition
+      when 'Acne & Pimples' then btnname2 += 'Acne'
       when 'Eczema, Psoriasis & Rash' then btnname2 += 'Eczema, Rash'
       when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
       when 'Stretch Marks' then btnname2 += 'Stretch Marks'
       when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
       when 'Pigmentation, Tanning & Dark Circles' then btnname2 += 'Pigmentation'
-      when 'Acne & Pimples' then btnname2 += 'Acne'
       else btnname2 += condition
     btnname2 += ' Button'
     
@@ -85,12 +85,12 @@ $ ->
 
         btnname2 = ''
         switch condition
-          when 'Eczema, Psoriasis & Rash' then btnname2 += 'Rash'
+          when 'Eczema, Psoriasis & Rash' then btnname2 += 'Eczema, Rash'
           when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
           when 'Stretch Marks' then btnname2 += 'Stretch Marks'
           when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
           when 'Pigmentation, Tanning & Dark Circles' then btnname2 += 'Pigmentation'
-          when 'Acne & Pimples' then btnname += 'Acne'
+          when 'Acne & Pimples' then btnname2 += 'Acne'
           else btnname2 += condition
         btnname2 += ' Button'
 

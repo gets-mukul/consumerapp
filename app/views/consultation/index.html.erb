@@ -14,22 +14,23 @@
         <div class="container">
             <div class="row contactpopup_info">
                 <div class="col-sm-12 box pad_0 margin_0">
-          				<div class="row space_bottom">
-          					<div class="col-sm-12"><h1>Let's get started</h1></div>
-          					<div class="col-sm-12"><h4 style="font-size: 16px; line-height: 1.1; font-weight: normal; margin-top: 10px">To begin a consultation, we need some details from you</h4></div>
-          	    	</div>
+                  <div class="row space_bottom">
+                    <div class="col-sm-12"><h1>Let's get started</h1></div>
+                    <div class="col-sm-12"><h4 style="font-size: 16px; line-height: 1.1; font-weight: normal; margin-top: 10px">To begin a consultation, we need some details from you</h4></div>
+                  </div>
                     <%= render 'form', patient: @patient %>
                 </div>
             </div>
         </div>
     </section>
 </main> -->
+
 <%if @condition %>
+  <% logger.info "CONDITION ALREADY SELECTED" %>
   <script type="text/javascript">
     location.href = "/consult/consultation_form/<%= @condition %>";
   </script>
 <%else %>
-
 <main id="my-form-step">
     <section class="inner_content">
         <div class="container">
@@ -42,14 +43,12 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="text-center">
-                  <!-- <div class="list_btn hover space_bottom form-stepper-2">Acne</div> -->
                   <div class="list_btn hover space_bottom form-stepper-2">Acne &amp; Pimples</div>
                 </div>
                 <div class="text-center">
                   <div class="list_btn hover space_bottom form-stepper-2">Hairfall or Hair Thinning</div>
                 </div>
                 <div class="text-center">
-                  <!-- <div class="list_btn hover space_bottom form-stepper-2">Pigmentation &amp; Dark Circles</div> -->
                   <div class="list_btn hover space_bottom form-stepper-2">Pigmentation, Tanning &amp; Dark Circles</div>
                 </div>
                 <div class="text-center">

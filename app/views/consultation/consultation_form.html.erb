@@ -22,16 +22,8 @@
   var btnname2 = ""
 
   switch(condition)  {
-    case 'Acne &amp; Pimples': 
-      btnname2 += 'Acne';
-      break;
-    case 'Acne & Pimples': 
-      btnname2 += 'Acne';
-      break;
+    case 'Eczema, Psoriasis & Rash':
     case 'Eczema, Psoriasis &amp; Rash': 
-      btnname2 += 'Eczema, Psoriasis and Rash';
-      break;
-    case 'Eczema, Psoriasis & Rash': 
       btnname2 += 'Eczema, Psoriasis and Rash';
       break;
     case 'Skin Growth (Moles, Warts)':
@@ -43,13 +35,15 @@
     case 'Hairfall or Hair Thinning':
       btnname2 += 'Hairfall';
       break;
-    case 'Pigmentation, Tanning &amp; Dark Circles':
-      btnname2 += 'Pigmentation and Dark Circles';
-      break;
     case 'Pigmentation, Tanning & Dark Circles':
+    case 'Pigmentation, Tanning &amp Dark Circles':
       btnname2 += 'Pigmentation and Dark Circles';
       break;
-    default:
+    case 'Acne & Pimples':
+    case 'Acne &amp; Pimples':
+      btnname2 += 'Acne';
+      break;
+    default: 
       btnname2 += condition;
   }
 
