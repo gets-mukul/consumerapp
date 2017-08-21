@@ -2,6 +2,7 @@
 
 <% if session[:promo_code].present? and (session[:promo_code].starts_with? "SODELHI" or @amount===0) %>
 <% session[:promo_code] = "" %>
+
 <main class="margin_t_15">
     <section class="inner_content">
         <div class="container">
@@ -71,7 +72,6 @@
 
 
 <% else %>
-
 
 <main id="form-step-4" style="width: 100%; overflow-y: hidden; overflow-x: hidden">
   <section class="inner_content pad_15">
@@ -149,6 +149,14 @@
                           <div class="doc-qualification">MD (Dermatology & VD)</div>
                         </div>
                       </div>
+                      <div class="slide">
+                        <img src="<%= asset_path("pradnya.jpg") %>" alt="Dr Pradnya Shastri">
+                        <div class="carousel-img-details">
+                          <div class="doc-name">Dr Pradnya Shastri</div>
+                          <div class="doc-qualification">MBBS, DDVL</div>
+                        </div>
+                      </div>
+
                     </div>
                   </div>
 
@@ -190,6 +198,13 @@
                           <div class="carousel-img-details">
                             <div class="doc-name">Dr. Gaurangi Shrawat</div>
                             <div class="doc-qualification">MD (Dermatology & VD)</div>
+                          </div>
+                        </div>
+                        <div class="item">
+                          <img src="<%= asset_path("pradnya.jpg") %>" alt="Dr Pradnya Shastri">
+                          <div class="carousel-img-details">
+                            <div class="doc-name">Dr Pradnya Shastri</div>
+                            <div class="doc-qualification">MBBS, DDVL</div>
                           </div>
                         </div>
                       </div>
