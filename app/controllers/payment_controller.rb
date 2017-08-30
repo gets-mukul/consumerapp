@@ -28,7 +28,25 @@ class PaymentController < ApplicationController
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
         failure
     end
-
+    
+    # get email of the current user from typeform responses
+    begin
+      typeform_uid = session[:typeform_uid]
+      if typeform_uid
+        response = HTTParty.get("https://api.typeform.com/v1/form/" + typeform_uid + "?key=#{Rails.application.secrets.TYPEFORM_API_KEY}&until=#{Time.now.to_i}&limit=10&order_by[]=date_submit,desc")
+        response = JSON.parse(response.body)
+        responses = response["responses"]
+        mobile_nos = responses.collect { |x| x["hidden"]["mobile"] }
+        @patient = Patient.find_by_id current_user.id
+        idx = mobile_nos.index(@patient.mobile)
+        mail = responses[idx]["answers"]["email_58205238"] || responses[idx]["answers"]["email_58205344"] || responses[idx]["answers"]["email_58205331"] || responses[idx]["answers"]["email_58205400"] || responses[idx]["answers"]["email_58205374"] || responses[idx]["answers"]["email_58205430"] || ""
+        if mail
+          @patient.update(email: mail)
+        end
+      end
+    rescue
+    end
+    
     @amount = 350
     if session[:promo_code].present?
       if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
@@ -41,25 +59,12 @@ class PaymentController < ApplicationController
         end
         @amount = @amount - @coupon.discount_amount
       end
-    end
 
-    # if session[:promo_code] and session[:promo_code].starts_with? "SODELHI"
-    #   @coupon = Coupon.find_by coupon_code: session[:promo_code]
-    #   @coupon.increment!(:count, 1)
-    #   @coupon.update(status: 'coupon used')
-    # end
-    # @amount = 350
-    # # if session[:coupon_applied]
-    # #   @amount = 200
-    # # end
-    # if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
-    #   @amount = 200
-    # end
-    # @error_msg = ""
-    # unless !params[:city].blank?
-    #     @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
-    #     failure
-    # end
+      if @amount == 0
+        success_without_payment
+        unregister
+      end
+    end
   end
 
   def issue_payment
@@ -75,6 +80,14 @@ class PaymentController < ApplicationController
     @content_paytm = @content_paytm + "<input type=\"hidden\" name=\"CHECKSUMHASH\" value=\"#{checksum_hash}\"></form><script type=\"text/javascript\">document.f1.submit();</script></body></html>"
     logger.info "patient: #{current_user.name} redirected to paytm"
     return render html: @content_paytm.html_safe
+  end
+
+  def success_without_payment
+    session[:promo_code] = ""
+    logger.info "SUCCESS WITHOUT PAYMENT"
+    @patient = Patient.find_by_id current_user.id
+    render 'success_without_payment'
+    UserPaymentNotifierMailer.send_user_payment_mail(@patient, current_payment).deliver_later if @patient.email.present?
   end
 
   def success
@@ -93,7 +106,7 @@ class PaymentController < ApplicationController
       @error_msg = "#{@patient.name} has cancelled the payment"
       logger.error "looks like #{@patient.name} has cancelled the payment"
       @patient.update({pay_status: "payment cancelled by patient"})
-	  current_payment.update({mode: '', status: 'cancelled_by_customer', bank_ref_num: params['BANKTXNID']})
+    current_payment.update({mode: '', status: 'cancelled_by_customer', bank_ref_num: params['BANKTXNID']})
       ErrorEmailer.error_email(@error_msg).deliver
       failure
     elsif not new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
@@ -122,26 +135,8 @@ class PaymentController < ApplicationController
       #   logger.info resp.body.strip
       # end
       @patient.update({pay_status: "paid"})
-      # get email of the current user from typeform responses
-      begin
-        typeform_uid = session[:typeform_uid]
-        if typeform_uid
-          response = HTTParty.get("https://api.typeform.com/v1/form/" + typeform_uid + "?key=#{Rails.application.secrets.TYPEFORM_API_KEY}&until=#{Time.now.to_i}&limit=10&order_by[]=date_submit,desc")
-          response = JSON.parse(response.body)
-          responses = response["responses"]
-          mobile_nos = responses.collect { |x| x["hidden"]["mobile"] }
-          @patient = Patient.find_by_id current_user.id
-          idx = mobile_nos.index(@patient.mobile)
-          mail = responses[idx]["answers"]["email_58205238"] || responses[idx]["answers"]["email_58205344"] || responses[idx]["answers"]["email_58205331"] || responses[idx]["answers"]["email_58205400"] || responses[idx]["answers"]["email_58205374"] || responses[idx]["answers"]["email_58205430"]
-          if mail
-            @patient.update(email: mail)
-            UserPaymentNotifierMailer.send_user_payment_mail(@patient, current_payment).deliver_later
-          end
-        end
-      rescue
-      end
-
-  	  current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
+      UserPaymentNotifierMailer.send_user_payment_mail(@patient, current_payment).deliver_later if @patient.email.present?
+      current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
       CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       # UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       render 'success'

@@ -715,13 +715,22 @@ coupon_list = [
 	# [ "DJS100", 100, 'coupon unused', 0, 2147483647 ],
 	# [ "DJS150", 150, 'coupon unused', 0, 2147483647 ],
 	# [ "DJS350", 350, 'coupon unused', 0, 2147483647 ]
-	[ "RBFJ3Y", 350, 'coupon unused', 0, 1 ]
-
+	# [ "RBFJ3Y", 350, 'coupon unused', 0, 1 ]
+	[ "GSBKKY2", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSBZ6GR", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSBDUJX", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSB6WBY", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSBVNGU", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSBG6ZN", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSB5W4Q", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSBHFLQ", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSBX5UA", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	[ "GSB57PU", 350, 'coupon unused', '2017-09-21', 0, 1 ]
 ]
 
 i=0
-coupon_list.each do |coupon_code, discount_amount, status, count, max_count|
-  Coupon.create( coupon_code: coupon_code, discount_amount: discount_amount, status: status, count: count, max_count: max_count)
+coupon_list.each do |coupon_code, discount_amount, status, expires_on, count, max_count|
+  Coupon.create( coupon_code: coupon_code, discount_amount: discount_amount, status: status, expires_on: expires_on, count: count, max_count: max_count)
   i = i + 1
 end
 

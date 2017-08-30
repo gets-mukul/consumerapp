@@ -9,7 +9,7 @@ class Patient < ApplicationRecord
   # has_and_belongs_to_many :coupons
   
   def set_defaults
-	self.email ||= ''
+	  self.email ||= ''
     self.pay_status ||= 'payment pending'
   end
 end

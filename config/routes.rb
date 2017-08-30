@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     scope 'payment' do
       post '/success', to: 'payment#success'
       post '/failure', to: 'payment#failure'
+      post '/success_without_payment', to: 'payment#success_without_payment'
     end
 
     get '/privacy_policy', to: 'static_pages#privacy_policy'
