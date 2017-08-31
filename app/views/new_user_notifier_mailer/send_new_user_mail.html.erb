@@ -307,7 +307,7 @@
                                       <td>Referrer</td>
                                       <%= content_tag(:td, "Insta") if @insta %>
                                       <%= content_tag(:td, "Promo") if @promo_code %>
-                                      <%= content_tag(:td, "Promo") if @coupon_code %>
+                                      <%= content_tag(:td, "Promo") if !@coupon_code.empty? %>
                                     </tr>
                                   </thead>
                                   <br>
@@ -319,7 +319,7 @@
                                       <td class="no-style"><%= @referrer %></td>
                                       <%= content_tag(:td, @insta, :class => 'no-style') if @insta %>
                                       <%= content_tag(:td, @promo_code, :class => 'no-style') if @promo_code %>
-                                      <%= content_tag(:td, @coupon_code, :class => 'no-style') if @coupon_code %>
+                                      <%= content_tag(:td, @coupon_code, :class => 'no-style') if !@coupon_code.empty? %>
                                     </tr>
                                     <br><br>
                                     <tr>
