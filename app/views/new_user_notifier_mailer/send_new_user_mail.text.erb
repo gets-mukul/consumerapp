@@ -10,4 +10,4 @@ Mobile : <%= @user.mobile %>
 Referrer : <%= @referrer %>
 <%= "Insta : " + @insta if @insta %>
 <%= "Promo : " + @promo_code  if @promo_code  %>
-<%= "Promo : " + @coupon_code if @coupon_code %>
+<%= "Promo : " + @coupon_code if !@coupon_code.empty? %>

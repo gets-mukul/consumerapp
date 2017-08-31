@@ -4,10 +4,18 @@ class NewUserNotifierMailer < ApplicationMailer
     @user = user
     @referrer = referrer.downcase.to_s;
     @coupon_code = coupon_code
-    mail( :to => Rails.application.secrets.ADMIN_EMAIL,
-    # mail( :to => [Rails.application.secrets.ADMIN_EMAIL, "jesse.dhara@gmail.com"],
-    # mail( :to => "jesse.dhara@gmail.com",
-    :subject => "Remedica: New user sign up." )
+    if !@coupon_code.empty?
+      mail( :to => Rails.application.secrets.ADMIN_EMAIL,
+      # mail( :to => [Rails.application.secrets.ADMIN_EMAIL, "jesse.dhara@gmail.com"],
+      # mail( :to => "jesse.dhara@gmail.com",
+      :subject => "Remedica: New user sign up." )
+    else
+      mail( :to => Rails.application.secrets.ADMIN_EMAIL,
+      # mail( :to => [Rails.application.secrets.ADMIN_EMAIL, "jesse.dhara@gmail.com"],
+      # mail( :to => "jesse.dhara@gmail.com",
+      :subject => "Remedica: New coupon sign up." )
+    end
+
   end
 
   def send_new_user_mail_with_insta(user, referrer, insta, promo_code)
