@@ -40,7 +40,7 @@ class PaymentController < ApplicationController
         @patient = Patient.find_by_id current_user.id
         idx = mobile_nos.index(@patient.mobile)
         mail = responses[idx]["answers"]["email_58205238"] || responses[idx]["answers"]["email_58205344"] || responses[idx]["answers"]["email_58205331"] || responses[idx]["answers"]["email_58205400"] || responses[idx]["answers"]["email_58205374"] || responses[idx]["answers"]["email_58205430"] || ""
-        if mail
+        if !mail.empty?
           @patient.update(email: mail)
         end
       end
