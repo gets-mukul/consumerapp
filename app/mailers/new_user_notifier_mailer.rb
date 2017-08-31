@@ -1,8 +1,9 @@
 class NewUserNotifierMailer < ApplicationMailer
 
-  def send_new_user_mail(user, referrer)
+  def send_new_user_mail(user, referrer, coupon_code="")
     @user = user
     @referrer = referrer.downcase.to_s;
+    @coupon_code = coupon_code
     mail( :to => Rails.application.secrets.ADMIN_EMAIL,
     # mail( :to => [Rails.application.secrets.ADMIN_EMAIL, "jesse.dhara@gmail.com"],
     # mail( :to => "jesse.dhara@gmail.com",
