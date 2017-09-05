@@ -29,28 +29,25 @@ $ ->
   $('.thanksmsg_popup').hide()
 
   $('#my-form-step .form-stepper-2').on 'click', ->
-    condition = $(this).text()
+    condition = $(this).attr('value')
     console.log condition
     btnname = 'click'    
     switch condition
-      when 'Acne & Pimples' then btnname += 'Acne'
-      when 'Eczema, Psoriasis & Rash' then btnname += 'Rash'
+      when 'Eczema, Psoriasis and Rash' then btnname += 'Rash'
       when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
       when 'Stretch Marks' then btnname += 'StretchMarks'
       when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
-      when 'Pigmentation, Tanning & Dark Circles' then btnname += 'Pigmentation'
+      when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
       else btnname += condition
     btnname += 'Button'
     ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
 
     btnname2 = ''
     switch condition
-      when 'Acne & Pimples' then btnname2 += 'Acne'
-      when 'Eczema, Psoriasis & Rash' then btnname2 += 'Eczema, Rash'
-      when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
-      when 'Stretch Marks' then btnname2 += 'Stretch Marks'
-      when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
-      when 'Pigmentation, Tanning & Dark Circles' then btnname2 += 'Pigmentation'
+      when 'Eczema, Psoriasis and Rash' then btnname += 'Eczema, Rash'
+      when 'Skin Growth (Moles, Warts)' then btnname += 'Skin Growths'
+      when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
+      when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
       else btnname2 += condition
     btnname2 += ' Button'
     
@@ -69,29 +66,26 @@ $ ->
       manageFormStepsVisibility()
 
       $('#my-form-step .form-stepper-2').on 'click', ->
-        condition = $(this).text()
+        condition = $(this).attr('value')
         console.log condition
         btnname = 'click'
         switch condition
-          when 'Eczema, Psoriasis & Rash' then btnname += 'Rash'
+          when 'Eczema, Psoriasis and Rash' then btnname += 'Rash'
           when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
           when 'Stretch Marks' then btnname += 'StretchMarks'
           when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
-          when 'Pigmentation, Tanning & Dark Circles' then btnname += 'Pigmentation'
-          when 'Acne & Pimples' then btnname += 'Acne'
+          when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
           else btnname += condition
         btnname += 'Button'
         ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
 
         btnname2 = ''
         switch condition
-          when 'Eczema, Psoriasis & Rash' then btnname2 += 'Eczema, Rash'
-          when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
-          when 'Stretch Marks' then btnname2 += 'Stretch Marks'
-          when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
-          when 'Pigmentation, Tanning & Dark Circles' then btnname2 += 'Pigmentation'
-          when 'Acne & Pimples' then btnname2 += 'Acne'
-          else btnname2 += condition
+          when 'Eczema, Psoriasis and Rash' then btnname += 'Eczema, Rash'
+          when 'Skin Growth (Moles, Warts)' then btnname += 'Skin Growths'
+          when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
+          when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
+          else btnname += condition
         btnname2 += ' Button'
 
         mixpanel.track("Button Clicked", {

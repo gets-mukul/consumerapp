@@ -7,6 +7,7 @@ module PatientsHelper
     session[:user_id] = user.id
     session[:condition] = params[:condition]
     logger.info "Registered #{user.name}, condition: #{params[:condition]}"
+    setup_patient_source
   end
 
   def unregister
@@ -22,4 +23,13 @@ module PatientsHelper
     end
   end
 
+  def setup_patient_source
+    patient_source_params = {
+      patient: current_user,
+      local_referrer: params[:referrer],
+      utm_campaign: params[:utm_campaign]
+    }
+    PatientSource.create(patient_source_params)
+    logger.info "Setting up utm campaign for #{patient_source_params}"
+  end
 end

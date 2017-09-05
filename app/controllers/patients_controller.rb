@@ -26,6 +26,7 @@ class PatientsController < ApplicationController
         resp, data = send_new_patient_info patient_params
         if !resp.kind_of? Net::HTTPOK
           logger.debug resp.body
+          # save_patient
           redirect_to "/"
           # render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
         else
@@ -106,10 +107,11 @@ class PatientsController < ApplicationController
       @patient = Patient.new(patient_params)
       if @patient.save
         register @patient
+        PatientSource.new(patient_source_params)
         if session[:promo_code].present?
-          NewUserNotifierMailer.send_new_user_mail(@patient, params[:referrer], session[:promo_code]).deliver_later
+          NewUserNotifierMailer.send_new_user_mail(@patient, session[:promo_code]).deliver_later
         else
-          NewUserNotifierMailer.send_new_user_mail(@patient, params[:referrer]).deliver_later
+          NewUserNotifierMailer.send_new_user_mail(@patient).deliver_later
         end
         
         return redirect_to "/consult"

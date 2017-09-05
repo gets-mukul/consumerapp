@@ -16,32 +16,27 @@
 </style>
 <% end %>
 <script type="text/javascript">
-
+          when 'Eczema, Psoriasis and Rash' then btnname += 'Eczema, Rash'
+          when 'Skin Growth (Moles, Warts)' then btnname += 'Skin Growths'
+          when 'Stretch Marks' then btnname += 'StretchMarks'
+          when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
+          when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
 
   var condition = "<%= session[:condition] %>";
   var btnname2 = ""
 
   switch(condition)  {
-    case 'Eczema, Psoriasis & Rash':
-    case 'Eczema, Psoriasis &amp; Rash': 
-      btnname2 += 'Eczema, Psoriasis and Rash';
+    case 'Eczema, Psoriasis and Rash':
+      btnname2 += 'Eczema, Rash';
       break;
     case 'Skin Growth (Moles, Warts)':
       btnname2 += 'Skin Growths';
       break;
-    case 'Stretch Marks':
-      btnname2 += 'Stretch Marks';
-      break;
     case 'Hairfall or Hair Thinning':
       btnname2 += 'Hairfall';
       break;
-    case 'Pigmentation, Tanning & Dark Circles':
-    case 'Pigmentation, Tanning &amp; Dark Circles':
-      btnname2 += 'Pigmentation and Dark Circles';
-      break;
-    case 'Acne & Pimples':
-    case 'Acne &amp; Pimples':
-      btnname2 += 'Acne';
+    case 'Pigmentation, Tanning and Dark Circles':
+      btnname2 += 'Pigmentation';
       break;
     default: 
       btnname2 += condition;

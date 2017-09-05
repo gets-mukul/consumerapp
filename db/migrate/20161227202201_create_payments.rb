@@ -12,7 +12,7 @@ class CreatePayments < ActiveRecord::Migration[5.0]
       t.string :bank_ref_num
       t.belongs_to :patient, index: true
 
-      t.timestamp
+      t.timestamps
     end
   end
 end

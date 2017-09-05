@@ -8,7 +8,7 @@ class PaymentController < ApplicationController
 
   include PaymentHelper
   include PaytmHelper
-  before_action :check_current_user
+  before_action :check_current_user, :check_current_consultation
   after_action :update_payment, only: [:failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
@@ -21,6 +21,11 @@ class PaymentController < ApplicationController
   # end
 
   def index
+
+    logger.info "CURRENT CONSULTATION"
+    logger.info @current_consultation
+    logger.info current_consultation
+
     typeform_uid = session[:typeform_uid]
     response = HTTParty.get("https://api.typeform.com/v1/form/" + typeform_uid + "?key=#{Rails.application.secrets.TYPEFORM_API_KEY}&until=#{Time.now.to_i}&limit=10&order_by[]=date_submit,desc")
     @error_msg = ""
@@ -37,33 +42,23 @@ class PaymentController < ApplicationController
         response = JSON.parse(response.body)
         responses = response["responses"]
         mobile_nos = responses.collect { |x| x["hidden"]["mobile"] }
-        @patient = Patient.find_by_id current_user.id
-        idx = mobile_nos.index(@patient.mobile)
+        idx = mobile_nos.index(current_user.mobile)
         mail = responses[idx]["answers"]["email_58205238"] || responses[idx]["answers"]["email_58205344"] || responses[idx]["answers"]["email_58205331"] || responses[idx]["answers"]["email_58205400"] || responses[idx]["answers"]["email_58205374"] || responses[idx]["answers"]["email_58205430"] || ""
         if !mail.empty?
-          @patient.update(email: mail)
+          current_user.update(email: mail)
         end
       end
     rescue
     end
     
-    @amount = 350
-    if session[:promo_code].present?
-      if ['SOCIAL150', 'REFER150'].include? session[:promo_code]
-        @amount = 200
-      else
-        @coupon = Coupon.find_by coupon_code: session[:promo_code]
-        @coupon.increment!(:count, 1)
-        if @coupon.count >= @coupon.max_count
-          @coupon.update(status: 'coupon used')
-        end
-        @amount = @amount - @coupon.discount_amount
-      end
+    current_consultation.update(user_status: 'form filled')
 
-      if @amount == 0
-        success_without_payment
-        unregister
-      end
+    @amount = current_consultation.amount
+
+    if @amount == 0
+      success_without_payment
+      unregister_consultation
+      unregister
     end
   end
 
@@ -85,9 +80,11 @@ class PaymentController < ApplicationController
   def success_without_payment
     session[:promo_code] = ""
     logger.info "SUCCESS WITHOUT PAYMENT"
-    @patient = Patient.find_by_id current_user.id
     render 'success_without_payment'
-    UserPaymentNotifierMailer.send_user_payment_mail(@patient, current_payment).deliver_later if @patient.email.present?
+    UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
+    
+    current_user.update({pay_status: "free"})
+    current_consultation.update({pay_status: "free", user_status: 'free consultation done'})
   end
 
   def success
@@ -101,19 +98,20 @@ class PaymentController < ApplicationController
     end
 
     checksum_hash = params["CHECKSUMHASH"]
-    @patient = Patient.find_by_id current_user.id
     if params["STATUS"] == "TXN_FAILURE"
-      @error_msg = "#{@patient.name} has cancelled the payment"
-      logger.error "looks like #{@patient.name} has cancelled the payment"
-      @patient.update({pay_status: "payment cancelled by patient"})
-    current_payment.update({mode: '', status: 'cancelled_by_customer', bank_ref_num: params['BANKTXNID']})
+      @error_msg = "#{current_user.name} has cancelled the payment"
+      logger.error "looks like #{current_user.name} has cancelled the payment"
+      current_user.update({pay_status: "payment cancelled by patient"})
+      current_consultation.update({ pay_status: "payment cancelled by patient", user_status: 'payment failed' })
+      current_payment.update({mode: '', status: 'cancelled_by_customer', bank_ref_num: params['BANKTXNID']})
       ErrorEmailer.error_email(@error_msg).deliver
       failure
     elsif not new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
       @error_msg = "Invalid Checksum!"
-      logger.error "invalid checksum for #{@patient.name}"
-      @patient.update({pay_status: "payment failed|invalid checksum"})
-      ErrorEmailer.error_email("invalid checksum for " + @patient.name).deliver
+      logger.error "invalid checksum for #{current_user.name}"
+      current_user.update({pay_status: "payment failed|invalid checksum"})
+      current_consultation.update({ pay_status: "payment failed|invalid checksum", user_status: 'payment failed' })
+      ErrorEmailer.error_email("invalid checksum for " + current_user.name).deliver
       failure
     else
       url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
@@ -134,24 +132,28 @@ class PaymentController < ApplicationController
       #   failure
       #   logger.info resp.body.strip
       # end
-      @patient.update({pay_status: "paid"})
-      UserPaymentNotifierMailer.send_user_payment_mail(@patient, current_payment).deliver_later if @patient.email.present?
+      current_user.update({pay_status: "paid"})
+      current_consultation.update({ pay_status: "paid", user_status: 'paid' })
+
+      UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
       current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
       CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       # UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
       render 'success'
+      unregister_consultation
       unregister
     end
   end
 
   def failure
     logger.error "payment failure for patient: #{current_user.name}"
-    @patient = Patient.find_by_id current_user.id
     @error_msg ||= params['error_Message'] + "|" + params['unmappedstatus']
-    @patient.update({pay_status: "payment failed : #{@error_msg}"})
+    current_user.update({pay_status: "payment failed : #{@error_msg}"})
+    current_consultation.update({ pay_status: "payment failed : #{@error_msg}", user_status: 'payment failed' })
     render 'failure'
     if request.method == "GET"
       # Redirection from within controller
+      unregister_consultation
       unregister
     end
   end
@@ -164,6 +166,7 @@ class PaymentController < ApplicationController
 
   def update_payment
     current_payment.update(capture_params)
+    unregister_consultation
     unregister
   end
 

@@ -316,7 +316,7 @@
                                       <td><%= @user.name %></td>
                                       <td><%= @user.email %></td>
                                       <td><%= @user.mobile %></td>
-                                      <td class="no-style"><%= @referrer %></td>
+                                      <td class="no-style"><%= @user.referrer.downcase.to_s %></td>
                                       <%= content_tag(:td, @insta, :class => 'no-style') if @insta %>
                                       <%= content_tag(:td, @promo_code, :class => 'no-style') if @promo_code %>
                                       <%= content_tag(:td, @coupon_code, :class => 'no-style') if !@coupon_code.empty? %>
