@@ -97,8 +97,7 @@ module PaymentHelper
         :desc	=> "Remedico treatment for #{current_user.name}",
         :mode => mode,
         :pg_type => gateway,
-        :consultation => current_consultation.id
-
+        :consultation => current_consultation
       }
     end
 

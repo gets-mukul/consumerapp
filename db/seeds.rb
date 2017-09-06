@@ -740,7 +740,7 @@ end
 
 coupon_list2 = [
 	[ "SOCIAL150", 150, 'coupon unused', '2017-09-11', 0, 2147483647 ],
-	[ "REFER150", 150, 'coupon unused',, '2017-09-11' 0, 2147483647 ]
+	[ "REFER150", 150, 'coupon unused', '2017-09-11', 0, 2147483647 ]
 ]
 
 coupon_list2.each do |coupon_code, discount_amount, status, expires_on, count, max_count|
@@ -750,3 +750,6 @@ end
 
 print i
 puts " entries created"
+
+
+end

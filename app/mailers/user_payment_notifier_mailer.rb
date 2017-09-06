@@ -8,8 +8,8 @@ class UserPaymentNotifierMailer < ApplicationMailer
     :subject => "Remedico: Payment notice." )
   end
 
-  def send_user_form_filled_mail(consultation)
-    @consultation = consultation
+  def send_user_form_filled_mail(id)
+    @consultation = Consultation.find_by_id id
     @payment_link = ""
     if @consultation.amount == 350
       @payment_link = "https://imjo.in/rrn3Ct"
@@ -19,6 +19,7 @@ class UserPaymentNotifierMailer < ApplicationMailer
       @payment_link = "https://imjo.in/RnnpHx"
     else
       @payment_link = "remedicohealth.com"
+    end
 
     # mail( :to => [@consultation.patient.email, "jesse.dhara@gmail.com"],
     mail( :to => @consultation.patient.email,

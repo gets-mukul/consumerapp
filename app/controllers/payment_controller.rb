@@ -32,6 +32,7 @@ class PaymentController < ApplicationController
     unless !params[:city].blank?
         @error_msg = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
         failure
+        return
     end
     
     # get email of the current user from typeform responses
@@ -57,8 +58,6 @@ class PaymentController < ApplicationController
 
     if @amount == 0
       success_without_payment
-      unregister_consultation
-      unregister
     end
   end
 
@@ -85,6 +84,8 @@ class PaymentController < ApplicationController
     
     current_user.update({pay_status: "free"})
     current_consultation.update({pay_status: "free", user_status: 'free consultation done'})
+    unregister_consultation
+    unregister
   end
 
   def success
