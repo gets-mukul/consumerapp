@@ -107,7 +107,6 @@ class PatientsController < ApplicationController
       @patient = Patient.new(patient_params)
       if @patient.save
         register @patient
-        PatientSource.new(patient_source_params)
         if session[:promo_code].present?
           NewUserNotifierMailer.send_new_user_mail(@patient, session[:promo_code]).deliver_later
         else
