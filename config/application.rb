@@ -28,5 +28,9 @@ module Remedica
     config.time_zone = 'Kolkata'
     config.active_record.default_timezone = :local
     config.active_job.queue_adapter = Rails.env.production? ? :sidekiq : :async
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.perform_caching = true
   end
 end
