@@ -7,7 +7,7 @@ class CouponController < ApplicationController
 			session[:coupon_applied] = true
 			session[:promo_code] = params[:promo_code]
 			logger.info session[:promo_code]
-			render :json => { :value => "success", :discount_price => '200' }
+			render :json => { :value => "success", :discount_price => '250' }
 		elsif ['SOCIAL100', 'REFER100'].include? params[:promo_code]
 			session[:coupon_applied] = true
 			session[:promo_code] = params[:promo_code]
