@@ -53,7 +53,7 @@ class SmsServiceController < ApplicationController
       response = JSON.parse(json.body)
 
       @sms = SmsService.create({
-        patient_id: patient.id
+        patient_id: patient.id,
         sms_type: template,
         sms_id: response["SMSMessage"]["Sid"],
         detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
@@ -63,7 +63,6 @@ class SmsServiceController < ApplicationController
       @sms.update({consultation_id: consultation.id}) if consultation.present?
 
       CheckSmsWorker.perform_in(15.minutes, @sms.sms_id)
-      CheckSmsWorker.perform_in(id, "form filled", sorted_consultation.id)
 
     end
     
