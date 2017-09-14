@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     post '/patients' => 'patients#create', defaults: {format: 'json'}
     get '/patients' => 'patients#create', defaults: {format: 'json'}
 
+    get '/patients/instant_login' => 'patients#instant_login', defaults: {format: 'json'}
+
     post '/patients/:coupon' => 'patients#create_with_coupon', defaults: {format: 'json'}
     get '/patients/:coupon' => 'patients#create_with_coupon', defaults: {format: 'json'}
 
@@ -17,7 +19,9 @@ Rails.application.routes.draw do
     scope 'payment' do
       post '/success', to: 'payment#success'
       post '/failure', to: 'payment#failure'
-      post '/success_without_payment', to: 'payment#success_without_payment'
+      get '/failure', to: 'payment#failure'
+      get '/success_free', to: 'payment#success_free'
+      get '/instant_payment' => 'payment#instant_payment', defaults: {format: 'json'}
     end
 
     get '/privacy_policy', to: 'static_pages#privacy_policy'

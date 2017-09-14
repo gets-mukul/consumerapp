@@ -8,6 +8,7 @@ module PatientsHelper
     session[:condition] = params[:condition]
     logger.info "Registered #{user.name}, condition: #{params[:condition]}"
     setup_patient_source
+    DeliverSMSWorker.perform_in(1.hours, @patient.id) if Rails.env.production?
   end
 
   def unregister
