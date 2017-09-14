@@ -4,6 +4,7 @@ class PatientsController < ApplicationController
   REMEDICA_PATIENTS_ENDPOINT = Rails.application.secrets.PATIENTS_ENDPOINT
   require 'uri'
   require 'net/http'
+  require 'encrypt'
 
   # POST /patients
   def create
@@ -40,7 +41,6 @@ class PatientsController < ApplicationController
   # POST /patients
   def create_with_coupon
     if params[:coupon] == "SODELHI"
-      logger.info "USER SET COUPON PREVIOUSLY"
 
       @coupon = Coupon.find_by coupon_code: session[:promo_code]
 
@@ -86,14 +86,31 @@ class PatientsController < ApplicationController
     end
   end
 
+  def instant_login
+    id = decrypt(params[:p], 0)
+    logger.info "ID INSTANT LOGIN"
+    logger.info id
+    if id.nil?
+      redirect_to "/"
+    else
+      @patient = Patient.find_by_id id
+      if @patient
+        register @patient
+        return redirect_to "/consult"
+      else
+        redirect_to "/"
+      end
+    end
+  end
+
   private
     def conditions
       [
         "Acne",
         "Hairfall or Hair Thinning",
-        "Pigmentation & Dark Circles",
+        "Pigmentation and Dark Circles",
         "Dandruff",
-        "Eczema, Psoriasis & Rash",
+        "Eczema, Psoriasis and Rash",
         "Stretch Marks",
         "Skin Growth (Moles, Warts)"
       ]

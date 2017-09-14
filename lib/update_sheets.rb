@@ -58,5 +58,18 @@ def update_sheet
   }
 
   update_res = service.update_spreadsheet_value(spreadsheet_id, range, value_range_object, value_input_option: 'USER_ENTERED')
+
+  consultations = Consultation.joins('LEFT JOIN coupons on consultations.coupon_id=coupons.id').left_outer_joins(:patient).select('consultations.id, consultations.patient_id, patients.name, patients.mobile, coupons.coupon_code, consultations.category, consultations.user_status, consultations.created_at')
+  consultation_list = consultations.pluck(:id, :patient_id, :name, :mobile, :coupon_code, :category, :user_status, :created_at)
+
+  range = 'Consultations!A2'
+
+  value_range_object = {
+    major_dimension: "ROWS",
+    values: consultation_list
+  }
+
+  update_res = service.update_spreadsheet_value(spreadsheet_id, range, value_range_object, value_input_option: 'USER_ENTERED')
+
 end
 
