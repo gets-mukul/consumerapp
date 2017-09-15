@@ -4,7 +4,6 @@ module PaymentHelper
   SALT = Rails.application.secrets.PAYU_IN_SALT
 
   def build_payment_params
-    byebug
     txnid = build_transaction_id
     desc = "Remedico treatment for #{current_user.name}"
 
