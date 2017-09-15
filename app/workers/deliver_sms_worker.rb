@@ -14,7 +14,7 @@ class DeliverSMSWorker
 			if sorted_consultation.user_status == 'form filled'
 				SmsServiceController.send_sms(id, "form filled", sorted_consultation.id)
 			elsif sorted_consultation.user_status == 'registered'
-				SmsServiceController.send_sms(consultation.id, "registered", sorted_consultation.id)
+				SmsServiceController.send_sms(id, "registered", sorted_consultation.id)
 			end
 		else
 			SmsServiceController.send_sms(id, "registered", "")
