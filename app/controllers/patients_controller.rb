@@ -142,7 +142,7 @@ class PatientsController < ApplicationController
       @patient = Patient.new(patient_params)
       if @patient.save
         register @patient
-        NewUserNotifierMailer.send_new_user_mail_with_insta(@patient, params[:referrer], params[:insta], session[:promo_code]).deliver_later
+        NewUserNotifierMailer.send_new_user_mail_with_insta(@patient, params[:insta], session[:promo_code]).deliver_later
         @coupon.update(status: 'coupon attached')
         logger.info 'RETURN SUCCESS'
         render :json => { :value => "success", :discount_price => 'FREE' }
