@@ -35,7 +35,7 @@
 								<hr class="border_transparent">
 								<h2><span><i>2</i></span>Treatment Plan</h2>
 								<p class="bullet_pad">
-									One of our dermatologists will prepare a personalized treatment plan for you within 48 hours.
+									One of our dermatologists will prepare a personalized treatment plan for you within 24 hours.
 									<br /><br />
 									They will diagnose your condition, provide advice, and prescribe medications & other products as required.
 								</p>
@@ -63,7 +63,7 @@
 			       <!--             </span>-->
 			       <!--             <span class="font_weight_med color_blue space_left">-->
 			       <!--                 <i class="inline fa fa-whatsapp color_blue"></i>-->
-			       <!--                 8433 848 969-->
+			       <!--                 +91 8433 848 969-->
 			       <!--             </span>-->
 			       <!--         </div>-->
 			                <!--<div class="row visible-xs">-->
@@ -76,7 +76,7 @@
 			                <!--    <div class="col-sm-12">-->
 			                <!--        <div class="font_weight_med color_blue">-->
 			                <!--            <i class="inline fa fa-whatsapp color_blue"></i>-->
-			                <!--            8433 848 969-->
+			                <!--            +91 8433 848 969-->
 			                <!--        </div>-->
 			                <!--    </div>-->
 			                <!--</div>-->
@@ -189,7 +189,8 @@
             var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
             console.log(checkbox.checked);
             if (!checkbox || !checkbox.checked) { return; }
-            window.location.href = "/consult/new_patient";
+            $('#form-step-3').removeClass('hidden');
+            $('#form-step-2').addClass('hidden');
             ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
         });
     });

@@ -1,0 +1,178 @@
+<article class="inner_content">
+    <div class="container" style="max-width: 800px;">
+        <div class="row">
+            <div class="col-sm-12 box pad_0 margin_0">
+              <section class=" text-center">
+                <div class="row" style="margin-bottom:20px;margin-top:20px;">
+                  <%= image_tag "remedico1.png", style: "height:30px" %>
+                </div>
+                <div class="row space_top_sm">
+                  <h4 style="font-weight: normal">Welcome to your consultation. </h4>
+                </div>
+                <div class="row space_top_sm">
+                  <h4 style="font-weight: normal; line-height: 1.4;">Please note that Remedico is designed for non-urgent skin and hair conditions only. If you require urgent attention, please see your doctor as soon as possible.</h4>
+                </div>
+              </section>
+              <section class="space_bottom text-center">
+                <div class="row ">
+                    <h4 style="font-weight: normal; line-height: 1.4;">Once you're ready to begin, indicate you agree to our terms & policies, and select "Get Started" below.</h4>
+                </div>
+        <!--<div class="row space_top_sm">-->
+     <!--             <h4>If you have any questions in the meantime, please contact us at:</h4>-->
+     <!--         </div>-->
+     <!--         <div class="row text-center font_h5 hidden-xs">-->
+     <!--             <span class="font_weight_med color_blue">-->
+     <!--                 <i class="inline fa fa-envelope-o color_blue"></i>-->
+     <!--                 consult@remedicohealth.com-->
+     <!--             </span>-->
+     <!--             <span class="font_weight_med color_blue space_left">-->
+     <!--                 <i class="inline fa fa-whatsapp color_blue"></i>-->
+     <!--                 +91 8433 848 969-->
+     <!--             </span>-->
+     <!--         </div>-->
+              <!--<div class="row visible-xs">-->
+              <!--    <div class="col-sm-12">-->
+              <!--        <div class="font_weight_med color_blue">-->
+              <!--            <i class="inline fa fa-envelope-o color_blue"></i>-->
+              <!--            consult@remedicohealth.com-->
+              <!--        </div>-->
+              <!--    </div>-->
+              <!--    <div class="col-sm-12">-->
+              <!--        <div class="font_weight_med color_blue">-->
+              <!--            <i class="inline fa fa-whatsapp color_blue"></i>-->
+              <!--            +91 8433 848 969-->
+              <!--        </div>-->
+              <!--    </div>-->
+              <!--</div>-->
+              </section>
+              <section>
+                <div class="action_content">
+                    <div id="agree_terms" class="text-center">
+                        <input type="checkbox" name="agree_terms">
+                        <label for="agree_terms"></label>
+                        <span>I agree to the <a href="/terms-of-use.html">Terms of Use</a> and <a href="/privacy-policy.html"><nobr>Privacy Policy</nobr></nobr></a?</span>
+                    </div>
+                    <div class="btns_info text-center">
+                        <a class="ready_btn">
+                            GET STARTED
+                        </a>
+                    </div>
+                </div>
+              </section>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<!-- Modal -->
+<div id="myModal" class="modal fade contactpopup_info" role="dialog">
+<div class="modal-dialog contact_dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="mainform_popup">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4>Hi there<span>If you'd like to consult a specialist, or just want more info, fill in your details and we'll contact you.</span></h4>
+            </div>
+            <div class="modal-body">
+                <form role="form" action="https://formbox.es/NgH3bFiWYpY6HuPBRAMiXryt" method="post" class="ig-form">
+                    <div class="input-field form-group">
+                        <input type="text" class="form-control" name="name">
+                        <label>Name</label>
+                        <i class="fa fa-user"></i> </div>
+                    <div class="input-field form-group">
+                        <input type="text" class="form-control" name="email">
+                        <label>Email</label>
+                        <i class="fa fa-envelope"></i> </div>
+                    <div class="input-field form-group">
+                        <input type="text" class="form-control" name="mobile">
+                        <label>Mobile</label>
+                        <i class="fa fa-phone"></i> </div>
+                    <div class="btns_info">
+                        <button type="submit" class="letus_btn text-center senddetails_btn">Send details</button>
+                    </div>
+                    <div class="thanks_msg"></div>
+                </form>
+            </div>
+        </div>
+        <div class="thanksmsg_popup">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <h4>Thanks! <span>Our team will get in touch with you shortly...</span></h4>
+        </div>
+    </div>
+</div>
+</div>
+<script>
+$(function() {
+
+$(".thanksmsg_popup").hide();
+$('.ig-form').submit(function(e) {
+    e.preventDefault();
+    var url = $(this).attr('action');
+    var data = $(this).serialize()
+    console.log(data);
+    $.ajax({
+        type: 'post',
+        crossDomain: true,
+        jsonp: false,
+        url: url,
+        data: data,
+        success: function(response) {
+            // console.log('done');
+             console.log(response);
+            $('.mainform_popup').hide();
+            $(".thanksmsg_popup").show();
+            setTimeout(function() {
+                $('.thanksmsg_popup .close').trigger('click');
+            }, 3000);
+        },
+        error: function(response) {
+            // console.log('error');
+             console.log(response);
+            $('.mainform_popup').hide();
+            $(".thanksmsg_popup").show();
+            setTimeout(function() {
+                $('.thanksmsg_popup .close').trigger('click');
+            }, 3000);
+        }
+    });
+});
+
+
+mixpanel.track("Page Loaded", {
+  "Page Name": "Welcome Page",
+  "Condition Name": 'n/a',
+});
+
+// For "I agree Terms of Use and Privacy Policy"
+$("#agree_terms").on('click', function() {
+    var checkbox = $(this).find("input[name=agree_terms]")[0];
+    if (!checkbox) { return; }
+    checkbox.checked = !checkbox.checked;
+});
+
+$("a.ready_btn").on('click', function () {
+    var checkbox = $("#agree_terms").find("input[name=agree_terms]")[0];
+    // console.log(checkbox.checked);
+    if (!checkbox || !checkbox.checked) { return; }
+
+    <% if @condition %>
+      location.href = "/consult/consultation_form/<%= @condition %>";
+    <% else %>
+      $('#form-step-2').removeClass('hidden');
+      $('#form-step-1').addClass('hidden');
+    <% end %>
+    ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickReadyButton'});
+    window._fbq.push(['track', 'Ready Button Clicked', {'Page URL': 'consult/'}]);
+    mixpanel.track("Button Clicked", {
+      "Button Name": "Ready Button",
+      "Condition Name": "n/a",
+      "Page URL": "consult/",
+    });
+});
+});
+
+</script>

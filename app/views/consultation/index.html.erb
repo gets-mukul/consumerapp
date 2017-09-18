@@ -9,7 +9,7 @@
 </style>
 <% end %>
 <%= content_for :body_class, "inner_body white_back pad_15" %>
-<main id="form-step-1">
+<!-- <main id="form-step-1">
     <section class="inner_content">
         <div class="container">
             <div class="row contactpopup_info">
@@ -23,7 +23,11 @@
             </div>
         </div>
     </section>
+</main> -->
+<main id="form-step-1">
+	<%= render 'welcome' %>
 </main>
+<%unless @condition %>
 <main id="form-step-2">
     <section class="inner_content">
         <div class="container">
@@ -33,37 +37,38 @@
           <div class="col-sm-12"><h1>How can we help?</h1></div>
           <div class="col-sm-12"><h4 style="font-size: 16px; line-height: 1">Let us know which condition you would like help with</h4></div>
           </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <div class="text-center">
-              <div class="list_btn hover space_bottom form-stepper-2">Acne</div>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="text-center">
+                  <div class="list_btn hover space_bottom form-stepper-2">Acne</div>
+                </div>
+                <div class="text-center">
+                  <div class="list_btn hover space_bottom form-stepper-2">Hairfall or Hair Thinning</div>
+                </div>
+                <div class="text-center">
+                  <div class="list_btn hover space_bottom form-stepper-2">Pigmentation &amp; Dark Circles</div>
+                </div>
+                <div class="text-center">
+                  <div class="list_btn hover space_bottom form-stepper-2">Dandruff</div>
+                </div>
+                <div class="text-center">
+                  <div class="list_btn hover space_bottom form-stepper-2">Eczema, Psoriasis &amp; Rash</div>
+                </div>
+                <div class="text-center">
+                  <div class="list_btn hover space_bottom form-stepper-2">Stretch Marks</div>
+                </div>
+                <div class="text-center">
+                  <div class="list_btn hover space_bottom form-stepper-2">Skin Growth (Moles, Warts)</div>
+                </div>
+              </div>
             </div>
-            <div class="text-center">
-              <div class="list_btn hover space_bottom form-stepper-2">Hairfall or Hair Thinning</div>
-            </div>
-            <div class="text-center">
-              <div class="list_btn hover space_bottom form-stepper-2">Pigmentation & Discolouration</div>
-            </div>
-            <div class="text-center">
-              <div class="list_btn hover space_bottom form-stepper-2">Dandruff</div>
-            </div>
-            <div class="text-center">
-              <div class="list_btn hover space_bottom form-stepper-2">Eczema, Psoriasis & Rash</div>
-            </div>
-            <div class="text-center">
-              <div class="list_btn hover space_bottom form-stepper-2">Stretch Marks</div>
-            </div>
-            <div class="text-center">
-              <div class="list_btn hover space_bottom form-stepper-2">Skin Growth (Moles, Warts)</div>
-            </div>
-          </div>
-        </div>
                 </div>
             </div>
     <hr class="border_transparent">
         </div>
     </section>
 </main>
+<%end%>
 <!-- Modal -->
 <div id="myModal" class="modal fade contactpopup_info" role="dialog">
     <div class="modal-dialog contact_dialog">

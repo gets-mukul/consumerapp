@@ -261,7 +261,16 @@
         .btn-primary a:hover {
           background-color: #34495e !important;
           border-color: #34495e !important; } }
-
+        .no-style, .no-style a, .no-style * {
+          border: none;
+          background-color: white;
+          color: #222;
+          text-decoration: none;
+          line-height: 1.2;
+          padding: 5px;
+          font-weight: 400;
+          text-transform: lowercase;
+        }
     </style>
   </head>
   <body class="">
@@ -295,6 +304,7 @@
                                       <td>Name</td>
                                       <td>Email</td>
                                       <td>Mobile</td>
+                                      <td>Referrer</td>
                                     </tr>
                                   </thead>
                                   <br>
@@ -303,6 +313,7 @@
                                       <td><%= @user.name %></td>
                                       <td><%= @user.email %><span></td>
                                       <td><%= @user.mobile %></td>
+                                      <td class="no-style"><%= @referrer %></td>
                                     </tr>
                                     <br><br>
                                     <tr>

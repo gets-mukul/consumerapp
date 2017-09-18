@@ -15,6 +15,39 @@
   }
 </style>
 <% end %>
+<script type="text/javascript">
+
+
+  var condition = "<%= session[:condition] %>";
+  var btnname2 = ""
+
+  switch(condition)  {
+    case 'Eczema, Psoriasis & Rash': 
+      btnname2 += 'Rash';
+      break;
+    case 'Skin Growth (Moles, Warts)':
+      btnname2 += 'Skin Growths';
+      break;
+    case 'Stretch Marks':
+      btnname2 += 'Stretch Marks';
+      break;
+    case 'Hairfall or Hair Thinning':
+      btnname2 += 'Hairfall';
+      break;
+    case 'Pigmentation & Dark Circles':
+      btnname2 += 'Pigmentation';
+      break;
+    default: 
+      btnname2 += condition;
+  }
+
+  mixpanel.track("Page Loaded", {
+    "Page Name": "Condition Typeform Page",
+    "Condition Name": btnname2,
+  });
+  window._fbq.push(['track', 'Condition Typeform Page Loaded', {'Condition Name':btnname2}]);
+
+</script>
 <div class="loader"></div>
 <iframe id="typeform-full" width="100%" height="100%" frameborder="0" src="<%= @condition_form %>"></iframe>
 <script type="text/javascript" src="https://s3-eu-west-1.amazonaws.com/share.typeform.com/embed.js"></script>

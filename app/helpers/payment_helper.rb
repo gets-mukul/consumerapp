@@ -6,7 +6,11 @@ module PaymentHelper
   def build_payment_params
     txnid = build_transaction_id
     desc = "Remedico treatment for #{current_user.name}"
-    amount = 350.round(2)
+    if session[:coupon_applied]
+      amount = 200.round(2)
+    else
+      amount = 350.round(2)
+    end
 
     sha512 = OpenSSL::Digest::SHA512.new
     string = [KEY,txnid,amount.to_s,desc,current_user.name,current_user.email,"|||||||||",SALT].join("|")
@@ -23,6 +27,27 @@ module PaymentHelper
       :surl	=> Rails.application.secrets.DOMAIN + '/payment/success',
       :furl	=> Rails.application.secrets.DOMAIN + '/payment/failure',
       :service_provider => 'payu_paisa'
+    }
+  end
+
+  def build_paytm_params
+    txnid = build_transaction_id
+    if session[:coupon_applied]
+      amount = 200.round(2)
+    else
+      amount = 350.round(2)
+    end
+    {
+      :MID => Rails.application.secrets.MID,
+      :CHANNEL_ID => "WEB",
+      :TXN_AMOUNT	=> amount.to_s,
+      :INDUSTRY_TYPE_ID => Rails.application.secrets.INDUSTRY_TYPE_ID,
+      :WEBSITE => Rails.application.secrets.WEBSITE,
+      :CUST_ID => current_user.id,
+      :ORDER_ID => txnid,
+      :EMAIL => "",
+      :MOBILE_NO	=> current_user.mobile,
+      :CALLBACK_URL => Rails.application.secrets.DOMAIN + '/payment/success'
     }
   end
 
@@ -56,13 +81,22 @@ module PaymentHelper
       end
     end
 
-    def user_payment_params payment_params, mode
+    def user_payment_params payment_params, mode, gateway
+      if gateway == 'PAYTM'
+        txn_id = payment_params[:ORDER_ID]
+        amount = payment_params[:TXN_AMOUNT]
+      else
+        txn_id = payment_params[:txnid]
+        amount = payment_params[:amount]
+      end
       {
-        :txnid => payment_params[:txnid],
+        :txnid =>  txn_id,
         :status => "Initiated",
-        :amount	=> payment_params[:amount],
-        :desc	=> payment_params[:productinfo],
-        :mode => mode
+        :amount	=> amount,
+        :desc	=> "Remedico treatment for #{current_user.name}",
+        :mode => mode,
+        :pg_type => gateway
+
       }
     end
 
@@ -88,15 +122,22 @@ module PaymentHelper
             if response["hidden"]["email"] == current_user.email
               logger.info { "Record for #{current_user.email} found" }
               if response["answers"].count > 8
+                logger.info { "#{current_user.email} has more than 8 answers. No Red flags." }
                 return false
+              else
+                logger.info { "#{current_user.email} has less than 8 answers. Red flags presumed." }
+                return true
               end
             end
           end
+          logger.info { "#{current_user.email} entry not found. Red flags presumed." }
           return true
         else
+          logger.info { "Typeform responses = 0. Red flags presumed." }
           return true
         end
       else
+        logger.info { "Typeform did not return 200 OK." }
         return true
       end
     end
