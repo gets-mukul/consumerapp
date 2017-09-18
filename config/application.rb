@@ -25,5 +25,12 @@ module Remedica
     config.assets.paths << Rails.root.join("app", "assets", "fonts")
     config.action_view.embed_authenticity_token_in_remote_forms = true
     config.action_mailer.asset_host = Rails.application.secrets.DOMAIN
+    config.time_zone = 'Kolkata'
+    config.active_record.default_timezone = :local
+    config.active_job.queue_adapter = Rails.env.production? ? :sidekiq : :async
+    config.action_mailer.perform_deliveries = true
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.perform_caching = true
+    # config.action_mailer.delivery_method = :smtp
   end
 end

@@ -26,44 +26,28 @@ $ ->
     console.log "Typeform loaded"
     spinner.stop()
 
-  manageFormStepsVisibility = ->
-    i = 1
-    while i <= formSteps
-      if i == currentFormStep
-        $('#form-step-' + i).removeClass 'hidden'
-      else
-        $('#form-step-' + i).addClass 'hidden'
-      i++
-    return
-
-
   $('.thanksmsg_popup').hide()
 
-  formSteps = 3
-  currentFormStep = 1
-  manageFormStepsVisibility()
-
-  $('#form-step-2 .form-stepper-2').on 'click', ->
-    condition = $(this).text()
+  $('#my-form-step .form-stepper-2').on 'click', ->
+    condition = $(this).attr('value')
     console.log condition
     btnname = 'click'    
     switch condition
-      when 'Eczema, Psoriasis & Rash' then btnname += 'Rash'
+      when 'Eczema, Psoriasis and Rash' then btnname += 'Rash'
       when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
       when 'Stretch Marks' then btnname += 'StretchMarks'
       when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
-      when 'Pigmentation & Dark Circles' then btnname += 'Pigmentation'
+      when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
       else btnname += condition
     btnname += 'Button'
     ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
 
     btnname2 = ''
     switch condition
-      when 'Eczema, Psoriasis & Rash' then btnname2 += 'Eczema, Rash'
-      when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
-      when 'Stretch Marks' then btnname2 += 'Stretch Marks'
-      when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
-      when 'Pigmentation & Dark Circles' then btnname2 += 'Pigmentation'
+      when 'Eczema, Psoriasis and Rash' then btnname += 'Eczema, Rash'
+      when 'Skin Growth (Moles, Warts)' then btnname += 'Skin Growths'
+      when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
+      when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
       else btnname2 += condition
     btnname2 += ' Button'
     
@@ -81,28 +65,27 @@ $ ->
       currentFormStep++
       manageFormStepsVisibility()
 
-      $('#form-step-2 .form-stepper-2').on 'click', ->
-        condition = $(this).text()
+      $('#my-form-step .form-stepper-2').on 'click', ->
+        condition = $(this).attr('value')
         console.log condition
         btnname = 'click'
         switch condition
-          when 'Eczema, Psoriasis & Rash' then btnname += 'Rash'
+          when 'Eczema, Psoriasis and Rash' then btnname += 'Rash'
           when 'Skin Growth (Moles, Warts)' then btnname += 'SkinGrowths'
           when 'Stretch Marks' then btnname += 'StretchMarks'
           when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
-          when 'Pigmentation & Dark Circles' then btnname += 'Pigmentation'
+          when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
           else btnname += condition
         btnname += 'Button'
         ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
 
         btnname2 = ''
         switch condition
-          when 'Eczema, Psoriasis & Rash' then btnname2 += 'Rash'
-          when 'Skin Growth (Moles, Warts)' then btnname2 += 'Skin Growths'
-          when 'Stretch Marks' then btnname2 += 'Stretch Marks'
-          when 'Hairfall or Hair Thinning' then btnname2 += 'Hairfall'
-          when 'Pigmentation & Dark Circles' then btnname2 += 'Pigmentation'
-          else btnname2 += condition
+          when 'Eczema, Psoriasis and Rash' then btnname += 'Eczema, Rash'
+          when 'Skin Growth (Moles, Warts)' then btnname += 'Skin Growths'
+          when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
+          when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
+          else btnname += condition
         btnname2 += ' Button'
 
         mixpanel.track("Button Clicked", {
@@ -110,7 +93,7 @@ $ ->
           "Condition Name": btnname2,
           "Page URL": "consult/",
         });
-
+        window._fbq.push(['track', 'Conditon Button Clicked',{'Condition Name':btnname2,'Page URL':'consult/'}]);
         window.location.href = '/consult/consultation_form/' + condition
 
     ).on "ajax:error", (e, xhr, status, error) ->

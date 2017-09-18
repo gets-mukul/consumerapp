@@ -12,7 +12,7 @@
 							</div>
 						</div>
 						
-						<% if @error_msg.include? 'nearby hospital' %>
+						<% if session[:error_msg].include? 'nearby hospital' %>
 						<!-- Red Flag block -->
 						<div><h1 class="space_top" style="font-size:28px">We're sorry ...</h1></div>
 						<div><p style="font-size: 16px">
@@ -30,7 +30,7 @@
 						<% end %>
                         <!--<div >-->
                         <!--  <p>-->
-                        <!--    <%= @error_msg %>-->
+                        <!--    <%= session[:error_msg] %>-->
                         <!--  </p>-->
                         <!--</div>-->
                         
@@ -165,7 +165,7 @@
       "Page Name": "Payments Failure Page",
       "Condition Name": 'n/a',
     });
-    window._fbq.push(['track', 'Payments S/F Page Load',{'Status': 'failure', 'Page URL':'payment/failure'}]);
+    window._fbq.push(['track', 'Payments Failure Page Load',{'Status': 'failure', 'Page URL':'payment/failure'}]);
 
   });
 </script>

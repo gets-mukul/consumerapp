@@ -14,21 +14,23 @@
         <div class="container">
             <div class="row contactpopup_info">
                 <div class="col-sm-12 box pad_0 margin_0">
-          				<div class="row space_bottom">
-          					<div class="col-sm-12"><h1>Let's get started</h1></div>
-          					<div class="col-sm-12"><h4 style="font-size: 16px; line-height: 1.1; font-weight: normal; margin-top: 10px">To begin a consultation, we need some details from you</h4></div>
-          	    	</div>
+                  <div class="row space_bottom">
+                    <div class="col-sm-12"><h1>Let's get started</h1></div>
+                    <div class="col-sm-12"><h4 style="font-size: 16px; line-height: 1.1; font-weight: normal; margin-top: 10px">To begin a consultation, we need some details from you</h4></div>
+                  </div>
                     <%= render 'form', patient: @patient %>
                 </div>
             </div>
         </div>
     </section>
 </main> -->
-<main id="form-step-1">
-	<%= render 'welcome' %>
-</main>
-<%unless @condition %>
-<main id="form-step-2">
+
+<%if @condition %>
+  <script type="text/javascript">
+    location.href = "/consult/consultation_form/<%= @condition %>";
+  </script>
+<%else %>
+<main id="my-form-step">
     <section class="inner_content">
         <div class="container">
             <div class="row contactpopup_info">
@@ -40,25 +42,25 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="text-center">
-                  <div class="list_btn hover space_bottom form-stepper-2">Acne</div>
+                  <div class="list_btn hover space_bottom form-stepper-2" value="Acne">Acne &amp; Pimples</div>
                 </div>
                 <div class="text-center">
-                  <div class="list_btn hover space_bottom form-stepper-2">Hairfall or Hair Thinning</div>
+                  <div class="list_btn hover space_bottom form-stepper-2" value="Hairfall or Hair Thinning">Hairfall or Hair Thinning</div>
                 </div>
                 <div class="text-center">
-                  <div class="list_btn hover space_bottom form-stepper-2">Pigmentation &amp; Dark Circles</div>
+                  <div class="list_btn hover space_bottom form-stepper-2" value="Pigmentation and Dark Circles">Pigmentation, Tanning &amp; Dark Circles</div>
                 </div>
                 <div class="text-center">
-                  <div class="list_btn hover space_bottom form-stepper-2">Dandruff</div>
+                  <div class="list_btn hover space_bottom form-stepper-2" value="Dandruff">Dandruff</div>
                 </div>
                 <div class="text-center">
-                  <div class="list_btn hover space_bottom form-stepper-2">Eczema, Psoriasis &amp; Rash</div>
+                  <div class="list_btn hover space_bottom form-stepper-2" value="Eczema, Psoriasis and Rash">Eczema, Psoriasis &amp; Rash</div>
                 </div>
                 <div class="text-center">
-                  <div class="list_btn hover space_bottom form-stepper-2">Stretch Marks</div>
+                  <div class="list_btn hover space_bottom form-stepper-2" value="Stretch Marks">Stretch Marks</div>
                 </div>
                 <div class="text-center">
-                  <div class="list_btn hover space_bottom form-stepper-2">Skin Growth (Moles, Warts)</div>
+                  <div class="list_btn hover space_bottom form-stepper-2" value="Skin Growth (Moles, Warts)">Skin Growth (Moles, Warts)</div>
                 </div>
               </div>
             </div>
@@ -68,7 +70,10 @@
         </div>
     </section>
 </main>
-<%end%>
+
+<%end %>
+
+
 <!-- Modal -->
 <div id="myModal" class="modal fade contactpopup_info" role="dialog">
     <div class="modal-dialog contact_dialog">
@@ -110,6 +115,12 @@
     </div>
 </div>
 <script>
+
+mixpanel.track("Page Loaded", {
+  "Page Name": "Welcome Page",
+  "Condition Name": 'n/a',
+});
+
 $(function(){
   $(".thanksmsg_popup").hide();
   $('.ig-form').submit(function(e) {

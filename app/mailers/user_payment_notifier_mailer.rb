@@ -3,7 +3,27 @@ class UserPaymentNotifierMailer < ApplicationMailer
   def send_user_payment_mail(user, payment)
     @user = user
     @payment = payment
+    # mail( :to => [@user.email, "jesse.dhara@gmail.com"],
     mail( :to => @user.email,
-    :subject => "Remedica: Payment notice." )
+    :subject => "Remedico: Payment notice." )
   end
+
+  def send_user_form_filled_mail(id)
+    @consultation = Consultation.find_by_id id
+    @payment_link = ""
+    if @consultation.amount == 350
+      @payment_link = "https://imjo.in/rrn3Ct"
+    elsif @consultation.amount == 250
+      @payment_link = "https://imjo.in/mx27qE"
+    elsif @consultation.amount == 200
+      @payment_link = "https://imjo.in/RnnpHx"
+    else
+      @payment_link = "remedicohealth.com"
+    end
+
+    # mail( :to => [@consultation.patient.email, "jesse.dhara@gmail.com"],
+    mail( :to => @consultation.patient.email,
+    :subject => "Remedico: Payment notice." )
+  end
+
 end

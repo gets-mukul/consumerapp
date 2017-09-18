@@ -7,4 +7,7 @@ User Details:
 Name : <%= @user.name %>
 Email : <%= @user.email %>
 Mobile : <%= @user.mobile %>
-Referrer : <%= @referrer %>
+Referrer : <%= @user.referrer.downcase.to_s %>
+<%= "Insta : " + @insta if @insta %>
+<%= "Promo : " + @promo_code  if @promo_code  %>
+<%= "Promo : " + @coupon_code if !@coupon_code.empty? %>

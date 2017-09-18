@@ -6,11 +6,8 @@ module PaymentHelper
   def build_payment_params
     txnid = build_transaction_id
     desc = "Remedico treatment for #{current_user.name}"
-    if session[:coupon_applied]
-      amount = 200.round(2)
-    else
-      amount = 350.round(2)
-    end
+
+    amount = current_consultation.amount.round(2)
 
     sha512 = OpenSSL::Digest::SHA512.new
     string = [KEY,txnid,amount.to_s,desc,current_user.name,current_user.email,"|||||||||",SALT].join("|")
@@ -32,11 +29,8 @@ module PaymentHelper
 
   def build_paytm_params
     txnid = build_transaction_id
-    if session[:coupon_applied]
-      amount = 200.round(2)
-    else
-      amount = 350.round(2)
-    end
+    amount = current_consultation.amount.round(2)
+
     {
       :MID => Rails.application.secrets.MID,
       :CHANNEL_ID => "WEB",
@@ -73,6 +67,7 @@ module PaymentHelper
       key = @patient.name + @patient.email + @patient.mobile
       txnid = "RE" + sha256.hexdigest(key).to_s[1..16] + Time.now.to_s.gsub(/-|\s|\:|\+/,'')
       session[:txnid] = txnid
+      return txnid
     end
 
     def check_current_user
@@ -95,8 +90,8 @@ module PaymentHelper
         :amount	=> amount,
         :desc	=> "Remedico treatment for #{current_user.name}",
         :mode => mode,
-        :pg_type => gateway
-
+        :pg_type => gateway,
+        :consultation => current_consultation
       }
     end
 
@@ -105,7 +100,7 @@ module PaymentHelper
       mode	= params["mode"].nil? ? "failed" : params[:mode]        # Payment category by which the transaction was completed/ attempted.
       pg_type = params["PG_TYPE"]	                                  # Gives the information of payment gateway used for transaction.
       bank_ref_num = params["bank_ref_num"]	                        # For a successful transaction, this will give you the bank reference number generated at bank’s end.
-      status = @error_msg.blank? ? "paid" : @error_msg
+      status = session[:error_msg].blank? ? "paid" : session[:error_msg]
       { mihpayid: mihpayid, mode: mode, pg_type: pg_type, bank_ref_num: bank_ref_num, status: status }
     end
 
