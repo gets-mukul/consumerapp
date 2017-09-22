@@ -1,5 +1,4 @@
 <%= content_for :body_class, "inner_body white_back" %>
-
 <main id="form-step-4" style="width: 100%; overflow-y: hidden; overflow-x: hidden">
   <section class="inner_content pad_15">
     <div class="container">
@@ -16,7 +15,6 @@
                   The final step is the payment.
                 </p>
               </div>
-
 
               <div class="row desktop margin_b_25">
                 <div class="col-md-12 margin_t_25">
@@ -637,8 +635,8 @@
                               <div class="row payment-option-text">Net banking</div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                              <div class="row payment-option-icon"><img src="<%= asset_path("paytm.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 35px;"></div>
-                              <div class="row payment-option-text">Paytm wallet</div>
+                              <div class="row payment-option-icon"><img src="<%= asset_path("wallet.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 35px;"></div>
+                              <div class="row payment-option-text">Wallets</div>
                             </div>
                             
                           </div>
@@ -650,15 +648,6 @@
 
               <hr class="pad_0  margin_0" />
               
-              <div>
-                <p class="" style="padding-top: 20px;">
-                  <b>
-                    <!-- <h5 class="sub-title">Total payment: Rs. <%= @amount %></h5> -->
-<!--                     <span class="payment-total">Total payment: </span>
-                    <span class="payment-amount">Rs. <%= @amount %></span> -->
-                  </b>
-                </p>
-              </div>
             </div>
           </div>
         </div>
@@ -677,7 +666,7 @@
       </div>
 
       <div class="col-sm-12 sticky-footer">
-        <%= form_tag '/consult/payment', method: :post do %>
+        <%= form_tag '/consult/payment/initiate_payment', method: :post do %>
         <div class="text-center">
             <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
                PAY FOR YOUR TREATMENT PLAN
@@ -698,20 +687,80 @@
         </p>
     </div> 
   </section>
-  
+
 </main>
 
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script type="text/javascript">
 
 $(function() {
+  var options = {
+      "key": "<%= Rails.application.secrets.RAZOR_PAY_KEY_ID %>",
+      "amount": "<%= current_consultation.amount*100 %>",
+      "name": "Remedico",
+      "description": "Treatment plan",
+      "image": "<%= asset_path('logo100x100.png') %>",
+      "handler": function (response){
+        console.log(response);
+        var mapForm = document.createElement("form");
+        mapForm.target = "_self";
+        mapForm.method = "POST";
+        mapForm.action = "/consult/payment/success";
 
-  mixpanel.track("Page Loaded", {
-    "Page Name": "Payments Index Page",
-    "Condition Name": 'n/a',
-  });
-  window._fbq.push(['track', 'Payments Page Load',{'Page URL':'payment/index'}]);
+        var mapInput = document.createElement("input");
+        mapInput.type = "hidden";
+        mapInput.name = "payment_id";
+        mapInput.value = response.razorpay_payment_id;
 
-  $("button.list_btn_dark").on('click', function () {
+        var mapInput2 = document.createElement("input");
+        mapInput2.name = "authenticity_token"
+        mapInput2.value = "<%= form_authenticity_token %>"
+        mapInput2.type = "hidden"
+
+        mapForm.appendChild(mapInput);
+        mapForm.appendChild(mapInput2);
+        document.body.appendChild(mapForm);
+
+        mapForm.submit();
+
+      },
+      "external": {
+        wallets: ['paytm'],
+        handler: function(data) {
+          // write code on how to handle the external wallet here, based on the param 'data'
+          console.log(data.wallet);
+          if(data.wallet === "paytm") {
+            var mapForm = document.createElement("form");
+            mapForm.target = "_self";
+            mapForm.method = "POST";
+            mapForm.action = "/consult/payment/payment_paytm";
+            var mapInput = document.createElement("input");
+            mapInput.name = "authenticity_token"
+            mapInput.value = "<%= form_authenticity_token %>"
+            mapInput.type = "hidden"
+        
+            mapForm.appendChild(mapInput);
+            document.body.appendChild(mapForm);
+
+            mapForm.submit();
+          }
+        }
+      },
+      "prefill": {
+          "name": "<%= current_user.name %>",
+          "contact": "<%= current_user.mobile %>",
+          "email": "<%= current_user.email %>"
+      },
+      "theme": {
+          "color": "#17a6b0"
+      }
+  };
+  var rzp1 = new Razorpay(options);
+  document.getElementById('payBtn').onclick = function(e){
+      
+      rzp1.open();
+      // e.preventDefault();
+    
       ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton'});
       mixpanel.track("Button Clicked", {
         "Button Name": "Payment Button",
@@ -719,7 +768,14 @@ $(function() {
         "Page URL": "payment/index",
       });
       window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
+  }
+
+
+  mixpanel.track("Page Loaded", {
+    "Page Name": "Payments Index Page",
+    "Condition Name": 'n/a',
   });
+  window._fbq.push(['track', 'Payments Page Load',{'Page URL':'payment/index'}]);
 
   $(".collapsible-section h5").click(function(e) {
 

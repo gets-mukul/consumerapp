@@ -8,7 +8,7 @@ module PatientsHelper
     session[:condition] = params[:condition]
     logger.info "Registered #{user.name}, condition: #{params[:condition]}"
     setup_patient_source
-    DeliverSMSWorker.perform_in(1.hours, @patient.id) if Rails.env.production?
+    DeliverSMSWorker.perform_in(1.hours, user.id) if Rails.env.production?
   end
 
   def unregister
@@ -30,7 +30,9 @@ module PatientsHelper
       local_referrer: params[:referrer],
       utm_campaign: params[:utm_campaign]
     }
-    PatientSource.create(patient_source_params)
+    patient_source = PatientSource.create(patient_source_params)
+
+    session[:patient_source_id] = patient_source.id
     logger.info "Setting up utm campaign for #{patient_source_params}"
   end
 end

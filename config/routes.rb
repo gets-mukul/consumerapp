@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     get '/payment', to: 'payment#index'
     post '/payment', to: 'payment#issue_payment'
     scope 'payment' do
+      post '/payment_paytm', to: 'payment#issue_payment_paytm'
+      post '/initiate_payment', to: 'payment#initiate_payment'
+
       post '/success', to: 'payment#success'
       post '/failure', to: 'payment#failure'
       get '/failure', to: 'payment#failure'
