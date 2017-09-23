@@ -6,6 +6,8 @@ module ConsultationHelper
 
   def register_consultation consultation
     session[:consultation_id] = consultation.id
+    patient_source = PatientSource.find_by_id session[:patient_source_id]
+    patient_source.update({consultation_id: consultation.id})
     logger.info "Registered #{consultation.patient.name}, condition: #{session[:condition]}"
   end
 

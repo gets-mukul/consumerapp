@@ -4,7 +4,8 @@ module PaymentHelper
   SALT = Rails.application.secrets.PAYU_IN_SALT
 
   def build_payment_params
-    txnid = build_transaction_id
+    # txnid = build_transaction_id
+    txnid = session[:txnid]
     desc = "Remedico treatment for #{current_user.name}"
 
     amount = current_consultation.amount.round(2)
@@ -28,7 +29,8 @@ module PaymentHelper
   end
 
   def build_paytm_params
-    txnid = build_transaction_id
+    # txnid = build_transaction_id
+    txnid = session[:txnid]
     amount = current_consultation.amount.round(2)
 
     {
