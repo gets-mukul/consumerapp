@@ -160,14 +160,20 @@ class PaymentController < ApplicationController
       if (response.status=='authorized')
         logger.info "CAPTURING PAYMENT"
         response = response.capture({amount:amount})
-      
-
       end
       current_payment.update({status: response.status, pg_type: 'RAZORPAY'})
       
       current_user.update({pay_status: "paid"})
       current_consultation.update({ pay_status: "paid", user_status: 'paid' })
-      response.method == "wallet" ? mode = "wallet - " + response.wallet : mode = response.method
+
+      mode = case response.method
+      when "netbanking"
+        "netbanking - " + response.bank
+      when  "wallet"
+        "wallet - " + response.wallet
+      else
+        response.method
+      end
 
       UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
       SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?

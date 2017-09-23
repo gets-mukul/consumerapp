@@ -1,5 +1,4 @@
 class SmsServiceController < ApplicationController
-  require 'update_sheets'
   require 'encrypt'
   require 'net/http'
   require 'uri'
@@ -27,11 +26,10 @@ class SmsServiceController < ApplicationController
   end
 
   def self.send_sms(patient_id, template, consultation_id)
-    puts "IN SEND SMS"
+    puts "< IN SEND SMS >"
 
     message = SmsServiceController.message_body(patient_id, template, consultation_id)
-    puts "MSGS"
-    logger.info message
+    puts "< MESSAGE >"
 
     patient = Patient.find_by_id patient_id
     consultation = Consultation.find_by_id consultation_id

@@ -152,7 +152,7 @@
               <div class="row left-align collapsible-section">
                   <div class="col-sm-12">
                       <div>
-                        <h5 class="sub-title">What can I expect?<span class="more-less fa fa-plus"></span></h5>
+                        <h5 class="sub-title">What will be in my treatment plan?<span class="more-less fa fa-plus"></span></h5>
                         <div class="hidden-content-wrapper pad">
 
                           <% case session[:condition]
@@ -620,25 +620,53 @@
                       <div>
                         <h5 class="sub-title">How can I pay?<span class="more-less fa fa-plus"></span></h5>
                         <div class="hidden-content-wrapper">
-                          <!-- <p class="p_16">
-                            You can pay with Credit Card, Debit Card, Net Banking or Paytm.
-                          </p> -->
-                          <div class="row text-center margin_b_25">
+
+                          <div class="row text-center margin_b_25 margin_t_15">
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                              <div class="row payment-option-icon"><img src="<%= asset_path("card.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 35px;"></div>
-                              <!-- <div class="row payment-option-icon"><span class="fa fa-credit-card"></span></div> -->
+                              <div class="row payment-option-icon"><img src="<%= asset_path("card.png") %>" class="img-responsive" alt="Credit/Debit card" style="display: inline-block; max-height: 35px;"></div>
                               <div class="row payment-option-text">Credit card/ Debit card</div>
                             </div>
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                              <div class="row payment-option-icon"><img src="<%= asset_path("netbanking.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 35px;"></div>
-                              <!-- <div class="row payment-option-icon"><span class="fa fa-bank"></span></div> -->
+                              <div class="row payment-option-icon"><img src="<%= asset_path("netbanking.png") %>" class="img-responsive" alt="netbanking" style="display: inline-block; max-height: 35px;"></div>
                               <div class="row payment-option-text">Net banking</div>
                             </div>
+                          </div>
+
+                          <div class="row text-center margin_b_15"></div>
+
+                          <div class="row text-center margin_b_25">
                             <div class="col-md-4 col-sm-4 col-xs-4">
-                              <div class="row payment-option-icon"><img src="<%= asset_path("wallet.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 35px;"></div>
-                              <div class="row payment-option-text">Wallets</div>
+                              <div class="row payment-option-icon"><img src="<%= asset_path("paytm.png") %>" class="img-responsive" alt="paytm" style="display: inline-block; max-height: 25px;"></div>
                             </div>
-                            
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("olamoney.jpg") %>" class="img-responsive" alt="ola money" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("freecharge.jpg") %>" class="img-responsive" alt="freecharge" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                          </div>
+
+
+
+                          <div class="row text-center margin_b_25">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("mobikwik.png") %>" class="img-responsive" alt="mobikwik" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payzapp.png") %>" class="img-responsive" alt="payzapp" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payumoney.png") %>" class="img-responsive" alt="PayU money" style="display: inline-block; max-height: 20px;"></div>
+                            </div>
+                          </div>
+
+                          <div class="row text-center margin_b_25">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("airtelmoney.png") %>" class="img-responsive" alt="airtel money" style="display: inline-block; max-height: 38px;"></div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("mpesa.png") %>" class="img-responsive" alt="mpesa" style="display: inline-block; max-height: 38px;"></div>
+                            </div>
                           </div>
 
                         </div>
@@ -701,7 +729,6 @@ $(function() {
       "description": "Treatment plan",
       "image": "<%= asset_path('logo100x100.png') %>",
       "handler": function (response){
-        console.log(response);
         var mapForm = document.createElement("form");
         mapForm.target = "_self";
         mapForm.method = "POST";
@@ -728,7 +755,6 @@ $(function() {
         wallets: ['paytm'],
         handler: function(data) {
           // write code on how to handle the external wallet here, based on the param 'data'
-          console.log(data.wallet);
           if(data.wallet === "paytm") {
             var mapForm = document.createElement("form");
             mapForm.target = "_self";
