@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>User payment notice.</title>
+    <title>Free consultation notice.</title>
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -272,7 +272,7 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">A new user signed up for Remedico!</span>
+            <span class="preheader">A new user signed up for Remedica!</span>
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -281,10 +281,10 @@
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p><img src="<%= image_url("/assets/remedica_logo.png") %>" alt="Remedico" /></p>
+                        <p><img src="<%= image_url("/assets/remedica_logo.png") %>" alt="Remedica Logo" /></p>
                         <p>Hi Ranjit,</p>
-                        <p><%= @user.name %> paid for their diagnosis.</p>
-                        <p>The user payment details are as follows: </p>
+                        <p><%= @consultation.patient.name %> has done a free consultation</p>
+                        <p>The consultation details are as follows: </p>
                         <table border="0" cellpadding="" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -299,48 +299,12 @@
                                   <br>
                                   <tbody>
                                     <tr>
-                                      <td>Transaction ID</td>
-                                      <td><%= @payment.txnid %></td>
-                                    </tr>
-                                    <tr>
                                       <td>Patient Name</td>
-                                      <td><%= @user.name %></td>
+                                      <td><%= @consultation.patient.name %></td>
                                     </tr>
                                     <tr>
-                                      <td>Patient Email</td>
-                                      <td><%= @user.email %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Patient Contact</td>
-                                      <td><%= @user.mobile %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Amount</td>
-                                      <td><%= @payment.amount %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Status</td>
-                                      <td><%= @user.pay_status %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Additional Charges</td>
-                                      <td><%= @payment.add_charge %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>PayU Biz ID</td>
-                                      <td><%= @payment.mihpayid %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Payment Mode</td>
-                                      <td><%= @payment.mode %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>PG Type</td>
-                                      <td><%= @payment.pg_type %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Bank Ref #</td>
-                                      <td><%= @payment.bank_ref_num %></td>
+                                      <td>Coupon used</td>
+                                      <td><%= @coupon.coupon_code %></td>
                                     </tr>
                                     <br><br>
                                     <tr>
@@ -367,7 +331,7 @@
               <table border="0" cellpadding="0" cellspacing="0">
                 <tr>
                   <td class="content-block">
-                    <span class="apple-link">Remedico</span>
+                    <span class="apple-link">Remedica</span>
                   </td>
                 </tr>
                 <tr>

@@ -4,7 +4,7 @@ class CustomerPaymentNotifierMailer < ApplicationMailer
     @user = user
     @payment = payment
     mail( :to => Rails.application.secrets.ADMIN_EMAIL,
-    :subject => "Remedica: User payment notice." )
+    :subject => "Remedico: User payment notice." )
   end
 
 end

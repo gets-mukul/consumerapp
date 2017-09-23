@@ -88,6 +88,7 @@ class PaymentController < ApplicationController
     render 'success_free'
     UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
     SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
+    FreeConsultationNotifierMailer.send_free_consultation_notifier_mail(current_consultation).deliver_later and Rails.env.production?
     current_user.update({pay_status: "free"})
     current_consultation.update({pay_status: "free", user_status: 'free consultation done'})
     unregister_consultation
