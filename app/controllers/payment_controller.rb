@@ -83,20 +83,28 @@ class PaymentController < ApplicationController
   end
 
   def success_free
-    session[:promo_code] = ""
     logger.info "SUCCESS WITHOUT PAYMENT"
     render 'success_free'
     UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
     SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
-    FreeConsultationNotifierMailer.send_free_consultation_notifier_mail(current_consultation).deliver_later and Rails.env.production?
+    FreeConsultationNotifierMailer.send_free_consultation_notifier_mail(current_consultation).deliver_later if Rails.env.production?
     current_user.update({pay_status: "free"})
     current_consultation.update({pay_status: "free", user_status: 'free consultation done'})
+    coupon = Coupon.find_by_id current_consultation.coupon_id
+    if coupon
+      coupon.increment!(:count, 1)
+      coupon.update(status: 'coupon used')
+    end
+    session[:promo_code] = ""
     unregister_consultation
     unregister
   end
 
   def success
     logger.info params
+    if params[:pg_type]=="RAZORPAY"
+      current_payment.update({:pg_type => "RAZORPAY"})
+    end
     if current_payment.pg_type=='PAYTM'
       posted_hash = params["hash"]
       paytm_params = Hash.new
@@ -148,6 +156,12 @@ class PaymentController < ApplicationController
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
         current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
         CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
+        
+        coupon = Coupon.find_by_id current_consultation.coupon_id
+        if coupon
+          coupon.increment!(:count, 1)
+          coupon.update(status: 'coupon used')
+        end
         render 'success'
         unregister_consultation
         unregister
@@ -161,28 +175,38 @@ class PaymentController < ApplicationController
       if (response.status=='authorized')
         logger.info "CAPTURING PAYMENT"
         response = response.capture({amount:amount})
-      end
-      current_payment.update({status: response.status, pg_type: 'RAZORPAY'})
+        current_payment.update({status: response.status, pg_type: 'RAZORPAY'})
       
-      current_user.update({pay_status: "paid"})
-      current_consultation.update({ pay_status: "paid", user_status: 'paid' })
+        current_user.update({pay_status: "paid"})
+        current_consultation.update({ pay_status: "paid", user_status: 'paid' })
 
-      mode = case response.method
-      when "netbanking"
-        "netbanking - " + response.bank
-      when  "wallet"
-        "wallet - " + response.wallet
-      else
-        response.method
+        mode = case response.method
+        when "netbanking"
+          "netbanking - " + response.bank
+        when  "wallet"
+          "wallet - " + response.wallet
+        else
+          response.method
+        end
+
+        UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
+        SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
+        current_payment.update({mode: mode, status: 'paid', bank_ref_num: response.id})
+        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if Rails.env.production?
+        coupon = Coupon.find_by_id current_consultation.coupon_id
+        if coupon
+          coupon.increment!(:count, 1)
+          coupon.update(status: 'coupon used')
+        end
+        render 'success'
+        unregister_consultation
+        unregister
+      elsif
+        session[:error_msg] = "Authorization Error!"
+        logger.info response
+        ErrorEmailer.error_email("razorpay payment not authorized for " + current_user.name).deliver
+        redirect_to :failure
       end
-
-      UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
-      SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
-      current_payment.update({mode: mode, status: 'paid', bank_ref_num: response.id})
-      CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if Rails.env.production?
-      render 'success'
-      unregister_consultation
-      unregister
     end
       
   end

@@ -744,8 +744,14 @@ $(function() {
         mapInput2.value = "<%= form_authenticity_token %>"
         mapInput2.type = "hidden"
 
+        var mapInput3 = document.createElement("input");
+        mapInput3.name = "pg_type"
+        mapInput3.value = "RAZORPAY"
+        mapInput3.type = "hidden"
+
         mapForm.appendChild(mapInput);
         mapForm.appendChild(mapInput2);
+        mapForm.appendChild(mapInput3);
         document.body.appendChild(mapForm);
 
         mapForm.submit();
