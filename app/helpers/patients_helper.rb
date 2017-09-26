@@ -25,14 +25,20 @@ module PatientsHelper
   end
 
   def setup_patient_source
-    patient_source_params = {
-      patient: current_user,
-      local_referrer: params[:referrer],
-      utm_campaign: params[:utm_campaign]
-    }
-    patient_source = PatientSource.create(patient_source_params)
 
-    session[:patient_source_id] = patient_source.id
-    logger.info "Setting up utm campaign for #{patient_source_params}"
+    existing_patient_source = PatientSource.where(patient_id: current_user.id).where("created_at >= ?", DateTime.now-0.02).order('id desc')
+
+    unless existing_patient_source.present?
+
+      patient_source_params = {
+        patient: current_user,
+        local_referrer: params[:referrer],
+        utm_campaign: params[:utm_campaign]
+      }
+      patient_source = PatientSource.create(patient_source_params)
+
+      session[:patient_source_id] = patient_source.id
+      logger.info "Setting up utm campaign for #{patient_source_params}"
+    end
   end
 end
