@@ -76,10 +76,11 @@ class PaymentController < ApplicationController
     logger.info "ISSUE PAYMENT"
     logger.info session[:txnid]
     if session[:txnid].blank?
-      logger.info "YESSS"
+      logger.info "YES TXNID BLANK"
       payment_params = { :txnid => build_transaction_id, :amount => current_consultation.amount.round(2) }
       current_user.payments.create(user_payment_params(payment_params, "pending", "RAZORPAY"))
     end
+    render :json => { :value => "success" }
   end
 
   def success_free
