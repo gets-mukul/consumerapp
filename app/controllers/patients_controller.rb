@@ -18,23 +18,26 @@ class PatientsController < ApplicationController
     else
       # If they don't, check remote database for
       # cases when remote database is updated and local isn't.
-      result = patient_exists? patient_params[:mobile]
-      if result
-        # Patient exists in remote database.
-        save_patient
-      else
-        # New Patient, update both local and remote databases.
-        resp, data = send_new_patient_info patient_params
-        if !resp.kind_of? Net::HTTPOK
-          logger.debug resp.body
-          # save_patient
-          redirect_to "/"
-          # render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
-        else
-          # Patient saved at remote database. We can start saving it at local as well.
-          save_patient
-        end
-      end
+      save_patient
+      
+      # result = patient_exists? patient_params[:mobile]
+      # if result
+      #   # Patient exists in remote database.
+      #   save_patient
+      # else
+      #   # New Patient, update both local and remote databases.
+      #   resp, data = send_new_patient_info patient_params
+      #   if !resp.kind_of? Net::HTTPOK
+      #     logger.debug resp.body
+      #     # save_patient
+      #     redirect_to "/"
+      #     # render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
+      #   else
+      #     # Patient saved at remote database. We can start saving it at local as well.
+      #     save_patient
+      #   end
+      # end
+      
     end
   end
 
@@ -58,25 +61,28 @@ class PatientsController < ApplicationController
         else
           # If they don't, check remote database for
           # cases when remote database is updated and local isn't.
-          result = patient_exists? patient_params[:mobile]
-          if result
-            # Patient exists in remote database.
-            save_patient_with_coupon
-          else
-            # New Patient, update both local and remote databases.
-            resp, data = send_new_patient_info patient_params
-            if !resp.kind_of? Net::HTTPOK
-              logger.debug resp.body
-              logger.info 'RETURN FAILURE'
-              render :json => { :value => "failure" }
-              # redirect_to "/?applied=false"
-              # redirect_to "/"
-              # render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
-            else
-              # Patient saved at remote database. We can start saving it at local as well.
-              save_patient_with_coupon
-            end
-          end
+          save_patient_with_coupon
+          
+          # result = patient_exists? patient_params[:mobile]
+          # if result
+          #   # Patient exists in remote database.
+          #   save_patient_with_coupon
+          # else
+          #   # New Patient, update both local and remote databases.
+          #   resp, data = send_new_patient_info patient_params
+          #   if !resp.kind_of? Net::HTTPOK
+          #     logger.debug resp.body
+          #     logger.info 'RETURN FAILURE'
+          #     render :json => { :value => "failure" }
+          #     # redirect_to "/?applied=false"
+          #     # redirect_to "/"
+          #     # render json: { :error => "An error ocurred. Please try again later." }, status: :unprocessable_entity
+          #   else
+          #     # Patient saved at remote database. We can start saving it at local as well.
+          #     save_patient_with_coupon
+          #   end
+          # end
+          
         end
       else
         logger.info 'NOT EXISTS'
@@ -204,3 +210,16 @@ class PatientsController < ApplicationController
       con.post url.path, post_params.to_query
     end
 end
+
+
+post_params = {
+  :phone_no => "9999999990",
+  :token => "a6kxpBwYXpHRPxHEpKCTWFJlbWVkaWNhIFBhdGllbnRzIENvbnRyb2xsZXI"
+}
+
+# url = URI.parse("http://127.0.0.1:6536/app/api/patient" + "/find")
+url = URI.parse("http://54.255.145.215/app/api/patient" + "/find")
+con = Net::HTTP.new(url.host, url.port)
+con.use_ssl = true if Rails.env.development?
+# con.ssl_version = :SSLv3
+resp = con.post url.path, post_params.to_query

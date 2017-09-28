@@ -694,13 +694,12 @@
       </div>
 
       <div class="col-sm-12 sticky-footer">
-        <%= form_tag '/consult/payment/initiate_payment', method: :post do %>
         <div class="text-center">
             <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
                PAY FOR YOUR TREATMENT PLAN
             <% end %>
         </div>
-        <% end %>
+        
       </div>
 
 
@@ -792,6 +791,16 @@ $(function() {
       
       rzp1.open();
       // e.preventDefault();
+      $.ajax({
+        type: "POST",
+        url: "/consult/payment/initiate_payment",
+        success: function (response) {
+          return false;
+        },
+        error: function (response) {
+          return false;
+        }
+      })
     
       ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton'});
       mixpanel.track("Button Clicked", {
