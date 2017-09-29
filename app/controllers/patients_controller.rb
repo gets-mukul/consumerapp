@@ -210,16 +210,3 @@ class PatientsController < ApplicationController
       con.post url.path, post_params.to_query
     end
 end
-
-
-post_params = {
-  :phone_no => "9999999990",
-  :token => "a6kxpBwYXpHRPxHEpKCTWFJlbWVkaWNhIFBhdGllbnRzIENvbnRyb2xsZXI"
-}
-
-# url = URI.parse("http://127.0.0.1:6536/app/api/patient" + "/find")
-url = URI.parse("http://54.255.145.215/app/api/patient" + "/find")
-con = Net::HTTP.new(url.host, url.port)
-con.use_ssl = true if Rails.env.development?
-# con.ssl_version = :SSLv3
-resp = con.post url.path, post_params.to_query
