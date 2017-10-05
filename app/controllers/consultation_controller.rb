@@ -28,17 +28,24 @@ class ConsultationController < ApplicationController
   end
 
   def welcome
+    # for choosing a condition from the list
+    # ui takes care of output
+  end
+
+  def self.latest_order
+    @@latest_order = ["payment failed", "paid", "free consultation done", "form filled", "registered"]
   end
 
   def create
-
+    # check if this patient started a consultation exists in the last ~30 mins
     consultation = Consultation.where(patient_id: current_user.id).where("created_at >= ?", DateTime.now-0.02).order('id desc')
-
     if consultation.present?
-      latest_order = ["payment failed", "paid", "free consultation done", "form filled", "registered"]
-      sorted_consultation = consultation.sort_by{|x| latest_order.index x.user_status}[0]
+
+      # get the consultation with latest status from these consultations
+      sorted_consultation = consultation.sort_by{|x| ConsultationController.latest_order.index x.user_status}[0]
       @consultation = Consultation.find_by_id sorted_consultation.id
 
+      # update consultation details
       @consultation.update({category: @condition})
       consultation_params = {}
       unless session[:promo_code].nil?
@@ -51,6 +58,7 @@ class ConsultationController < ApplicationController
       register_consultation @consultation
 
     else
+      # no consultation found. Create new consultation
       consultation_params = {
         patient: current_user,
         category: @condition
@@ -69,7 +77,5 @@ class ConsultationController < ApplicationController
       DeliverMailsWorker.perform_in(1.hours, @consultation.id) if Rails.env.production?
     end
     UpdateSheetsWorker.perform_in(1.hours) if Rails.env.production?
-
   end
-
 end
