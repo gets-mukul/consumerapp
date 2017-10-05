@@ -33,7 +33,7 @@ class PatientsController < ApplicationController
           # patient exists in local database. Log them in
           register @patient
           @coupon.update(status: 'coupon attached')
-          logger.info "Patient Controller: Free coupon patient #{@patient.name} registered"
+          logger.info "Patient Controller: free coupon patient #{@patient.name} registered"
           render :json => { :value => "success", :discount_price => 'FREE' }
         else
           # patient exists in local database. Store their details
@@ -41,7 +41,7 @@ class PatientsController < ApplicationController
         end
       else
         # coupon does not exist
-        logger.info "Patient Controller: Free coupon #{@coupon.coupon_code} does not exist"
+        logger.info "Patient Controller: free coupon #{@coupon.coupon_code} does not exist"
         render :json => { :value => "failure" }
       end
     end
@@ -50,7 +50,7 @@ class PatientsController < ApplicationController
   def instant_login
     # decrypt the id
     id = decrypt(params[:p], 0)
-    logger.info "Patient Controller: Instant login with patient id #{id}"
+    logger.info "Patient Controller: instant login with patient id #{id}"
     if id.nil?
       # id does not exist
       redirect_to "/"
@@ -58,11 +58,11 @@ class PatientsController < ApplicationController
       # id exists, get patient with that id
       @patient = Patient.find_by_id id
       if @patient
-        logger.info "Patient Controller: Instant login successful for patient id #{id}"
+        logger.info "Patient Controller: instant login successful for patient id #{id}"
         register @patient
         return redirect_to "/consult"
       else
-        logger.info "Patient Controller: Instant login patient does not exist for patient id #{id}"
+        logger.info "Patient Controller: instant login patient does not exist for patient id #{id}"
         redirect_to "/"
       end
     end
