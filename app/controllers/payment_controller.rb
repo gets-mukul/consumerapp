@@ -15,20 +15,17 @@ class PaymentController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
-    logger.info "IN INDEX"
-    logger.info current_consultation.id
-    typeform_uid = session[:typeform_uid]
-    # response = HTTParty.get("https://api.typeform.com/v1/form/" + typeform_uid + "?key=#{Rails.application.secrets.TYPEFORM_API_KEY}&until=#{Time.now.to_i}&limit=10&order_by[]=date_submit,desc")
+    logger.info "Payment Controller: in payment index for #{current_consultation.id}"
+
     session[:error_msg] = ""
     if params[:city].blank?
-      logger.info "FAILED"
-        session[:error_msg] = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
-        logger.info "ERROR MSG"
-        logger.info session[:error_msg]
-        redirect_to :failure
-        # failure
+      logger.info "Payment Controller: payment city blank for #{current_consultation.id}"
+      session[:error_msg] = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
+      logger.info "Payment Controller: error msg ${session[:error_msg]} set"
+      redirect_to :failure
+      # failure
     else
-      # get email of the current user from typeform responses
+      # get email of the current user from typeform responses and store it
       begin
         typeform_uid = session[:typeform_uid]
         if typeform_uid
@@ -45,9 +42,12 @@ class PaymentController < ApplicationController
       rescue
       end
 
+      # update user status
       current_consultation.update(user_status: 'form filled')
 
+      # fetch consultation fee
       @amount = current_consultation.amount
+      # if amount is 0 then end the consultation and display success page
       if @amount == 0
         redirect_to :success_free
       end
@@ -73,10 +73,10 @@ class PaymentController < ApplicationController
   end
 
   def initiate_payment
-    logger.info "ISSUE PAYMENT"
-    logger.info session[:txnid]
+    logger.info "Payment Controller: in initiate_payment. Issue payment for #{current_consultation.id}"
+    logger.info "Payment Controller: #{session[:txnid]}"
     if session[:txnid].blank?
-      logger.info "YES TXNID BLANK"
+      logger.info "Payment Controller: txn id blank. Build new transaction"
       payment_params = { :txnid => build_transaction_id, :amount => current_consultation.amount.round(2) }
       current_user.payments.create(user_payment_params(payment_params, "pending", "RAZORPAY"))
     end
@@ -84,11 +84,18 @@ class PaymentController < ApplicationController
   end
 
   def success_free
-    logger.info "SUCCESS WITHOUT PAYMENT"
+    # success page for free consultations
+    logger.info "Payment Controller: free success page rendered"
     render 'success_free'
+
+    # initiate job - send user mail
     UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
+    # initiate job - send sms
     SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
+    # initiate job - send admin mail for free consultation
     FreeConsultationNotifierMailer.send_free_consultation_notifier_mail(current_consultation).deliver_later if Rails.env.production?
+
+    # update details
     current_user.update({pay_status: "free"})
     current_consultation.update({pay_status: "free", user_status: 'free consultation done'})
     coupon = Coupon.find_by_id current_consultation.coupon_id
@@ -102,11 +109,15 @@ class PaymentController < ApplicationController
   end
 
   def success
+    # redirect to page for paid consultations
+    logger.info "Payment Controller: in success"
     logger.info params
     if params[:pg_type]=="RAZORPAY"
       current_payment.update({:pg_type => "RAZORPAY"})
     end
+
     if current_payment.pg_type=='PAYTM'
+      # issuing paytm payment
       posted_hash = params["hash"]
       paytm_params = Hash.new
       params.keys.each do |k|
@@ -153,9 +164,12 @@ class PaymentController < ApplicationController
         current_user.update({pay_status: "paid"})
         current_consultation.update({ pay_status: "paid", user_status: 'paid' })
 
+        # initiate job - send user mail
         UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
+        # initiate job - send sms
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
         current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
+        # initiate job - send admin mail a paid consultation
         CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
         
         coupon = Coupon.find_by_id current_consultation.coupon_id
@@ -169,7 +183,7 @@ class PaymentController < ApplicationController
       end
     elsif current_payment.pg_type=='RAZORPAY'
 
-      logger.info "ISSUE PAYMENT RAZORPAY"
+      # issuing razorpay payment
       logger.info params
       amount = current_consultation.amount*100
       response = Razorpay::Payment.fetch(params[:payment_id])
@@ -213,27 +227,23 @@ class PaymentController < ApplicationController
   end
 
   def failure
-    logger.info "IN FAILURE"
-    logger.info "ERROR MSG"
-    logger.info session[:error_msg]
-    logger.error "payment failure for patient: #{current_user.name}"
+    logger.error "Payment Controller: in payment failure for patient: #{current_user.name}"
+    logger.info "Payment Controller: error msg ${session[:error_msg]} set"
     session[:error_msg] ||= params['error_Message'] + "|" + params['unmappedstatus']
     current_user.update({pay_status: "payment failed : #{session[:error_msg]}"})
     current_consultation.update({ pay_status: "payment failed : #{session[:error_msg]}", user_status: "payment failed : #{session[:error_msg]}" })
     render 'failure'
-    # if request.method == "GET"
-    #   Redirection from within controller
-    #   unregister_consultation
-    #   unregister
-    # end
   end
 
   def instant_payment
-    logger.info "INSTANT PAYMENT"
+    # decrypt the id
     id = decrypt(params[:p], 1)
+    logger.info "Payment Controller: in instant payment with id #{id}"
     if id.nil?
+      # id does not exist
       redirect_to "/"
     else
+       # id exists, get consultation with that id
       @consultation = Consultation.find_by_id id
       if @consultation
         register_consultation @consultation
@@ -247,16 +257,16 @@ class PaymentController < ApplicationController
 
   private
 
-  def current_payment
-    current_user.payments.find_by_txnid(session[:txnid])
-  end
+    def current_payment
+      current_user.payments.find_by_txnid(session[:txnid])
+    end
 
-  def update_payment
-    logger.info "UPDATE PAYMENT"
-    logger.info current_user.payments
-    current_payment.update(capture_params) if !current_payment.nil?
-    unregister_consultation
-    unregister
-  end
+    def update_payment
+      logger.info "UPDATE PAYMENT"
+      logger.info current_user.payments
+      current_payment.update(capture_params) if !current_payment.nil?
+      unregister_consultation
+      unregister
+    end
 
 end
