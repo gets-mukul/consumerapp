@@ -8,6 +8,7 @@ class PatientsController < ApplicationController
 
   # POST /patients
   def create
+    Rails.logger.info("Patients Controller: Create new patient");
     # check if patient exists in database
     @patient = Patient.find_by_mobile(patient_params[:mobile])
     if @patient
@@ -49,6 +50,7 @@ class PatientsController < ApplicationController
 
   def instant_login
     # decrypt the id
+    Rails.logger.info("Patients Controller: Instant login");
     id = decrypt(params[:p], 0)
     logger.info "Patient Controller: instant login with patient id #{id}"
     if id.nil?

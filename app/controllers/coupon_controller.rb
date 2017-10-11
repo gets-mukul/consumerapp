@@ -1,6 +1,7 @@
 class CouponController < ApplicationController
 
 	def apply
+		Rails.logger.info("Coupon Controller: Applying coupon");
 		# temporary
 		# check if the coupon is for 150 off
 		if ['SOCIAL150', 'REFER150'].include? params[:promo_code]

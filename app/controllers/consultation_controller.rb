@@ -37,6 +37,7 @@ class ConsultationController < ApplicationController
   end
 
   def create
+    Rails.logger.info("Consultation Controller: Create new user");
     # check if this patient started a consultation exists in the last ~30 mins
     consultation = Consultation.where(patient_id: current_user.id).where("created_at >= ?", DateTime.now-0.02).order('id desc')
     if consultation.present?

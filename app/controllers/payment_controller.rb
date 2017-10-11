@@ -15,6 +15,8 @@ class PaymentController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:success, :failure]
 
   def index
+
+    Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
 
     session[:error_msg] = ""
