@@ -33,8 +33,10 @@ gem 'newrelic_rpm'
 gem 'sidekiq'
 # Use google sheets api to update data
 gem 'google-api-client'
-#Use razorpay for payments
+# Use razorpay for payments
 gem 'razorpay'
+# Log entries
+gem 'le'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
