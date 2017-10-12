@@ -123,7 +123,7 @@ class PatientsController < ApplicationController
       {
         email: params[:email],
         mobile: params[:mobile],
-        name: params[:name].downcase.titleize,
+        name: params[:name].downcase.titleize.strip,
         referrer: params[:referrer]
       }
       # params.require(:patient).permit(:name, :email, :mobile)
