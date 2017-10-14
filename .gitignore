@@ -16,6 +16,7 @@
 # Ignore Byebug command history file.
 .byebug_history
 
+/db/schema.rb
 /db/*.sqlite3
 /db/*.sqlite3-journal
 /coverage/
