@@ -261,7 +261,7 @@ class PaymentController < ApplicationController
   private
 
     def current_payment
-      current_user.payments.find_by_txnid(session[:txnid])
+      current_user.payments.find_by txnid: session[:txnid]
     end
 
     def update_payment
