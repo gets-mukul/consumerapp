@@ -250,6 +250,7 @@ class PaymentController < ApplicationController
       if @consultation
         register_consultation @consultation
         register @consultation.patient
+        session[:condition] = @consultation.category
         return redirect_to "/consult/payment?city=null"
       else
         redirect_to "/"

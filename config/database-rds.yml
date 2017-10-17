@@ -22,10 +22,13 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 8 } %>
 
 development:
-  <<: *default
-  database: Remedica_production
-  username: Remedica
-  password: <%= ENV['REMEDICA_DATABASE_PASSWORD'] %>
+  <<: *default  
+  database: remedico_development
+  username: remedico
+  password: <%= ENV['REMEDICO_DATABASE_PASSWORD'] %>
+  
+  host: dev-rds-postgres.czkfg6sul0zu.ap-southeast-1.rds.amazonaws.com
+  port: 5432
   # pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
   # The specified database role being used to connect to postgres.
@@ -83,6 +86,9 @@ test:
 #
 production:
   <<: *default
-  database: Remedica_production
-  username: Remedica
-  password: <%= ENV['REMEDICA_DATABASE_PASSWORD'] %>
+  database: remedico_production
+  username: remedico
+  password: <%= ENV['REMEDICO_DATABASE_PASSWORD'] %>
+  
+  host: prod-rds-postgres.czkfg6sul0zu.ap-southeast-1.rds.amazonaws.com
+  port: 5432

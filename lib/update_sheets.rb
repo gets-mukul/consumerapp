@@ -47,7 +47,6 @@ def update_sheet
   service.authorization = authorize
 
   spreadsheet_id = '1CvkpikWLZS99FqavGiQKDO4IJ1vI7Ilb9a_kEBOmYAE'
-  # spreadsheet_id = '1sCo9wsvOOptC7K76cGzxQp9FxMTJ7MetbxOcZPiMdGk'
   range = 'User Data!A2'
 
   patients = Patient.all.order('id asc').pluck(:id, :created_at, :updated_at, :name, :mobile, :email, :referrer)
@@ -59,8 +58,8 @@ def update_sheet
 
   update_res = service.update_spreadsheet_value(spreadsheet_id, range, value_range_object, value_input_option: 'USER_ENTERED')
 
-  # consultations = Consultation.joins('LEFT JOIN coupons on consultations.coupon_id=coupons.id').left_outer_joins(:patient).select('consultations.id, consultations.patient_id, patients.name, patients.mobile, coupons.coupon_code, consultations.category, consultations.user_status, consultations.created_at').order('consultations.id asc')
-  consultations = Consultation.joins('LEFT JOIN coupons on consultations.coupon_id=coupons.id').joins('LEFT JOIN patient_sources on consultations.id=patient_sources.consultation_id').left_outer_joins(:patient).select('consultations.id, consultations.patient_id, patients.name, patients.mobile, coupons.coupon_code, consultations.category, consultations.user_status, consultations.pay_status, patient_sources.local_referrer, patient_sources.utm_campaign, consultations.created_at').order('consultations.id asc')
+  consultations = Consultation.joins('LEFT OUTER JOIN patient_sources on patient_sources.consultation_id=consultations.id').joins('LEFT JOIN patients on consultations.patient_id=patients.id').joins('LEFT OUTER JOIN coupons on consultations.coupon_id=coupons.id').select('distinct on (consultations.id) consultations.id, patients.id, patients.name, patients.mobile, coupons.coupon_code, consultations.category, consultations.user_status, consultations.pay_status, consultations.created_at, patient_sources.local_referrer, patient_sources.utm_campaign').order('consultations.id asc')
+
   consultation_list = consultations.pluck(:id, :patient_id, :name, :mobile, :coupon_code, :category, :user_status, :pay_status, :created_at, :local_referrer, :utm_campaign)
 
   range = 'Consultations!A2'
