@@ -52,10 +52,11 @@
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
     <% if Rails.env.production? %>
-        {ga('create', 'UA-81367416-1', 'auto');ga('require', 'GTM-KZ4ZWTR');}
+        {ga('create', 'UA-81367416-1', 'auto');ga('require', 'GTM-NTBH57D');}
     <% else %>
-        {ga('create', 'UA-81367416-3', 'auto');ga('require', 'GTM-NTBH57D');}
+        {ga('create', 'UA-81367416-3', 'auto');ga('require', 'GTM-NMS55KX');}
     <% end %>
+    ga('send', 'pageview');
     </script>
     <% if Rails.env.production? %>
         <style>.async-hide { opacity: 0 !important} </style>
@@ -63,14 +64,14 @@
         h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
         (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
         })(window,document.documentElement,'async-hide','dataLayer',4000,
-        {'GTM-KZ4ZWTR':true});</script>
+        {'GTM-NTBH57D':true});</script>
     <% else %>
         <style>.async-hide { opacity: 0 !important} </style>
         <script>(function(a,s,y,n,c,h,i,d,e){s.className+=' '+y;h.start=1*new Date;
         h.end=i=function(){s.className=s.className.replace(RegExp(' ?'+y),'')};
         (a[n]=a[n]||[]).hide=h;setTimeout(function(){i();h.end=null},c);h.timeout=c;
         })(window,document.documentElement,'async-hide','dataLayer',4000,
-        {'GTM-NTBH57D':true});</script>
+        {'GTM-NMS55KX':true});</script>
     <% end %>
     <!-- Quora Pixel Code (JS Helper) -->
     <script>

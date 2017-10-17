@@ -13,3 +13,6 @@ ActionMailer::Base.smtp_settings = {
 
 # Initialize the Rails application.
 Rails.application.initialize!
+unless Rails.env.production?
+	Rails.logger = Le.new(Rails.application.secrets.LE_RAILS_DEV_TOKEN, :debug => true, :local => true)
+end

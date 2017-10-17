@@ -769,12 +769,13 @@ $(function() {
             mapInput.name = "authenticity_token"
             mapInput.value = "<%= form_authenticity_token %>"
             mapInput.type = "hidden"
-            var mapInput3 = document.createElement("input");
-        mapInput3.name = "pg_type"
-        mapInput3.value = "RAZORPAY"
-        mapInput3.type = "hidden"
+            var mapInput2 = document.createElement("input");
+            mapInput2.name = "pg_type"
+            mapInput2.value = "PAYTM"
+            mapInput2.type = "hidden"
         
             mapForm.appendChild(mapInput);
+            mapForm.appendChild(mapInput2);
             document.body.appendChild(mapForm);
 
             mapForm.submit();
@@ -797,43 +798,8 @@ $(function() {
   };
   var rzp1 = new Razorpay(options);
 
-  $('.sticky-footer').on('click', '#paytmPayBtn', function () {
-
-    $.ajax({
-      type: "POST",
-      url: "/consult/payment/initiate_payment",
-      success: function (response) {
-        var mapForm = document.createElement("form");
-        mapForm.target = "_self";
-        mapForm.method = "POST";
-        mapForm.action = "/consult/payment/payment_paytm";
-        var mapInput = document.createElement("input");
-        mapInput.name = "authenticity_token"
-        mapInput.value = "<%= form_authenticity_token %>"
-        mapInput.type = "hidden"
-        var mapInput3 = document.createElement("input");
-
-        mapForm.appendChild(mapInput);
-        document.body.appendChild(mapForm);
-
-        mapForm.submit();
-
-        ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton'});
-        mixpanel.track("Button Clicked", {
-          "Button Name": "Payment Button",
-          "Condition Name": "n/a",
-          "Page URL": "payment/index",
-        });
-        window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
-        return false;
-      },
-      error: function (response) {
-        return false;
-      }
-    })
-  });
-
-  document.getElementById('payBtn').onclick = function(e){
+  $('.sticky-footer').on('click', '#payBtn', function () {
+  // document.getElementById('payBtn').onclick = function(e){
     rzp1.open();
     // e.preventDefault();
     $.ajax({
@@ -854,7 +820,46 @@ $(function() {
       "Page URL": "payment/index",
     });
     window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
-  }
+  });
+
+  $('.sticky-footer').on('click', '#paytmPayBtn', function () {
+    $.ajax({
+      type: "POST",
+      url: "/consult/payment/initiate_payment",
+      success: function (response) {
+        var mapForm = document.createElement("form");
+        mapForm.target = "_self";
+        mapForm.method = "POST";
+        mapForm.action = "/consult/payment/payment_paytm";
+        var mapInput = document.createElement("input");
+        mapInput.name = "authenticity_token"
+        mapInput.value = "<%= form_authenticity_token %>"
+        mapInput.type = "hidden"
+        var mapInput2 = document.createElement("input");
+        mapInput2.name = "pg_type"
+        mapInput2.value = "PAYTM"
+        mapInput2.type = "hidden"
+
+        mapForm.appendChild(mapInput);
+        mapForm.appendChild(mapInput2);
+        document.body.appendChild(mapForm);
+
+        mapForm.submit();
+
+        ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton'});
+        mixpanel.track("Button Clicked", {
+          "Button Name": "Payment Button",
+          "Condition Name": "n/a",
+          "Page URL": "payment/index",
+        });
+        window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
+        return false;
+      },
+      error: function (response) {
+        return false;
+      }
+    })
+  });
 
   mixpanel.track("Page Loaded", {
     "Page Name": "Payments Index Page",
