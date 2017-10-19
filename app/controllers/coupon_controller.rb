@@ -20,7 +20,7 @@ class CouponController < ApplicationController
 			coupon_name = params[:coupon]
 			@coupon = Coupon.find_by coupon_code: coupon_name
 			if @coupon
-				if ((@coupon.status!='coupon used') && (@coupon.count<@coupon.max_count) && (@coupon.expires_on.present? ? Time.new <= @coupon.expires_on : true))
+				if ((@coupon.count<@coupon.max_count) && (@coupon.expires_on.present? ? Time.new <= @coupon.expires_on : true))
 					@coupon.update(status: 'coupon entered')
 					session[:coupon_applied] = true
 					session[:promo_code] = coupon_name
