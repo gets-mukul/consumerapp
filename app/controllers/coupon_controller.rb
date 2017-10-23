@@ -2,22 +2,15 @@ class CouponController < ApplicationController
 
 	def apply
 		Rails.logger.info("Coupon Controller: Applying coupon");
-		# temporary
-		# check if the coupon is for 150 off
-		if ['SOCIAL150', 'REFER150'].include? params[:promo_code]
-			session[:coupon_applied] = true
-			session[:promo_code] = params[:promo_code].sub '150', '100'
-			logger.info session[:promo_code]
-			render :json => { :value => "success", :discount_price => '250' }
-		elsif ['SOCIAL100', 'REFER100'].include? params[:promo_code]
-			session[:coupon_applied] = true
-			session[:promo_code] = params[:promo_code]
-			logger.info session[:promo_code]
-			render :json => { :value => "success", :discount_price => '250' }
 
-		#check if a coupon has been applied
-		elsif params[:promo_code] == "COUPON"
+		# check if a coupon has been applied
+		if params[:promo_code] == "COUPON"
 			coupon_name = params[:coupon]
+			# check if the coupon is for 150 off, if it is, give away 100 off 
+			if ['SOCIAL150', 'REFER150'].include? coupon_name
+				coupon_name = coupon_name.sub '150', '100'
+			end
+
 			@coupon = Coupon.find_by coupon_code: coupon_name
 			if @coupon
 				if ((@coupon.count<@coupon.max_count) && (@coupon.expires_on.present? ? Time.new <= @coupon.expires_on : true))
