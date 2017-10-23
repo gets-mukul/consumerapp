@@ -9,7 +9,7 @@ $ ->
     text: "I just did a consultation with a dermatologist online on Remedico - should definitely try it!"
     url: "remedicohealth.com"
     shares: [
-      { share: "whatsapp", url: "whatsapp://send?text=I just did a consultation with a dermatologist online on Remedico - you should try it! remedicohealth.com" },
+      { share: "whatsapp", url: "I just did a consultation with a dermatologist online on Remedico - you should try it! remedicohealth.com" },
       { share: "twitter", url: "With @remedicohealth you can now consult with dermatologists online remedicohealth.com", hashtags: "Remedico, Healthcare" },
       { share: "facebook" },
       { share: "messenger" },
