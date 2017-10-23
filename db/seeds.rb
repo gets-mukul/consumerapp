@@ -716,21 +716,12 @@ coupon_list = [
 	# [ "DJS150", 150, 'coupon unused', 0, 2147483647 ],
 	# [ "DJS350", 350, 'coupon unused', 0, 2147483647 ]
 	# [ "RBFJ3Y", 350, 'coupon unused', 0, 1 ]
-	# [ "GSBKKY2", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSBZ6GR", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSBDUJX", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSB6WBY", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSBVNGU", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSBG6ZN", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSB5W4Q", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSBHFLQ", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSBX5UA", 350, 'coupon unused', '2017-09-21', 0, 1 ],
-	# [ "GSB57PU", 350, 'coupon unused', '2017-09-21', 0, 1 ]
 
 	# [ "SOCIAL100", 100, 'coupon unused', 0, 2147483647 ],
 	# [ "REFER100", 100, 'coupon unused', 0, 2147483647 ]
 
 	# ["DJS349", 349, 'coupon unused', 0, 2147483647 ]
+	[ "WEKIFJ3Y", 350, 'coupon unused', 0,  20],
 ]
 
 i=0
@@ -741,6 +732,16 @@ coupon_list.each do |coupon_code, discount_amount, status, count, max_count|
 end
 
 coupon_list2 = [
+	# [ "GSBKKY2", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSBZ6GR", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSBDUJX", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSB6WBY", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSBVNGU", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSBG6ZN", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSB5W4Q", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSBHFLQ", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSBX5UA", 350, 'coupon unused', '2017-09-21', 0, 1 ],
+	# [ "GSB57PU", 350, 'coupon unused', '2017-09-21', 0, 1 ]
 	# [ "SOCIAL150", 150, 'coupon unused', '2017-09-11', 0, 2147483647 ],
 	# [ "REFER150", 150, 'coupon unused', '2017-09-11', 0, 2147483647 ]
 	# [ "IGMUSKAN", 350, 'coupon unused', '2017-09-21', 0, 1 ]
