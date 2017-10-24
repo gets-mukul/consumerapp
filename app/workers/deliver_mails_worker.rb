@@ -1,5 +1,6 @@
 class DeliverMailsWorker
 	include Sidekiq::Worker
+	sidekiq_options :retry => 5
 
 	def perform(id)
 		puts "SIDEKIQ WORKER RUNNING"
