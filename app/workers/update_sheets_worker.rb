@@ -8,5 +8,4 @@ class UpdateSheetsWorker
 		puts "UPDATE SHEETS"
 		update_sheet
 	end
-
 end

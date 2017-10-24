@@ -22,5 +22,3 @@ class DeliverSMSWorker
 		puts "DELIVERED SMS"
 	end
 end
-
-		
