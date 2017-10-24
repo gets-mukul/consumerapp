@@ -59,9 +59,6 @@ class SmsServiceController < ApplicationController
         date_sent: response["SMSMessage"]["DateSent"]
       })
       @sms.update({consultation_id: consultation.id}) if consultation.present?
-
-      CheckSmsWorker.perform_in(15.minutes, @sms.sms_id)
-
     end
     
   end
