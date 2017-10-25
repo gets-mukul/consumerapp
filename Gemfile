@@ -31,6 +31,7 @@ gem 'httparty'
 gem 'newrelic_rpm'
 # Use sidekiq for queued jobs
 gem 'sidekiq'
+gem "sidekiq-cron"
 # Use google sheets api to update data
 gem 'google-api-client'
 # Use razorpay for payments
