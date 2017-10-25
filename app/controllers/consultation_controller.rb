@@ -77,5 +77,6 @@ class ConsultationController < ApplicationController
 
       DeliverMailsWorker.perform_in(1.hours, @consultation.id) if Rails.env.production?
     end
+    UpdateSheetsWorker.perform_in(1.hours) if Rails.env.production?
   end
 end
