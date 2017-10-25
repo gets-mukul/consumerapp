@@ -44,6 +44,7 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'activeadmin', github: 'activeadmin'
 end
 
 group :development do
