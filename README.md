@@ -64,33 +64,3 @@ select cs.id, p.id, p.name, cs.user_status, cs.pay_status, cs.amount, cp.coupon_
 # to let git ignore files
 git update-index --assume-unchanged config/database.yml
 ```
-
-### App flow
-
-The basic flow of the app is as follows:
-
-```flow
-st=>start: Start your consultation
-e=>end
-op1=>operation: Check if condition is preselected
-cond1=>condition: Selected or Not?
-op2=>operation: Display conditions list
-op3=>operation: Display typeform
-op4=>operation: Display payments index page
-cond2=>condition: Free of redflags?
-op5=>operation: Display success page
-op6=>operation: Display failure page
-op7=>operation: Payment
-cond3=>condition: Payment successful?
-
-st->op1->cond1
-cond1(yes)->op3
-cond1(no)->op2->op3
-op3->cond2
-cond2(yes)->op4->op7->cond3
-cond2(no)->op6->e
-cond3(yes)->op5->e
-cond3(no)->op6->e
-```
-
-
