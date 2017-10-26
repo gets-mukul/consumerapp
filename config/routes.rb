@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  ActiveAdmin.routes(self)
   scope '/consult' do
     get '/promo/:promo_code' => 'coupon#apply'
 
