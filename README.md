@@ -1,6 +1,6 @@
 
 # README
-consumerapp has the patient side app up of remedico
+consumerapp has the patient side app of remedico
 
 ### Setup
 ####  Make directories required locally for logs 
