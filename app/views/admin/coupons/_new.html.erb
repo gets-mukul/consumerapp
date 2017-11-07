@@ -80,7 +80,7 @@
     <ol>
       <li class="action input_action " id="coupon_submit_action">
         <input type="submit" name="commit" value="<%= f.object.new_record? ?  "Create Coupon(s)" : "Edit Coupon" %>" /></li>
-      <li class="cancel"><a href="/admin/coupons">Cancel</a></li>
+      <li class="cancel"><a href="<%= admin_coupons_path %>">Cancel</a></li>
     </ol>
   </fieldset>
 <% end %>

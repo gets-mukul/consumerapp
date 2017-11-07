@@ -1,6 +1,7 @@
 ActiveAdmin.register Patient do
   require 'encrypt'
   actions :all, :except => [:new, :destroy]
+  permit_params :name, :mobile, :email
   
   scope :all, :default => true
   scope "Payment Pending"
@@ -87,7 +88,7 @@ ActiveAdmin.register Patient do
         super - ['edit']
       end
     end
-          
+    
     private
       def admin_user_not_authorized
         flash[:alert]="Access denied"

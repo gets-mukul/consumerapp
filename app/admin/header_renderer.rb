@@ -6,20 +6,20 @@ module ActiveAdmin
       def get_authorized_menu_items
         if current_admin_user.admin?
           return [
-            { :title=>"Dashboard", :url=>"/admin" },
-            { :title=>"Users", :url=>"/admin/admin_users" },
-            { :title=>"Consultations", :url=>"/admin/consultations" },
-            { :title=>"Coupons", :url=>"/admin/coupons" },
-            { :title=>"Patients", :url=>"/admin/patients" },
-            { :title=>"Payments", :url=>"/admin/payments" },
-            { :title=>"Comments", :url=>"/admin/comments" }
+            { :title=>"Dashboard", :url=>admin_root_path },
+            { :title=>"Users", :url=>admin_admin_users_path },
+            { :title=>"Consultations", :url=>admin_consultations_path },
+            { :title=>"Coupons", :url=>admin_coupons_path },
+            { :title=>"Patients", :url=>admin_patients_path },
+            { :title=>"Payments", :url=>admin_payments_path },
+            { :title=>"Comments", :url=>admin_comments_path }
           ]
         elsif current_admin_user.regular?
           return [
-            { :title=>"Dashboard", :url=>"/admin" },
-            { :title=>"Consultations", :url=>"/admin/consultations" },
-            { :title=>"Patients", :url=>"/admin/patients" },
-            { :title=>"Comments", :url=>"/admin/comments" }
+            { :title=>"Dashboard", :url=>admin_root_path },
+            { :title=>"Consultations", :url=>admin_consultations_path },
+            { :title=>"Patients", :url=>admin_patients_path },
+            { :title=>"Comments", :url=>admin_comments_path }
           ]
         end
       end
