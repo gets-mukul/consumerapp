@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  require 'sidekiq/web'
+  require 'sidekiq/cron/web'
+  mount Sidekiq::Web => '/sidekiq'
+  
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
+  
   scope '/consult' do
     get '/promo/:promo_code' => 'coupon#apply'
 
@@ -32,4 +39,7 @@ Rails.application.routes.draw do
     #root 'consultation#welcome'
     get '/', to: 'consultation#index'
   end
+  
+
 end
+

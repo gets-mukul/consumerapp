@@ -1,0 +1,32 @@
+<%= semantic_form_for [:admin, @consultation] do |f| %>
+<%= f.inputs do %>
+<li class="email input required stringish" id="admin_user_email_input">
+    <label for="admin_user_email" class="label">Email</label>
+    <span id="admin_user_email"><%= @consultation.id %></span>
+</li>
+<%= f.input :pay_status, :include_blank => false, :collection => ["payment failed", "payment pending", "payment failed : Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.", "payment cancelled by patient", "free", "paid"] %>
+
+<li class="select input required" id="payment_pg_type_input"><label for="payment_pg_type" class="label">Payment Gateway Type</label>
+  <select name="payment[pg_type]" id="payment_pg_type_input">
+    <option selected="selected" value=""></option>
+    <option value="PAYTM">PAYTM</option>
+    <option value="RAZORPAY">RAZORPAY</option>
+    <option value="INSTAMOJO">INSTAMOJO</option>
+  </select>
+</li>
+
+<li class="string input required stringish" id="payment_bank_ref_num_input">
+  <label for="payment_bank_ref_num" class="label">Payment Bank Ref Num</label>
+  <input id="payment_bank_ref_num" type="text" name="payment[bank_ref_num]" />
+  <p class="inline-hints">ex: 
+    &emsp;&nbsp;&nbsp;PAYTM:&emsp;&emsp;&emsp;157xxxxxxxx<br>
+    &emsp;&emsp;&emsp;RAZORPAY:&emsp;pay_8oxxxxxxxxxxxx
+  </p>
+</li>
+
+<% end %>
+<%= f.actions do %>
+    <%= f.action :submit, label: "Update Payment Status"%>
+    <%= f.action :cancel %>
+  <% end %>
+<% end %>

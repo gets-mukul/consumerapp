@@ -31,6 +31,7 @@ gem 'httparty'
 gem 'newrelic_rpm'
 # Use sidekiq for queued jobs
 gem 'sidekiq'
+gem "sidekiq-cron"
 # Use google sheets api to update data
 gem 'google-api-client'
 # Use razorpay for payments
@@ -39,8 +40,9 @@ gem 'razorpay'
 gem 'le'
 
 # Testing ActiveAdmin
-# gem 'activeadmin', github: 'activeadmin'
-
+gem 'activeadmin', github: 'activeadmin'
+gem 'devise'
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,0 +1,182 @@
+<%= semantic_form_for [:admin, @coupon], builder: ActiveAdmin::FormBuilder do |f| %>
+  <%= f.inputs "Coupon" do %>
+      <% f.semantic_errors *f.object.errors.keys %>
+      
+      <% if f.object.new_record? %>
+        <li class="datalist input required stringish" id="coupon_category_input">
+          <label for="coupon_category" class="label">category<abbr title="required">*</abbr></label>
+          <input id="coupon_category" list="coupon_category_datalist" type="text" name="coupon[category]" />
+          <datalist id="coupon_category_datalist">
+            <option value="SOCIAL">SOCIAL</option>
+            <option value="REFER">REFER</option>
+            <option value="WEKI">WEKI</option>
+          </datalist>
+        </li>
+      <% else %>
+        <li class="string input required stringish">
+          <label class="label">Coupon code</label>
+          <span><b><%= @coupon.coupon_code %></b></span>
+        </li>
+      <% end %>
+      <%=     f.input :discount_amount, :label => 'discount', :hint => 'ex: 100', :as => :number, :input_html => { :min => 1, :max => 350 } %>
+      <%=     f.input :max_count, :include_blank => true, :required => false, :label => '#times the coupon can be used', :as => :number, :input_html => { :min => 0, :max => 2147483647 } %>
+      
+      <li class="datetime_select input optional" id="coupon_expires_on_input">
+        <fieldset class="fragments">
+          <legend class="label"><label for="coupon_expires_on_1i">expires on</label></legend>
+          <ol class="fragments-group">
+            <li class="fragment">
+              <%= datetime_select('expires_on', 'date', :order => [:year, :month, :day, :hour,:minute], include_blank: true) %>
+            </li>
+          </ol>
+        </fieldset>
+      </li>
+      <li></li>
+      <% if f.object.new_record? %>
+        <li class="number input required numeric stringish" id="coupon_generate_input"><label for="coupon_generate" class="label">Generate unique codes?</label>
+          <label class="switch">
+            <input type="checkbox" name="generate_checkbox" id="generate">
+            <span class="slider"></span>
+          </label>
+        </li>
+      <% end %>
+
+  <% end %>
+  
+  <% if f.object.new_record? %>
+    <div class="tabs">
+      <div class="tab-content">
+        <ol></ol>
+        <div id="promo" class="tab-element">
+          <fieldset class="inputs">
+            <ol>
+              <li class="string input required stringish" id="coupon_coupon_code_input">
+                <label for="coupon_coupon_code" class="label">Coupon code<abbr title="required">*</abbr></label>
+                <input id="coupon_coupon_code" type="text" name="coupon[coupon_code]" />
+              </li>
+            </ol>
+          </fieldset>
+        </div>
+        <div id="generate-unique-coupons" class="tab-element">
+          <fieldset class="inputs">
+            <ol>
+              <li class="number input required numeric stringish" id="coupon_n_coupons_to_generate_input">
+                  <label for="coupon_n_coupons_to_generate" class="label">#unique coupons to generate</label>
+                  <input id="coupon_n_coupons_to_generate" value="1" min="1" step="1" type="number" name="coupon_n_coupons_to_generate" />
+              </li>
+              <li></li>
+              <li class="number input required numeric stringish">
+                  <label for="preview_coupon" class="label">Example</label>
+                  <input id="preview_coupon" readonly></input>
+              </li>
+            </ol>
+          </fieldset>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  
+  <fieldset class="actions">
+    <ol>
+      <li class="action input_action " id="coupon_submit_action">
+        <input type="submit" name="commit" value="<%= f.object.new_record? ?  "Create Coupon(s)" : "Edit Coupon" %>" /></li>
+      <li class="cancel"><a href="/admin/coupons">Cancel</a></li>
+    </ol>
+  </fieldset>
+<% end %>
+
+<script>
+
+    $('input[name=generate_checkbox]').change(function(){
+        if($(this).is(':checked')) {
+            $('.tab-element').toggle();
+        } else {
+            $('.tab-element').toggle();
+        }
+    });
+
+    var category = '';
+    var discount = '';
+    
+    $("#coupon_category").keyup(function(){
+        category = this.value;
+        $("#coupon_coupon_code").val(category + discount);
+        $("#preview_coupon").val(category + 'JW2T');
+    });
+    
+    $("#coupon_discount_amount").keyup(function(){
+        discount = this.value;
+        $("#coupon_coupon_code").val(category + discount);
+    });
+    
+</script>
+
+<style>
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 16px;
+  padding-top: initial;
+}
+
+/* Hide default HTML checkbox */
+.switch input {display:none;}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 16px;
+  width: 30px;
+  height: 16px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 13px;
+  width: 13px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #37474f;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #37474f;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(13px);
+  -ms-transform: translateX(13px);
+  transform: translateX(13px);
+}
+
+.tab-element {
+  display: none;
+}
+
+div.tab-content div.tab-element:nth-child(2) {
+  display: block;
+}
+
+.tabs fieldset {
+  margin-bottom: 0;
+}
+
+</style>
