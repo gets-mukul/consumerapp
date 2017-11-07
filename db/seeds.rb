@@ -721,7 +721,10 @@ coupon_list = [
 	# [ "REFER100", 100, 'coupon unused', 0, 2147483647 ]
 
 	# ["DJS349", 349, 'coupon unused', 0, 2147483647 ]
-	[ "WEKIFJ3Y", 350, 'coupon unused', 0,  20],
+	# [ "WEKIFJ3Y", 350, 'coupon unused', 0,  20],
+	# [ "WEKIFJ3Y", 350, 'coupon unused', 0,  3],
+	# [ "WEKI57PU", 350, 'coupon unused', 0,  1],
+	# [ "WEKIX5UA", 350, 'coupon unused', 0,  1],
 ]
 
 i=0
@@ -755,3 +758,5 @@ end
 print i
 puts " entries created"
 
+AdminUser.create!(email: '	mail@akhilsingh.net', password: 'password', password_confirmation: 'password', role: 'admin')
+AdminUser.create!(email: '	jesse.dhara@gmail.com', password: 'password', password_confirmation: 'password', role: 'admin')

@@ -21,6 +21,7 @@ class NewUserNotifierMailer < ApplicationMailer
     @user = user
     @insta = insta.to_s
     @promo_code = promo_code.to_s
+    @coupon_code = ""
     mail( :to => Rails.application.secrets.ADMIN_EMAIL,
     # mail( :to => [Rails.application.secrets.ADMIN_EMAIL, "jesse.dhara@gmail.com"],
     # mail( :to => "jesse.dhara@gmail.com",
