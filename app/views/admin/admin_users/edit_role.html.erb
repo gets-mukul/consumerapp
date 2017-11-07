@@ -1,0 +1,16 @@
+<%= semantic_form_for [:admin, @edit_user] do |f| %>
+<%= f.inputs do %>
+<li class="email input required stringish" id="admin_user_email_input">
+    <label for="admin_user_email" class="label">Email</label>
+    <span id="admin_user_email"><%= @edit_user.email %></span>
+</li>
+<%=   f.input :role, :include_blank => false %>
+<% end %>
+
+<fieldset class="actions"><ol>
+  <li class="action input_action " id="admin_user_submit_action">
+    <input type="submit" name="commit" value="Update User Role" /></li>
+  <li class="cancel"><a href="/admin/admin_users">Cancel</a></li>
+</ol></fieldset>
+    
+<% end %>

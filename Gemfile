@@ -40,14 +40,14 @@ gem 'le'
 
 # Testing ActiveAdmin
 gem 'activeadmin', github: 'activeadmin'
- 
+gem 'devise'
+gem 'pundit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'activeadmin', github: 'activeadmin'
 end
 
 group :development do

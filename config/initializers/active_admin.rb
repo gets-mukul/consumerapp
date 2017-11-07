@@ -4,7 +4,7 @@ ActiveAdmin.setup do |config|
   # Set the title that is displayed on the main layout
   # for each of the active admin pages.
   #
-  config.site_title = "Remedica"
+  config.site_title = "Remedico"
 
   # Set the link url for the title. For example, to take
   # users to your main site. Defaults to no link.
@@ -16,7 +16,7 @@ ActiveAdmin.setup do |config|
   #
   # Note: Aim for an image that's 21px high so it fits in the header.
   #
-  # config.site_title_image = "logo.png"
+  # config.site_title_image = "footer_logo.png"
 
   # == Default Namespace
   #
@@ -45,17 +45,45 @@ ActiveAdmin.setup do |config|
   #
   # This will ONLY change the title for the admin section. Other
   # namespaces will continue to use the main "site_title" configuration.
+  
+  # == Current User
+  #
+  # Active Admin will associate actions with the current
+  # user performing them.
+  #
+  # This setting changes the method which Active Admin calls
+  # (within the application controller) to return the currently logged in user.
+  config.current_user_method = :current_admin_user
 
   # == User Authentication
-  #
+  
+  # config.authorization_adapter = ActiveAdmin::PunditAdapter
+  # config.authorization_adapter = "Authorization"
+
+  # if current_admin_user.role == 'regular'
+  #   config.authorization_adapter = "Authorization"
+  # end
+  
+  # config.namespace :admin do |ns|
+  #   ns.authorization_adapter = "AdminAuthorization"
+  # end
+  
+  # config.namespace :my do |ns|
+  #   ns.authorization_adapter = "RegularAuthorization"
+  # end
+
+  #this line sets the default policy to application_policy.rb
+  # config.pundit_default_policy = "ApplicationPolicy"
+
+  
   # Active Admin will automatically call an authentication
   # method in a before filter of all controller actions to
   # ensure that there is a currently logged in admin user.
   #
   # This setting changes the method which Active Admin calls
   # within the application controller.
-  # config.authentication_method = :authenticate_admin_user!
-
+  config.authentication_method = :authenticate_admin_user!
+  
   # == User Authorization
   #
   # Active Admin will automatically call an authorization
@@ -63,7 +91,7 @@ ActiveAdmin.setup do |config|
   # ensure that there is a user with proper rights. You can use
   # CanCanAdapter or make your own. Please refer to documentation.
   # config.authorization_adapter = ActiveAdmin::CanCanAdapter
-
+  # config.authorization_adapter = ActiveAdmin::PunditAdapter
   # In case you prefer Pundit over other solutions you can here pass
   # the name of default policy class. This policy will be used in every
   # case when Pundit is unable to find suitable policy.
@@ -79,15 +107,6 @@ ActiveAdmin.setup do |config|
   # Method provided here should be defined in application_controller.rb.
   # config.on_unauthorized_access = :access_denied
 
-  # == Current User
-  #
-  # Active Admin will associate actions with the current
-  # user performing them.
-  #
-  # This setting changes the method which Active Admin calls
-  # (within the application controller) to return the currently logged in user.
-  # config.current_user_method = :current_admin_user
-
   # == Logging Out
   #
   # Active Admin displays a logout link on each screen. These
@@ -99,7 +118,8 @@ ActiveAdmin.setup do |config|
   #
   # Default:
   config.logout_link_path = :destroy_admin_user_session_path
-
+  config.logout_link_method = :delete
+  
   # This setting changes the http method used when rendering the
   # link. For example :get, :delete, :put, etc..
   #
@@ -200,12 +220,12 @@ ActiveAdmin.setup do |config|
   #
   # To change the default utility navigation to show a link to your website & a logout btn
   #
-  #   config.namespace :admin do |admin|
-  #     admin.build_menu :utility_navigation do |menu|
-  #       menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
-  #       admin.add_logout_button_to_menu menu
-  #     end
+  # config.namespace :admin do |admin|
+  #   admin.build_menu :utility_navigation do |menu|
+  #     menu.add label: "My Great Website", url: "http://www.mygreatwebsite.com", html_options: { target: :blank }
+  #     admin.add_logout_button_to_menu menu
   #   end
+  # end
   #
   # If you wanted to add a static menu item to the default menu provided:
   #
@@ -253,7 +273,7 @@ ActiveAdmin.setup do |config|
   # hand side with a filter for each attribute of the registered model.
   # You can enable or disable them for all resources here.
   #
-  # config.filters = true
+  config.filters = true
   #
   # By default the filters include associations in a select, which means
   # that every record will be loaded for each association.
@@ -267,7 +287,7 @@ ActiveAdmin.setup do |config|
   # By default, the footer shows the current Active Admin version. You can
   # override the content of the footer here.
   #
-  # config.footer = 'my custom footer text'
+  # config.footer = "Remedico"
 
   # == Sorting
   #
@@ -275,4 +295,17 @@ ActiveAdmin.setup do |config|
   # You can inherit it with own class and inject it for all resources
   #
   # config.order_clause = MyOrderClause
+  
+  # module ActiveAdmin
+  #   module Filters
+  #     #
+  #     module ResourceExtension
+  #       private
+  #       def add_search_status_sidebar_section
+  #       end
+  #     end
+  #   end
+  # end
+
+  # config.gem "cancancan"  
 end
