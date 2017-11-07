@@ -1,7 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-  
   scope '/consult' do
     get '/promo/:promo_code' => 'coupon#apply'
 
@@ -36,6 +33,10 @@ Rails.application.routes.draw do
     get '/', to: 'consultation#index'
   end
   
+  scope '/internal' do
+    devise_for :admin_users, ActiveAdmin::Devise.config
+    ActiveAdmin.routes(self)
+  end
 
 end
 

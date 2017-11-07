@@ -18,6 +18,7 @@ ActiveAdmin.register Coupon do
     include Pundit
     protect_from_forgery
     rescue_from Pundit::NotAuthorizedError, with: :admin_user_not_authorized
+    rescue_from ActiveRecord::RecordNotFound, with: :coupon_creation_error
     before_action :authenticate_admin_user!
     before_action :authorize_activity
 
@@ -95,6 +96,11 @@ ActiveAdmin.register Coupon do
       def admin_user_not_authorized
         flash[:alert]="Access denied"
         redirect_to (request.referrer || admin_root_path)
+      end
+      
+      def coupon_creation_error
+        flash[:alert]="Please fill in all the manadatory fields."
+        redirect_to (request.referrer || new_admin_coupon_path )
       end
   end
 
