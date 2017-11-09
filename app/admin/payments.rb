@@ -1,6 +1,5 @@
 ActiveAdmin.register Payment do
   actions :all, :except => [:new, :destroy, :edit]
-  config.per_page = [2, 50, 100]
 
   controller do
     include Pundit
