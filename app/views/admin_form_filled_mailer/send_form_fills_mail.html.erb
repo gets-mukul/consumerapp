@@ -307,15 +307,11 @@
                                   </thead>
                                   <br>
                                   <tbody>
-                                    <% @consultations.each do |c| %>
+                                   <% @consultations.each do |c| %>
                                     <tr>
-                                      <td><%= c.id %></td>
-                                      <td><%= c.pid %></td>
-                                      <td><%= c.name %></td>
-                                      <td><%= c.mobile %></td>
-                                      <td><%= c.category %></td>
-                                      <td><%= c.created_at.strftime("%d-%m-%Y %H:%M") %></td>
-                                      <td><%= c.coupon %></td>
+                                      <% c.each do |item| %>
+                                        <td><%= item %></td>
+                                      <% end %>
                                     </tr>
                                     <% end %>
                                   </tbody>
@@ -323,7 +319,6 @@
                               </td>
                             </tr>
                             <tr>
-
                               <td align="left">
                             <br><br><%= link_to "Go to Remedico", "/", target: "_blank" %></td>
                             </tr>
@@ -336,7 +331,7 @@
               </tr>
 
               <!-- END MAIN CONTENT AREA -->
-              </table>
+            </table>
 
             <!-- START FOOTER -->
             <div class="footer">
