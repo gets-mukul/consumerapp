@@ -11,6 +11,11 @@
             <option value="REFER">REFER</option>
             <option value="WEKI">WEKI</option>
           </datalist>
+          <p class="inline-hints">ex:
+                  &nbsp;&nbsp;SOCIAL&emsp;-&emsp;for social media campaigns<br>
+                  &emsp;&emsp;REFER&emsp;&nbsp;-&emsp;for recommendations<br>
+                  &emsp;&emsp;WEKI&emsp;&emsp;-&emsp;for free consultation giveaways
+          </p>
         </li>
       <% else %>
         <li class="string input required stringish">
@@ -88,27 +93,27 @@
 <script>
 
     $('input[name=generate_checkbox]').change(function(){
-        if($(this).is(':checked')) {
-            $('.tab-element').toggle();
-        } else {
-            $('.tab-element').toggle();
-        }
+      if($(this).is(':checked')) {
+        $('.tab-element').toggle();
+      } else {
+        $('.tab-element').toggle();
+      }
     });
 
     var category = '';
     var discount = '';
     
-    $("#coupon_category").keyup(function(){
-        category = this.value;
-        $("#coupon_coupon_code").val(category + discount);
-        $("#preview_coupon").val(category + 'JW2T');
+    document.getElementById('coupon_category').addEventListener('input', function () {
+      category = this.value;
+      $("#coupon_coupon_code").val(category + discount);
+      $("#preview_coupon").val(category + 'JW2T');
     });
     
-    $("#coupon_discount_amount").keyup(function(){
-        discount = this.value;
-        $("#coupon_coupon_code").val(category + discount);
+    document.getElementById('coupon_discount_amount').addEventListener('input', function () {
+      discount = this.value;
+      $("#coupon_coupon_code").val(category + discount);
     });
-    
+
 </script>
 
 <style>
@@ -177,6 +182,10 @@ div.tab-content div.tab-element:nth-child(2) {
 
 .tabs fieldset {
   margin-bottom: 0;
+}
+
+input#coupon_category, input#coupon_coupon_code {
+  text-transform: uppercase;
 }
 
 </style>
