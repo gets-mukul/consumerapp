@@ -10,9 +10,10 @@ class PaymentController < ApplicationController
 
   include PaymentHelper
   include PaytmHelper
-  before_action :check_current_user, :check_current_consultation, except: [:instant_payment]
+  # before_action :check_current_user, :check_current_consultation, except: [:instant_payment]
+  before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create]
   after_action :update_payment, only: [:failure]
-  skip_before_action :verify_authenticity_token, only: [:success, :failure]
+  skip_before_action :verify_authenticity_token, only: [:success, :failure], raise: false
 
   def index
 
