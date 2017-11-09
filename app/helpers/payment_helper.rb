@@ -61,6 +61,13 @@ module PaymentHelper
     end
     sha512.hexdigest(string)
   end
+  
+    def build_transaction_id_external patient
+      sha256 = OpenSSL::Digest::SHA256.new
+      key = patient.name + patient.email + patient.mobile
+      txnid = "RE" + sha256.hexdigest(key).to_s[1..16] + Time.now.to_s.gsub(/-|\s|\:|\+/,'')
+      return txnid
+    end
 
   private
     def build_transaction_id
