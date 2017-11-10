@@ -12,7 +12,6 @@ ActiveAdmin.register Coupon do
   scope :all, :default => true
   scope "Used"
   scope "Promos"
-  actions :all, :except => [:destroy]
   
   controller do
     include Pundit
@@ -53,11 +52,16 @@ ActiveAdmin.register Coupon do
       end
       
       if params['generate_checkbox'] != 'on'
-        hash[:coupon_code] = params["coupon"]["coupon_code"]
-        coupon = Coupon.new(hash)
-         
-        if coupon.save
-          options[:location] ||= admin_coupon_path(coupon.id)
+        hash[:coupon_code] = params["coupon"]["coupon_code"].upcase
+
+        if Coupon.find_by :coupon_code => hash[:coupon_code]
+          flash[:alert]="Coupon already exists, please select a different name."
+          return redirect_to request.referrer
+        else
+          coupon = Coupon.new(hash)
+          if coupon.save
+            options[:location] ||= admin_coupon_path(coupon.id)
+          end
         end
       else
         # letters = (
@@ -74,8 +78,17 @@ ActiveAdmin.register Coupon do
         
         uniq_codes = letters.permutation(4).to_a
         uniq_codes.map! { |item| params["coupon"]["category"] + item.join() }
-        uniq_codes = uniq_codes.shuffle[0...n]
-        
+        uniq_codes = uniq_codes.shuffle
+        selected_uniq_codes = [];
+        i = 0;
+        loop do
+          unless Coupon.find_by :coupon_code => uniq_codes[i]
+            selected_uniq_codes << uniq_codes[i]
+          end
+          i = i + 1
+          break if selected_uniq_codes.length == n
+        end
+
         coupons = []
         for i in 0...n do
           coupons.push(hash.merge(coupon_code: uniq_codes[i]))
