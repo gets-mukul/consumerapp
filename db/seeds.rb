@@ -759,4 +759,4 @@ print i
 puts " entries created"
 
 AdminUser.create!(email: '	mail@akhilsingh.net', password: 'password', password_confirmation: 'password', role: 'admin')
-AdminUser.create!(email: '	jesse.dhara@gmail.com', password: 'password', password_confirmation: 'password', role: 'admin')
+AdminUser.create!(email: '	jesse@remedicohealth.com', password: 'password', password_confirmation: 'password', role: 'admin')
