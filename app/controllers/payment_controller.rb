@@ -13,7 +13,7 @@ class PaymentController < ApplicationController
   # before_action :check_current_user, :check_current_consultation, except: [:instant_payment]
   before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create]
   after_action :update_payment, only: [:failure]
-  skip_before_action :verify_authenticity_token, only: [:success, :failure], raise: false
+  skip_before_action :verify_authenticity_token, only: [:success, :failure, :initiate_payment]
 
   def index
 
@@ -251,7 +251,6 @@ class PaymentController < ApplicationController
       if @consultation
         register_consultation @consultation
         register @consultation.patient
-        session[:condition] = @consultation.category
         return redirect_to "/consult/payment?city=null"
       else
         redirect_to "/"

@@ -23,7 +23,6 @@ $ ->
   spinner = new Spinner(opts).spin(target)
 
   $('#typeform-full').on 'load', ->
-    console.log "Typeform loaded"
     spinner.stop()
 
   $('.thanksmsg_popup').hide()

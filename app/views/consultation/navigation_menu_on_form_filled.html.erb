@@ -1,0 +1,32 @@
+<%= content_for :body_class, "inner_body white_back pad_15" %>
+<%= content_for :turn_turbolinks, "data-turbolinks=false" %>
+<article class="inner_content">
+    <div class="container" style="max-width: 800px;">
+        <div class="row">
+            <div class="col-sm-12 box pad_0 margin_0">
+              <section class=" text-center">
+                <div class="row" style="margin-bottom:20px;margin-top:20px;">
+                  <%= image_tag "remedico1.png", style: "height:30px" %>
+                </div>
+                <div class="row space_top_sm">
+                  <h4 style="font-weight: normal">Welcome back, <%= current_user.name %>!</h4>
+                </div>
+                <div class="row space_top_sm">
+                  <h4 style="font-weight: normal; line-height: 1.4;">Do you want to continue your previous consultation for <%= @fetched_consultation.category %>, or start a new one?</h4>
+                </div>
+              </section>
+              <section class="space_top space_bottom">
+                <div class="btns_info text-center">
+                    <%= link_to "FINISH YOUR CONSULTATION", consultation_initiate_path(:id => @fetched_consultation.id, :link => '/consult/payment?city=null'), :class => 'action_btn primary' %>
+                </div>
+                <div class=" text-center">
+                    <b>OR</b>
+                </div>
+                <div class="btns_info text-center">
+                    <%= link_to "START A NEW CONSULTATION", consultation_index__path, :class => 'action_btn secondary' %>
+                </div>
+              </section>
+            </div>
+        </div>
+    </div>
+</article>
