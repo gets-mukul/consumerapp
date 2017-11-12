@@ -1,5 +1,5 @@
 class PatientsController < ApplicationController
-  skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token, raise: false
   before_action :set_patient, only: [:show, :edit, :update, :destroy]
   REMEDICA_PATIENTS_ENDPOINT = Rails.application.secrets.PATIENTS_ENDPOINT
   require 'uri'
@@ -125,7 +125,7 @@ class PatientsController < ApplicationController
       {
         email: params[:email],
         mobile: params[:mobile],
-        name: params[:name].downcase.titleize.strip,
+        name: (params[:name] || "").downcase.titleize.strip,
         referrer: params[:referrer]
       }
       # params.require(:patient).permit(:name, :email, :mobile)

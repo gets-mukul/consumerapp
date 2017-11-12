@@ -1,5 +1,7 @@
 class ConsultationController < ApplicationController
-  before_action :check_current_user
+  # before_action :check_current_user
+  before_filter :check_current_user, except: [:new, :create]
+  
 
   def index
     # fetch current user and condition from session if user choce a condition

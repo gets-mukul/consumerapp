@@ -39,9 +39,11 @@ gem 'razorpay'
 # Log entries
 gem 'le'
 
-# Testing ActiveAdmin
+# Use activeadmin for admin panel
 gem 'activeadmin', github: 'activeadmin'
+# Use devise to set up admin users on admin panel
 gem 'devise'
+# Use pundit for authorization of admin users
 gem 'pundit'
 
 group :development, :test do

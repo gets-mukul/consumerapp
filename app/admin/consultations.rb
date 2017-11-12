@@ -1,6 +1,5 @@
 ActiveAdmin.register Consultation do
   require 'encrypt'
-  config.per_page = [10, 50, 100]
   
   scope :all, :default => true
   scope "Registered"
@@ -12,10 +11,6 @@ ActiveAdmin.register Consultation do
   permit_params :coupon_id, :category, :user_status, :pay_status, :amount, :payment
   actions :all, :except => [:new, :destroy]
 
-  filter :user_status
-  filter :pay_status
-  filter :coupon
-  
   action_item :edit_pay_status, only: [:show, :edit] do
     link_to 'Update Pay Status', edit_pay_status_admin_consultation_path
   end
