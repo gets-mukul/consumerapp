@@ -1,4 +1,5 @@
 <%= content_for :body_class, "inner_body white_back" %>
+<%= content_for :turn_turbolinks, "data-turbolinks=false" %>
 <main id="form-step-4" style="width: 100%; overflow-y: hidden; overflow-x: hidden">
   <section class="inner_content pad_15">
     <div class="container">
@@ -646,8 +647,6 @@
                             </div>
                           </div>
 
-
-
                           <div class="row text-center margin_b_25">
                             <div class="col-md-4 col-sm-4 col-xs-4">
                               <div class="row payment-option-icon"><img src="<%= asset_path("mobikwik.png") %>" class="img-responsive" alt="mobikwik" style="display: inline-block; max-height: 25px;"></div>
@@ -682,27 +681,32 @@
       </div>
     </div>
   </section>
-
+  <section style="background-color: #f7fcfc;">
+    <div class="row space_bottom">
+      <div class="col-sm-12 text-center space_bottom space_top" style="border-top: 1.5px dotted #17a6b0; border-bottom: 1.5px dotted #17a6b0;">
+        <div class="space_bottom space_top">
+        <img src="<%= asset_path("satisfaction_icon_blue_light.png") %>" />
+        <h5 class="sub-title color_blue">100% satisfaction </h5>
+        <p class="p_16" style="padding: 0px 30px;">If you're not completely satisfied with your consultation, we will refund your fee.</p>
+        </div>
+      </div>
+    </div>
+  </section>
   <section>
     <div class="row">
-
       <div class="col-sm-12 text-center space_bottom">
         <!-- <i class="fa fa-shield" style="display: inline-block; vertical-align: middle;" aria-hidden="true"></i>
         <span style="margin-left: 4px; margin-right: 4px;">Secure payment powered by</span>
         <img src="<%= asset_path("paytm.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 25px; margin-top: -10px;"> -->
         <h5 class="sub-title space_bottom">Total payment: Rs. <%= @amount %></h5>
       </div>
-
       <div class="col-sm-12 sticky-footer">
         <div class="text-center">
             <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
                PAY FOR YOUR TREATMENT PLAN
             <% end %>
         </div>
-        
       </div>
-
-
     </div>
   </section>
 
