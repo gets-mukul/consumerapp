@@ -26,6 +26,8 @@ class ConsultationController < ApplicationController
   end
 
   def index_page
+    # unregister, if any previous consultation exists
+    unregister_consultation
     # start a new consultation
     render 'index'
   end
@@ -42,7 +44,7 @@ class ConsultationController < ApplicationController
   def consultation_form
     if params[:condition]
       session[:condition] = @condition = params[:condition]
-      create
+      create unless current_consultation.present?
     else
       redirect_to :new_patient_path
     end
@@ -58,7 +60,7 @@ class ConsultationController < ApplicationController
 
     @condition_form = typeform[@condition] << "?mobile=#{current_user.mobile}&name=#{current_user.name}"
     session[:typeform_uid] = typeform[@condition].scan(/\/([\w]*)\?/)[0][0]
-    @consultation.update({category: params[:condition]}) unless params[:condition]==@consultation.category
+    current_consultation.update({category: params[:condition]}) unless params[:condition]==current_consultation.category
   end
 
   # def welcome

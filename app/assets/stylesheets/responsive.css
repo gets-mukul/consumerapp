@@ -599,11 +599,9 @@
 
 }
 
-
 @media (max-width: 320px) {
     section.block-sec {
         background-color: #17a6b0;
         padding: 0px 18px;
     }
 }
-
