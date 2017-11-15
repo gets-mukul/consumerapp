@@ -8,6 +8,15 @@ ActiveAdmin.register Consultation do
   scope "Free"
   scope "Payment Failed"
 
+  filter :patient
+  filter :coupon
+  filter :category, :as => :select
+  filter :user_status
+  filter :amount
+  filter :pay_status
+  filter :created_at
+  filter :updated_at
+
   permit_params :coupon_id, :category, :user_status, :pay_status, :amount, :payment
   actions :all, :except => [:new, :destroy]
 
@@ -116,6 +125,7 @@ ActiveAdmin.register Consultation do
     
     column :user_status
     column :pay_status
+    column :updated_at
     actions
   end
   
