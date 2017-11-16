@@ -3,8 +3,8 @@ class Consultation < ApplicationRecord
   belongs_to :coupon, optional: true
   validates_presence_of :user_status, :pay_status, :amount, :category, :patient
   
-  scope "Registered", -> { where(pay_status: 'registered') }
-  scope "Form filled", -> { where(pay_status: 'form filled') }
+  scope "Registered", -> { where(user_status: 'registered') }
+  scope "Form filled", -> { where(user_status: 'form filled') }
   scope "Paid", -> { where(pay_status: 'paid') }
   scope "Free", -> { where(pay_status: 'free') }
   scope "Payment Failed", -> { where("pay_status like 'payment failed%'")}
