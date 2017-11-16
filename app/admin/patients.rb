@@ -3,11 +3,11 @@ ActiveAdmin.register Patient do
   actions :all, :except => [:new, :destroy]
   permit_params :name, :mobile, :email
   
-  scope :all, :default => true
-  scope "Payment Pending"
-  scope "Free"
-  scope "Payment Failed" 
-  scope "Paid"
+  scope :all, :default => true, show_count: false
+  scope "Payment Pending", show_count: false
+  scope "Free", show_count: false
+  scope "Payment Failed", show_count: false
+  scope "Paid", show_count: false
 
   index do
     column :id do |p|

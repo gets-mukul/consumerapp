@@ -12,7 +12,7 @@ ActiveAdmin.register_page "Dashboard" do
             # table_for Patient('id desc').limit(10) do
             table_for Patient.order("id desc").limit(10) do
   
-              column(:name) {|patient| link_to patient.id, admin_patient_path(patient.id) } 
+              column(:name) {|patient| link_to patient, admin_patient_path(patient.id) }
               column(:mobile)
               column(:pay_status)
             end
