@@ -9,9 +9,9 @@ ActiveAdmin.register Coupon do
     link_to "Edit coupon", edit_admin_coupon_path
   end
 
-  scope :all, :default => true
-  scope "Used"
-  scope "Promos"
+  scope :all, :default => true, show_count: false
+  scope "Used", show_count: false
+  scope "Promos", show_count: false
   
   controller do
     include Pundit
@@ -95,6 +95,7 @@ ActiveAdmin.register Coupon do
         end
         
         Coupon.create(coupons)
+        flash[:notice] = 'Coupon was successfully created'
         
         options[:location] ||= admin_coupons_path
       end
