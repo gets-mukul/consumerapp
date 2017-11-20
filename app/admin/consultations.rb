@@ -60,6 +60,7 @@ ActiveAdmin.register Consultation do
               
               payment_params[:pg_type] = params[:payment][:pg_type] if params[:payment][:pg_type]
               payment_params[:bank_ref_num] = params[:payment][:bank_ref_num] if params[:payment][:bank_ref_num]
+              payment_params[:mode] = "manual entry"
               
               payment.update(payment_params)
             else
@@ -195,7 +196,7 @@ ActiveAdmin.register Consultation do
       end
       
       panel "Source data" do
-        table_for PatientSource.select(:created_at, :local_referrer, :utm_campaign, :consultation_id).where(:patient_id => consultation.patient_id)  do
+        table_for PatientSource.select(:created_at, :local_referrer, :utm_campaign, :consultation_id).where(:patient_id => consultation.patient_id).order('created_at ASC')  do
           column :created_at
           column "Consultation ID" do |ps|
             link_to ps.consultation_id, admin_consultation_path(ps.consultation_id)  if ps.consultation_id? 
@@ -208,7 +209,7 @@ ActiveAdmin.register Consultation do
         end
       end
       panel "Transactions" do
-        table_for Payment.select(:created_at, :id, :status, :amount, :pg_type, :consultation_id, :updated_at).where(:patient_id => consultation.patient_id)  do
+        table_for Payment.select(:created_at, :id, :status, :amount, :pg_type, :consultation_id, :updated_at).where(:patient_id => consultation.patient_id).order('created_at ASC')  do
           column :created_at
           column "Consultation ID" do |p|
             link_to p.consultation_id, admin_consultation_path(p.consultation_id)

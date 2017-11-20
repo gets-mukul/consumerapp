@@ -4,6 +4,6 @@ admin_form_fill_mails_job:
   queue: default
 
 update_google_sheets_job:
-  cron: "0 */3 * * *" # execute at every 3 hours 
+  cron: "0 3 */1 * *" # execute every day at 03:00
   class: "UpdateSheetsWorker"
   queue: default
