@@ -33,7 +33,7 @@ ActiveAdmin.register Consultation do
     before_action :coupon_empty? , only: [:update]
 
     def scoped_collection
-      super.includes :patient, :coupon
+      super.includes :patient, :coupon, :doctor
     end
 
     def coupon_empty?
@@ -130,6 +130,9 @@ ActiveAdmin.register Consultation do
     
     column :user_status
     column :pay_status
+    column "Doctor" do |cs|
+      cs.doctor.short_name if cs.doctor
+    end
     column :updated_at
     actions
   end

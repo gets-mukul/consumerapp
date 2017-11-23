@@ -1,6 +1,8 @@
 class Consultation < ApplicationRecord
   belongs_to :patient
   belongs_to :coupon, optional: true
+  belongs_to :doctor, optional: true
+
   validates_presence_of :user_status, :pay_status, :amount, :category, :patient
   
   scope "Registered", -> { where(user_status: 'registered') }
