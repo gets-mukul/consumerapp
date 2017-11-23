@@ -10,13 +10,14 @@ class PaymentController < ApplicationController
 
   include PaymentHelper
   include PaytmHelper
+  include DoctorHelper
   # before_action :check_current_user, :check_current_consultation, except: [:instant_payment]
   before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create]
+  before_action :fetch_current_doctor, except: [:instant_payment]
   after_action :update_payment, only: [:failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure, :initiate_payment]
 
   def index
-
     Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
 
@@ -99,8 +100,10 @@ class PaymentController < ApplicationController
     FreeConsultationNotifierMailer.send_free_consultation_notifier_mail(current_consultation).deliver_later if Rails.env.production?
 
     # update details
+    assign_consultation_to_doctor current_consultation
     current_user.update({pay_status: "free"})
     current_consultation.update({pay_status: "free", user_status: 'free consultation done'})
+
     coupon = Coupon.find_by_id current_consultation.coupon_id
     if coupon
       coupon.increment!(:count, 1)
@@ -164,6 +167,7 @@ class PaymentController < ApplicationController
         #   failure
         #   logger.info resp.body.strip
         # end
+        assign_consultation_to_doctor current_consultation
         current_user.update({pay_status: "paid"})
         current_consultation.update({ pay_status: "paid", user_status: 'paid' })
 
@@ -194,7 +198,8 @@ class PaymentController < ApplicationController
         logger.info "CAPTURING PAYMENT"
         response = response.capture({amount:amount})
         current_payment.update({status: response.status, pg_type: 'RAZORPAY'})
-      
+
+        assign_consultation_to_doctor current_consultation
         current_user.update({pay_status: "paid"})
         current_consultation.update({ pay_status: "paid", user_status: 'paid' })
 
@@ -216,6 +221,7 @@ class PaymentController < ApplicationController
           coupon.increment!(:count, 1)
           coupon.update(status: 'coupon used')
         end
+
         render 'success'
         unregister_consultation
         unregister
@@ -226,7 +232,6 @@ class PaymentController < ApplicationController
         redirect_to :failure
       end
     end
-      
   end
 
   def failure

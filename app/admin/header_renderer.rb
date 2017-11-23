@@ -30,11 +30,12 @@ module ActiveAdmin
         super :style => "text-align: left;"    
   
           @namespace = namespace
-          @menu = Menu.new do |m|
-            for item in get_authorized_menu_items
-              m.add label: item[:title], url: item[:url] 
-            end
-          end
+          # @menu = Menu.new do |m|
+          #   for item in get_authorized_menu_items
+          #     m.add label: item[:title], url: item[:url]
+          #   end
+          # end
+          @menu = menu
           @utility_menu = @namespace.fetch_menu(:utility_navigation)
         
         div do 

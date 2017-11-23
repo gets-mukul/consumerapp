@@ -8,8 +8,14 @@ a:hover {
   text-decoration: none;
 }
 
+.card {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  max-width: 300px;
+  margin:0 auto;
+}
+
 .paymentProgressImage {
-    content:(url("progress_bar_web.png"))
+  content:(url("progress_bar_web.png"))
 }
 
 .jssocials-shares {

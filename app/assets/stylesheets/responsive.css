@@ -492,7 +492,6 @@
 }
 
 @media (max-width: 480px) {
-
     .testi-sec h2 {
     padding: 40px 0px 50px 0px;
 }
@@ -603,5 +602,17 @@
     section.block-sec {
         background-color: #17a6b0;
         padding: 0px 18px;
+    }
+}
+
+@media (max-height: 780px) {
+    .list_btn_dark.sticky-footer.hover, .list_btn_dark.sticky-footer.hover:hover, .list_btn_dark.sticky-footer.hover:focus {
+        padding: 25px;
+    }
+}
+
+@media (max-height: 680px) {
+    .list_btn_dark.sticky-footer.hover, .list_btn_dark.sticky-footer.hover:hover, .list_btn_dark.sticky-footer.hover:focus {
+        padding: 12px 50px;
     }
 }

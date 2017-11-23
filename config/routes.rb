@@ -40,5 +40,6 @@ Rails.application.routes.draw do
     ActiveAdmin.routes(self)
   end
 
+  devise_for :doctors
 end
 
