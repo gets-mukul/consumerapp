@@ -177,7 +177,7 @@ class PaymentController < ApplicationController
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
         current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
         # initiate job - send admin mail a paid consultation
-        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later
+        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later
         
         coupon = Coupon.find_by_id current_consultation.coupon_id
         if coupon
@@ -215,7 +215,7 @@ class PaymentController < ApplicationController
         UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
         current_payment.update({mode: mode, status: 'paid', bank_ref_num: response.id})
-        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if Rails.env.production?
+        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later if Rails.env.production?
         coupon = Coupon.find_by_id current_consultation.coupon_id
         if coupon
           coupon.increment!(:count, 1)
