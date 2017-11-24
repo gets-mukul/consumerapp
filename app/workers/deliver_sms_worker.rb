@@ -7,7 +7,7 @@ class DeliverSMSWorker
 		puts "DELIVER SMS"
 
 		sent_sms = SmsService.where(patient_id: id).where("created_at >= ?", DateTime.now-0.25)
-		if sent_sms.present?
+		unless sent_sms.present?
 			consultation = Consultation.where(patient_id: id).where("created_at >= ?", DateTime.now-0.5).order('id desc')
 			if consultation.present?
 				latest_order = ["payment failed", "paid", "free consultation done", "form filled", "registered"]
