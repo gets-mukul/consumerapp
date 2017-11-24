@@ -342,6 +342,10 @@
                                       <td>Bank Ref #</td>
                                       <td><%= @payment.bank_ref_num %></td>
                                     </tr>
+                                    <tr>
+                                      <td>Assigned Doctor</td>
+                                      <td><%= @doctor %></td>
+                                    </tr>
                                     <br><br>
                                     <tr>
                                       <td><%= link_to "Go to Remedico", "#{Rails.application.secrets.DOMAIN}", target: "_blank" %></td>
