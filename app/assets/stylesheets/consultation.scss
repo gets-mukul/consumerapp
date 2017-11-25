@@ -1,3 +1,32 @@
 // Place all the styles related to the consultation controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.action_btn {
+	cursor: pointer;
+	-webkit-border-radius:30px;
+	-moz-border-radius:30px;
+	border-radius:30px;
+	padding:12px 30px; text-decoration:none;
+	min-width: 320px;
+	display: inline-block;
+	font-size: 14px;
+    letter-spacing: 2px;
+	transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+}
+
+.action_btn.primary {
+	background-color:#17b06e;
+	color:#fff;
+    font-weight: 600;
+	border:1px solid #17b06e;
+}
+
+.action_btn.secondary {
+	color: #000;
+	border: 1px solid #3f3f3f;
+}
+
+.action_btn.secondary:hover {
+	text-decoration: underline;
+}

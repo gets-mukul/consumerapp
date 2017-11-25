@@ -2,15 +2,42 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 //= require jssocials
-//= require jssocials-theme-flat
+//= require jssocials-theme-minima
+
 a:hover {
   text-decoration: none;
 }
 
-.paymentProgressImage {
-    content:(url("progress_bar_web.png"))
+.card {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  max-width: 300px;
+  margin:0 auto;
 }
 
+.paymentProgressImage {
+  content:(url("progress_bar_web.png"))
+}
+
+.jssocials-shares {
+  margin: 0.2em 0; }
+
+.jssocials-shares * {
+  box-sizing: border-box; }
+
+.jssocials-share {
+  font-size: 20px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.3em 0.6em 0.3em 0; }
+
+.jssocials-share.jssocials-share-whatsapp a { color: #29a628 }
+.jssocials-share.jssocials-share-twitter a { color: #00aced }
+.jssocials-share.jssocials-share-facebook a { color: #3b5998 }
+.jssocials-share.jssocials-share-messenger a { color: #0084ff }
+.jssocials-share.jssocials-share-googleplus a { color: #dd4b39 }
+.jssocials-share.jssocials-share-linkedin a { color: #007bb6 }
+.jssocials-share.jssocials-share-pinterest a { color: #cb2027 }
+.jssocials-share.jssocials-share-email a { color: #3490F3 }
 
 @media only screen  and (max-device-width:480px) {
   .paymentProgressImage {
