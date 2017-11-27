@@ -10,9 +10,11 @@ Rails.application.routes.draw do
     post '/patients/:coupon' => 'patients#create_with_coupon', defaults: {format: 'json'}
     get '/patients/:coupon' => 'patients#create_with_coupon', defaults: {format: 'json'}
 
-    get '/consultation', to: 'consultation#welcome'
+    # get '/consultation', to: 'consultation#welcome'
     get '/consultation_form/:condition', to: 'consultation#consultation_form'
     get '/new_patient', to: 'consultation#index'
+    get '/consultation/index_', to: 'consultation#index_page'
+    get '/consultation/initiate', to: 'consultation#initiate'
 
     get '/payment', to: 'payment#index'
     post '/payment', to: 'payment#issue_payment'
@@ -38,5 +40,6 @@ Rails.application.routes.draw do
     ActiveAdmin.routes(self)
   end
 
+  devise_for :doctors
 end
 

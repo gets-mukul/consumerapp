@@ -1,12 +1,21 @@
 ActiveAdmin.register Consultation do
   require 'encrypt'
   
-  scope :all, :default => true
-  scope "Registered"
-  scope "Form filled"
-  scope "Paid"
-  scope "Free"
-  scope "Payment Failed"
+  scope :all, :default => true, show_count: false
+  scope "Registered", show_count: false
+  scope "Form filled", show_count: false
+  scope "Paid", show_count: false
+  scope "Free", show_count: false
+  scope "Payment Failed", show_count: false
+
+  filter :patient
+  filter :coupon
+  filter :category, :as => :select
+  filter :user_status
+  filter :amount
+  filter :pay_status
+  filter :created_at
+  filter :updated_at
 
   permit_params :coupon_id, :category, :user_status, :pay_status, :amount, :payment
   actions :all, :except => [:new, :destroy]
@@ -22,6 +31,10 @@ ActiveAdmin.register Consultation do
     rescue_from Pundit::NotAuthorizedError, with: :admin_user_not_authorized
     before_action :authenticate_admin_user!
     before_action :coupon_empty? , only: [:update]
+
+    def scoped_collection
+      super.includes :patient, :coupon, :doctor
+    end
 
     def coupon_empty?
       params[:consultation][:coupon_id] = nil if params[:consultation][:coupon_id].blank?
@@ -47,6 +60,7 @@ ActiveAdmin.register Consultation do
               
               payment_params[:pg_type] = params[:payment][:pg_type] if params[:payment][:pg_type]
               payment_params[:bank_ref_num] = params[:payment][:bank_ref_num] if params[:payment][:bank_ref_num]
+              payment_params[:mode] = "manual entry"
               
               payment.update(payment_params)
             else
@@ -116,12 +130,17 @@ ActiveAdmin.register Consultation do
     
     column :user_status
     column :pay_status
+    column "Doctor" do |cs|
+      cs.doctor.short_name if cs.doctor
+    end
+    column :updated_at
     actions
   end
   
   show do
     attributes_table do
       row :patient
+      row("Patient ID") {consultation.patient_id}
       row :category
       row :user_status
       row :amount
@@ -140,9 +159,15 @@ ActiveAdmin.register Consultation do
         ps.utm_campaign if ps
       end
       
-      row "Payment link" do |cs|
-        "bit.do/rmpay?p=" + encrypt(cs)
-      end
+      row("Payment link") {
+        if consultation.user_status != 'registered'
+          "bit.do/rmpay?p=" + encrypt(consultation)
+        else
+          ""
+        end
+      }
+
+      row("Login link") { "bit.do/rme?p=" + encrypt(consultation.patient) }
       
       panel "Patient" do
         table_for Patient.select(:id, :mobile, :email).where(:id => consultation.patient_id)  do
@@ -174,14 +199,31 @@ ActiveAdmin.register Consultation do
       end
       
       panel "Source data" do
-        table_for PatientSource.select(:created_at, :local_referrer, :utm_campaign, :consultation_id).where(:patient_id => consultation.patient_id)  do
+        table_for PatientSource.select(:created_at, :local_referrer, :utm_campaign, :consultation_id).where(:patient_id => consultation.patient_id).order('created_at ASC')  do
           column :created_at
-          column "Consultation ID" do |ps| 
+          column "Consultation ID" do |ps|
             link_to ps.consultation_id, admin_consultation_path(ps.consultation_id)  if ps.consultation_id? 
           end
-          column :consultation_id
           column :local_referrer
           column :utm_campaign
+          column ""
+          column ""
+          column ""
+        end
+      end
+      panel "Transactions" do
+        table_for Payment.select(:created_at, :id, :status, :amount, :pg_type, :consultation_id, :updated_at).where(:patient_id => consultation.patient_id).order('created_at ASC')  do
+          column :created_at
+          column "Consultation ID" do |p|
+            link_to p.consultation_id, admin_consultation_path(p.consultation_id)
+          end
+          column "ID" do |p|
+            link_to p.id, admin_payment_path(p.id)
+          end
+          column :status
+          column :amount
+          column :pg_type
+          column :updated_at
         end
       end
     end
