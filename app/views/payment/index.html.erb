@@ -18,7 +18,7 @@
               <div class="row margin_25">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="card">
-                    <img class="card-img-top" src="<%= asset_path(current_doctor.avatar) %>" alt="Dr. Abhishek Omchery">
+                    <img class="card-img-top" src="<%= asset_path(current_doctor.avatar) %>" alt="<%= asset_path(current_doctor.short_name) %>">
                     <div class="card-block" style="padding: 10px;">
                       <h5 class="sub-title color_blue"><%= current_doctor.full_name %></h5>
                       <p class="card-text margin_t_15 " style="line-height: 20px" >
@@ -1386,6 +1386,28 @@ $(function() {
       
     });
 
+
+  /* save the current window state on load */
+  if (window.history && window.history.pushState) {
+    /* added city parameter manually */
+    window.history.pushState('forward', null, './payment?city=null#');
+
+    /* trigger on back button */
+    window.onpopstate = function(e) {
+      var state = $('.razorpay-container').css('display');
+      if (state=='none') {
+        var r = confirm("Warning: Are you sure you want to cancel your consultation?");
+        if (r == true) {
+          window.location = '/consult'
+          return false;
+        } else {
+        e.preventDefault();
+        }
+      } else if (state='block') {
+        rzp1.close();
+      }
+    }
+  }
 });
 
 </script>
