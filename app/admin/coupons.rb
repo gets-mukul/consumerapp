@@ -133,8 +133,6 @@ ActiveAdmin.register Coupon do
       row "Coupon link" do |c|
         if c.discount_amount == 350 || c.coupon_code.starts_with?("SOCIAL") || c.coupon_code.starts_with?("REFER")
           "remedicohealth.com/?applied=true&promo=" + c.coupon_code
-        else
-          ""
         end
       end
       active_admin_comments
