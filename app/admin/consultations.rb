@@ -182,7 +182,7 @@ ActiveAdmin.register Consultation do
       active_admin_comments
       
       panel "All Consultations" do
-        table_for Consultation.where(:patient_id => consultation.patient_id).joins('LEFT OUTER JOIN patient_sources on patient_sources.consultation_id=consultations.id').select('DISTINCT on (consultations.id) consultations.created_at, consultations.id, consultations.coupon_id, consultations.user_status, consultations.pay_status, patient_sources.local_referrer, patient_sources.utm_campaign') do
+        table_for Consultation.where(:patient_id => consultation.patient_id).joins('LEFT OUTER JOIN patient_sources on patient_sources.consultation_id=consultations.id').order('consultations.id, patient_sources.created_at').select('DISTINCT on (consultations.id) consultations.created_at, consultations.id, consultations.coupon_id, consultations.user_status, consultations.pay_status, patient_sources.local_referrer, patient_sources.utm_campaign') do
           column :created_at
           column "Consultation ID" do |cs| 
             link_to cs.id, admin_consultation_path(cs.id)
