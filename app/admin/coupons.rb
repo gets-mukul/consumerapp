@@ -131,11 +131,12 @@ ActiveAdmin.register Coupon do
       row :created_at
       row :updated_at
       row "Coupon link" do |c|
-        if c.discount_amount == 350 || c.coupon_code.starts_with?("SOCIAL") || c.coupon_code.starts_with?("REFER")
-          "remedicohealth.com/?applied=true&promo=" + c.coupon_code
-        else
-          ""
-        end
+        # if c.discount_amount == 350 || c.coupon_code.starts_with?("SOCIAL") || c.coupon_code.starts_with?("REFER")
+        #   "remedicohealth.com/?applied=true&promo=" + c.coupon_code
+        # else
+        #   ""
+        # end
+        "remedicohealth.com/?applied=true&promo=" + c.coupon_code
       end
       active_admin_comments
     end

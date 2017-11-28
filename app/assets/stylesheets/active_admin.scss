@@ -17,5 +17,9 @@ td.col.col-count,
 td.col.col-max_count,
 td.col.col-mobile,
 td.col.col-sign_in_count {
-    text-align: right;
+  text-align: right;
+}
+
+td.col.col-doctor {
+  white-space: nowrap;
 }

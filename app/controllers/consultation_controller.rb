@@ -81,37 +81,40 @@ class ConsultationController < ApplicationController
       # get the consultation with latest status from these consultations
       sorted_consultation = consultation.sort_by{|x| ConsultationController.latest_order.index x.user_status}[0]
       @consultation = Consultation.find_by_id sorted_consultation.id
-
-      # update consultation details
-      @consultation.update({category: @condition})
-      consultation_params = {}
-      unless session[:promo_code].nil?
-        coupon = Coupon.find_by coupon_code: session[:promo_code]
-        consultation_params[:amount] = 350 - coupon.discount_amount
-        consultation_params[:coupon_id] = coupon.id
+  
+      unless @consultation.pay_status == 'paid'
+  
+        # update consultation details
+        @consultation.update({category: @condition})
+        consultation_params = {}
+        unless session[:promo_code].nil?
+          coupon = Coupon.find_by coupon_code: session[:promo_code]
+          consultation_params[:amount] = 350 - coupon.discount_amount
+          consultation_params[:coupon_id] = coupon.id
+        end
+  
+        @consultation.update(consultation_params)
+        register_consultation @consultation
+        return
       end
-
-      @consultation.update(consultation_params)
-      register_consultation @consultation
-
-    else
-      # no consultation found. Create new consultation
-      consultation_params = {
-        patient: current_user,
-        category: @condition
-      }
-      unless session[:promo_code].nil?
-        coupon = Coupon.find_by coupon_code: session[:promo_code]
-        consultation_params[:amount] = 350 - coupon.discount_amount
-        consultation_params[:coupon_id] = coupon.id
-      end
-      logger.info consultation_params
-
-      @consultation = Consultation.create(consultation_params)
-      logger.info @consultation
-      register_consultation @consultation
-
-      DeliverMailsWorker.perform_in(1.hours, @consultation.id) if Rails.env.production?
     end
+    # no latest unpaid consultation found
+    # create new consultation
+    consultation_params = {
+      patient: current_user,
+      category: @condition
+    }
+    unless session[:promo_code].nil?
+      coupon = Coupon.find_by coupon_code: session[:promo_code]
+      consultation_params[:amount] = 350 - coupon.discount_amount
+      consultation_params[:coupon_id] = coupon.id
+    end
+    logger.info consultation_params
+
+    @consultation = Consultation.create(consultation_params)
+    logger.info @consultation
+    register_consultation @consultation
+
+    DeliverMailsWorker.perform_in(1.hours, @consultation.id) if Rails.env.production?
   end
 end
