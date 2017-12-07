@@ -9,6 +9,7 @@
 
 @import "active_admin/mixins";
 @import "active_admin/base";
+@import "statistics";
 
 td.col.col-id,
 td.col.col-discount_amount,
@@ -22,4 +23,8 @@ td.col.col-sign_in_count {
 
 td.col.col-doctor {
   white-space: nowrap;
+}
+
+.field {
+  border: 2px solid red;
 }

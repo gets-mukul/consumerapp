@@ -1,0 +1,190 @@
+<%= content_for :turn_turbolinks, "data-turbolinks=false" %>
+<style type="text/css">
+  * {box-sizing: border-box;}
+  body {
+  background-color: #fff;
+  text-align: center;
+  color: #3D3D3D;
+  }
+  .field {
+  transform: scale(0.8);
+  margin-bottom: 3rem;
+  opacity: 0.5;
+  transition: 0.5s ease all;
+  margin-top: 15%;
+  }
+  .field label {
+  display: block;
+  }
+  .field.active {
+  opacity: 1;
+  transform: scale(1);
+  }
+  div .full-vh {
+  height: 100vh;
+  vertical-align: middle;
+  margin-top: 15%;
+  }
+  div .field {
+  height: 100vh;
+  }
+  .selfie_btn {
+  display: inline-block;
+  cursor: default;
+  background-color: #17a6b0;
+  color: #fff;
+  width: auto;
+  height: 45px;
+  line-height: 38px;
+  padding: 0px 20px;
+  font-size: 25px;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  text-align: center;
+  font-weight: bold;
+  font-family: "Source Sans Pro", sans-serif;
+  max-width: 610px;
+  -moz-transition: background-color ease-out 100ms 0ms;
+  -webkit-transition: background-color ease-out 100ms 0ms;
+  -o-transition: background-color ease-out 100ms 0ms;
+  transition: background-color ease-out 100ms 0ms;
+  -webkit-box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1);
+  border: none;
+  color: #fff;
+  margin-top: 2%;
+  }
+  input:focus {
+  outline: none;
+  }
+  .select2-container--default .select2-selection--multiple {
+  background-color: #30aeb759;
+  border: 2px solid #30aeb7;
+  border-radius: 4px;
+  cursor: text;
+  }
+  div.field {
+  text-align: left;
+  margin-left: 5%;
+  }
+  div .field label {
+  font-size: 2em;
+  font-weight: 300;
+  line-height: 1.125em;
+  }
+  .form-border {
+  border-bottom: 3px solid #000000cf;
+  border-radius: 0px;
+  border-top: 0px;
+  border-right: 0px;
+  border-left: 0px;
+  background-color: #fff;
+  font-size: 32px;
+  font-weight: 200;
+  }
+  
+  #footer {
+  height: 60px;
+  background-color: #f5f5f5;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  }
+  .scrollable-field {
+    padding-top: 15%;
+  }
+
+  .submit_button {
+    width: 100%;
+  }
+
+  #h1_3ea7_0{font-size: 20px; font-weight: 600;}
+  #p_3ea7_0{font-size: 18px; font-weight: 400; line-height: 20px}
+  #p_3ea7_1{font-size: 18px; font-weight: 400; line-height: 20px}
+  #button_3ea7_0{margin-top:2%;}
+  #sub_3ea7_0{margin-top: -11px; margin-bottom: 28px; font-size: 16px;}
+  #selfie-photo{ margin-left: 15%; }
+  #p_3ea7_2{margin-top: 5px; margin-bottom: 28px; font-size: 16px;}
+  #div_3ea7_1{text-align:center;}
+  #div_3ea7_3{ background-color: #fafafa;border-top: 1px solid rgba(0, 0, 0, 0.25);border-bottom: 1px solid rgba(0, 0, 0, 0.25); }
+</style>
+<div class="container">
+  <div class="col-sm-12">
+    <div class="wrapper">
+      <div >
+        <div class="full-vh scrollable-field" id="scroll_element_1">
+          <div><img src="https://remedicohealth.com/images/footer_logo_blue1-min.png" alt="Remedico - Logo"/ id="tries"></div>
+          
+          <div><h1 id="h1_3ea7_0">Selfie Checkup</h1></div>
+          <div><p id="p_3ea7_0">Welcome to your FREE selfie checkup!</p></div>
+          
+          <div><p id="p_3ea7_1">Simply submit a selfie, and our dermatologists will give you a free diagnosis.</p></div>
+          <div><button class="selfie_btn scroll_to_next" id="button_3ea7_0">Start</button></div>
+          
+        </div>
+      </div>
+      
+      <!--FORM START-->
+      
+      <%= form_tag({:controller => "selfie_form", :action => "create"}, :method => "post", :class => "form", :id => "selfie_form", :multipart => true) do %>
+      
+        <!--NAME-->
+        
+        <div class="field scrollable-field" id="scroll_element_2">
+          <label class-"form-label">What is your name?*</label>
+          <input type="text" name="name" class="form-border" id="name"/>
+          <div id="error_name" for="name" class="alert text-danger font_h4">Please enter a valid name.</div>
+          <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
+        </div>
+        
+        <!--MOBILE-->
+        
+        <div class="field scrollable-field" id="scroll_element_3">
+          <label class-"form-label">What is your mobile number?*</label>
+          <sub id="sub_3ea7_0">Please ensure you have WhatsApp on this number, as we will send your diagnosis to you via WhatsApp.</sub><br>
+  
+  			  <input id="mobile" type="number" name="mobile" class="form-border input-number–noSpinners"/>
+  			  <div id="error_mobile" for="mobile" class="alert text-danger font_h4">This mobile number is not valid.</div>
+          <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
+        </div>
+        
+        <!--TAKE SELFIE-->
+        
+        <div class="field scrollable-field" id="scroll_element_4">
+          <label class="form-label">We will need a clear selfie of your face.<br><p id="p_3ea7_2">Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. <br>Ensure your profile is fully visible.</p> </label><br>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-1">
+              <div id="div_3ea7_1"><img src="https://images.typeform.com/images/LALXa4LfQghT/image/default#.png" alt="Take a selfie using your phone camera, and come back here"/></div>
+            </div>
+          </div>
+          
+          <div class="col-sm-6 col-sm-offset-3">
+            <label for="file_upload" id="selfie-photo">Click below to take your selfie.</label>
+      			<input id="file_upload" type="file" name="image" accept="image/*" capture="camera"/>
+            <div id="error_file_upload" for="file_upload" class="alert text-danger font_h4">Please upload your selfie.</div>
+          </div>
+        </div>
+      
+        <input type="hidden" id="referrer" name="referrer" value="">
+        <input type="hidden" id="utm_campaign" name="utm_campaign" value="<%= params['utm_campaign'] %>">
+        
+         <!--SUBMIT FORM -->
+        <div class="scrollable-field" id="scroll_element_5">
+          <div><button type="button" class="submit_button selfie_btn">Submit</button></div>
+        </div>
+      
+      <% end %>
+      
+      <!--FORM END-->
+    </div>
+  </div>
+</div>
+
+<div id="footer">
+  <div class="col-xs-12 navbar-fixed-bottom" id="div_3ea7_3">
+  <div class="row" id="bottomNav">
+   <div class="col-xs-4 text-center"><a href="#"><img src="<%= asset_path('footer_logo_blue1-min.png') %>" alt="Remedico - Logo" style="margin: 6px 0;"/></a></div>
+  </div>
+  </div>
+</div>

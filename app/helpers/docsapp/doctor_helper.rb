@@ -1,0 +1,2 @@
+module Docsapp::DoctorHelper
+end

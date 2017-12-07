@@ -1,22 +1,22 @@
 module DoctorHelper
   
-  def current_doctor
-    @current_doctor ||= Doctor.find session[:current_doctor_id]
+  def matched_consultation_doctor
+    @matched_consultation_doctor ||= Doctor.find session[:matched_consultation_doctor_id]
   end
 
   def assign_consultation_to_doctor consultation
-    current_doctor = Doctor.find(fetch_latest_doctor)
-    Rails.logger.info "Doctor Helper: Assigning #{current_doctor.first_name} to Consultation##{consultation.id}"
-    consultation.update(:doctor => current_doctor)
-    current_doctor.consultations_count += 1
-    current_doctor.save
+    matched_consultation_doctor = Doctor.find(fetch_latest_doctor)
+    Rails.logger.info "Doctor Helper: Assigning #{matched_consultation_doctor.first_name} to Consultation##{consultation.id}"
+    consultation.update(:doctor => matched_consultation_doctor)
+    matched_consultation_doctor.consultations_count += 1
+    matched_consultation_doctor.save
   end
   
-  def fetch_current_doctor
-    Rails.logger.info "Doctor Helper: Fetch current doctor initiated by Consultation##{session[:consultation_id]}"
-    unless session[:current_doctor_id]
-      # store the current doctor in session
-      session[:current_doctor_id] = fetch_latest_doctor
+  def fetch_matched_consultation_doctor
+    Rails.logger.info "Doctor Helper: Fetch matched_consultation_doctor initiated by Consultation##{session[:consultation_id]}"
+    unless session[:matched_consultation_doctor_id]
+      # store the matched_consultation_doctor in session
+      session[:matched_consultation_doctor_id] = fetch_latest_doctor
     end
   end
   
@@ -40,8 +40,29 @@ module DoctorHelper
         break
       end
     end
-    Rails.logger.info "Doctor Helper: Set current doctor #{next_doctor.first_name} to Consultation##{session[:consultation_id]}"
+    Rails.logger.info "Doctor Helper: Set matched_consultation_doctor #{next_doctor.first_name} to Consultation##{session[:consultation_id]}"
     return next_doctor.id
   end
   
+  def allocate_docs_to_selfies
+    Rails.logger.info "Allocating doctors to selfies"
+    # get all available doctors
+    doctors = Doctor.where(:available_for_selfie_checkup => true)
+    # get all the pending selfies
+    pending_selfies = SelfieForm.where('doctor_id is null')
+    # extract the pending selfies
+    pending_selfie_ids = pending_selfies.pluck(:id)
+
+    selfie_chunks = pending_selfie_ids.each_slice(doctors.length).to_a
+    if selfie_chunks[doctors.length].present?
+      selfie_chunks[doctors.length-1] += selfie_chunks[doctors.length]
+      selfie_chunks.delete_at doctors.length
+    end
+
+    doctors.zip(selfie_chunks).each do |doctor, selfies|
+      pending_selfies.where(id: selfies).update_all(:doctor_id => doctor.id)
+    end
+
+    Rails.logger.info "Doctor Helper: Set matched_consultation_doctor #{next_doctor.first_name} to Consultation##{session[:consultation_id]}"
+  end
 end

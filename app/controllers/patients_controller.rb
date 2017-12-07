@@ -70,6 +70,15 @@ class PatientsController < ApplicationController
     end
   end
 
+  def set_patient_email
+    if current_user && params["email"].present?
+      current_user.update({:email => params["email"]})
+      render :json => { :value => "success" }
+    else
+      render :json => { :value => "failure" }
+    end
+  end
+
   private
     def conditions
       [

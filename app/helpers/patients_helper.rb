@@ -18,6 +18,12 @@ module PatientsHelper
     reset_session
   end
 
+  def register_selfie_checkup_user user
+    session[:user_id] = user.id
+    logger.info "Registered #{user.name} for selfie_checkup"
+    setup_patient_source
+  end
+
   def check_current_user
     if current_user.nil? and session[:condition].nil?
       redirect_to '/'

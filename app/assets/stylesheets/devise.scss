@@ -1,0 +1,27 @@
+@import "bootstrap";
+@import "font-awesome.min";
+
+.login-box {
+  margin-top: 75px;
+  color: #5d5d5d;
+}
+.form-control,
+input[type="submit"].btn-block, input[type="reset"].btn-block, input[type="button"].btn-block {
+  border-radius: 0;
+}
+.btn-login,
+.btn-login:hover,
+.btn-login:focus {
+  background-color: #17a6b0;
+  color: white;
+  font-weight: 600;
+}
+.login-logo {
+  margin-bottom: 60px;
+}
+.admin_user_remember_me {
+  margin : 4px 0 0;
+}
+div#flash_alert {
+  color: #7d0000;
+}

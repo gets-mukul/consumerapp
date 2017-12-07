@@ -1,0 +1,86 @@
+<div class="content-wrapper">
+  <!-- Swiper -->
+  
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+        
+      <% @selfie_forms.each do |selfie_form| %>
+      
+        <div class="swiper-slide">
+          
+          <div class="swiper-text">
+            <div class="swiper-name"><%= selfie_form.patient.name %></div>
+            <div class="swiper-id hidden" id="<%= selfie_form.id %>"></div>
+          </div>
+
+          <div class="swiper-zoom-container">
+            <img src="<%= selfie_form.image %>" class="swiper-lazy">
+            <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>
+          </div>
+          <div class="empty_space_150"></div>
+        </div>
+
+      <% end %>
+      
+      <div class="swiper-slide">
+        <div style="text-align:center;">
+          <img src="" />
+          <p style="color:white; font-size:18px;">End of Pending Cases For Now</p>
+          <img width="150px" src="<%= asset_path('docsapp-last.jpg') %>" alt="Remedico - Last Login Screen"/>
+          <p style="color:white; font-size:18px;">Thank you for being part of 
+          <br><img src="<%= asset_path('footer_logo_blue1-min.png') %>" alt="Remedico" style="margin: 6px 0;"/></p>
+        </div>
+      </div>  
+    </div>
+    
+    <!--condition selector-->
+    <div class="row condition-selector-container">
+      <div class="condition-selector-wrapper col-md-8 col-sm-12 col-xs-12 col-md-offset-2">
+        <div class="row">
+          <div class="col-sm-12 col-md-6 text-center">
+            
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+            <div><label class="condition-key-label">Select Conditions</label></div>
+            <%= select_tag :key,
+              options_from_collection_for_select(@conditions, "key", "key"),
+              { :multiple => true, :class => 'js-example-basic-multiple pull-left', :placeholder => 'Enter Conditions' }
+            %>
+          </div>
+          <div class="swiper-controllers col-sm-12 col-md-6 text-center">
+            <button class='btn btn-secondary btn-circle btn-xl condition-btn-bad-photo' id="bad-photo">
+              <i class="fa fa-times-circle" aria-hidden="true"></i><br>
+            </button>
+            <button class='btn btn-success btn-circle btn-xl condition-btn-add' id="diagnosed" >
+              <i class="fa fa-paper-plane" aria-hidden="true"></i><br> Send
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Add Navigation -->
+    <div class="swiper-button-prev"></div>
+    <div class="swiper-button-next"></div>
+  </div>
+</div>
+
+<script src="<%= asset_path("docsapp/swiper.min.js") %>"></script>
+
+<!-- Initialize Swiper -->
+<script>
+  var swiper = new Swiper('.swiper-container', {
+    zoom: true,
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'fraction',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+  });
+  $(document).ready(function() {
+    $('.js-example-basic-multiple').select2();
+  });
+ 
+</script>

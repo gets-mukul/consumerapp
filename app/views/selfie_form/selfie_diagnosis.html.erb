@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" media="none" onload="if(media!='all')media='all'">
+
+        <style type="text/css">
+            
+            img {
+                max-width: 100%
+            }
+
+            .general-faqs {
+                padding: 0 16px 60px;
+                margin-top: -40px;
+            }
+
+            .row.icon-set-container {
+                padding: 1%;
+                margin-top: 50px;
+                margin-bottom: -30px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            }
+
+            .icon-set-container .row {
+                display: inline-block;
+                margin-bottom: 5%;
+                width: 100%;
+                height: 100%;
+            }
+
+            .item-icon {
+                float: left;
+                display: block;
+                width: 25%;
+            }
+
+            .item-content {
+                margin-left: 27%;
+                margin-right: 4%;
+                margin-top: 4%;
+                text-align: left;
+            }
+
+            .item-content h4 {
+                font-size: 14px;
+                font-family: arial;
+                letter-spacing: 0.2px;
+                color: #17a6b0;
+                margin-bottom: 2px;
+                font-weight: 600;
+            }
+
+            .item-content p {
+                font-size: 12px;
+                line-height: 14px;
+            }
+
+            .washing {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+            }
+            .vitamin_supplements {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 300% 0;
+            }
+            .diet_lifestyle {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 200% 0;
+            }
+            .sun_protection {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 100% 0;    
+            }
+            .topical_applications {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 0 50%;
+            }
+            .procedures {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 300% 50%;
+            }
+            .tests_reports {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 200% 50%;
+            }
+            .oral_medication {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 100% 50%;
+            }
+            .removal_options {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 0% 100%;
+            }
+            .diagnosis {
+                background: url(https://remedicohealth.com/images/icon-set.png);
+                background-size:  400% 300%;
+                background-position: 300% 100%;
+            }
+
+
+            @media only screen and (min-width: 500px) {
+                .icon-set-container .row {
+                    height: 80px;
+                }   
+            }
+
+            @media only screen and (min-width: 768px) {
+                .icon-set-container .row {
+                    height: 100px;
+                }   
+            }
+
+            @media only screen and (min-width: 992px) {
+                .icon-set-container .row {
+                    height: 90px;
+                }   
+            }
+
+
+            @media only screen and (min-width: 1100px) {
+                .icon-set-container .row {
+                    height: 100px;
+                }   
+            }
+
+            @media only screen and (min-width: 1300px) {
+                .icon-set-container .row {
+                    height: 80px;
+                }   
+            }
+
+        </style>    
+        
+        </head>
+
+        <body>
+
+        <!-- header start -->
+        <div style="background: #17a6b0 ;padding: 20px 0px 0px 6%;
+        ">
+        <div id="logo" style="width: 90%;text-align: left;    padding-bottom: 12px;    padding-top: 10px;"><img alt="" src="http://remedicohealth.com/images/remedico_white1.png" style="width: 34%;max-width: 120px;" /></div>
+        <div class="author" style="width: 90%;margin: 10px 0px 0px;">
+        <div class="width-auto" style="display: inline-block;vertical-align: top;"><img alt="" id="author" src="http://remedicohealth.com/images/email/image_<%= @selfie_form.doctor.code %>.png" style="width: 105%;    margin-bottom: 20px;" /></div>
+
+        <div id="aname" style="display: inline-block; padding-left: 12px;    margin-top: -2px;
+    ">
+        <div class="author_name">
+        <p style="font-family: Arial, Helvetica, sans-serif;color:#fff;text-transform:uppercase;margin:0!important;"><span>Diagnosis for <span style="display:block; line-height:normal"><%= @selfie_form.patient.name %></span></span></p>
+        </div>
+
+        <p class="prepared" style="font-family: Arial, Helvetica, sans-serif;color:#fff;margin-top:4px!important;"><span><%= @selfie_form.doctor.full_name %></span></p>
+        </div>
+        </div>
+        </div>
+        <!-- header end -->
+
+        <!-- message section start    -->
+        <div style="background: #fff;padding:30px 0px 30px 0;">
+        <div style="text-align: left;padding: 0px 6%;">
+        <div style="font-family: Arial, Helvetica, sans-serif; font-weight:bold; font-size: 14px; color: #282828 ; text-align:left; line-height: 24px;">Hi <%= @selfie_form.patient.name %>,</div>
+
+        <div style="font-family: Helvetica, arial, sans-serif; font-size: 14px; color: #000; text-align:left; line-height: 24px;">I have reviewed the photo you provided, and have prepared the following preliminary diagnosis for you. <b>Please note that this is an indication based on your photo only, and is not a comprehensive medical opinion or prescription</b>.</div>
+        </div>
+        </div>
+        <!-- message section end --><!-- box start    -->
+
+        <div class="box">
+        <div class="head" style="padding:20px 2px 20px 6%;background-color: #f7f7f7 ;vertical-align: middle;">
+        <div style="display: inline-block;"><img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/abt_ur_condition_icon.png" style="vertical-align: middle;" /></div>
+
+        <div class="about" id="about" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#17a6b0 ;text-transform:uppercase;display: inline-block;vertical-align: middle;margin: 0px;padding-left:8px;">About your condition</div>
+        </div>
+
+        <div class="content" style="padding: 30px 6% 30px 6%;;background-color:#fff;">
+
+        <!--inline description begin-->
+        <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#515151 ;line-height:20px;margin-bottom:15px">
+        It seems that you may have <%= @conditions.length < 3 ? @conditions.to_sentence(:two_words_connector => ', as well as ') : @conditions[2..-1].unshift((@conditions[0..1].to_sentence(:two_words_connector => ', as well as '))).to_sentence(:words_connector => ', ', :last_word_connector => ', and ').html_safe %>.</div>
+        <!--inline description end-->
+        
+        <% if @selfie_form.conditions.length==1 %>
+            <%= @selfie_form.conditions[0].desc.html_safe %>
+        <% else %>
+            <% @selfie_form.conditions.each do |condition| %>
+                <div style="font-family:Arial, Helvetica, sans-serif;font-size:13px;font-weight:bold;color:#515151;line-height:20px;margin-bottom:8px;margin-top: 20px;">About <%= condition.title %></div>
+                <%= condition.desc.html_safe %>
+            <% end %>
+        <% end %>
+        </div>
+        <!-- box end -->
+
+        <div class="box">
+        <div class="head" style="padding:20px 2px 20px 6%;background-color: #f7f7f7 ;vertical-align: middle;">
+        <div style="display: inline-block;"><img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/treatment_plan_icon.png" style="vertical-align: middle;" /></div>
+
+        <div class="about" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#17a6b0;text-transform:uppercase;display: inline-block;vertical-align: middle;margin:0px;padding-left:8px;">
+        Treatment Plan</div>
+        </div>
+
+        <div class="content" style=" padding:30px 6% 30px 6%;background-color:#fff;">
+
+        <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#515151 ;line-height:20px;margin-bottom:15px">
+        If you were to proceed for a full consultation, I would provide you with the following (as necessary) as part of the treatment plan for your condition(s):</div>
+
+        <!-- icons start -->
+
+        <section class="text-center general-faqs">
+            <div class="row">
+                <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6">
+
+                <!-- condition wise code start -->
+
+
+                    <div class="row icon-set-container bg_white pad_10">
+                        <br>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <span class="item-icon"><img class="icon-set diagnosis" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                                <div class="item-content">
+                                    <h4>Diagnosis & medical advice</h4>
+                                    <p>Diagnosis of your medical condition(s), and potential causes</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <span class="item-icon"><img class="icon-set topical_applications" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                                <div class="item-content">
+                                    <h4>Topical applications</h4>
+                                    <p>Including creams, lotions, moisturisers, and other products</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <span class="item-icon"><img class="icon-set oral_medication" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                                <div class="item-content">
+                                    <h4>Oral medication</h4>
+                                    <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <span class="item-icon"><img class="icon-set vitamin_supplements" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                                <div class="item-content">
+                                    <h4>Vitamins & supplements</h4>
+                                    <p>Depending on your condition, supplements to help promote skin health</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <span class="item-icon"><img class="icon-set washing" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                                <div class="item-content">
+                                    <h4>Washing advice</h4>
+                                    <p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <span class="item-icon"><img class="icon-set diet_lifestyle" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                                <div class="item-content">
+                                    <h4>Diet & lifestyle advice</h4>
+                                    <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <span class="item-icon"><img class="icon-set procedures" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                                <div class="item-content">
+                                    <h4>Procedures</h4>
+                                    <p>Procedures for improving skin appearance and health, if I think you will benefit</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="row">
+                                <span class="item-icon"><img class="icon-set tests_reports" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                                <div class="item-content">
+                                    <h4>Tests & reports</h4>
+                                    <p>Blood and other tests, if necessary for further investigation</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                <!-- condition wise code end-->
+
+                </div>
+            </div>
+        </section>
+
+        <section style=" text-align: center; ">
+        <a href="/consult/" style=" border-radius: 4px; padding: 3%; border: 1px solid lightblue; background-color: #25aab4; box-shadow: 0px 2px 4px 2px #00000036; "><div class="btn" style=" font-size: 1.2em; text-align: center; font-weight: 900; color: white; "><span>Get Your Treatment Plan</span><br><span style="font-size: 12px;font-weight: 400;text-transform: capitalize;"> for <%= @selfie_form.conditions.pluck(:title).to_sentence %></span> </div></a>
+        </section>
+
+        <!-- icons end -->
+
+        </div>
+
+        <!-- box end -->
+
+
+        <!-- box start -->
+        <div class="box">
+        <div class="head" style="padding:20px 2px 20px 6%;background-color: #f7f7f7 ;vertical-align: middle;">
+        <div style="display: inline-block;"><img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/follow_up_icon.png" style="vertical-align: middle;" /></div>
+
+        <div class="about" style="font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#17a6b0 ;text-transform:uppercase;display: inline-block;vertical-align: middle;margin: 0px;padding-left:8px;">
+        Next steps</div>
+        </div>
+
+        <div class="content" style="padding:30px 6% 30px 6%;background-color:#fff;">
+
+        <div style="display: inline-block;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#515151 ;line-height:20px;margin-bottom:8px;width: 90%;">
+        If you would like to complete a consultation with us, reach out to us through any of the ways below:
+        </div>
+
+        <div class="footer_section" style="padding:7px 0;"><img width="22" height="20" alt="" src="https://remedicohealth.com/images/fa_envelope.png" /> <a href="mailto:consult@remedicohealth.com" style="font-family:Arial, Helvetica, sans-serif;vertical-align: top;margin-left: 10px;text-decoration: none; color: black; line-height: 24px;color:#515151;">consult@remedicohealth.com</a> </div>
+
+        <div class="footer_section" style="padding:7px 0;"><img width="22" height="22" alt="" src="https://remedicohealth.com/images/fa_feather_globe.png" /> <a href="https://remedicohealth.com/" style="font-family:Arial, Helvetica, sans-serif;vertical-align: top;margin-left: 10px;text-decoration: none; color: black; line-height: 24px;color:#515151;">remedicohealth.com</a> </div>
+
+        <div class="footer_section" style="vertical-align:middle;padding-top: 8px;"> <img width="22" height="22" alt="" src="https://remedicohealth.com/images/fa_whatsapp.png" /> <span style="display:inline-block; font-family:arial,helvetica,sans-serif; margin-left:10px; vertical-align:top;line-height: 22px;color:#515151;">+91 8433 848 969</span> </div>
+
+        </div>
+        </div>
+        <!-- box end -->
+
+
+        <!-- footer start        -->
+        <div style="background:url(http://thedemolabs.com/demo/remedica/email_template/img/footer_image.png);background-repeat: repeat; padding:30px 0;text-align: center;display: block;">
+        <img src="https://remedicohealth.com/images/footer_logo_blue1.png" alt="Remedico">
+        </div>
+        <!-- footer end -->
+    </body>
+</html>

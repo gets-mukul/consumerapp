@@ -1,0 +1,2 @@
+module Docsapp::ApplicationHelper
+end
