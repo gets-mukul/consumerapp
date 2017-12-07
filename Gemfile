@@ -38,7 +38,10 @@ gem 'google-api-client'
 gem 'razorpay'
 # Log entries
 gem 'le'
-
+# Use carrier wave for imsges
+gem 'carrierwave', '~> 1.0'
+gem 'mini_magick'
+gem 'fog'
 # Use activeadmin for admin panel
 gem 'activeadmin', github: 'activeadmin'
 # Use devise to set up admin users on admin panel

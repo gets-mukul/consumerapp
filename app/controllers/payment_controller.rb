@@ -13,7 +13,7 @@ class PaymentController < ApplicationController
   include DoctorHelper
   # before_action :check_current_user, :check_current_consultation, except: [:instant_payment]
   before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create]
-  before_action :fetch_current_doctor, except: [:instant_payment]
+  before_action :fetch_matched_consultation_doctor, except: [:instant_payment]
   after_action :update_payment, only: [:failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure, :initiate_payment]
 

@@ -1,6 +1,8 @@
 ActiveAdmin.register AdminUser do
   permit_params :email, :password, :password_confirmation, :role
   actions :all, :except => [:destroy]
+  config.filters = false
+
 
   index do
     selectable_column
@@ -18,11 +20,6 @@ ActiveAdmin.register AdminUser do
     end
   end
   
-  filter :email
-  filter :current_sign_in_at
-  filter :sign_in_count
-  filter :created_at
-
   form do |f|
     f.inputs do
       f.input :email
@@ -37,26 +34,8 @@ ActiveAdmin.register AdminUser do
     attributes_table do
       row :email
       row :role
-      row :remember_created_at
       row :current_sign_in_at
       row :last_sign_in_at
-      row :current_sign_in_ip
-      row :last_sign_in_ip
-      row :updated_at
-      
-      row "Local Referrer" do |cs|
-          ps = PatientSource.find_by :consultation_id => cs.id
-          ps.local_referrer if ps
-      end
-      
-      row "UTM Campaign" do |cs|
-          ps = PatientSource.find_by :consultation_id => cs.id
-          ps.utm_campaign if ps
-      end
-      
-      row "Payment link" do |cs|
-          "bit.do/rmpay?p=" + encrypt(cs)
-      end
       
       active_admin_comments
     end
