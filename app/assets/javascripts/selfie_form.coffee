@@ -121,7 +121,8 @@ $ ->
             $('.email-container p label')[0].innerHTML = "We have received your email!"
   
   customScrollToElement = (id) ->
-    $('html,body').animate { scrollTop: id.offset().top-125 }, 'slow'
+    mOffset =  $(window).height()/2-id.height()/1.3
+    $('html,body').animate { scrollTop: id.offset().top-mOffset }, 'slow'
     return
 
 
