@@ -15,6 +15,7 @@ ActiveAdmin.register SelfieForm do
   scope "Unclear photos"
   scope "To be sent out"
   scope "No conditions"
+  actions :all, :except => [:new, :destroy]
   
   batch_action :destroy, false
   batch_action :edit, form: {
@@ -74,7 +75,7 @@ ActiveAdmin.register SelfieForm do
   show do
     attributes_table do
       row :patient
-      row("Image URL") { selfie_form.image_url_to_s }
+      row("Image URL") { selfie_form.image_url.to_s }
       row("Image") { image_tag selfie_form.image_url(:medium).to_s }
       row :status
       row :diagnosis_link

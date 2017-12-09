@@ -24,7 +24,7 @@ class SelfieFormController < ApplicationController
         return
       end
     end
-    render "new"
+    redirect_to "/consult/selfie_form/new"
   end
 
   def selfie_diagnosis
