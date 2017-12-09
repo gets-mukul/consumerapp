@@ -51,19 +51,19 @@ $(document).ready ->
       list.indexOf(el) < 0
 
   $('.swiper-controllers .btn').click ->
+    console.log 'clicked'
     status = $(this).attr('id')
     id = $('.swiper-slide-active .swiper-text .swiper-id').attr('id')
     if id
       conditions = $('.js-example-basic-multiple').val()
-      if conditions == null
-        status = "no-condition"
       params = {}
       switch status
         when 'diagnosed' then params = { id: id, status: "diagnosed", conditions: conditions }
-        when 'no-condition' then params = { id: id, status: "no-condition" }
         when 'bad-photo' then params = { id: id, status: "bad-photo" }
+        when 'no-condition' then params = { id: id, status: "no-condition" }
         else console.log ''
-      console.log params
+      if conditions == null and status = null
+        params = { id: id, status: "no-condition" }
       $('.js-example-basic-multiple').val('').trigger('change')
       $('.swiper-button-next').click()
       $.ajax
