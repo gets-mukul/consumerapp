@@ -1,8 +1,11 @@
 ActiveAdmin.register Doctor do
 
-  permit_params :email, :first_name, :last_name, :mobile, :location, :qualification, :desc, :experience, :available_for_consultation, :available_for_selfie_checkup
+  permit_params :email, :first_name, :last_name, :mobile, :location, :qualification, :desc, :experience, :available_for_consultation, :available_for_selfie_checkup, :password
   config.filters = false
   actions :all, :except => [:new, :destroy]
+  action_item :edit, only: :show do
+    link_to "Change Password", change_admin_doctor_path
+  end
   
   batch_action :destroy, false
   
@@ -26,6 +29,10 @@ ActiveAdmin.register Doctor do
     redirect_to collection_path, notice: "Updated doctor status."
   end
   
+  member_action :change, method: :get do
+    redirect_to resource_path(resource)
+  end
+
   index do
     selectable_column
     column :id
@@ -72,4 +79,29 @@ ActiveAdmin.register Doctor do
     end
   end
 
+  controller do
+    include Pundit
+    protect_from_forgery
+    rescue_from Pundit::NotAuthorizedError, with: :admin_user_not_authorized
+    before_action :authenticate_admin_user!
+    before_action :authorize_activity
+
+    def authorize_activity
+      authorize Doctor
+    end
+
+    def pundit_user
+      current_admin_user
+    end
+
+    def change
+      @doctor = resource
+    end
+
+    private
+      def admin_user_not_authorized
+        flash[:alert]="Access denied"
+        redirect_to (request.referrer || admin_root_path)
+      end
+  end
 end

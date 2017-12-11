@@ -330,6 +330,7 @@
     } else {
       $('#selfie_form').submit();
     }
+    ga('send', 'event', { eventCategory: 'selfieFormPage', eventAction: 'clickSubmitButton' });
   });
   
   customScrollToElement = function(id) {
@@ -352,6 +353,7 @@
       reader.readAsDataURL(input.files[0]);
       $('#scroll_element_5').show();
       customScrollToElement($('#scroll_element_5'));
+      ga('send', 'event', { eventCategory: 'selfieFormPage', eventAction: 'clickUploadButton' });
     }
   }
 

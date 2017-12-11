@@ -9,8 +9,9 @@ class SelfieForm < ApplicationRecord
   scope "Created today", -> { where("created_at >= ?", Time.zone.now.beginning_of_day) }
   scope "To be diagnosed", -> { where(status: 'pending') }
   scope "Unclear photos", -> { where(status: 'unclear') }
-  scope "No conditions", -> { where(status: 'no-condition')}
+  scope "No conditions", -> { where(status: 'no-condition') }
   scope "To be sent out", -> { where(status: 'diagnosed') }
+  scope "Sent", -> { where(status: 'sent') }
   
   def set_defaults
 	  self.status ||= 'pending'
