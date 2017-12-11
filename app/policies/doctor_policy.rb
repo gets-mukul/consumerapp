@@ -31,6 +31,10 @@ class DoctorPolicy < AdminUserPolicy
   def batch_action?
     @user.admin?
   end
+  
+  def change?
+    @user.admin?
+  end
 
   def scope
     Pundit.policy_scope!(user, record.class)
