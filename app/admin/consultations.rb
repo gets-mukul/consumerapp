@@ -119,7 +119,7 @@ ActiveAdmin.register Consultation do
 
   index do
     column :created_at
-    column :id, :label => 'Consultation id'
+    column :id
     column :patient
     column :coupon
     column :amount
@@ -138,92 +138,101 @@ ActiveAdmin.register Consultation do
   end
   
   show do
-    attributes_table do
-      row :patient
-      row("Patient ID") {consultation.patient_id}
-      row :category
-      row :user_status
-      row :amount
-      row :coupon
-      row :pay_status
-      row :created_at
-      row :updated_at
-      
-      row "Local Referrer" do |cs|
-        ps = PatientSource.find_by :consultation_id => cs.id
-        ps.local_referrer if ps
-      end
-      
-      row "UTM Campaign" do |cs|
-        ps = PatientSource.find_by :consultation_id => cs.id
-        ps.utm_campaign if ps
-      end
-      
-      row("Payment link") {
-        if consultation.user_status != 'registered'
-          "bit.do/rmpay?p=" + encrypt(consultation)
-        else
-          ""
-        end
-      }
+    div class: "row" do
+      div class: "col-md-6 col-sm-12 col-xs-12" do
+        attributes_table do
+          row :patient
+          row("Patient ID") {consultation.patient_id}
+          row :category
+          row :user_status
+          row :amount
+          row :coupon
+          row :pay_status
+          row :created_at
+          row :updated_at
 
-      row("Login link") { "bit.do/rme?p=" + encrypt(consultation.patient) }
-      
-      panel "Patient" do
-        table_for Patient.select(:id, :mobile, :email).where(:id => consultation.patient_id)  do
-          column "Patient ID" do |p| 
-            link_to p.id, admin_patient_path(p.id)
-          end
-          column :mobile
-          column :email
-        end
-      end
-      
-      active_admin_comments
-      
-      panel "All Consultations" do
-        table_for Consultation.where(:patient_id => consultation.patient_id).joins('LEFT OUTER JOIN patient_sources on patient_sources.consultation_id=consultations.id').order('consultations.id, patient_sources.created_at').select('DISTINCT on (consultations.id) consultations.created_at, consultations.id, consultations.coupon_id, consultations.user_status, consultations.pay_status, patient_sources.local_referrer, patient_sources.utm_campaign') do
-          column :created_at
-          column "Consultation ID" do |cs| 
-            link_to cs.id, admin_consultation_path(cs.id)
-          end
-          column "Coupon" do |cs| 
-            cs.coupon
-          end
+          row("Payment link") {
+            if consultation.user_status != 'registered'
+              "bit.do/rmpay?p=" + encrypt(consultation)
+            else
+              ""
+            end
+          }
 
-          column :user_status
-          column :pay_status
-          column :local_referrer
-          column :utm_campaign
+          row("Login link") { "bit.do/rme?p=" + encrypt(consultation.patient) }
+
+          panel "Patient" do
+            table_for Patient.select(:id, :mobile, :email).where(:id => consultation.patient_id)  do
+              column "Patient ID" do |p|
+                link_to p.id, admin_patient_path(p.id)
+              end
+              column :mobile
+              column :email
+            end
+          end
         end
       end
-      
-      panel "Source data" do
-        table_for PatientSource.select(:created_at, :local_referrer, :utm_campaign, :consultation_id).where(:patient_id => consultation.patient_id).order('created_at ASC')  do
-          column :created_at
-          column "Consultation ID" do |ps|
-            link_to ps.consultation_id, admin_consultation_path(ps.consultation_id)  if ps.consultation_id? 
+
+      div class: "col-md-6 col-sm-12 col-xs-12" do
+        active_admin_comments
+      end
+    end
+
+    div class: "row" do
+      div class: "col-md-12 col-sm-12 col-xs-12" do
+        panel "All Consultations" do
+          table_for Consultation.where(:patient_id => consultation.patient_id).joins('LEFT OUTER JOIN patient_sources on patient_sources.consultation_id=consultations.id').order('consultations.id, patient_sources.created_at').select('DISTINCT on (consultations.id) consultations.created_at, consultations.id, consultations.coupon_id, consultations.user_status, consultations.pay_status, patient_sources.local_referrer, patient_sources.utm_campaign') do
+            column :created_at
+            column "Consultation ID" do |cs|
+              link_to cs.id, admin_consultation_path(cs.id)
+            end
+            column "Coupon" do |cs|
+              cs.coupon
+            end
+
+            column :user_status
+            column :pay_status
+            column :local_referrer
+            column :utm_campaign
           end
-          column :local_referrer
-          column :utm_campaign
-          column ""
-          column ""
-          column ""
         end
       end
-      panel "Transactions" do
-        table_for Payment.select(:created_at, :id, :status, :amount, :pg_type, :consultation_id, :updated_at).where(:patient_id => consultation.patient_id).order('created_at ASC')  do
-          column :created_at
-          column "Consultation ID" do |p|
-            link_to p.consultation_id, admin_consultation_path(p.consultation_id)
+    end
+
+    div class: "row" do
+      div class: "col-md-12 col-sm-12 col-xs-12" do
+        panel "Source data" do
+          table_for PatientSource.select(:created_at, :local_referrer, :utm_campaign, :consultation_id).where(:patient_id => consultation.patient_id).order('created_at ASC')  do
+            column :created_at
+            column "Consultation ID" do |ps|
+              link_to ps.consultation_id, admin_consultation_path(ps.consultation_id)  if ps.consultation_id?
+            end
+            column :local_referrer
+            column :utm_campaign
+            column ""
+            column ""
+            column ""
           end
-          column "ID" do |p|
-            link_to p.id, admin_payment_path(p.id)
+        end
+      end
+    end
+
+    div class: "row" do
+      div class: "col-md-12 col-sm-12 col-xs-12" do
+        panel "Transactions" do
+          table_for Payment.select(:created_at, :id, :status, :amount, :pg_type, :consultation_id, :updated_at).where(:patient_id => consultation.patient_id).order('created_at ASC')  do
+            column :created_at
+            column "Consultation ID" do |p|
+              link_to p.consultation_id, admin_consultation_path(p.consultation_id)
+            end
+            column "ID" do |p|
+              link_to p.id, admin_payment_path(p.id)
+            end
+            column :status
+            column :amount
+            column :pg_type
+            column :updated_at
           end
-          column :status
-          column :amount
-          column :pg_type
-          column :updated_at
         end
       end
     end
@@ -249,5 +258,28 @@ ActiveAdmin.register Consultation do
   member_action :edit_pay_status, :method => :get do
     @consultation = resource
   end
-  
+
+  csv force_quotes: true, col_sep: ';' do
+    column :created_at
+    column :id, :label => 'Consultation id'
+    column :patient
+    column "Mobile" do |cs|
+      cs.patient.mobile
+    end
+    column :category
+    column :user_status
+    column :coupon
+    column :amount
+    column :pay_status
+
+    column :updated_at
+
+    column "Local Referrer" do |cs|
+      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:local_referrer).map {|e| e ? e : "nil"} * ", "
+    end
+
+    column "UTM Campaign" do |cs|
+      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:local_referrer).map {|e| e ? e : "nil"} * ", "
+    end
+  end
 end
