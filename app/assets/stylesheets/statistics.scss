@@ -1,0 +1,21 @@
+
+ul.statistics.statistics-stats {
+    display: inline-block;
+    list-style-type: none;
+}
+
+.statistics.statistics-stats li {
+    float: left;
+    padding: 20px;
+}
+
+.statistics.statistics-stats-value {
+    font-size: 32px;
+}
+
+.statistics.statistics-stats-label {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: bold;
+    line-height: 1.2em;
+}

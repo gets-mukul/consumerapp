@@ -10,6 +10,11 @@
 @import "active_admin/mixins";
 @import "active_admin/base";
 
+/* ------------------------ RESET ------------------------ */
+#footer {
+  visibility: hidden;
+}
+
 td.col.col-id,
 td.col.col-discount_amount,
 td.col.col-amount,
