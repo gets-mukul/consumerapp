@@ -15,16 +15,23 @@ ActiveAdmin.register SelfieForm do
   scope "Unclear photos"
   scope "To be sent out"
   scope "No conditions"
+  scope "Sent"
   actions :all, :except => [:new, :destroy]
   
   batch_action :destroy, false
-  batch_action :edit, form: {
+  batch_action :change_doctor, form: {
     doctor: Doctor.all.map { |doctor| [doctor.short_name, doctor.id] }
   } do |ids, inputs|
-    SelfieForm.where(:id => ids).update_all(:doctor_id => inputs["doctor"]) 
-    redirect_to collection_path, notice: "Updated doctor."
+    SelfieForm.where(:id => ids, :status => 'pending').update_all(:doctor_id => inputs['doctor'])
+    redirect_to collection_path, notice: 'Updated doctor.'
   end
-  
+  batch_action :change_status, form: {
+    status: ['bad-photo', 'sent']
+  } do |ids, inputs|
+    SelfieForm.where(:id => ids).update_all(:status => inputs['status'])
+    redirect_to collection_path, notice: 'Updated status.'
+  end
+
   index do
     
     panel "" do
@@ -59,22 +66,20 @@ ActiveAdmin.register SelfieForm do
     column :created_at
     column :id
     column :patient
+    column "Mobile" do |selfie_form|
+      selfie_form.patient.mobile
+    end
     column :status
     column :doctor
     column :diagnosis_link
     column :updated_at
     actions
   end
-  
-  controller do
-    def scoped_collection
-      super.includes :patient, :doctor
-    end
-  end
-  
+
   show do
     attributes_table do
       row :patient
+      row("Mobile") { selfie_form.patient.mobile }
       row("Image URL") { selfie_form.image_url.to_s }
       row("Image") { image_tag selfie_form.image_url(:medium).to_s }
       row :status
@@ -82,7 +87,34 @@ ActiveAdmin.register SelfieForm do
       row :doctor
       row :created_at
       row :updated_at
+      row("Conditions") { selfie_form.conditions.to_sentence }
     end
+  end
+
+  controller do
+    include Pundit
+    protect_from_forgery
+    rescue_from Pundit::NotAuthorizedError, with: :admin_user_not_authorized
+    before_action :authenticate_admin_user!
+    before_action :authorize_activity
+
+    def authorize_activity
+      authorize SelfieForm
+    end
+
+    def scoped_collection
+      super.includes :patient, :doctor
+    end
+
+    def pundit_user
+      current_admin_user
+    end
+
+    private
+      def admin_user_not_authorized
+        flash[:alert]="Access denied"
+        redirect_to (request.referrer || admin_root_path)
+      end
   end
 
 end
