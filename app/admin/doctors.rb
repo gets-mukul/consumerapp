@@ -52,4 +52,24 @@ ActiveAdmin.register Doctor do
     end
   end
 
+  show do
+    attributes_table do
+      row :email
+      row :current_sign_in_at
+      row :last_sign_in_at
+      row :full_name
+      row :mobile
+      row :location
+      row :avatar
+      row :qualification
+      row("Description") { doctor.desc.html_safe }
+      row :experience
+      row :available_for_consultation
+      row :available_for_selfie_checkup
+      row :consultations_count
+      row :selfies_count
+      row :code
+    end
+  end
+
 end

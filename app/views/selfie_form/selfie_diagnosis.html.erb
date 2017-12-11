@@ -185,7 +185,7 @@
 
         <!--inline description begin-->
         <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#515151 ;line-height:20px;margin-bottom:15px">
-        It seems that you may have <%= @conditions.length < 3 ? @conditions.to_sentence(:two_words_connector => ', as well as ') : @conditions[2..-1].unshift((@conditions[0..1].to_sentence(:two_words_connector => ', as well as '))).to_sentence(:words_connector => ', ', :last_word_connector => ', and ').html_safe %>.</div>
+        It seems that you may have <%= @conditions.length < 3 ? @conditions.to_sentence(:two_words_connector => ', as well as ').html_safe : @conditions[2..-1].unshift((@conditions[0..1].to_sentence(:two_words_connector => ', as well as '))).to_sentence(:words_connector => ', ', :last_word_connector => ', and ').html_safe %>.</div>
         <!--inline description end-->
         
         <% if @selfie_form.conditions.length==1 %>

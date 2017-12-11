@@ -29,8 +29,8 @@
         <!-- small box -->
         <div class="small-box bg-green">
           <div class="inner">
-            <h3><%= SelfieForm.where("status!='pending' and doctor_id = ?", current_doctor.id).count()  %><sup style="font-size: 20px">%</sup></h3>
-            <p>Completed</p>
+            <h3><%= current_doctor.selfies_count() %></h3>
+            <p>Selfies Checked</p>
           </div>
           <div class="icon">
             <i class="ion ion-android-happy"></i>
