@@ -28,6 +28,10 @@ class SelfieFormPolicy < AdminUserPolicy
     @user.admin?
   end
 
+  def batch_action?
+    @user.admin?
+  end
+
   def scope
     Pundit.policy_scope!(user, record.class)
   end
