@@ -279,7 +279,7 @@ ActiveAdmin.register Consultation do
     end
 
     column "UTM Campaign" do |cs|
-      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:local_referrer).map {|e| e ? e : "nil"} * ", "
+      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:utm_campaign).map {|e| e ? e : "nil"} * ", "
     end
   end
 end
