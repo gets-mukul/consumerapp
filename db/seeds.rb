@@ -789,10 +789,10 @@ end
 #   i += 1
 # end
 
-Doctor.find_by(:email => "sonam@remedico.com").update({:code => 'svim'})
-Doctor.find_by(:email => "gaurangi@remedico.com").update({:code => 'grg'})
-Doctor.find_by(:email => "ankita@remedico.com").update({:code => 'asaw'})
-Doctor.find_by(:email => "abhishek@remedico.com").update({:code => 'aom'})
+Doctor.find_by(:email => "sonam@remedico.com").update({:code => 'svim', :email => 'sonam_v7@yahoo.com', :available_for_selfie_checkup => true})
+Doctor.find_by(:email => "gaurangi@remedico.com").update({:code => 'grg', :email => 'gaurangishrawat@yahoo.com', :available_for_selfie_checkup => true})
+Doctor.find_by(:email => "ankita@remedico.com").update({:code => 'asaw', :email => 'ankita.sawant1@gmail.com', :available_for_selfie_checkup => true})
+Doctor.find_by(:email => "abhishek@remedico.com").update({:code => 'aom', :email => 'abhishekomchery@gmail.com'})
 Doctor.find_by(:email => "gautam@remedico.com").update({:code => 'gdet'})
 Doctor.find_by(:email => "pradnya@remedico.com").update({:code => 'prd'})
 

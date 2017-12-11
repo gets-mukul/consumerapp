@@ -19,5 +19,6 @@ $ ->
             console.log "saved"
             $('.email-container div').animate({ opacity: 0 }, 600).remove()
             $('.email-container p label')[0].innerHTML = "We have received your email!"
+      ga('send', 'event', { eventCategory: 'selfieFormPage', eventAction: 'clickEmailButton' });
   
   return
