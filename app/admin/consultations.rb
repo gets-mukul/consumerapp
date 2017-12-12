@@ -275,11 +275,11 @@ ActiveAdmin.register Consultation do
     column :updated_at
 
     column "Local Referrer" do |cs|
-      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:local_referrer).map {|e| e ? e : "nil"} * ", "
+      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:local_referrer).collect {|obj| obj.present? ? obj : "nil"} * ", "
     end
 
     column "UTM Campaign" do |cs|
-      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:utm_campaign).map {|e| e ? e : "nil"} * ", "
+      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:utm_campaign).collect {|obj| obj.present? ? obj : "nil"} * ", "
     end
   end
 end
