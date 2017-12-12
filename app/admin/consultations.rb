@@ -259,7 +259,7 @@ ActiveAdmin.register Consultation do
     @consultation = resource
   end
 
-  csv force_quotes: true, col_sep: ';' do
+  csv force_quotes: true, col_sep: ',' do
     column :created_at
     column :id, :label => 'Consultation id'
     column :patient
