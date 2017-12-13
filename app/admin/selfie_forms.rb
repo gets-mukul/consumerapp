@@ -73,7 +73,7 @@ ActiveAdmin.register SelfieForm do
     column :doctor
     column :diagnosis_link
     column "Shortened URL" do |selfie_form|
-       selfie_form.diagnosis_link ? "bit.do/remedico-selfie?s=" + selfie_form.diagnosis_link.split('/').last : ""
+       selfie_form.diagnosis_link ? "bit.do/remedico-selfie?s=" + selfie_form.diagnosis_link.split('=').last : ""
     end
     column :updated_at
     actions
@@ -87,7 +87,7 @@ ActiveAdmin.register SelfieForm do
       row("Image") { image_tag selfie_form.selfie_image.image_url(:medium).to_s }
       row :status
       row :diagnosis_link
-      row("Sortened URL") { selfie_form.diagnosis_link ? "bit.do/remedico-selfie?s=" + selfie_form.diagnosis_link.split('/').last : "" }
+      row("Sortened URL") { selfie_form.diagnosis_link ? "bit.do/remedico-selfie?s=" + selfie_form.diagnosis_link.split('=').last : "" }
       row :doctor
       row :created_at
       row :updated_at
