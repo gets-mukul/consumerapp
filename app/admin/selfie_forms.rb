@@ -1,5 +1,5 @@
 ActiveAdmin.register SelfieForm do
-
+  require 'urlsafe_encrypt'
   permit_params :doctor_id
 
   filter :id
@@ -72,6 +72,9 @@ ActiveAdmin.register SelfieForm do
     column :status
     column :doctor
     column :diagnosis_link
+    column "Shortened URL" do |selfie_form|
+       selfie_form.diagnosis_link ? "bit.do/remedico-selfie?s=" + selfie_form.diagnosis_link.split('/').last : ""
+    end
     column :updated_at
     actions
   end
@@ -80,10 +83,11 @@ ActiveAdmin.register SelfieForm do
     attributes_table do
       row :patient
       row("Mobile") { selfie_form.patient.mobile }
-      row("Image URL") { selfie_form.image_url.to_s }
-      row("Image") { image_tag selfie_form.image_url(:medium).to_s }
+      row("Image URL") { selfie_form.selfie_image.image_url.to_s }
+      row("Image") { image_tag selfie_form.selfie_image.image_url(:medium).to_s }
       row :status
       row :diagnosis_link
+      row("Sortened URL") { selfie_form.diagnosis_link ? "bit.do/remedico-selfie?s=" + selfie_form.diagnosis_link.split('/').last : "" }
       row :doctor
       row :created_at
       row :updated_at
