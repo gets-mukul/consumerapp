@@ -15,7 +15,7 @@
         
           <p style="margin-bottom: 20px;"><strong>Dear <%= @user.name %>,</strong></p>
           <p>Thanks for trying out Remedico! </p>
-          <p>Our dermatologists have reviewed your selfie. Here is your diagnosis</p>
+          <p>Our dermatologists have reviewed your selfie. Click below to get your diagnosis</p>
           <!-- Start you consultation button start -->
           <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;width: 100%;max-width: 600px;margin: 25px 0">
             <tbody>
@@ -25,7 +25,7 @@
                     <tbody>
                       <tr>
                         <td align="center" valign="middle" style="font-family: Arial;font-size: 16px;padding: 10px 15px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;vertical-align: top;">
-                          <a title="Get my diagnosis" href="<%= @selfie.diagnosis_link %>" target="_blank" style="font-weight: bold;letter-spacing: 1.1px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;font-size: 14px !important;">GET MY DIAGNOSIS</a>
+                          <a title="Get my diagnosis" href="<%= @selfie_link %>" target="_blank" style="font-weight: bold;letter-spacing: 1.1px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;font-size: 14px !important;">GET MY DIAGNOSIS</a>
                         </td>
                       </tr>
                     </tbody>
