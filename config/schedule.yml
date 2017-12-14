@@ -7,3 +7,13 @@ update_google_sheets_job:
   cron: "0 */3 * * *" # execute every 3 hours
   class: "UpdateSheetsWorker"
   queue: default
+
+allocate_doctors_to_selfies_job:
+  cron: "0 */1 * * *" # execute every 1 hour
+  class: "AllocateDoctorsToSelfiesWorker"
+  queue: default
+
+send_out_selfie_diagnosis_job:
+  cron: "0 */2 * * *" # execute every 2 hours
+  class: "SendOutSelfieDiagnosisWorker"
+  queue: default

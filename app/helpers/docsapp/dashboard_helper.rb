@@ -1,0 +1,2 @@
+module Docsapp::DashboardHelper
+end

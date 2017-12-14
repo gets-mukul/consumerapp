@@ -1,0 +1,114 @@
+// Place all the styles related to the Docsapp::Dashboard controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.content_wrapper {
+  font-family: ralewayregular;
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+}
+.swiper-container {
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+
+  .swiper-slide {
+    overflow: hidden;
+    
+    .swiper-zoom-container {
+      background-color: #000;
+    }
+
+    .swiper-text {
+      color: #fff;
+      padding: 0 10px 10px;
+      font-family: 'pt_sansregular';
+      
+      .swiper-name {
+        font-size: 18px;
+      }
+    }
+    
+    .empty_space_150 {
+      background-color: black;
+      height: 150px;
+    }
+    
+  }
+  
+  .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    background-color: #138E97;
+    border: 1px solid #5f5ca857;
+    border-radius: 4px;
+    cursor: default;
+    color: white;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+    text-transform: capitalize;
+    padding: 0 5px;
+    font-weight: 500;
+    box-shadow: 0 1px 0px 1px #00000026;
+  }
+}
+.btn-circle.btn-xl {
+  width: 80px;
+  height: 80px;
+  padding: 10px 16px;
+  font-size: 0.8em;
+  line-height: 1.33;
+  border-radius: 50px;
+  box-shadow: 0px 3px 2px 2px rgba(0, 0, 0, 0.125);
+}
+
+.btn-secondary.btn-circle {
+  width: 50px !important;
+  height: 50px !important;
+  font-size: 0.5em;
+  color: #dd4b39;
+}
+
+.btn-circle {
+  .fa {
+    font-size: 3em;
+    margin-left: -0.1em;
+  }  
+}
+
+.condition-selector-container {
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+}
+
+.condition-selector-wrapper {
+  position: fixed;
+  bottom: 1px;
+  z-index: 9999;
+  border: 2px solid #80808047;
+  border-radius: 3px;
+  margin-bottom: 5px;
+  background-color: #f0f8ff9e;
+  box-shadow: 0 2px 3px 5px #0000006b;
+  margin-bottom: 0px;
+  padding: 2px 5px;
+}
+
+.condition-key-label {
+  margin: 0 0 2px;
+  color: #666;
+  font-size: 12px;  
+}
+
+.swiper-pagination {
+  color: #666;
+  right: 0;
+  font-size: 18px;
+  padding-right: 16px;
+}
+
+@media (min-width: 768px) {
+  .swiper-pagination {
+    padding-right: 16px;
+  }
+}

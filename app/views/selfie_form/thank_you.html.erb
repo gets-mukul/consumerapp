@@ -1,0 +1,68 @@
+<%= content_for :body_class, "inner_body white_back pad_15" %>
+<%= content_for :web_push, "<link rel='manifest' href='/manifest.json'>
+  <script src='https://cdn.onesignal.com/sdks/OneSignalSDK.js' async></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(['init', {
+      appId: 'faeb4687-bc7b-49b6-b8f0-93be7a95f6bd',
+      autoRegister: false,
+      notifyButton: {
+        enable: true /* Set to false to hide */
+      }
+    }]);
+  </script>".html_safe %>
+
+<main class="margin_t_15">
+  <section class="inner_content">
+    <div class="container">
+      <div class="row contactpopup_info margin_t_15">
+        <div class="col-sm-12 box pad_0 margin_0">
+          <div class="row">
+            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 space_bottom">
+              <div class="row margin_25">
+                <a href="https://remedicohealth.com"><img src="<%= asset_path('footer_logo_blue1-min.png') %>" alt="Remedico"></a>
+              </div>
+              <div class="row margin_b_25">
+                <div class="col-sm-12 col-md-6 col-md-offset-3">
+                  <div class="icon_circle_back_lg green_back">
+                    <i class="fa fa-check"></i>
+                  </div>
+                </div>
+              </div>
+              <div class="row margin_t_15">
+                <p>Thanks! We'll send your diagnosis to your mobile number soon.<br><br></p> 
+                <div class="email-container">
+                  <p><label>Enter your email for important updates from Remedico</label></p>  
+                  <div class="space_bottom">
+                    <button class="input-text-field-btn" id="store_email">Send</button>
+                    <div class="inline-email-field-wrapper">
+                      <input type="email" name="email" id="email" placeholder="greatskin@gmail.com"  class="inline-email-field"/>
+                    </div>
+                  </div>
+              </div>
+              
+              <div class="row margin_t_15">
+                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                  <div class="row selfie_form_social">
+                    <div class="col-md-12 col-sm-12 col-xs-12">Follow Us On Instagram <a href="http://bit.ly/2AZAc1x"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
+                    
+                    
+                  </div>
+                </div>
+              </div>
+              
+                <br>
+                <p>
+                  Follow Remedico to be updated with the latest skin care tips and communication regarding your <strong>free</strong> selfie-consultation.
+              </p>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">

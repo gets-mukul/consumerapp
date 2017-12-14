@@ -1,15 +1,19 @@
 class Doctor < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  # :confirmable, :lockable, "registerable", :timeoutable and :omniauthable
+  devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  def to_s
+    "Dr. #{first_name}"
+  end
+
   def short_name
-    'Dr. ' << self.first_name
+    "Dr. #{first_name}"
   end
 
   def full_name
-    'Dr. ' << self.first_name << ' ' << self.last_name
+    "Dr. #{first_name} #{last_name}"
   end
-  
+
 end
