@@ -4,6 +4,7 @@ def urlsafe_encrypt(text)
 end
 
 def urlsafe_decrypt(text)
+  text = text.ljust(24, '=')
   text = Base64.urlsafe_decode64(text)
   (value = OpenSSL::Cipher::Cipher.new('aes-128-cbc').send(:decrypt)).key = Digest::SHA256.digest(Rails.application.secrets.SELFIE_KEY)
   value.update(text) << value.final
