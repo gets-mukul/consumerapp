@@ -64,7 +64,7 @@ class SmsServiceController < ApplicationController
   # usage: message_body("Kelly", 1234)
   def self.selfie_diagnosis_message_body(name, selfie_link)
     login_link = "bit.do/remedico-selfie?s=" + selfie_link.split('=').last
-    sms = "Hi #{name}! Your selfie diagnosis is ready. Check it out at #{login_link} - Team Remedico"
+    sms = "Hi #{name}! Your selfie diagnosis is ready. Check it out at #{login_link} -Team Remedico"
     return sms
   end
 

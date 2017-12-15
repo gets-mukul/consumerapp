@@ -9,7 +9,7 @@ class SelfieFormController < ApplicationController
     Rails.logger.info "Registering selfie user #{params['name']}"
 
     # check if patient exists
-    patient = Patient.where(:mobile => params['mobile']).first_or_create(:name => params['name'].downcase.titleize.strip, :pay_status => 'selfie checkup')
+    patient = Patient.where(:mobile => params['mobile']).first_or_create(:name => params['name'].downcase.titleize.strip!, :pay_status => 'selfie checkup')
 
     if patient
       # create a selfie form
@@ -43,7 +43,7 @@ class SelfieFormController < ApplicationController
       if @selfie_form
         # if key is valid render the diagnosis page
         @conditions = @selfie_form.conditions.pluck(:inline_desc)
-        @login_link = "/consult/patients?name=#{selfie_form.patient.name}&mobile=#{selfie_form.patient.mobile}"
+        @login_link = "/consult/patients?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}"
         render 'selfie_diagnosis'
       end
     end
