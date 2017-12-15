@@ -103,6 +103,7 @@ body {
 .margin_t_15 { margin-top: 15px; }
 .margin_t_25 { margin-top: 25px; }
 
+.margin_b_15 { margin-bottom: 15px; }
 .margin_b_25 { margin-bottom: 25px; }
 
 .icon_circle_back_lg {
@@ -197,9 +198,9 @@ a { color: #17a6b0; }
 .header {
 	width: 100%;
 
-	background: url("remedica_bg") top right no-repeat;
-	background-size: cover;
-	min-height:570px;
+	// background: url("remedica_bg") top right no-repeat;
+	// background-size: cover;
+	// min-height:570px;
    /* position: absolute;
 	top: 0;
 	z-index: 100;
