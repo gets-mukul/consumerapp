@@ -9,7 +9,7 @@
   
   * {
     font-size: 16px;
-    line-height: 20px;
+    line-height: 24px;
     color: #515151;
   }
   #logo {
@@ -86,7 +86,7 @@
     display: block;
   }
   .general-faqs {
-    padding: 0 16px 60px;
+    padding: 0 16px 40px;
     margin-top: -40px;
   }
 
@@ -226,6 +226,13 @@
   .box .content .hello-desc {
     line-height: 24px;
   }
+  .selfie-diagnosis.sticky-btn.top-btn {
+    margin-bottom: 40px;
+    margin-top: -10px;
+  }
+  .selfie-diagnosis.sticky-btn.bottom-btn {
+    margin-top: 40px;
+  }
   .selfie-diagnosis.sticky-btn * {
     color: #ffffff;
   }
@@ -235,19 +242,6 @@
     text-decoration :none;
     text-transform: uppercase;
   }
-  .selfie-diagnosis.sticky-btn a.hidden-md.hidden-lg {
-    border-radius:0;
-    bottom: 0px;
-    left: 0;
-    z-index: 9999;
-    text-shadow: 1px 1px 1px #0000004f;
-    box-shadow: 1px 1px 3px 3px #00000052;
-    width: 100%;
-    text-transform: uppercase;
-  }
-  .selfie-diagnosis.footer {  
-    height: 130px;
-  }
   .box .content .footer_section {
     vertical-align: middle;
     padding-top: 18px;
@@ -256,9 +250,15 @@
     color: #515151;
   }
   .selfie_form_social a i.fa {
-    color: #17a6b0;
-    font-size: 1.6em;
+    font-size: 1.4em;
+    padding-left: 0;
+    margin-left: -20%;
+    color: #dddddd;
   }
+  .selfie_form_social_label * {
+    color: #dddddd;
+  }
+
 </style>
 
 <!--logo begin-->
@@ -320,13 +320,10 @@
 <!--section end - About your condition-->
 
 <!--button start-->
-<div class="selfie-diagnosis sticky-btn  margin_b_25 text-center">
-  <a href="<%= @login_link %>" class="action_btn primary hidden-sm hidden-xs"><i class="fa fa-medkit" aria-hidden="true" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');"></i>&nbsp;Get Your Treatment Plan</a>
+<div class="selfie-diagnosis sticky-btn  text-center top-btn">
+  <a href="<%= @login_link %>" class="action_btn primary"><i class="fa fa-medkit" aria-hidden="true" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');"></i>&nbsp;Get Your Treatment Plan</a>
 </div>
 
-<div class="selfie-diagnosis sticky-btn text-center">
-  <a href="<%= @login_link %>" class="action_btn primary hidden-md hidden-lg"  id="sticky-mobile-footer" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');">&nbsp;Get Your Treatment Plan</a>
-</div>
 <!--button end-->
 
 <!--section start - Treatment Plan-->
@@ -455,31 +452,18 @@
   </div>
 
   <!--button start-->
-  <div class="selfie-diagnosis sticky-btn  margin_t_25 text-center">
-    <a href="<%= @login_link %>" class="action_btn primary hidden-sm hidden-xs" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
+  <div class="selfie-diagnosis sticky-btn text-center bottom-btn">
+    <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
   </div>
   <!--button end-->
 
-
   <div class="content">
     <div class="margin_b_15">
-      If you would like to complete a consultation with us, reach out to us through any of the ways below:
+      If you would like more information, please reach out to us through any of the ways below
     </div>
     
     <div class="footer_section"><img width="22" height="20" alt="" src="https://remedicohealth.com/images/fa_envelope.png" /> <a href="mailto:consult@remedicohealth.com">consult@remedicohealth.com</a></div>
     <div class="footer_section"> <img width="22" height="22" alt="" src="https://remedicohealth.com/images/fa_whatsapp.png" /> <span><a href="tel:+918433848969">+91 8433 848 969</a></span></div>
-        
-    <div class="row margin_25">
-      <div class="col-md-6 col-sm-12 col-xs-12 ">
-        <div class="margin_b_25"><b>Follow us at</b></div>
-        <div class="row selfie_form_social">
-          <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2ktwiaF"><i class="fa fa-facebook"></i></a></div>
-          <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2AZAc1x"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
-          <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2BHcNyK"><i class="fa fa-snapchat" aria-hidden="true"></i></a></div>
-          <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2iEbJUK"><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
-        </div>
-      </div>
-    </div>
   </div>
 
 </div>
@@ -487,31 +471,20 @@
 
 <!--footer start-->
 <div class='selfie-diagnosis footer'>
+  <div class="row margin_b_25">
+    <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 margin_b_25">
+      <div class="margin_b_15 selfie_form_social_label"><b>Follow us at</b></div>
+      <div class="row selfie_form_social">
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2ktwiaF"><i class="fa fa-facebook"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2AZAc1x"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2BHcNyK"><i class="fa fa-snapchat" aria-hidden="true"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2iEbJUK"><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
+      </div>
+    </div>
+  </div>
   <a href="https://remedicohealth.com" target="_blank"><img src="https://remedicohealth.com/images/footer_logo_blue1.png" alt="Remedico"></a>
+  <div class="margin_5"><small>&copy; 2017 All rights reserved</small></div>
+
 </div>
 <!--footer end-->
 
-<script>
-  var isFixed = true;
-  
-  function checkOffset() {
-    if(isFixed && (($('#sticky-mobile-footer').offset().top + $('#sticky-mobile-footer').height() < $('#treatment-plan-section').offset().top) || ($('#sticky-mobile-footer').offset().top + $('#sticky-mobile-footer').height() >= $('#div_e641_26').offset().top))) {
-      $('#sticky-mobile-footer').css('position', 'relative');
-      isFixed = false;
-    }
-    if(!isFixed && $(document).scrollTop() + window.innerHeight >= $('#treatment-plan-section').offset().top) {
-      $('#sticky-mobile-footer').css('position', 'fixed'); // restore when you scroll up
-      isFixed = true;
-    }
-  }
-  
-  $('document').ready(function() {
-    $(document).scroll(function() {
-      checkOffset();
-    });
-    $(document).on('touchmove', function(event) {
-      checkOffset();
-    });
-    checkOffset();
-  });
-</script>
