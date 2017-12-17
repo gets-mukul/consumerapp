@@ -1,0 +1,16 @@
+<%= semantic_form_for [:admin, @doctor] do |f| %>
+
+<%= f.inputs do %>
+    <% f.semantic_errors *f.object.errors.keys %>
+<%=   f.input :email %>
+<%=   f.input :password %>
+<%=   f.input :confirm_password %>
+<% end %>
+
+<fieldset class="actions"><ol>
+  <li class="action input_action " id="admin_user_submit_action">
+    <input type="submit" name="commit" value="Update Doctor Password" /></li>
+  <li class="cancel"><a href="<%= admin_doctors_path %>">Cancel</a></li>
+</ol></fieldset>
+    
+<% end %>

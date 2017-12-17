@@ -1,0 +1,490 @@
+<%= content_for :header_content, "
+  <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous' media='none' onload='if(media!=\"all\")media=\"all\"'>
+  <meta name='theme-color' content='#17a6b0' />".html_safe %>
+
+<style type="text/css">
+  html, body {
+    font-family: Helvetica, arial, sans-serif;
+  }
+  
+  * {
+    font-size: 16px;
+    line-height: 24px;
+    color: #515151;
+  }
+  #logo {
+    position: fixed;
+    background-color: #17a6b0;
+    width: 100%;
+    z-index:9999;
+    box-shadow: 1px 0 1px 1px #00000042;
+    max-height: 45px;
+    height: 45px;
+    padding: 0 5%;
+    line-height: 45px!important;
+  }
+  #logo img {
+    width: 34%;
+    max-width: 120px;
+  }
+  .selfie-diagnosis.header {
+    background: #17a6b0;
+    padding: 60px 0px 0px 6%;
+  }
+  .selfie-diagnosis .doctor-container {
+    display: inline-block;
+    vertical-align: top;
+  }
+  .selfie-diagnosis .author-secton {
+    display: inline-block;
+    padding-left: 12px;
+    margin-top: -2px;
+  }
+  .selfie-diagnosis p.author {
+    margin: 0!important;
+  }
+  .selfie-diagnosis .author-name {
+    text-transform:uppercase;
+  }
+  .selfie-diagnosis .author span {
+    display:block;
+    line-height:normal;
+    color: #ffffff;
+  }
+  .selfie-diagnosis .author-secton .prepared {
+    color: #ffffff;
+  }
+  .selfie-diagnosis .doctor-avatar {
+    width: 105%;
+    margin-bottom: 15px;
+  }
+  .selfie-diagnosis p {
+    margin-top:4px!important;
+  }
+  .box .head {
+    padding: 20px 2px 20px 6%;
+    background-color: #f7f7f7;
+    vertical-align: middle;
+  }
+  .box .head .img-holder {
+    display: inline-block;
+  }
+  .box .about {
+    font-size:16px;
+    color:#17a6b0;
+    text-transform:uppercase;
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0px;
+    padding-left:8px;
+  }
+  .selfie-diagnosis.footer {
+    background:url(http://thedemolabs.com/demo/remedica/email_template/img/footer_image.png);
+    background-repeat: repeat;
+    padding:30px 0;
+    text-align: center;
+    display: block;
+  }
+  .general-faqs {
+    padding: 0 16px 40px;
+    margin-top: -40px;
+  }
+
+  .row.icon-set-container {
+    padding: 1%;
+    margin-top: 50px;
+    margin-bottom: -30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+
+  .icon-set-container .row {
+    display: inline-block;
+    margin-bottom: 5%;
+    width: 100%;
+    height: 100%;
+  }
+
+  .item-icon {
+    float: left;
+    display: block;
+    width: 25%;
+  }
+
+  .item-content {
+    margin-left: 27%;
+    margin-right: 4%;
+    margin-top: 4%;
+    text-align: left;
+  }
+
+  .item-content h4 {
+    font-size: 16px;
+    font-family: arial;
+    letter-spacing: 0.2px;
+    color: #17a6b0;
+    margin-bottom: 2px;
+    font-weight: 600;
+  }
+
+  .item-content p {
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+  .washing {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+  }
+  .vitamin_supplements {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 300% 0;
+  }
+  .diet_lifestyle {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 200% 0;
+  }
+  .sun_protection {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 100% 0;  
+  }
+  .topical_applications {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 0 50%;
+  }
+  .procedures {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 300% 50%;
+  }
+  .tests_reports {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 200% 50%;
+  }
+  .oral_medication {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 100% 50%;
+  }
+  .removal_options {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 0% 100%;
+  }
+  .diagnosis {
+    background: url(https://remedicohealth.com/images/icon-set.png);
+    background-size:  400% 300%;
+    background-position: 300% 100%;
+  }
+
+
+  @media only screen and (min-width: 500px) {
+    .icon-set-container .row {
+      height: 80px;
+    }   
+  }
+
+  @media only screen and (min-width: 768px) {
+    .icon-set-container .row {
+      height: 100px;
+    }   
+  }
+
+  @media only screen and (min-width: 992px) {
+    .icon-set-container .row {
+      height: 90px;
+    }   
+  }
+
+  @media only screen and (min-width: 1100px) {
+    .icon-set-container .row {
+      height: 100px;
+    }   
+  }
+
+  @media only screen and (min-width: 1300px) {
+    .icon-set-container .row {
+      height: 80px;
+    }
+  }
+  .box .content {
+    padding: 30px 6%;
+  }
+  .box .content .condition-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+    margin-top: 20px;
+  }
+  .box .content .hello {
+    font-weight: 700;
+    line-height: 24px;
+  }
+  .box .content .hello-desc {
+    line-height: 24px;
+  }
+  .selfie-diagnosis.sticky-btn.top-btn {
+    margin-bottom: 40px;
+    margin-top: -10px;
+  }
+  .selfie-diagnosis.sticky-btn.bottom-btn {
+    margin-top: 40px;
+  }
+  .selfie-diagnosis.sticky-btn * {
+    color: #ffffff;
+  }
+  .selfie-diagnosis.sticky-btn a {
+    text-align: center;
+    box-shadow: 1px 1px 1px #00000038;
+    text-decoration :none;
+    text-transform: uppercase;
+  }
+  .box .content .footer_section {
+    vertical-align: middle;
+    padding-top: 18px;
+  }
+  .box .content .footer_section a {
+    color: #515151;
+  }
+  .selfie_form_social a i.fa {
+    font-size: 1.4em;
+    padding-left: 0;
+    margin-left: -20%;
+    color: #dddddd;
+  }
+  .selfie_form_social_label * {
+    color: #dddddd;
+  }
+
+</style>
+
+<!--logo begin-->
+<div id="logo" style=""><img alt="" src="http://remedicohealth.com/images/remedico_white1.png"/></div>
+<!--logo end-->
+
+<!--header start-->
+<div class="container-fluid selfie-diagnosis header">
+  <div class="author">
+    <div class="width-auto doctor-container">
+      <img alt="" class="doctor-avatar" src="http://remedicohealth.com/images/email/image_<%= @selfie_form.doctor.code %>.png" />
+    </div>
+    
+    <div class="author-secton">
+      <div class="author-name">
+        <p class="author"><span>Diagnosis for <span><%= @selfie_form.patient.name.strip %></span></span></p>
+      </div>
+      <p class="prepared"><span><%= @selfie_form.doctor.full_name %></span></p>
+    </div>
+  </div>
+</div>
+<!--header end-->
+
+<!-- message section start  -->
+<div class="box">
+  <div class="content">
+      <div class="hello">Hi <%= @selfie_form.patient.name %>,</div>
+      <div class="hello-desc">I have reviewed the photo you provided, and have prepared the following preliminary diagnosis for you. <b>Please note that this is an indication based on your photo only, and is not a comprehensive medical opinion or prescription</b>.</div>
+  </div>
+</div>
+<!-- message section end -->
+
+<!--section start - About your condition-->
+<div class="box">
+  
+  <div class="head">
+    <div class="img-holder">
+      <img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/abt_ur_condition_icon.png" />
+    </div>
+    <div class="about">About your condition</div>
+  </div>
+  
+  <div class="content">
+    <div class="margin_b_15">
+      It seems that you may have <%= @conditions.length < 3 ? @conditions.to_sentence(:two_words_connector => ', as well as ').html_safe : @conditions[2..-1].unshift((@conditions[0..1].to_sentence(:two_words_connector => ', as well as '))).to_sentence(:words_connector => ', ', :last_word_connector => ', and ').html_safe %>.
+    </div>
+    
+    <% if @selfie_form.conditions.length==1 %>
+      <%= @selfie_form.conditions[0].desc.html_safe %>
+    <% else %>
+      <% @selfie_form.conditions.each do |condition| %>
+        <div class="condition-title">About <%= condition.title %></div>
+        <%= condition.desc.html_safe %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+<!--section end - About your condition-->
+
+<!--button start-->
+<div class="selfie-diagnosis sticky-btn  text-center top-btn">
+  <a href="<%= @login_link %>" class="action_btn primary"><i class="fa fa-medkit" aria-hidden="true" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');"></i>&nbsp;Get Your Treatment Plan</a>
+</div>
+
+<!--button end-->
+
+<!--section start - Treatment Plan-->
+<div class="box" id="treatment-plan-section">
+  
+  <div class="head">
+    <div class="img-holder">
+      <img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/treatment_plan_icon.png" />
+    </div>
+    <div class="about">Treatment Plan</div>
+  </div>
+
+  <div class="content">
+    <div class="margin_b_15">
+      If you were to proceed for a full consultation, I would provide you with the following (as necessary) as part of the treatment plan for your condition(s):
+    </div>
+    
+    <!-- icons start -->
+    <section class="text-center general-faqs">
+      <div class="row">
+        <div class="col-xs-12 col-sm-offset-1 col-sm-10 col-md-offset-3 col-md-6">
+
+        <!-- condition wise code start -->
+          <div class="row icon-set-container bg_white pad_10">
+            <br>
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set diagnosis" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                <div class="item-content">
+                  <h4>Diagnosis & medical advice</h4>
+                  <p>Diagnosis of your medical condition(s), and potential causes</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set topical_applications" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                <div class="item-content">
+                  <h4>Topical applications</h4>
+                  <p>Including creams, lotions, moisturisers, and other products</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set oral_medication" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                <div class="item-content">
+                  <h4>Oral medication</h4>
+                  <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set vitamin_supplements" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                <div class="item-content">
+                  <h4>Vitamins & supplements</h4>
+                  <p>Depending on your condition, supplements to help promote skin health</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set washing" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                <div class="item-content">
+                  <h4>Washing advice</h4>
+                  <p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set diet_lifestyle" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                <div class="item-content">
+                  <h4>Diet & lifestyle advice</h4>
+                  <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set procedures" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                <div class="item-content">
+                  <h4>Procedures</h4>
+                  <p>Procedures for improving skin appearance and health, if I think you will benefit</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-sm-6 col-xs-12">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set tests_reports" src="https://remedicohealth.com/images/trans_120_120.png" alt="Remedico"></span>
+                <div class="item-content">
+                  <h4>Tests & reports</h4>
+                  <p>Blood and other tests, if necessary for further investigation</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        <!-- condition wise code end-->
+
+        </div>
+      </div>
+    </section>
+    <!-- icons end -->
+  </div>
+
+</div>
+<!--section end - Treatment Plan-->
+
+<!--section start - Next steps-->
+<div class="box">
+
+  <div class="head">
+    <div class="img-holder">
+      <img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/follow_up_icon.png" />
+    </div>
+    <div class="about">Next steps</div>
+  </div>
+
+  <!--button start-->
+  <div class="selfie-diagnosis sticky-btn text-center bottom-btn">
+    <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
+  </div>
+  <!--button end-->
+
+  <div class="content">
+    <div class="margin_b_15">
+      If you would like more information, please reach out to us through any of the ways below
+    </div>
+    
+    <div class="footer_section"><img width="22" height="20" alt="" src="https://remedicohealth.com/images/fa_envelope.png" /> <a href="mailto:consult@remedicohealth.com">consult@remedicohealth.com</a></div>
+    <div class="footer_section"> <img width="22" height="22" alt="" src="https://remedicohealth.com/images/fa_whatsapp.png" /> <span><a href="tel:+918433848969">+91 8433 848 969</a></span></div>
+  </div>
+
+</div>
+<!--section end - Next steps-->
+
+<!--footer start-->
+<div class='selfie-diagnosis footer'>
+  <div class="row margin_b_25">
+    <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 margin_b_25">
+      <div class="margin_b_15 selfie_form_social_label"><b>Follow us at</b></div>
+      <div class="row selfie_form_social">
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2ktwiaF"><i class="fa fa-facebook"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2AZAc1x"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2BHcNyK"><i class="fa fa-snapchat" aria-hidden="true"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2iEbJUK"><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
+      </div>
+    </div>
+  </div>
+  <a href="https://remedicohealth.com" target="_blank"><img src="https://remedicohealth.com/images/footer_logo_blue1.png" alt="Remedico"></a>
+  <div class="margin_5"><small>&copy; 2017 All rights reserved</small></div>
+
+</div>
+<!--footer end-->
+

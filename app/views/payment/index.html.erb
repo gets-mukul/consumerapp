@@ -21,19 +21,19 @@
               <div><h1 style="font-size: 28px;">Almost done, <span customer-name><%= current_user.name %></span>!</h1></div>
               <div>
                 <p class="p_16 margin_t_25">
-                  You've been matched with <%= current_doctor.short_name %>.<br>
+                  You've been matched with <%= matched_consultation_doctor.short_name %>.<br>
                   Click<b>&nbsp;&nbsp;PAY NOW&nbsp;&nbsp;</b>to get your treatment plan.<br>
                 </p>
               </div>
               <div class="row margin_25">
                 <div class="col-md-12 col-sm-12 col-xs-12">
                   <div class="card">
-                    <img class="card-img-top" src="<%= asset_path(current_doctor.avatar) %>" alt="<%= asset_path(current_doctor.short_name) %>">
+                    <img class="card-img-top" src="<%= asset_path(matched_consultation_doctor.avatar) %>" alt="<%= asset_path(matched_consultation_doctor.short_name) %>">
                     <div class="card-block" style="padding: 10px;">
-                      <h5 class="sub-title color_blue"><%= current_doctor.full_name %></h5>
+                      <h5 class="sub-title color_blue"><%= matched_consultation_doctor.full_name %></h5>
                       <p class="card-text margin_t_15 " style="line-height: 20px" >
-                        <b><%= (current_doctor.consultations_count/10)*10 %>+</b> online consultations<br>
-                        <b><%= current_doctor.experience %>+</b> years experience<br>
+                        <b><%= (matched_consultation_doctor.consultations_count/10)*10 %>+</b> online consultations<br>
+                        <!-- <b><= matched_consultation_doctor.experience %>+</b> years experience<br>-->
                         Expert in treating <b><%= current_consultation.category %></b>
                       </p>
                     </div>

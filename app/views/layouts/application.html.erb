@@ -10,7 +10,7 @@
 <!--<![endif]-->
   <head>
     <title>Remedico - consult hair & skin specialists, dermatologists from your phone</title>
-    <%= csrf_meta_tags %>
+    <%= csrf_meta_tag %>
 
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,7 +120,7 @@
         })();
     </script>
     <!-- End Inspectlet Embed Code -->
-
+     <%= yield :header_content %>
 </head>
 
 <body <%= yield :turn_turbolinks %> class="<%= yield :body_class %>">

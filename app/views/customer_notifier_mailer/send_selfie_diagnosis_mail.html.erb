@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <body style="text-align: center; font-family: Arial; font-size: 16px; max-width: 600px; margin: auto;">
+    <div style="text-align: center">
+      <div style="background-color: #18a4b7">
+        <img src="http://www.remedicohealth.com/images/email/whitelogo.png" alt="remedico" style="max-height: 30px; max-width: 100%;height: auto; margin: 20px 10px 20px;">
+
+      </div>
+      <div style="background: #EEE;padding: 40px 20px 0px;">
+      
+
+      <div style="background-color: #FFF;padding: 20px 0 40px;border-radius: 5px;text-align: left; color: #545454; font-size: 14px;">
+
+        <div style="width: 80%; margin-left: 10%; line-height: 1.5">
+        
+          <p style="margin-bottom: 20px;"><strong>Dear <%= @user.name %>,</strong></p>
+          <p>Thanks for trying out Remedico! </p>
+          <p>Our dermatologists have reviewed your selfie. Click below to get your diagnosis</p>
+          <!-- Start you consultation button start -->
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width: 100%;border-collapse: collapse;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;width: 100%;max-width: 600px;margin: 25px 0">
+            <tbody>
+              <tr>
+                <td style="padding-top: 0 18px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;font-family: sans-serif;font-size: 14px !important;vertical-align: top;" valign="top" align="center">
+                  <table border="0" cellpadding="0" cellspacing="0" style="border-collapse: separate !important;border-radius: 80px;background-color: #17B06E;mso-table-lspace: 0pt;mso-table-rspace: 0pt;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;padding: 4px 25px;width: 100%;max-width: 600px;">
+                    <tbody>
+                      <tr>
+                        <td align="center" valign="middle" style="font-family: Arial;font-size: 16px;padding: 10px 15px;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;vertical-align: top;">
+                          <a title="Get my diagnosis" href="<%= @selfie_link %>" target="_blank" style="font-weight: bold;letter-spacing: 1.1px;line-height: 100%;text-align: center;text-decoration: none;color: #FFFFFF;mso-line-height-rule: exactly;-ms-text-size-adjust: 100%;-webkit-text-size-adjust: 100%;display: block;font-size: 14px !important;">GET MY DIAGNOSIS</a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- Start you consultation button end -->
+          <p style="margin-top: 20px;">Thanks, <br><strong>Team Remedico</strong></p>
+
+        </div>
+
+
+        <br>
+
+        <div style="text-align: left; width: 90%; margin-left: 5%; border: 1px solid #ddd; border-radius: 5px;line-height: 1.5">
+          <div style="padding: 15px;">
+            In the meantime, if you have any questions feel free to reach out to us by emailing us at <strong>consult@remedicohealth.com</strong>, or you can reach us on <strong>WhatsApp</strong> at <strong><span style="white-space: nowrap">+91 8433 848 969</span></strong>
+          </div>
+        </div>
+      </div>
+
+      </div>
+      <div style="background-color: #eee; padding: 20px; font-size: 14px;">
+        <div style="margin: 5px 0px">
+          <a href="http://www.facebook.com/remedico"><img src="http://www.remedicohealth.com/images/email/FB.png" alt="Facebook" style="margin: 0px 5px;"></a>
+          <a href="http://www.twitter.com/remedicohealth"><img src="http://www.remedicohealth.com/images/email/tw.png" alt="Twitter" style="margin: 0px 5px;"></a>
+          <a href="http://www.instagram.com/remedico"><img src="http://www.remedicohealth.com/images/email/insta.png" alt="Instagram" style="margin: 0px 5px;"></a>
+        </div>
+        <div>
+          <a href="http://www.remedicohealth.com"><img src="http://www.remedicohealth.com/images/email/remedica_logo.png" alt="remedico" style="width: 100px; margin-top: 10px;"></a>
+        </div>
+        <div style="font-size:12px;display:block; margin-top:10px">
+          <span>
+
+          <a href="http://www.remedicohealth.com/privacy-policy.html" style="color: gray;">Privacy Policy</a>
+           |
+          <a href="http://www.remedicohealth.com/terms-of-use.html" style="color: gray;">Terms of Use</a>
+           |
+          <a href="http://www.remedicohealth.com/about.html" style="color: gray;">About Us</a>
+          </span>
+
+        </div>
+
+      </div>
+    </div>
+  </body>
+</html>

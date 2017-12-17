@@ -1,0 +1,458 @@
+<%= content_for :turn_turbolinks, "data-turbolinks=false" %>
+<style type="text/css">
+  * {box-sizing: border-box;}
+  body {
+    background-color: #fff;
+    text-align: center;
+    color: #3D3D3D;
+  }
+  .field {
+    transform: scale(0.8);
+    transition: 0.5s ease all;
+    opacity: 0.5;
+  }
+  .field label {
+    display: block;
+  }
+  .field.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  div .full-vh {
+    vertical-align: middle;
+  }
+  .field:after {
+      content: "";
+      height: 75vh;
+      background-color: red;
+  }
+  .selfie_btn {
+    display: inline-block;
+    cursor: pointer;
+    background-color: #17a6b0;
+    color: #fff;
+    width: auto;
+    height: 45px;
+    line-height: 38px;
+    padding: 0px 20px;
+    font-size: 25px;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+    font-family: "Source Sans Pro", sans-serif;
+    max-width: 610px;
+    -moz-transition: background-color ease-out 100ms 0ms;
+    -webkit-transition: background-color ease-out 100ms 0ms;
+    -o-transition: background-color ease-out 100ms 0ms;
+    transition: background-color ease-out 100ms 0ms;
+    -webkit-box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.1);
+    border: none;
+    color: #fff;
+    margin-top: 2%;
+  }
+  input:focus {
+    outline: none;
+  }
+  .select2-container--default .select2-selection--multiple {
+    background-color: #30aeb759;
+    border: 2px solid #30aeb7;
+    border-radius: 4px;
+    cursor: text;
+  }
+  div.field {
+    text-align: left;
+    margin-left: 5%;
+  }
+  div .field label {
+    font-size: 2em;
+    font-weight: 300;
+    line-height: 1.125em;
+  }
+  .form-border {
+    border-bottom: 3px solid #000000cf;
+    border-radius: 0px;
+    border-top: 0px;
+    border-right: 0px;
+    border-left: 0px;
+    background-color: #fff;
+    font-size: 32px;
+    font-weight: 200;
+  }
+  #footer {
+    height: 35px;
+    background-color: #f5f5f5;
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+  .scrollable-field {
+    margin-top: 75vh;
+  }
+  .scrollable-field#scroll_element_1 {
+    margin-top: 25vh;
+  }
+  .scrollable-field#scroll_element_5 {
+    margin-top: 3rem;
+  }
+  .submit_button {
+    width: 100%;
+  }
+  input#file_upload {
+    outline: none;
+  }
+  #upload.selfie_btn {
+    max-width: initial;
+    font-size: 25px;
+    line-height: 45px;
+    font-weight: 700;
+    display: inline-block;
+  }
+  input[type="file"] {
+    display: none;
+  }
+  #h1_3ea7_0{font-size: 20px; font-weight: 600;}
+  #p_3ea7_0{font-size: 18px; font-weight: 400; line-height: 20px}
+  #p_3ea7_1{font-size: 18px; font-weight: 400; line-height: 20px}
+  #button_3ea7_0{margin-top:2%;}
+  #sub_3ea7_0{margin-top: -11px; margin-bottom: 28px; font-size: 14px;}
+  #selfie-photo{ margin-left: 15%; }
+  #p_3ea7_2{margin-top: 5px; margin-bottom: 28px; font-size: 16px;}
+  #div_3ea7_1{text-align:center;}
+  #div_3ea7_3{ background-color: #fafafa;border-top: 1px solid rgba(0, 0, 0, 0.25);border-bottom: 1px solid rgba(0, 0, 0, 0.25); }
+
+  .inverted_selfie_btn {
+    border: 2px solid #17a6b0;
+    background-color: white;
+    color: #17a6b0;
+  }
+
+  /*SquareButtons*/
+  .btn-sq-lg {
+    width: 100%;
+    height: 100%;
+    padding: 10%;
+  }
+  .btn-sq {
+    width: 100%;
+    height: 130px;
+    padding: 10%;
+  }
+  .btn-sq-sm {
+    width: 50px !important;
+    height: 50px !important;
+    font-size: 10px;
+  }
+  .btn-sq-xs {
+    width: 25px !important;
+    height: 25px !important;
+    padding:2px;
+  }
+  .h-divider{
+    margin-top:5px;
+    margin-bottom:5px;
+    height:1px;
+    width:2%;
+    border-top:1px solid gray;
+  }
+  input#mobile {
+    margin-top: 3%;
+  }
+  .file_upload_confirmation_buttons button {
+    width: 100%;
+    font-size: initial;
+  }
+
+</style>
+
+<div class="container">
+  <div class="col-sm-12">
+    <div class="wrapper">
+      <div >
+        <div class="full-vh scrollable-field" id="scroll_element_1">
+          <div><img src="https://remedicohealth.com/images/footer_logo_blue1-min.png" alt="Remedico - Logo"/ id="tries"></div>
+          
+          <div><h1 id="h1_3ea7_0">Selfie Checkup</h1></div>
+          <div><p id="p_3ea7_0">Welcome to your FREE selfie checkup!</p></div>
+          
+          <div class="margin_5"><p id="p_3ea7_1">Simply submit a selfie, and our dermatologists will give you a free diagnosis.</p></div>
+          <div><button class="selfie_btn scroll_to_next" id="button_3ea7_0">Start</button></div>
+          
+        </div>
+      </div>
+      
+      <!--FORM START-->
+      
+      <%= form_tag({:controller => "selfie_form", :action => "create"}, :method => "post", :class => "form", :id => "selfie_form", :multipart => true) do %>
+      
+        <!--NAME-->
+        
+        <div class="field scrollable-field" id="scroll_element_2">
+          <label class-"form-label">What is your name?*</label>
+          <input type="text" name="name" class="form-border" id="name"/>
+          <div id="error_name" for="name" class="alert text-danger font_h4">Please enter a valid name.</div>
+          <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
+        </div>
+        
+        <!--MOBILE-->
+        
+        <div class="field scrollable-field" id="scroll_element_3">
+          <label class-"form-label">What is your mobile number?*</label>
+          <sub id="sub_3ea7_0">We will be send your diagnosis to you via WhatsApp.</sub><br>
+  
+  			  <input id="mobile" type="number" name="mobile" class="form-border input-number–noSpinners" />
+  			  <div id="error_mobile" for="mobile" class="alert text-danger font_h4">This mobile number is not valid.</div>
+          <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
+        </div>
+
+        <!--TAKE SELFIE-->
+
+        <div class="field scrollable-field" id="scroll_element_4">
+          <label class="form-label">We will need a clear selfie of your face.<br><p id="p_3ea7_2">Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. <br>Ensure your profile is fully visible.</p> </label><br>
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+              <div id="div_3ea7_1"><img src="https://images.typeform.com/images/LALXa4LfQghT/image/default#.png" alt="Take a selfie using your phone camera, and come back here" id="image_preview" /></div>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-sm-offset-3 margin_25">
+            <label for="file_upload" class="selfie_btn" id="upload">Upload</label>
+            <input id="file_upload" type="file" name="image" accept="image/*" onchange="saveImage(this);" />
+            <div id="error_file_upload" for="file_upload" class="alert text-danger font_h4">Please upload your selfie.</div>
+          </div>
+
+          <div class="file_upload_confirmation_buttons" style="display: none;">
+            <div class="row text-center margin_25">
+              <!--confirm button -->
+              <div class="col-sm-4 col-sm-offset-2 col-xs-5 col-xs-offset-1">
+                <button type="button" class="selfie_btn" id="confirm_btn">Confirm</button>
+              </div>
+              <!--try again button-->
+              <div class="col-sm-4 col-xs-5">
+                <button type="button" class="selfie_btn inverted_selfie_btn" id="cancel_btn">Try Again</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <input type="hidden" id="referrer" name="referrer" value="">
+        <input type="hidden" id="utm_campaign" name="utm_campaign" value="<%= params['utm_campaign'] %>">
+        <!--<input type="hidden" id="image_path" name="image_path" value="">-->
+      
+      <% end %>
+      <!--FORM END-->
+    </div>
+      <div class="form-group margin_25">
+        <div class="progress" style="display: none">
+          <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
+        </div>
+      </div>
+  </div>
+</div>
+
+<div id="footer">
+  <div class="col-xs-12 navbar-fixed-bottom" id="div_3ea7_3">
+  <div class="row" id="bottomNav">
+   <div class="col-xs-4 text-center"><a href="#"><img src="<%= asset_path('footer_logo_blue1-min.png') %>" alt="Remedico - Logo" style="margin: 6px 0;"/></a></div>
+  </div>
+  </div>
+</div>
+
+<script>
+
+  $(function() {
+    document.getElementById('referrer').value = document.referrer || 'direct';
+  });
+  
+  'use strict';
+  var activeIndex, customScrollToElement, fields, inputs, scrollToActiveField, scrollToActiveFieldByIndex, setActiveTab, validate_data;
+  
+  activeIndex = 0;
+  fields = $('.scrollable-field');
+  inputs = $('.scrollable-field input');
+  var upload_input = $('input#file_upload');
+  
+  setActiveTab = function() {
+    var activeField;
+    fields.removeClass('active');
+    activeField = fields.eq(activeIndex);
+    activeField.addClass('active');
+    customScrollToElement(fields.eq(activeIndex));
+    activeField.find('input').focus();
+  };
+  
+  fields.click(function() {
+    scrollToActiveField(this);
+  });
+  
+  inputs.focus(function() {
+    scrollToActiveField($(this).closest('.scrollable-field'));
+  });
+  
+  inputs.keydown(function(event) {
+    var index, parent_field;
+    if (event.keyCode === 13 && this.validity.valid) {
+      event.preventDefault();
+      parent_field = this.closest('.scrollable-field');
+      if (validate_data(fields.eq(fields.index(parent_field)).find('input'))) {
+        index = fields.index(parent_field) + 1;
+        scrollToActiveField(fields[index]);
+      }
+    }
+  });
+  
+  $('.scroll_to_next').on('click', function(e) {
+    var index, parent_field;
+    parent_field = this.closest('.scrollable-field');
+    if (validate_data(fields.eq(fields.index(parent_field)).find('input'))) {
+      index = fields.index(parent_field) + 1;
+      activeIndex = index;
+      setActiveTab();
+    }
+    e.stopPropagation();
+  });
+  
+  scrollToActiveField = function(field) {
+    var index;
+    index = fields.index(field);
+    if (index !== activeIndex) {
+      activeIndex = index;
+      customScrollToElement(fields.eq(activeIndex));
+      setActiveTab();
+    }
+  };
+  
+  scrollToActiveFieldByIndex = function(index) {
+    scrollToActiveField(fields.eq(index));
+  };
+  
+  // validating a field
+  validate_data = function(input_field) {
+    var value;
+    value = input_field.val();
+    switch (input_field.attr('id')) {
+      case 'name':
+        if (/^[A-z ']{2,}$/.test(value)) {
+          $('#error_name').hide();
+          return true;
+        } else {
+          $('#error_name').show();
+          return false;
+        }
+        break;
+      case 'mobile':
+        if (/^[0-9]{10,15}$/.test(value)) {
+          $('#error_mobile').hide();
+          return true;
+        } else {
+          $('#error_mobile').show();
+          return false;
+        }
+        break;
+      case 'file_upload':
+        if (value !== "") {
+          $('#error_file_upload').hide();
+          return true;
+        } else {
+          $('#error_file_upload').show();
+          return false;
+        }
+        break;
+      default:
+        return true;
+    }
+  };
+  
+  // scroll to element
+  customScrollToElement = function(id) {
+    var mOffset;
+    mOffset = $(window).height() / 2 - id.height() / 1.3;
+    $('html,body').animate({
+      scrollTop: id.offset().top - mOffset
+    }, 'slow');
+  };
+  
+  setActiveTab();
+
+  // image preview
+  function saveImage(input) {
+    console.log("saving image");
+    if (input.files && input.files[0]) {
+      console.log("saving image");
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#image_preview')
+          .attr('src', e.target.result).height(270)
+      };
+      reader.readAsDataURL(input.files[0]);
+      $('#upload').hide();
+      $('.file_upload_confirmation_buttons').show();
+      customScrollToElement($('.file_upload_confirmation_buttons'));
+    }
+  }
+
+  // on cancel uploaded image button
+  $('#cancel_btn').on('click', function(e) {
+    $('#image_preview')
+      .attr('src', 'https://images.typeform.com/images/LALXa4LfQghT/image/default#.png').height('initial');
+    $('.file_upload_confirmation_buttons').hide();
+    $('#upload').show();
+    customScrollToElement($('#upload'));
+  });
+
+  // on confirm uploaded image button
+  $('#confirm_btn').on('click', function(e) {
+    var i, parent_field, returned_value;
+    i = 0;
+    returned_value = true;
+    while (i < inputs.length) {
+      returned_value &= validate_data(inputs.eq(i));
+      i++;
+    }
+    if (!returned_value) {
+      parent_field = $('.wrapper form').find('.alert:visible').eq(0).closest('.scrollable-field');
+      activeIndex = fields.index(parent_field);
+      e.stopPropagation();
+      setActiveTab();
+    } else {
+      $('.file_upload_confirmation_buttons').hide();
+      $('#upload').hide();
+      fields.removeClass('active');
+      var formData = new FormData();
+      formData.append('file_upload', $('#file_upload')[0].files[0]);
+      formData.append('name', $(inputs[0]).val());
+      formData.append('mobile', $(inputs[1]).val());
+      formData.append('referrer', $('#referrer').val());
+      formData.append('utm_campaign', $('#utm_campaign').val());
+      $.ajax({
+        url: '/consult/selfie_form/create',
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        // progress bar
+        xhr: function () {
+          var xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", function (evt) {
+            $('.progress').show();
+            customScrollToElement($('.progress'));
+            if (evt.lengthComputable) {
+              var percentComplete = evt.loaded / evt.total;
+              percentComplete = parseInt(percentComplete * 100);
+              $('.myprogress').text(percentComplete + '%');
+              $('.myprogress').css('width', percentComplete + '%');
+            }
+          }, false);
+          return xhr;
+        },
+        success: function (data) {
+          window.location.href = "/consult/selfie_form/thank_you";
+        }
+      });
+    }
+  });
+
+</script>
