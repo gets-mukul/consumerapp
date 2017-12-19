@@ -1,6 +1,6 @@
 ActiveAdmin.register SelfieForm do
   require 'urlsafe_encrypt'
-  permit_params :doctor_id
+  permit_params :doctor_id, :diagnosis_link, :status
 
   filter :id
   filter :patient
@@ -16,6 +16,7 @@ ActiveAdmin.register SelfieForm do
   scope "To be sent out"
   scope "No conditions"
   scope "Sent"
+  scope :all
   actions :all, :except => [:new, :destroy]
   
   batch_action :destroy, false
