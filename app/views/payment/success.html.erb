@@ -14,8 +14,12 @@
               <div><h1 class="space_top" style="font-size: 28px">Payment Successful</h1></div>
               <div style="margin-top: 20px">
                 <p style="font-size: 16px; line-height: 1.2; margin-bottom: 20px">
-                Thanks <span customer-name><%= current_user.name.titleize %></span>, we will get back to you within <strong>24 hours</strong> with your treatment plan.
+                <!-- Thanks <span customer-name><%= current_user.name.titleize %></span>, we will get back to you within <strong>24 hours</strong> with your treatment plan. -->
+                Thanks <span customer-name><%= current_user.name.titleize %></span>, we will get back to you with your treatment plan.
                 </p>
+                <div style="border: 1px solid gray;margin: 20px;border-style: dotted;">
+                  <p style="padding: 10px 10px 8px;"><strong>Due to the festive season, you may experience a delay in receiving your treatment plan.</strong></p>
+                </div>
                 <p style="font-size: 16px; line-height: 1.2; margin-bottom: 20px">Details of your transaction have been emailed to you.</p>
               </div>
               <div class="space_top">
