@@ -45,9 +45,15 @@
 
               <div class="left-align collapsible-section">
                 <h5 class="sub-title">When will I receive my treatment plan?<span class="more-less fa fa-plus"></span></h5>
-                <div class="hidden-content-wrapper margin_b_25">
+                <!-- <div class="hidden-content-wrapper margin_b_25">
                   <p class="p_16 margin_b_25 space_top_sm">
                     After the payment, you will receive your treatment plan within 24 hours.<br>
+                    Click<b>&nbsp;&nbsp;PAY NOW&nbsp;&nbsp;</b>below.
+                  </p>
+                </div> -->
+                <div class="hidden-content-wrapper margin_b_25">
+                  <p class="p_16 margin_b_25 space_top_sm">
+                    After the payment, you will receive your treatment plan shortly.<br>
                     Click<b>&nbsp;&nbsp;PAY NOW&nbsp;&nbsp;</b>below.
                   </p>
                 </div>
@@ -1264,7 +1270,11 @@ We are super confident in our process - it is as close as possible to visiting a
   <section>
     <div class="row">
       <div class="col-sm-12 text-center space_bottom">
+        <div style="margin: 20px;">
+            <h4 style="padding: 10px 10px 8px;line-height: 18px">Due to the festive season, you may experience a delay in receiving your treatment plan.</h4>
+        </div>
         <img src="<%= asset_path("payment_options/master_card_visa_paytm.png") %>" class="img-responsive" alt="Satisfaction-Payment-Gateway" style="display: inline-block; max-height: 25px;">
+
         <h5 class="sub-title space_bottom">Total payment: Rs. <%= @amount %></h5>
       </div>
       <div class="col-sm-12 sticky-footer">
