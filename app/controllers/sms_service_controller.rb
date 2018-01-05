@@ -49,15 +49,20 @@ class SmsServiceController < ApplicationController
       response = ""
       response = JSON.parse(json.body)
 
-      @sms = SmsService.create({
+      @sms = SmsService.new({
         patient_id: patient.id,
-        sms_type: template,
-        sms_id: response["SMSMessage"]["Sid"],
-        detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
-        status: response["SMSMessage"]["Status"],
-        date_sent: response["SMSMessage"]["DateSent"]
+        sms_type: template
       })
-      @sms.update({consultation_id: consultation.id}) if consultation.present?
+      unless response["SMSMessage"].nil?
+        @sms.assign_attributes({
+          sms_id: response["SMSMessage"]["Sid"],
+          detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
+          status: response["SMSMessage"]["Status"],
+          date_sent: response["SMSMessage"]["DateSent"]
+        })
+      end
+      @sms.consultation_id = consultation.id if consultation.present?
+      @sms.save!
     end
   end
 
@@ -87,15 +92,19 @@ class SmsServiceController < ApplicationController
     response = ""
     response = JSON.parse(json.body)
 
-    @sms = SmsService.create({
+    @sms = SmsService.new({
       patient_id: selfie_form.patient.id,
-      sms_type: "selfie diagnosis",
-      sms_id: response["SMSMessage"]["Sid"],
-      detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
-      status: response["SMSMessage"]["Status"],
-      date_sent: response["SMSMessage"]["DateSent"]
+      sms_type: "selfie diagnosis"
     })
-    selfie_form.status = 'sms - '+ response["SMSMessage"]["Status"]
-    selfie_form.save!
+    unless response["SMSMessage"].nil?
+      @sms.assign_attributes({
+        sms_id: response["SMSMessage"]["Sid"],
+        detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
+        status: response["SMSMessage"]["Status"],
+        date_sent: response["SMSMessage"]["DateSent"]
+      })
+      selfie_form.update({status: 'sms - '+ response["SMSMessage"]["Status"]})
+    end
+    @sms.save!
   end
 end
