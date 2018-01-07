@@ -32,8 +32,8 @@
                     <div class="card-block" style="padding: 10px;">
                       <h5 class="sub-title color_blue"><%= matched_consultation_doctor.full_name %></h5>
                       <p class="card-text margin_t_15 " style="line-height: 20px" >
-                        <b><%= (matched_consultation_doctor.consultations_count/10)*10 %>+</b> online consultations<br>
-                        <!-- <b><= matched_consultation_doctor.experience %>+</b> years experience<br>-->
+                        <!--<b><= (matched_consultation_doctor.consultations_count/10)*10 %>+</b> online consultations<br>-->
+                         <b><%= matched_consultation_doctor.experience %>+</b> years experience<br>
                         Expert in treating <b><%= current_consultation.category %></b>
                       </p>
                     </div>
