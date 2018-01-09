@@ -10,10 +10,10 @@ class PaymentController < ApplicationController
 
   include PaymentHelper
   include PaytmHelper
-  include DoctorHelper
+  # include DoctorHelper
   # before_action :check_current_user, :check_current_consultation, except: [:instant_payment]
   before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create]
-  before_action :fetch_matched_consultation_doctor, except: [:instant_payment]
+  # before_action :fetch_matched_consultation_doctor, except: [:instant_payment]
   after_action :update_payment, only: [:failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure, :initiate_payment]
 
@@ -100,7 +100,7 @@ class PaymentController < ApplicationController
     FreeConsultationNotifierMailer.send_free_consultation_notifier_mail(current_consultation).deliver_later if Rails.env.production?
 
     # update details
-    assign_consultation_to_doctor current_consultation
+    # assign_consultation_to_doctor current_consultation
     current_user.update({pay_status: "free"})
     current_consultation.update({pay_status: "free", user_status: 'free consultation done'})
 
@@ -167,7 +167,7 @@ class PaymentController < ApplicationController
         #   failure
         #   logger.info resp.body.strip
         # end
-        assign_consultation_to_doctor current_consultation
+        # assign_consultation_to_doctor current_consultation
         current_user.update({pay_status: "paid"})
         current_consultation.update({ pay_status: "paid", user_status: 'paid' })
 
@@ -177,7 +177,8 @@ class PaymentController < ApplicationController
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
         current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
         # initiate job - send admin mail a paid consultation
-        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later
+        # CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later
+        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later
         
         coupon = Coupon.find_by_id current_consultation.coupon_id
         if coupon
@@ -199,7 +200,7 @@ class PaymentController < ApplicationController
         response = response.capture({amount:amount})
         current_payment.update({status: response.status, pg_type: 'RAZORPAY'})
 
-        assign_consultation_to_doctor current_consultation
+        # assign_consultation_to_doctor current_consultation
         current_user.update({pay_status: "paid"})
         current_consultation.update({ pay_status: "paid", user_status: 'paid' })
 
@@ -215,7 +216,8 @@ class PaymentController < ApplicationController
         UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
         current_payment.update({mode: mode, status: 'paid', bank_ref_num: response.id})
-        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later if Rails.env.production?
+        # CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later if Rails.env.production?
+        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later if Rails.env.production?
         coupon = Coupon.find_by_id current_consultation.coupon_id
         if coupon
           coupon.increment!(:count, 1)
