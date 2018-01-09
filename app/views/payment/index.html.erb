@@ -1,5 +1,6 @@
 <%= content_for :body_class, "inner_body white_back" %>
 <%= content_for :turn_turbolinks, "data-turbolinks=false" %>
+
 <!-- header logo begin -->
 <div class="container">
   <div class="row text-center space_top">
@@ -10,1260 +11,894 @@
 
 <main id="form-step-4" style="width: 100%; overflow-y: hidden; overflow-x: hidden">
 
-  <!-- allocated doctors version  begin -->
-  <section class="inner_content pad_15">
-    <div class="container">
-      <div class="row contactpopup_info">
-        <div class="col-sm-12 box pad_0 margin_0">
-          <div class="row space_bottom">
-            <div class="col-sm-12 col-md-6 col-md-offset-3">
-
-              <div><h1 style="font-size: 28px;">Almost done, <span customer-name><%= current_user.name %></span>!</h1></div>
-              <div>
-                <p class="p_16 margin_t_25">
-                  You've been matched with <%= matched_consultation_doctor.short_name %>.<br>
-                  Click<b>&nbsp;&nbsp;PAY NOW&nbsp;&nbsp;</b>to get your treatment plan.<br>
-                </p>
-              </div>
-              <div class="row margin_25">
-                <div class="col-md-12 col-sm-12 col-xs-12">
-                  <div class="card">
-                    <img class="card-img-top" src="<%= asset_path(matched_consultation_doctor.avatar) %>" alt="<%= asset_path(matched_consultation_doctor.short_name) %>">
-                    <div class="card-block" style="padding: 10px;">
-                      <h5 class="sub-title color_blue"><%= matched_consultation_doctor.full_name %></h5>
-                      <p class="card-text margin_t_15 " style="line-height: 20px" >
-                        <b><%= (matched_consultation_doctor.consultations_count/10)*10 %>+</b> online consultations<br>
-                        <!-- <b><= matched_consultation_doctor.experience %>+</b> years experience<br>-->
-                        Expert in treating <b><%= current_consultation.category %></b>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <hr class="pad_0 margin_0" />
-
-              <div class="left-align collapsible-section">
-                <h5 class="sub-title">When will I receive my treatment plan?<span class="more-less fa fa-plus"></span></h5>
-                <div class="hidden-content-wrapper margin_b_25">
-                  <p class="p_16 margin_b_25 space_top_sm">
-                    After the payment, you will receive your treatment plan within 24 hours.<br>
-                    Click<b>&nbsp;&nbsp;PAY NOW&nbsp;&nbsp;</b>below.
+  <!-- version 1 begin -->
+  <div class="version_1">
+    <!-- content section begin -->
+    <section class="inner_content pad_15">
+      <div class="container">
+        <div class="row contactpopup_info">
+          <div class="col-sm-12 box pad_0 margin_0">
+            <div class="row space_bottom">
+              <div class="col-sm-12 col-md-6 col-md-offset-3">
+                <div><h1 style="font-size:28px">Almost done, <span customer-name><%=current_user.name %></span>!</h1></div>
+                <div>
+                  <p class="p_16 margin_t_25">
+                  The final step is the payment.
                   </p>
                 </div>
-              </div>
-
-              <hr class="pad_0 margin_0" />
-
-              <div class="row left-align collapsible-section">
-                <div class="col-sm-12">
-                  <div>
-                    <h5 class="sub-title">What will be in my treatment plan?<span class="more-less fa fa-plus"></span></h5>
-                    <div class="hidden-content-wrapper pad">
-
-                      <% case current_consultation.category
-
-                        when "Acne" then %>
-                        <div class="row icon-set-container white_back pad_10">
-                          <br>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diagnosis & medical advice</h4>
-                                <p>Diagnosis of your medical condition(s), and potential causes</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Topical applications</h4>
-                                <p>Including creams, lotions, moisturisers, and other products</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Oral medication</h4>
-                                <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Vitamins & supplements</h4>
-                                <p>Depending on your condition, supplements to help promote skin health and control acne</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Washing advice</h4>
-                                <p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diet & lifestyle advice</h4>
-                                <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
-                              </div>
-                            </div>
-                          </div>
-
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Procedures</h4>
-                                <p>Procedures for improving skin appearance and health, if they think you will benefit</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Tests & reports</h4>
-                                <p>Blood and other tests, if necessary for further investigation</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      <% when "Hairfall", "Hairfall or Hair Thinning" then %>
-                        <div class="row icon-set-container white_back pad_10">
-                          <br>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diagnosis & medical advice</h4>
-                                <p>Diagnosis of your medical condition(s), and potential causes</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Topical applications</h4>
-                                <p>Including lotions, serums, and other products</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Oral medication</h4>
-                                <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Vitamins & supplements</h4>
-                                <p>Depending on your condition, supplements to improve your hair growth, texture, and strength</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Washing advice</h4>
-                                <p>Shampoos and / or conditioners, and instructions on when and how to wash your hair</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diet & lifestyle advice</h4>
-                                <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy hair</p>
-                              </div>
-                            </div>
-                          </div>
-
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Procedures</h4>
-                                <p>Procedures for improving hair growth, if they think you will benefit</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Tests & reports</h4>
-                                <p>Blood and other tests, if necessary for further investigation</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      <% when "Pigmentation and Dark Circles", "Pigmentation & Dark Circles" then %>
-                        <div class="row icon-set-container white_back pad_10">
-                          <br>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diagnosis & medical advice</h4>
-                                <p>Diagnosis of your medical condition(s), and potential causes</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Topical applications</h4>
-                                <p>Including creams, lotions, moisturisers, and other products</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Oral medication</h4>
-                                <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Vitamins & supplements</h4>
-                                <p>Depending on your condition, supplements to help promote skin health and improve appearance</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Washing advice</h4>
-                                <p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diet & lifestyle advice</h4>
-                                <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Procedures</h4>
-                                <p>Procedures for improving skin appearance and health, if they think you will benefit</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Tests & reports</h4>
-                                <p>Blood and other tests, if necessary for further investigation</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      <% when "Dandruff" then %>
-                        <div class="row icon-set-container white_back pad_10">
-                          <br>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diagnosis & medical advice</h4>
-                                <p>Diagnosis of your medical condition(s), and potential causes</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Topical applications</h4>
-                                <p>Including lotions, serums, and other products</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Oral medication</h4>
-                                <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Washing advice</h4>
-                                <p>Shampoos and / or conditioners, and instructions on when and how to wash your hair</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diet & lifestyle advice</h4>
-                                <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy hair</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Tests & reports</h4>
-                                <p>Blood and other tests, if necessary for further investigation</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      <% when "Eczema, Psoriasis and Rash", "Eczema, Psoriasis & Rash" then %>
-                        <div class="row icon-set-container white_back pad_10">
-                          <br>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diagnosis & medical advice</h4>
-                                <p>Diagnosis of your medical condition(s), and potential causes</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Topical applications</h4>
-                                <p>Including creams, lotions, moisturisers, and other products</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Oral medication</h4>
-                                <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Washing advice</h4>
-                                <p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diet & lifestyle advice</h4>
-                                <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Tests & reports</h4>
-                                <p>Blood and other tests, if necessary for further investigation</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      <% when "Stretch Marks" then %>
-                        <div class="row icon-set-container white_back pad_10">
-                          <br>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diagnosis & medical advice</h4>
-                                <p>Diagnosis of your medical condition(s), and potential causes</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Topical applications</h4>
-                                <p>Including creams, lotions, moisturisers, and other products</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Procedures</h4>
-                                <p>Procedures for improving skin appearance and health, if they think you will benefit</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      <% when "Skin Growth (Moles, Warts)" then %>
-                        <div class="row icon-set-container white_back pad_10">
-                          <br>
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Diagnosis & medical advice</h4>
-                                <p>Diagnosis of your medical condition(s), and potential causes</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set removal_options" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Removal options</h4>
-                                <p>Options and recommendations for how to remove the growth, if required</p>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="col-md-6 col-sm-6 col-xs-12">
-                            <div class="row">
-                              <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-                              <div class="item-content">
-                                <h4>Tests & reports</h4>
-                                <p>Blood and other tests, if necessary for further investigation</p>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                      <% end %>
-
-                    </div>
+                
+                <!-- three step process desktop version -->
+                <div class="row desktop margin_b_25">
+                  <div class="col-md-12 margin_t_25">
+                    <img src="<%= asset_path("progress_bar_web.png") %>" />
                   </div>
                 </div>
-              </div>
+                <!-- three step process mobile version -->
+                <div class="row mobile margin_b_25">
+                  <div class="col-md-12 margin_t_10">
+                    <img src="<%= asset_path("progress_bar_mobile.png") %>" />
+                  </div>
+                </div>
 
-              <hr class="pad_0 margin_0" />
+                <!-- accordion section -->
+                <div>
+                  <hr class="pad_0 margin_0" />
+                  
+                  <!-- doctor carousel -->
+                  <div class="left-align collapsible-section">
+                    <h5 class="sub-title">Who will provide my treatment plan?<span class="more-less fa fa-plus"></span></h5>
+                    <div class="hidden-content-wrapper margin_b_25">
+                      <p class="p_16 margin_b_25 space_top_sm">
+                        One of our expert dermatologists below will prepare your treatment plan.
+                      </p>
 
-              <div class="row left-align collapsible-section">
-                  <div class="col-sm-12">
-                    <div>
-                      <h5 class="sub-title">How can I pay?<span class="more-less fa fa-plus"></span></h5>
-                      <div class="hidden-content-wrapper">
-
-                        <div class="row text-center margin_b_25 margin_t_15">
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="credit card debit card">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/card.png") %>" class="img-responsive" alt="Credit/Debit card" style="display: inline-block; max-height: 35px;"></div>
-                            <div class="row payment-option-text">Credit card/ Debit card</div>
+                      <!-- doctor carousel for mobile -->
+                      <div class="slider mobile" id="slider" style="padding-left:-15px">
+                        <div class="holder">
+                          <div class="slide">
+                            <img src="<%= asset_path("abhishek.jpg") %>" alt="Dr. Abhishek Omchery">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Abhishek Omchery</div>
+                              <div class="doc-qualification">MD (Dermatology & VD)</div>
+                            </div>
                           </div>
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="net banking">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/netbanking.png") %>" class="img-responsive" alt="netbanking" style="display: inline-block; max-height: 35px;"></div>
-                            <div class="row payment-option-text">Net banking</div>
+                          <div class="slide">
+                            <img src="<%= asset_path("ankita.jpg") %>" alt="Dr. Ankita Sawant">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Ankita Sawant</div>
+                              <div class="doc-qualification">MBBS, DDV</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("sonam.jpg") %>" alt="Dr. Sonam Vimadalal">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Sonam Vimadalal</div>
+                              <div class="doc-qualification">MBBS, DDVL</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("gautam.jpg") %>" alt="Dr. Gautam Dethe">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Gautam Dethe</div>
+                              <div class="doc-qualification">MBBS, DDV, DNB</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("gaurangi.jpg") %>" alt="Dr. Gaurangi Shrawat">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Gaurangi Shrawat</div>
+                              <div class="doc-qualification">MD (Dermatology & VD)</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("pradnya.jpg") %>" alt="Dr Pradnya Shastri">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr Pradnya Shastri</div>
+                              <div class="doc-qualification">MBBS, DDVL</div>
+                            </div>
                           </div>
                         </div>
-
-                        <div class="row text-center margin_b_15"></div>
-
-                        <div class="row text-center margin_b_25">
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="paytm">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/paytm.png") %>" class="img-responsive" alt="paytm" style="display: inline-block; max-height: 25px;"></div>
+                      </div>
+                      <!-- doctor carousel for desktop -->
+                      <div class="carousel-wrapper space_bottom desktop">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                          <div class="carousel-inner">
+                            <div class="item active">
+                              <img src="<%= asset_path("abhishek.jpg") %>" alt="Dr. Abhishek Omchery">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Abhishek Omchery</div>
+                                <div class="doc-qualification">MD (Dermatology & VD)</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("ankita.jpg") %>" alt="Dr. Ankita Sawant">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Ankita Sawant</div>
+                                <div class="doc-qualification">MBBS, DDV</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("sonam.jpg") %>" alt="Dr. Sonam Vimadalal">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Sonam Vimadalal</div>
+                                <div class="doc-qualification">MBBS, DDVL</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("gautam.jpg") %>" alt="Dr. Gautam Dethe">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Gautam Dethe</div>
+                                <div class="doc-qualification">MBBS, DDV, DNB</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("gaurangi.jpg") %>" alt="Dr. Gaurangi Shrawat">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Gaurangi Shrawat</div>
+                                <div class="doc-qualification">MD (Dermatology & VD)</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("pradnya.jpg") %>" alt="Dr Pradnya Shastri">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr Pradnya Shastri</div>
+                                <div class="doc-qualification">MBBS, DDVL</div>
+                              </div>
+                            </div>
                           </div>
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="olamoney">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/olamoney.jpg") %>" class="img-responsive" alt="ola money" style="display: inline-block; max-height: 25px;"></div>
-                          </div>
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="freecharge">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/freecharge.jpg") %>" class="img-responsive" alt="freecharge" style="display: inline-block; max-height: 25px;"></div>
-                          </div>
+                          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-menu-left"></span>
+                          </a>
+                          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                          </a>
                         </div>
-
-                        <div class="row text-center margin_b_25">
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="mobikwik">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/mobikwik.png") %>" class="img-responsive" alt="mobikwik" style="display: inline-block; max-height: 25px;"></div>
-                          </div>
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="payzapp">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/payzapp.png") %>" class="img-responsive" alt="payzapp" style="display: inline-block; max-height: 25px;"></div>
-                          </div>
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="payumoney">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/payumoney.png") %>" class="img-responsive" alt="PayU money" style="display: inline-block; max-height: 20px;"></div>
-                          </div>
-                        </div>
-
-                        <div class="row text-center margin_b_25">
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="airtelmoney" title="airtelmoney">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/airtelmoney.png") %>" class="img-responsive" alt="airtel money" style="display: inline-block; max-height: 38px;"></div>
-                          </div>
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="mpesa">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/mpesa.png") %>" class="img-responsive" alt="mpesa" style="display: inline-block; max-height: 38px;"></div>
-                          </div>
-                          <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="sbibuddy">
-                            <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/sbibuddy.png") %>" class="img-responsive" alt="sbibuddy" style="display: inline-block; max-height: 38px;"></div>
-                          </div>
-                        </div>
-
                       </div>
                     </div>
                   </div>
-              </div>
+                  
+                  <hr class="pad_0 margin_0" />
 
-              <hr class="pad_0  margin_0" />
+                  <!-- sample treatment plan -->
+                  <div class="row left-align collapsible-section">
+                    <div class="col-sm-12">
+                      <div>
+                        <h5 class="sub-title">What will be in my treatment plan?<span class="more-less fa fa-plus"></span></h5>
+                        <div class="hidden-content-wrapper pad">
+                          <% case current_consultation.category when "Acne" then %>
+                            <div class="row icon-set-container white_back pad_10">
+                              <br>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diagnosis & medical advice</h4>
+                                    <p>Diagnosis of your medical condition(s), and potential causes</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Topical applications</h4>
+                                    <p>Including creams, lotions, moisturisers, and other products</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Oral medication</h4>
+                                    <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Vitamins & supplements</h4>
+                                    <p>Depending on your condition, supplements to help promote skin health and control acne</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Washing advice</h4>
+                                    <p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diet & lifestyle advice</h4>
+                                    <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Procedures</h4>
+                                    <p>Procedures for improving skin appearance and health, if they think you will benefit</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Tests & reports</h4>
+                                    <p>Blood and other tests, if necessary for further investigation</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% when "Hairfall", "Hairfall or Hair Thinning" then %>
+                            <div class="row icon-set-container white_back pad_10">
+                              <br>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diagnosis & medical advice</h4>
+                                    <p>Diagnosis of your medical condition(s), and potential causes</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Topical applications</h4>
+                                    <p>Including lotions, serums, and other products</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Oral medication</h4>
+                                    <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Vitamins & supplements</h4>
+                                    <p>Depending on your condition, supplements to improve your hair growth, texture, and strength</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Washing advice</h4>
+                                    <p>Shampoos and / or conditioners, and instructions on when and how to wash your hair</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diet & lifestyle advice</h4>
+                                    <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy hair</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Procedures</h4>
+                                    <p>Procedures for improving hair growth, if they think you will benefit</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Tests & reports</h4>
+                                    <p>Blood and other tests, if necessary for further investigation</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% when "Pigmentation and Dark Circles", "Pigmentation & Dark Circles" then %>
+                            <div class="row icon-set-container white_back pad_10">
+                              <br>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diagnosis & medical advice</h4>
+                                    <p>Diagnosis of your medical condition(s), and potential causes</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Topical applications</h4>
+                                    <p>Including creams, lotions, moisturisers, and other products</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Oral medication</h4>
+                                    <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Vitamins & supplements</h4>
+                                    <p>Depending on your condition, supplements to help promote skin health and improve appearance</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Washing advice</h4>
+                                    <p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diet & lifestyle advice</h4>
+                                    <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Procedures</h4>
+                                    <p>Procedures for improving skin appearance and health, if they think you will benefit</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Tests & reports</h4>
+                                    <p>Blood and other tests, if necessary for further investigation</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% when "Dandruff" then %>
+                            <div class="row icon-set-container white_back pad_10">
+                              <br>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diagnosis & medical advice</h4>
+                                    <p>Diagnosis of your medical condition(s), and potential causes</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Topical applications</h4>
+                                    <p>Including lotions, serums, and other products</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Oral medication</h4>
+                                    <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Washing advice</h4>
+                                    <p>Shampoos and / or conditioners, and instructions on when and how to wash your hair</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diet & lifestyle advice</h4>
+                                    <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy hair</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Tests & reports</h4>
+                                    <p>Blood and other tests, if necessary for further investigation</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% when "Eczema, Psoriasis and Rash", "Eczema, Psoriasis & Rash" then %>
+                            <div class="row icon-set-container white_back pad_10">
+                              <br>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diagnosis & medical advice</h4>
+                                    <p>Diagnosis of your medical condition(s), and potential causes</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Topical applications</h4>
+                                    <p>Including creams, lotions, moisturisers, and other products</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Oral medication</h4>
+                                    <p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Washing advice</h4>
+                                    <p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diet & lifestyle advice</h4>
+                                    <p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Tests & reports</h4>
+                                    <p>Blood and other tests, if necessary for further investigation</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% when "Stretch Marks" then %>
+                            <div class="row icon-set-container white_back pad_10">
+                              <br>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diagnosis & medical advice</h4>
+                                    <p>Diagnosis of your medical condition(s), and potential causes</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Topical applications</h4>
+                                    <p>Including creams, lotions, moisturisers, and other products</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Procedures</h4>
+                                    <p>Procedures for improving skin appearance and health, if they think you will benefit</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% when "Skin Growth (Moles, Warts)" then %>
+                            <div class="row icon-set-container white_back pad_10">
+                              <br>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Diagnosis & medical advice</h4>
+                                    <p>Diagnosis of your medical condition(s), and potential causes</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set removal_options" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Removal options</h4>
+                                    <p>Options and recommendations for how to remove the growth, if required</p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="row">
+                                  <span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
+                                  <div class="item-content">
+                                    <h4>Tests & reports</h4>
+                                    <p>Blood and other tests, if necessary for further investigation</p>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% end %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-              <div class="left-align collapsible-section">
-                <h5 class="sub-title">Will these products suit me? What if I have a bad reaction?<span class="more-less fa fa-plus"></span></h5>
-                <div class="hidden-content-wrapper margin_b_25">
-                  <p class="p_16 margin_b_25 space_top_sm">
-                    Before preparing your treatment plan, our dermatologists take into account the information and photos you provided. They will prescribe products that are designed to suit your skin / hair, and overall body type. The products we prescribe are mild, with minimal or no side effects if taken correctly.<br>
-                    However, if you face any issues during your treatment, you can contact our customer service team at any time, and they will resolve your problem with the help of our dermatologists.
-                  </p>
+                  <hr class="pad_0 margin_0" />
+                  
+                  <!-- payment options -->
+                  <div class="row left-align collapsible-section">
+                    <div class="col-sm-12">
+                      <div>
+                        <h5 class="sub-title">How can I pay?<span class="more-less fa fa-plus"></span></h5>
+                        <div class="hidden-content-wrapper">
+                          <div class="row text-center margin_b_25 margin_t_15">
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="credit card debit card">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/card.png") %>" class="img-responsive" alt="Credit/Debit card" style="display: inline-block; max-height: 35px;"></div>
+                              <div class="row payment-option-text">Credit card/ Debit card</div>
+                            </div>
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="netbanking">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/netbanking.png") %>" class="img-responsive" alt="netbanking" style="display: inline-block; max-height: 35px;"></div>
+                              <div class="row payment-option-text">Net banking</div>
+                            </div>
+                          </div>
+                          <div class="row text-center margin_b_15"></div>
+                          <div class="row text-center margin_b_25">
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="paytm">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/paytm.png") %>" class="img-responsive" alt="paytm" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="olamoney">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/olamoney.jpg") %>" class="img-responsive" alt="ola money" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="freecharge">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/freecharge.jpg") %>" class="img-responsive" alt="freecharge" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                          </div>
+                          <div class="row text-center margin_b_25">
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="mobikwik">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/mobikwik.png") %>" class="img-responsive" alt="mobikwik" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="payzapp">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/payzapp.png") %>" class="img-responsive" alt="payzapp" style="display: inline-block; max-height: 25px;"></div>
+                            </div>
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="payumoney">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/payumoney.png") %>" class="img-responsive" alt="PayU money" style="display: inline-block; max-height: 20px;"></div>
+                            </div>
+                          </div>
+                          <div class="row text-center margin_b_25">
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="airtelmoney">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/airtelmoney.png") %>" class="img-responsive" alt="airtel money" style="display: inline-block; max-height: 38px;"></div>
+                            </div>
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="mpesa">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/mpesa.png") %>" class="img-responsive" alt="mpesa" style="display: inline-block; max-height: 38px;"></div>
+                            </div>
+                            <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="sbibuddy">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/sbibuddy.png") %>" class="img-responsive" alt="sbibuddy" style="display: inline-block; max-height: 38px;"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="pad_0  margin_0" />
+                  
+                  <!-- will these products suit -->
+                  <div class="row left-align collapsible-section">
+                    <div class="col-sm-12">
+                      <h5 class="sub-title">Will these products suit me? What if I have a bad reaction?<span class="more-less fa fa-plus"></span></h5>
+                      <div class="hidden-content-wrapper margin_b_25">
+                        <p class="p_16 margin_b_25 space_top_sm">
+                          Before preparing your treatment plan, our dermatologists take into account the information and photos you provided. They will prescribe products that are designed to suit your skin / hair, and overall body type. The products we prescribe are mild, with minimal or no side effects if taken correctly.<br>
+                          However, if you face any issues during your treatment, you can contact our customer service team at any time, and they will resolve your problem with the help of our dermatologists.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="pad_0 margin_0" />
+                  
+                  <!-- will this treatment work -->
+                  <div class="row left-align collapsible-section">
+                    <div class="col-sm-12">
+                      <h5 class="sub-title">Will this treatment work?<span class="more-less fa fa-plus"></span></h5>
+                      <div class="hidden-content-wrapper margin_b_25">
+                        <p class="p_16 margin_b_25 space_top_sm">
+                          We are super confident in our process - it is as close as possible to visiting a dermatologist in person. Our questionnaire and your photos provide a dermatologist with everything they need to give you the right advice. <br>We have served hundreds of happy patients who have seen great results. We are so confident in our process that we have a satisfaction guarantee – in case you are not happy with your treatment plan, we will refund your fee.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="pad_0 margin_0" />
                 </div>
+
               </div>
-
-              <hr class="pad_0 margin_0" />
-
-              <div class="left-align collapsible-section">
-                <h5 class="sub-title">Will this treatment work?<span class="more-less fa fa-plus"></span></h5>
-                <div class="hidden-content-wrapper margin_b_25">
-                  <p class="p_16 margin_b_25 space_top_sm">
-                   We are super confident in our process - it is as close as possible to visiting a dermatologist in person. Our questionnaire and your photos provide a dermatologist with everything they need to give you the right advice. <br>We have served hundreds of happy patients who have seen great results. We are so confident in our process that we have a satisfaction guarantee – in case you are not happy with your treatment plan, we will refund your fee.
-                  </p>
-                </div>
-              </div>
-
-              <hr class="pad_0  margin_0" />
-
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- allocated doctors version end -->
+    </section>
+    <!-- content section end -->
 
-  <!-- doctor carousel version begin -->
-<section class="inner_content pad_15" style="display:none">
-<div class="container">
-<div class="row contactpopup_info">
-<div class="col-sm-12 box pad_0 margin_0">
-<div class="row space_bottom">
-<div class="col-sm-12 col-md-6 col-md-offset-3">
-<div><h1 style="font-size:28px">Almost done, <span customer-name><%=current_user.name %></span>!</h1></div>
-<div>
-<p class="p_16 margin_t_25">
-The final step is the payment.
-</p>
-</div>
-<div class="row desktop margin_b_25">
-<div class="col-md-12 margin_t_25">
-<img src="<%= asset_path("progress_bar_web.png") %>" />
-</div>
-</div>
-<div class="row mobile margin_b_25">
-<div class="col-md-12 margin_t_10">
-<img src="<%= asset_path("progress_bar_mobile.png") %>" />
-</div>
-</div>
-<hr class="pad_0 margin_0" />
-<div class="left-align collapsible-section">
-<h5 class="sub-title">Who will provide my treatment plan?<span class="more-less fa fa-plus"></span></h5>
-<div class="hidden-content-wrapper margin_b_25">
-<p class="p_16 margin_b_25 space_top_sm">
-One of our expert dermatologists below will prepare your treatment plan.
-</p>
-<div class="slider mobile" id="slider" style="padding-left:-15px">
-<div class="holder">
-<div class="slide">
-<img src="<%= asset_path("abhishek.jpg") %>" alt="Dr. Abhishek Omchery">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Abhishek Omchery</div>
-<div class="doc-qualification">MD (Dermatology & VD)</div>
-</div>
-</div>
-<div class="slide">
-<img src="<%= asset_path("ankita.jpg") %>" alt="Dr. Ankita Sawant">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Ankita Sawant</div>
-<div class="doc-qualification">MBBS, DDV</div>
-</div>
-</div>
-<div class="slide">
-<img src="<%= asset_path("sonam.jpg") %>" alt="Dr. Sonam Vimadalal">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Sonam Vimadalal</div>
-<div class="doc-qualification">MBBS, DDVL</div>
-</div>
-</div>
-<div class="slide">
-<img src="<%= asset_path("gautam.jpg") %>" alt="Dr. Gautam Dethe">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Gautam Dethe</div>
-<div class="doc-qualification">MBBS, DDV, DNB</div>
-</div>
-</div>
-<div class="slide">
-<img src="<%= asset_path("gaurangi.jpg") %>" alt="Dr. Gaurangi Shrawat">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Gaurangi Shrawat</div>
-<div class="doc-qualification">MD (Dermatology & VD)</div>
-</div>
-</div>
-<div class="slide">
-<img src="<%= asset_path("pradnya.jpg") %>" alt="Dr Pradnya Shastri">
-<div class="carousel-img-details">
-<div class="doc-name">Dr Pradnya Shastri</div>
-<div class="doc-qualification">MBBS, DDVL</div>
-</div>
-</div>
-</div>
-</div>
-<div class="carousel-wrapper space_bottom desktop">
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-<div class="carousel-inner">
-<div class="item active">
-<img src="<%= asset_path("abhishek.jpg") %>" alt="Dr. Abhishek Omchery">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Abhishek Omchery</div>
-<div class="doc-qualification">MD (Dermatology & VD)</div>
-</div>
-</div>
-<div class="item">
-<img src="<%= asset_path("ankita.jpg") %>" alt="Dr. Ankita Sawant">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Ankita Sawant</div>
-<div class="doc-qualification">MBBS, DDV</div>
-</div>
-</div>
-<div class="item">
-<img src="<%= asset_path("sonam.jpg") %>" alt="Dr. Sonam Vimadalal">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Sonam Vimadalal</div>
-<div class="doc-qualification">MBBS, DDVL</div>
-</div>
-</div>
-<div class="item">
-<img src="<%= asset_path("gautam.jpg") %>" alt="Dr. Gautam Dethe">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Gautam Dethe</div>
-<div class="doc-qualification">MBBS, DDV, DNB</div>
-</div>
-</div>
-<div class="item">
-<img src="<%= asset_path("gaurangi.jpg") %>" alt="Dr. Gaurangi Shrawat">
-<div class="carousel-img-details">
-<div class="doc-name">Dr. Gaurangi Shrawat</div>
-<div class="doc-qualification">MD (Dermatology & VD)</div>
-</div>
-</div>
-<div class="item">
-<img src="<%= asset_path("pradnya.jpg") %>" alt="Dr Pradnya Shastri">
-<div class="carousel-img-details">
-<div class="doc-name">Dr Pradnya Shastri</div>
-<div class="doc-qualification">MBBS, DDVL</div>
-</div>
-</div>
-</div>
-<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-<span class="glyphicon glyphicon-menu-left"></span>
-</a>
-<a class="right carousel-control" href="#myCarousel" data-slide="next">
-<span class="glyphicon glyphicon-menu-right"></span>
-</a>
-</div>
-</div>
-</div>
-</div>
-<hr class="pad_0 margin_0" />
-<div class="row left-align collapsible-section">
-<div class="col-sm-12">
-<div>
-<h5 class="sub-title">What will be in my treatment plan?<span class="more-less fa fa-plus"></span></h5>
-<div class="hidden-content-wrapper pad">
-<% case current_consultation.category when "Acne" then %>
-<div class="row icon-set-container white_back pad_10">
-<br>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diagnosis & medical advice</h4>
-<p>Diagnosis of your medical condition(s), and potential causes</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Topical applications</h4>
-<p>Including creams, lotions, moisturisers, and other products</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Oral medication</h4>
-<p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Vitamins & supplements</h4>
-<p>Depending on your condition, supplements to help promote skin health and control acne</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Washing advice</h4>
-<p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diet & lifestyle advice</h4>
-<p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Procedures</h4>
-<p>Procedures for improving skin appearance and health, if they think you will benefit</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Tests & reports</h4>
-<p>Blood and other tests, if necessary for further investigation</p>
-</div>
-</div>
-</div>
-</div>
-<% when "Hairfall", "Hairfall or Hair Thinning" then %>
-<div class="row icon-set-container white_back pad_10">
-<br>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diagnosis & medical advice</h4>
-<p>Diagnosis of your medical condition(s), and potential causes</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Topical applications</h4>
-<p>Including lotions, serums, and other products</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Oral medication</h4>
-<p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Vitamins & supplements</h4>
-<p>Depending on your condition, supplements to improve your hair growth, texture, and strength</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Washing advice</h4>
-<p>Shampoos and / or conditioners, and instructions on when and how to wash your hair</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diet & lifestyle advice</h4>
-<p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy hair</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Procedures</h4>
-<p>Procedures for improving hair growth, if they think you will benefit</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Tests & reports</h4>
-<p>Blood and other tests, if necessary for further investigation</p>
-</div>
-</div>
-</div>
-</div>
-<% when "Pigmentation and Dark Circles", "Pigmentation & Dark Circles" then %>
-<div class="row icon-set-container white_back pad_10">
-<br>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diagnosis & medical advice</h4>
-<p>Diagnosis of your medical condition(s), and potential causes</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Topical applications</h4>
-<p>Including creams, lotions, moisturisers, and other products</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Oral medication</h4>
-<p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set vitamin_supplements" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Vitamins & supplements</h4>
-<p>Depending on your condition, supplements to help promote skin health and improve appearance</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Washing advice</h4>
-<p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diet & lifestyle advice</h4>
-<p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Procedures</h4>
-<p>Procedures for improving skin appearance and health, if they think you will benefit</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Tests & reports</h4>
-<p>Blood and other tests, if necessary for further investigation</p>
-</div>
-</div>
-</div>
-</div>
-<% when "Dandruff" then %>
-<div class="row icon-set-container white_back pad_10">
-<br>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diagnosis & medical advice</h4>
-<p>Diagnosis of your medical condition(s), and potential causes</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Topical applications</h4>
-<p>Including lotions, serums, and other products</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Oral medication</h4>
-<p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Washing advice</h4>
-<p>Shampoos and / or conditioners, and instructions on when and how to wash your hair</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diet & lifestyle advice</h4>
-<p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy hair</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Tests & reports</h4>
-<p>Blood and other tests, if necessary for further investigation</p>
-</div>
-</div>
-</div>
-</div>
-<% when "Eczema, Psoriasis and Rash", "Eczema, Psoriasis & Rash" then %>
-<div class="row icon-set-container white_back pad_10">
-<br>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diagnosis & medical advice</h4>
-<p>Diagnosis of your medical condition(s), and potential causes</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Topical applications</h4>
-<p>Including creams, lotions, moisturisers, and other products</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set oral_medication" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Oral medication</h4>
-<p>If required, oral tablets to treat the underlying condition, and improve your symptoms</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set washing" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Washing advice</h4>
-<p>Face washes, shampoos, and instructions on when and how to wash your face and body</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diet_lifestyle" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diet & lifestyle advice</h4>
-<p>Nutritional advice on foods to eat and avoid, as well as lifestyle habits to promote healthy skin</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Tests & reports</h4>
-<p>Blood and other tests, if necessary for further investigation</p>
-</div>
-</div>
-</div>
-</div>
-<% when "Stretch Marks" then %>
-<div class="row icon-set-container white_back pad_10">
-<br>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diagnosis & medical advice</h4>
-<p>Diagnosis of your medical condition(s), and potential causes</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set topical_applications" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Topical applications</h4>
-<p>Including creams, lotions, moisturisers, and other products</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set procedures" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Procedures</h4>
-<p>Procedures for improving skin appearance and health, if they think you will benefit</p>
-</div>
-</div>
-</div>
-</div>
-<% when "Skin Growth (Moles, Warts)" then %>
-<div class="row icon-set-container white_back pad_10">
-<br>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set diagnosis" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Diagnosis & medical advice</h4>
-<p>Diagnosis of your medical condition(s), and potential causes</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set removal_options" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Removal options</h4>
-<p>Options and recommendations for how to remove the growth, if required</p>
-</div>
-</div>
-</div>
-<div class="col-md-6 col-sm-6 col-xs-12">
-<div class="row">
-<span class="item-icon"><img class="icon-set tests_reports" src="<%= asset_path("trans_120_120.png") %>" alt="Remedico"></span>
-<div class="item-content">
-<h4>Tests & reports</h4>
-<p>Blood and other tests, if necessary for further investigation</p>
-</div>
-</div>
-</div>
-</div>
-<% end %>
-</div>
-</div>
-</div>
-</div>
-<hr class="pad_0 margin_0" />
-<div class="row left-align collapsible-section">
-<div class="col-sm-12">
-<div>
-<h5 class="sub-title">How can I pay?<span class="more-less fa fa-plus"></span></h5>
-<div class="hidden-content-wrapper">
-<div class="row text-center margin_b_25 margin_t_15">
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="credit card debit card">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/card.png") %>" class="img-responsive" alt="Credit/Debit card" style="display: inline-block; max-height: 35px;"></div>
-<div class="row payment-option-text">Credit card/ Debit card</div>
-</div>
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="netbanking">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/netbanking.png") %>" class="img-responsive" alt="netbanking" style="display: inline-block; max-height: 35px;"></div>
-<div class="row payment-option-text">Net banking</div>
-</div>
-</div>
-<div class="row text-center margin_b_15"></div>
-<div class="row text-center margin_b_25">
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="paytm">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/paytm.png") %>" class="img-responsive" alt="paytm" style="display: inline-block; max-height: 25px;"></div>
-</div>
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="olamoney">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/olamoney.jpg") %>" class="img-responsive" alt="ola money" style="display: inline-block; max-height: 25px;"></div>
-</div>
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="freecharge">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/freecharge.jpg") %>" class="img-responsive" alt="freecharge" style="display: inline-block; max-height: 25px;"></div>
-</div>
-</div>
-<div class="row text-center margin_b_25">
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="mobikwik">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/mobikwik.png") %>" class="img-responsive" alt="mobikwik" style="display: inline-block; max-height: 25px;"></div>
-</div>
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="payzapp">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/payzapp.png") %>" class="img-responsive" alt="payzapp" style="display: inline-block; max-height: 25px;"></div>
-</div>
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="payumoney">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/payumoney.png") %>" class="img-responsive" alt="PayU money" style="display: inline-block; max-height: 20px;"></div>
-</div>
-</div>
-<div class="row text-center margin_b_25">
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="airtelmoney">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/airtelmoney.png") %>" class="img-responsive" alt="airtel money" style="display: inline-block; max-height: 38px;"></div>
-</div>
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="mpesa">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/mpesa.png") %>" class="img-responsive" alt="mpesa" style="display: inline-block; max-height: 38px;"></div>
-</div>
-<div class="payment-option col-md-4 col-sm-4 col-xs-4" title="sbibuddy">
-<div class="row payment-option-icon"><img src="<%= asset_path("payment_options/sbibuddy.png") %>" class="img-responsive" alt="sbibuddy" style="display: inline-block; max-height: 38px;"></div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<hr class="pad_0  margin_0" />
-<div class="left-align collapsible-section">
-<h5 class="sub-title">Will these products suit me? What if I have a bad reaction?<span class="more-less fa fa-plus"></span></h5>
-<div class="hidden-content-wrapper margin_b_25">
-<p class="p_16 margin_b_25 space_top_sm">
-Before preparing your treatment plan, our dermatologists take into account the information and photos you provided. They will prescribe products that are designed to suit your skin / hair, and overall body type. The products we prescribe are mild, with minimal or no side effects if taken correctly.<br>
-However, if you face any issues during your treatment, you can contact our customer service team at any time, and they will resolve your problem with the help of our dermatologists.
-</p>
-</div>
-</div>
+    <!-- satisfaction guaranteed section begin -->
+    <section class="satisfaction space_bottom">
+      <div class="row text-center space_bottom space_top dotted-lines">
+        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+          <div class="row margin_t_25 margin_b_15">
 
-<hr class="pad_0 margin_0" />
+            <div class="col-md-6 col-sm-6 col-xs-12 satisfaction-content">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_blue_light_sm.png") %>" alt="Remedico"></span>
+                <div class="text-left">
+                  <h5 class="sub-title color_blue">100% satisfaction</h5>
+                  <p class="p_16 margin_b_0">If you're not satisfied with your consultation, we will refund your fee.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 satisfaction-content">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set" src="<%= asset_path("secure_icon_sm.png") %>" alt="Remedico"></span>
+                <div class="text-left">
+                  <h5 class="sub-title color_blue">Secure Information</h5>
+                  <p class="p_16">Your information and photos are only shared with the doctors.</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
-<div class="left-align collapsible-section">
-<h5 class="sub-title">Will this treatment work?<span class="more-less fa fa-plus"></span></h5>
-<div class="hidden-content-wrapper margin_b_25">
-<p class="p_16 margin_b_25 space_top_sm">
-We are super confident in our process - it is as close as possible to visiting a dermatologist in person. Our questionnaire and your photos provide a dermatologist with everything they need to give you the right advice. <br>We have served hundreds of happy patients who have seen great results. We are so confident in our process that we have a satisfaction guarantee – in case you are not happy with your treatment plan, we will refund your fee.
-</p>
-</div>
-</div>
-<hr class="pad_0 margin_0" />
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-  <!-- doctor carousel version end -->
-
-  <!-- satisfaction guaranteed section begin -->
-  <section class="satisfaction">
-    <div class="row space_bottom">
-      <div class="col-sm-12 text-center space_bottom space_top dotted-lines">
-        <div class="space_bottom space_top">
-        <img src="<%= asset_path("satisfaction_icon_blue_light.png") %>" />
-        <h5 class="sub-title color_blue">100% satisfaction </h5>
-        <p class="p_16" style="padding: 0px 30px;">If you're not completely satisfied with your consultation, we will refund your fee.</p>
         </div>
       </div>
-    </div>
-  </section>
-  <!-- satisfaction guaranteed section end -->
+    </section>
+    <!-- satisfaction guaranteed section end -->
+  </div>
+  <!-- version 1 end -->
+
+  <!-- version 2 begin -->
+  <div class="version_2" style="display: none;">
+    <!-- content section begin -->
+    <section class="inner_content pad_15">
+      <div class="container">
+        <div class="row contactpopup_info">
+          <div class="col-sm-12 box pad_0 margin_0">
+            <div class="row space_bottom">
+              <div class="col-sm-12 col-md-6 col-md-offset-3">
+                <div><h1 style="font-size:28px">Almost done, <span customer-name><%=current_user.name %></span>!</h1></div>
+                <div>
+                  <p class="p_16 margin_t_25">
+                  The final step is the payment.
+                  </p>
+                </div>
+                
+                <!-- three step process desktop version -->
+                <div class="row desktop margin_b_25">
+                  <div class="col-md-12 margin_t_25">
+                    <img src="<%= asset_path("progress_bar_web.png") %>" />
+                  </div>
+                </div>
+                <!-- three step process mobile version -->
+                <div class="row mobile margin_b_25">
+                  <div class="col-md-12 margin_t_10">
+                    <img src="<%= asset_path("progress_bar_mobile.png") %>" />
+                  </div>
+                </div>
+
+                <!-- accordion section -->
+                <div>
+                  <hr class="pad_0 margin_0" />
+                  
+                  <!-- doctor carousel -->
+                  <div class="left-align collapsible-section">
+                    <h5 class="sub-title">Who will provide my treatment plan?</h5>
+                    <div class="margin_b_25">
+                      <p class="p_16 margin_b_25 space_top_sm">
+                        One of our expert dermatologists below will prepare your treatment plan.
+                      </p>
+
+                      <!-- doctor carousel for mobile -->
+                      <div class="slider mobile" id="slider" style="padding-left:-15px">
+                        <div class="holder">
+                          <div class="slide">
+                            <img src="<%= asset_path("abhishek.jpg") %>" alt="Dr. Abhishek Omchery">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Abhishek Omchery</div>
+                              <div class="doc-qualification">MD (Dermatology & VD)</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("ankita.jpg") %>" alt="Dr. Ankita Sawant">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Ankita Sawant</div>
+                              <div class="doc-qualification">MBBS, DDV</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("sonam.jpg") %>" alt="Dr. Sonam Vimadalal">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Sonam Vimadalal</div>
+                              <div class="doc-qualification">MBBS, DDVL</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("gautam.jpg") %>" alt="Dr. Gautam Dethe">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Gautam Dethe</div>
+                              <div class="doc-qualification">MBBS, DDV, DNB</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("gaurangi.jpg") %>" alt="Dr. Gaurangi Shrawat">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr. Gaurangi Shrawat</div>
+                              <div class="doc-qualification">MD (Dermatology & VD)</div>
+                            </div>
+                          </div>
+                          <div class="slide">
+                            <img src="<%= asset_path("pradnya.jpg") %>" alt="Dr Pradnya Shastri">
+                            <div class="carousel-img-details">
+                              <div class="doc-name">Dr Pradnya Shastri</div>
+                              <div class="doc-qualification">MBBS, DDVL</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- doctor carousel for desktop -->
+                      <div class="carousel-wrapper space_bottom desktop">
+                        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                          <div class="carousel-inner">
+                            <div class="item active">
+                              <img src="<%= asset_path("abhishek.jpg") %>" alt="Dr. Abhishek Omchery">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Abhishek Omchery</div>
+                                <div class="doc-qualification">MD (Dermatology & VD)</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("ankita.jpg") %>" alt="Dr. Ankita Sawant">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Ankita Sawant</div>
+                                <div class="doc-qualification">MBBS, DDV</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("sonam.jpg") %>" alt="Dr. Sonam Vimadalal">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Sonam Vimadalal</div>
+                                <div class="doc-qualification">MBBS, DDVL</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("gautam.jpg") %>" alt="Dr. Gautam Dethe">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Gautam Dethe</div>
+                                <div class="doc-qualification">MBBS, DDV, DNB</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("gaurangi.jpg") %>" alt="Dr. Gaurangi Shrawat">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr. Gaurangi Shrawat</div>
+                                <div class="doc-qualification">MD (Dermatology & VD)</div>
+                              </div>
+                            </div>
+                            <div class="item">
+                              <img src="<%= asset_path("pradnya.jpg") %>" alt="Dr Pradnya Shastri">
+                              <div class="carousel-img-details">
+                                <div class="doc-name">Dr Pradnya Shastri</div>
+                                <div class="doc-qualification">MBBS, DDVL</div>
+                              </div>
+                            </div>
+                          </div>
+                          <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                            <span class="glyphicon glyphicon-menu-left"></span>
+                          </a>
+                          <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                            <span class="glyphicon glyphicon-menu-right"></span>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- content section end -->
+
+    <!-- satisfaction guaranteed section begin -->
+    <section class="satisfaction space_bottom">
+      <div class="row text-center space_bottom space_top dotted-lines">
+        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+          <div class="row margin_t_25 margin_b_15">
+
+            <div class="col-md-6 col-sm-6 col-xs-12 satisfaction-content">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_blue_light_sm.png") %>" alt="Remedico"></span>
+                <div class="text-left">
+                  <h5 class="sub-title color_blue">100% satisfaction</h5>
+                  <p class="p_16 margin_b_0">If you're not satisfied with your consultation, we will refund your fee.</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12 satisfaction-content">
+              <div class="row">
+                <span class="item-icon"><img class="icon-set" src="<%= asset_path("secure_icon_sm.png") %>" alt="Remedico"></span>
+                <div class="text-left">
+                  <h5 class="sub-title color_blue">Secure Information</h5>
+                  <p class="p_16">Your information and photos are only shared with the doctors.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    <!-- satisfaction guaranteed section end -->
+  </div>
+  <!-- version 2 end -->
 
   <!-- payment section begin -->
   <section>
-    <div class="row">
-      <div class="col-sm-12 text-center space_bottom">
+    <div class="row margin_t_25">
+      <div class="col-sm-12 text-center space_bottom margin_t_15">
         <img src="<%= asset_path("payment_options/master_card_visa_paytm.png") %>" class="img-responsive" alt="Satisfaction-Payment-Gateway" style="display: inline-block; max-height: 25px;">
         <h5 class="sub-title space_bottom">Total payment: Rs. <%= @amount %></h5>
       </div>

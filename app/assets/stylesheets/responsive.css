@@ -623,3 +623,10 @@
         padding: 12px 50px;
     }
 }
+
+@media (max-width: 768px) {
+    .satisfaction-content:first-child {
+        margin-bottom: 5px;
+    }
+}
+
