@@ -103,7 +103,7 @@ ActiveAdmin.register Consultation do
     end
     
     def action_methods
-      if current_admin_user.admin?
+      if current_admin_user and current_admin_user.admin?
         super
       else
         super - ['edit']

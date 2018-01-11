@@ -29,8 +29,8 @@ module PaymentHelper
   end
 
   def build_paytm_params
-    # txnid = build_transaction_id
-    txnid = session[:txnid]
+    txnid = build_transaction_id
+    # txnid = session[:txnid]
     amount = current_consultation.amount.round(2)
 
     {
