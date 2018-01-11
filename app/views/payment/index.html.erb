@@ -580,7 +580,7 @@
                   <hr class="pad_0 margin_0" />
                   
                   <!-- payment options -->
-                  <div class="row left-align collapsible-section">
+                  <!-- <div class="row left-align collapsible-section">
                     <div class="col-sm-12">
                       <div>
                         <h5 class="sub-title">How can I pay?<span class="more-less fa fa-plus"></span></h5>
@@ -627,6 +627,35 @@
                             </div>
                             <div class="payment-option col-md-4 col-sm-4 col-xs-4" title="sbibuddy">
                               <div class="row payment-option-icon"><img src="<%= asset_path("payment_options/sbibuddy.png") %>" class="img-responsive" alt="sbibuddy" style="display: inline-block; max-height: 38px;"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <div class="row left-align collapsible-section">
+                    <div class="col-sm-12">
+                      <div>
+                        <h5 class="sub-title">How can I pay?<span class="more-less fa fa-plus"></span></h5>
+                        <div class="hidden-content-wrapper">
+                          <!-- <p class="p_16">
+                            You can pay with Credit Card, Debit Card, Net Banking or Paytm.
+                          </p> -->
+                          <div class="row text-center margin_b_25">
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("card.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 35px;"></div>
+                              <!-- <div class="row payment-option-icon"><span class="fa fa-credit-card"></span></div> -->
+                              <div class="row payment-option-text">Credit card/ Debit card</div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("netbanking.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 35px;"></div>
+                              <!-- <div class="row payment-option-icon"><span class="fa fa-bank"></span></div> -->
+                              <div class="row payment-option-text">Net banking</div>
+                            </div>
+                            <div class="col-md-4 col-sm-4 col-xs-4">
+                              <div class="row payment-option-icon"><img src="<%= asset_path("paytm.png") %>" class="img-responsive" alt="Paytm" style="display: inline-block; max-height: 35px;"></div>
+                              <div class="row payment-option-text">Paytm wallet</div>
                             </div>
                           </div>
                         </div>
@@ -904,7 +933,7 @@
       </div>
       <div class="col-sm-12 sticky-footer">
         <div class="text-center">
-            <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
+            <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "paytmPayBtn") do %>
               <i class="fa fa-lock" aria-hidden="true"></i> PAY SECURELY NOW
             <% end %>
         </div>
