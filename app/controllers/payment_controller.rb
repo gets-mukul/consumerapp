@@ -65,6 +65,7 @@ class PaymentController < ApplicationController
     payment_params = build_paytm_params
     checksum_hash = new_pg_checksum(payment_params, PAYTM_MERCHANT_KEY).gsub("\n",'')
     current_user.payments.create(user_payment_params(payment_params, "pending", "PAYTM"))
+    # current_payment.update(user_payment_params(payment_params, "pending", "PAYTM"))
     @content_paytm = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-I\"><title>Paytm</title></head><body><center><h2>Redirecting to Paytm </h2><br /><h1>Please do not refresh this page...</h1></center><form method=\"post\" action=\"#{PAYTM_INITIAL_TRASACTION_URL}\" name=\"f1\">"
       keys = payment_params.keys
       keys.each do |k|
