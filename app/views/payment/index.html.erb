@@ -1058,10 +1058,10 @@ $(function() {
   });
 
   $('.sticky-footer').on('click', '#paytmPayBtn', function () {
-    $.ajax({
-      type: "POST",
-      url: "/consult/payment/initiate_payment",
-      success: function (response) {
+    // $.ajax({
+    //   type: "POST",
+    //   url: "/consult/payment/initiate_payment",
+    //   success: function (response) {
         var mapForm = document.createElement("form");
         mapForm.target = "_self";
         mapForm.method = "POST";
@@ -1088,12 +1088,12 @@ $(function() {
           "Page URL": "payment/index",
         });
         window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
-        return false;
-      },
-      error: function (response) {
-        return false;
-      }
-    })
+    //     return false;
+    //   },
+    //   error: function (response) {
+    //     return false;
+    //   }
+    // })
   });
 
   mixpanel.track("Page Loaded", {
