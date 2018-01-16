@@ -3,7 +3,7 @@ class PaymentController < ApplicationController
   require 'net/http'
   require 'net/https'
   require 'encrypt'
-  require 'razorpay'
+  # require 'razorpay'
   PAYU_IN_PAYMENT_URL = Rails.application.secrets.PAYMENT_URL
   PAYTM_MERCHANT_KEY = Rails.application.secrets.PAYTM_MERCHANT_KEY
   PAYTM_INITIAL_TRASACTION_URL = Rails.application.secrets.PAYTM_INITIAL_TRASACTION_URL
@@ -23,6 +23,12 @@ class PaymentController < ApplicationController
     logger.info '--------------'
     logger.info params
     session[:error_msg] = ""
+    if !request.referer.nil? and URI.parse(request.referer).path.start_with?("/consult/consultation_form", "/to/")
+      current_user.age = params[:age] unless params[:age].blank?
+      current_user.city = params[:city] unless params[:city].blank?
+      current_user.sex = params[:sex] unless params[:sex].blank?
+      current_user.save!
+    end
     if params[:city].blank?
       logger.info "Payment Controller: payment city blank for #{current_consultation.id}"
       session[:error_msg] = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
@@ -253,7 +259,7 @@ class PaymentController < ApplicationController
     render 'failure'
   end
 
-    def flag
+  def flag
     logger.error "Payment Controller: in payment red flag for patient: #{current_user.name}"
     logger.info "Payment Controller: error msg ${session[:error_msg]} set"
     session[:error_msg] ||= params['error_Message'] + "|" + params['unmappedstatus']
