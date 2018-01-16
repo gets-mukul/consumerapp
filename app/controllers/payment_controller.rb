@@ -3,7 +3,7 @@ class PaymentController < ApplicationController
   require 'net/http'
   require 'net/https'
   require 'encrypt'
-  require 'razorpay'
+  # require 'razorpay'
   PAYU_IN_PAYMENT_URL = Rails.application.secrets.PAYMENT_URL
   PAYTM_MERCHANT_KEY = Rails.application.secrets.PAYTM_MERCHANT_KEY
   PAYTM_INITIAL_TRASACTION_URL = Rails.application.secrets.PAYTM_INITIAL_TRASACTION_URL
@@ -20,14 +20,26 @@ class PaymentController < ApplicationController
   def index
     Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
-
+    logger.info params
     session[:error_msg] = ""
+    if !request.referer.nil? and URI.parse(request.referer).path.start_with?("/consult/consultation_form", "/to/")
+      current_user.age = params[:age] unless params[:age].blank?
+      current_user.city = params[:city] unless params[:city].blank?
+      current_user.sex = params[:sex] unless params[:sex].blank?
+      current_user.save!
+    end
     if params[:city].blank?
       logger.info "Payment Controller: payment city blank for #{current_consultation.id}"
       session[:error_msg] = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
       logger.info "Payment Controller: error msg ${session[:error_msg]} set"
-      redirect_to :failure
-      # failure
+
+      session[:tmp_age] = nil
+      unless params[:age].empty?
+        session[:tmp_age] = params[:age] if !params[:age].to_i.between?(3, 65)
+      end
+      session[:tmp_red_flag] = params[:redflag].humanize.reverse.sub(','.reverse, ' and'.reverse).reverse
+
+      redirect_to :flag
     else
       # get email of the current user from typeform responses and store it
       begin
@@ -244,6 +256,17 @@ class PaymentController < ApplicationController
     current_user.update({pay_status: "payment failed : #{session[:error_msg]}"})
     current_consultation.update({ pay_status: "payment failed : #{session[:error_msg]}", user_status: "payment failed : #{session[:error_msg]}" })
     render 'failure'
+  end
+
+  def flag
+    logger.error "Payment Controller: in payment red flag for patient: #{current_user.name}"
+    logger.info "Payment Controller: error msg ${session[:error_msg]} set"
+    session[:error_msg] ||= params['error_Message'] + "|" + params['unmappedstatus']
+    current_user.update({pay_status: "payment failed : #{session[:error_msg]}"})
+    current_consultation.update({ pay_status: "payment failed : #{session[:error_msg]}", user_status: "payment failed : #{session[:error_msg]}" })
+
+    @age = session[:tmp_age] if session[:tmp_age]
+    render 'flag'
   end
 
   def instant_payment

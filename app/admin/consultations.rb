@@ -266,6 +266,15 @@ ActiveAdmin.register Consultation do
     column "Mobile" do |cs|
       cs.patient.mobile
     end
+    column "Age" do |cs|
+      cs.patient.age
+    end
+    column "Sex" do |cs|
+      cs.patient.sex
+    end
+    column "City" do |cs|
+      cs.patient.city
+    end
     column :category
     column :user_status
     column :coupon
