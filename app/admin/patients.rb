@@ -35,7 +35,6 @@ ActiveAdmin.register Patient do
       row :age
       row :sex
       row :city
-
       row :pay_status
       row :created_at
       row :updated_at

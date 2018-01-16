@@ -20,7 +20,6 @@ class PaymentController < ApplicationController
   def index
     Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
-    logger.info '--------------'
     logger.info params
     session[:error_msg] = ""
     if !request.referer.nil? and URI.parse(request.referer).path.start_with?("/consult/consultation_form", "/to/")
