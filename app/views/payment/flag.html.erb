@@ -62,9 +62,9 @@
                         
                         <div>
                             <p style="font-size: 16px">
-                    	        If you've entered this in error, please <a href="/consult" class="contact-us"><nobr>click here</nobr></a> to restart your consultation.
-    						</p><br/>
-						</div>
+                                If you've entered this in error, please <%= link_to "click here", ('/consult/consultation_form/' + current_consultation.category) %> to restart your consultation.
+                            </p><br/>
+                        </div>
 						
 						<div class="space_top">
 							<p style="font-size: 16px">You can contact us for any questions or help at:</p>
