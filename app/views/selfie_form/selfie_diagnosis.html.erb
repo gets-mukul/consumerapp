@@ -5,6 +5,7 @@
 <style type="text/css">
   html, body {
     font-family: Helvetica, arial, sans-serif;
+    overflow-x: hidden;
   }
   
   * {
@@ -321,7 +322,7 @@
 
 <!--button start-->
 <div class="selfie-diagnosis sticky-btn  text-center top-btn">
-  <a href="<%= @login_link %>" class="action_btn primary"><i class="fa fa-medkit" aria-hidden="true" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');"></i>&nbsp;Get Your Treatment Plan</a>
+  <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'top','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'top', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
 </div>
 
 <!--button end-->
@@ -453,7 +454,7 @@
 
   <!--button start-->
   <div class="selfie-diagnosis sticky-btn text-center bottom-btn">
-    <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'clickGetTreatmentPlanButton');"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
+    <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'bottom','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'bottom', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
   </div>
   <!--button end-->
 
@@ -475,10 +476,10 @@
     <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4 col-xs-6 col-xs-offset-3 margin_b_25">
       <div class="margin_b_15 selfie_form_social_label"><b>Follow us at</b></div>
       <div class="row selfie_form_social">
-        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2ktwiaF"><i class="fa fa-facebook"></i></a></div>
-        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2AZAc1x"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
-        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2BHcNyK"><i class="fa fa-snapchat" aria-hidden="true"></i></a></div>
-        <div class="col-md-3 col-sm-3 col-xs-3"><a href="http://bit.ly/2iEbJUK"><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="https://www.facebook.com/remedico/" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickFBIcon');window._fbq.push(['track', 'Social Icon Clicked', {'Page URL':'/consult/selfie-diagnosis', 'Medium':'FB'}]);mixpanel.track('Social Icon Clicked', { 'Page URL': '/consult/selfie-diagnosis', 'Medium':'FB',});"><i class="fa fa-facebook"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="https://www.instagram.com/remedico/" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickIGIcon');window._fbq.push(['track', 'Social Icon Clicked', {'Page URL':'/consult/selfie-diagnosis', 'Medium':'IG'}]);mixpanel.track('Social Icon Clicked', { 'Page URL': '/consult/selfie-diagnosis', 'Medium':'IG',});"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="https://www.snapchat.com/add/remedico" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickSCIcon');window._fbq.push(['track', 'Social Icon Clicked', {'Page URL':'/consult/selfie-diagnosis', 'Medium':'SC'}]);mixpanel.track('Social Icon Clicked', { 'Page URL': '/consult/selfie-diagnosis', 'Medium':'SC',});"><i class="fa fa-snapchat" aria-hidden="true"></i></a></div>
+        <div class="col-md-3 col-sm-3 col-xs-3"><a href="https://twitter.com/remedicohealth" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickTWIcon');window._fbq.push(['track', 'Social Icon Clicked', {'Page URL':'/consult/selfie-diagnosis', 'Medium':'TW'}]);mixpanel.track('Social Icon Clicked', { 'Page URL': '/consult/selfie-diagnosis', 'Medium':'TW',});"><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
       </div>
     </div>
   </div>
@@ -488,3 +489,9 @@
 </div>
 <!--footer end-->
 
+<script>
+  window._fbq.push(['track', 'ViewContent',{'Page Name':'Selfie Checkup Diagnosis Page'}]);
+  mixpanel.track("Page Loaded", {
+    "Page Name": "Selfie Checkup Diagnosis Page",
+  });
+</script>
