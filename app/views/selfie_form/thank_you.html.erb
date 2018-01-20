@@ -30,33 +30,23 @@
                 </div>
               </div>
               <div class="row margin_t_15">
-                <p>Thanks! We'll send your diagnosis to your mobile number soon.<br><br></p> 
-                <div class="email-container">
-                  <p><label>Enter your email for important updates from Remedico</label></p>  
-                  <div class="space_bottom">
-                    <button class="input-text-field-btn" id="store_email">Send</button>
-                    <div class="inline-email-field-wrapper">
-                      <input type="email" name="email" id="email" placeholder="greatskin@gmail.com"  class="inline-email-field"/>
-                    </div>
-                  </div>
+                <p>Thanks! We'll send your diagnosis to your mobile number and email soon.<br><br></p>
               </div>
-              
-              <div class="row margin_t_15">
-                <div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                  <div class="row selfie_form_social">
-                    <div class="col-md-12 col-sm-12 col-xs-12">Follow Us On Instagram <a href="http://bit.ly/2AZAc1x"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
-                    
-                    
-                  </div>
-                </div>
-              </div>
-              
                 <br>
                 <p>
                   Follow Remedico to be updated with the latest skin care tips and communication regarding your <strong>free</strong> selfie-consultation.
               </p>
               </div>
-              
+              <div class="row margin_t_15">
+                <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                  <div class="row selfie_form_social">
+                    <div class="col-md-3 col-sm-3 col-xs-3"><a href="https://www.facebook.com/remedico/" onclick="ga('send', 'event', 'selfie_form', 'ClickFBIcon');window._fbq.push(['track', 'Social Icon Clicked', {'Page URL':'/consult/selfie_form', 'Medium':'FB'}]);mixpanel.track('Social Icon Clicked', { 'Page URL': '/consult/selfie_form', 'Medium':'FB',});"><i class="fa fa-facebook"></i></a></div>
+                    <div class="col-md-3 col-sm-3 col-xs-3"><a href="https://www.instagram.com/remedico/" onclick="ga('send', 'event', 'selfie_form', 'ClickIGIcon');window._fbq.push(['track', 'Social Icon Clicked', {'Page URL':'/consult/selfie_form', 'Medium':'IG'}]);mixpanel.track('Social Icon Clicked', { 'Page URL': '/consult/selfie_form', 'Medium':'IG',});"><i class="fa fa-instagram" aria-hidden="true"></i></a></div>
+                    <div class="col-md-3 col-sm-3 col-xs-3"><a href="https://www.snapchat.com/add/remedico" onclick="ga('send', 'event', 'selfie_form', 'ClickSCIcon');window._fbq.push(['track', 'Social Icon Clicked', {'Page URL':'/consult/selfie_form', 'Medium':'SC'}]);mixpanel.track('Social Icon Clicked', { 'Page URL': '/consult/selfie_form', 'Medium':'SC',});"><i class="fa fa-snapchat" aria-hidden="true"></i></a></div>
+                    <div class="col-md-3 col-sm-3 col-xs-3"><a href="https://twitter.com/remedicohealth" onclick="ga('send', 'event', 'selfie_form', 'ClickTWIcon');window._fbq.push(['track', 'Social Icon Clicked', {'Page URL':'/consult/selfie_form', 'Medium':'TW'}]);mixpanel.track('Social Icon Clicked', { 'Page URL': '/consult/selfie_form', 'Medium':'TW',});"><i class="fa fa-twitter" aria-hidden="true"></i></a></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -66,3 +56,10 @@
 </main>
 
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<script>
+  window._fbq.push(['track', 'ViewContent',{'Page Name':'Selfie Checkup Thank You'}]);
+  mixpanel.track("Page Loaded", {
+    "Page Name": "Selfie Checkup Thank You"
+  });
+</script>
