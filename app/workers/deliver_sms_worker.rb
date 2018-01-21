@@ -10,7 +10,7 @@ class DeliverSMSWorker
 		unless sent_sms.present?
 			consultation = Consultation.where(patient_id: id).where("created_at >= ?", DateTime.now-0.5).order('id desc')
 			if consultation.present?
-				latest_order = ["payment failed", "paid", "free consultation done", "form filled", "registered"]
+				latest_order = ["paid", "payment failed", "processing", "free consultation done", "form filled", "registered"]
 				sorted_consultation = consultation.sort_by{|x| latest_order.index x.user_status}[0]
 				puts sorted_consultation.id
 				if sorted_consultation.user_status == 'form filled'

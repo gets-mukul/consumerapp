@@ -15,7 +15,7 @@ class ConsultationController < ApplicationController
       if @fetched_consultation.user_status == 'registered'
         Rails.logger.info 'Consultation Controller: Rendering navigation menu - registered'
         render 'navigation_menu_on_registered'
-      elsif ['form filled', 'payment failed : '].include? @fetched_consultation.user_status or @fetched_consultation.user_status.end_with?('has cancelled the payment')
+      elsif ['form filled', 'payment failed : ', 'processing'].include? @fetched_consultation.user_status or @fetched_consultation.user_status.end_with?('has cancelled the payment')
         Rails.logger.info 'Consultation Controller: Rendering navigation menu - form filled'
         render 'navigation_menu_on_form_filled'
       end
@@ -38,6 +38,10 @@ class ConsultationController < ApplicationController
     @consultation = Consultation.find(params[:id])
     params[:condition] = @consultation.category
     register_consultation @consultation
+    unless session[:promo_code].nil?
+      coupon = Coupon.find_by coupon_code: session[:promo_code]
+      @consultation.update({:amount => (350 - coupon.discount_amount), :coupon_id => coupon.id});
+    end
     redirect_to params[:link]
   end
 
@@ -69,7 +73,7 @@ class ConsultationController < ApplicationController
   # end
 
   def self.latest_order
-    @@latest_order = ["payment failed", "paid", "free consultation done", "form filled", "registered"]
+    @@latest_order = ["paid", "payment failed", "processing", "free consultation done", "form filled", "registered"]
   end
 
   def create
