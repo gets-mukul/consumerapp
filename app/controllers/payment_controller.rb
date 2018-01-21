@@ -161,7 +161,7 @@ class PaymentController < ApplicationController
         current_consultation.update({ pay_status: "payment failed|invalid checksum", user_status: 'payment failed' })
         ErrorEmailer.error_email("invalid checksum for " + current_user.name).deliver
         redirect_to :failure
-      else
+      elsif params["STATUS"] == "TXN_SUCCESS"
         url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
         con = Net::HTTP.new(url.host, url.port )
         con.use_ssl = true
@@ -201,6 +201,21 @@ class PaymentController < ApplicationController
         render 'success'
         unregister_consultation
         unregister
+      else
+        url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
+        con = Net::HTTP.new(url.host, url.port )
+        con.use_ssl = true
+        request_data = {"MID": params["MID"], "ORDERID": params["ORDERID"]}
+        new_checksum_hash = new_pg_checksum(request_data, PAYTM_MERCHANT_KEY).gsub("\n",'')
+        request_data["CHECKSUMHASH"] = new_checksum_hash
+        resp, data = con.get url.path + "?JsonData=" + request_data.to_json
+        logger.info resp.body
+
+        current_user.update({pay_status: "processing"})
+        current_consultation.update({ pay_status: "processing", user_status: 'processing' })
+
+        DeliverAdminPendingTransactionMailsWorker.perform_in(30.minutes, current_payment.id)
+        render 'pending'
       end
     # elsif current_payment.pg_type=='RAZORPAY'
 
