@@ -15,7 +15,7 @@ class ConsultationController < ApplicationController
       if @fetched_consultation.user_status == 'registered'
         Rails.logger.info 'Consultation Controller: Rendering navigation menu - registered'
         render 'navigation_menu_on_registered'
-      elsif ['form filled', 'payment failed : ', 'processing'].include? @fetched_consultation.user_status or @fetched_consultation.user_status.end_with?('has cancelled the payment')
+      elsif ['form filled', 'payment failed : ', 'processing'].include? @fetched_consultation.user_status
         Rails.logger.info 'Consultation Controller: Rendering navigation menu - form filled'
         render 'navigation_menu_on_form_filled'
       end
