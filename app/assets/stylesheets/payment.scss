@@ -83,3 +83,55 @@ a:hover {
 .satisfaction .dotted-lines {
   border-top: 1.5px dotted #17a6b0; border-bottom: 1.5px dotted #17a6b0;
 }
+
+.billing-information > thead {
+  border-bottom: 4px solid #eee;
+}
+
+.billing-information > tfoot {
+  border-top: 4px solid #eee;
+}
+
+.billing-information > thead th, .billing-information > tfoot td {
+  padding: 10px;
+  padding-left: 0;
+}
+
+.billing-information > tbody td {
+  padding-top: 10px;
+}
+
+.promo-section  {
+  line-height: 40px;
+}
+
+.billing-information td {
+  vertical-align: top;
+}
+
+.billing-information table td {
+  font-weight: 400!important;
+}
+
+.billing-information table {
+  border: 2px solid #eee;
+  padding: 5px;
+  width: 95%;
+}
+
+.billing-information table td {
+  text-align: left!important;
+  padding: 5px;
+  background-color: #fbfbfb;
+}
+
+.treatment-plan-table, .support-table {
+  width: 100%;
+}
+
+.amount-right {
+  text-align: right;
+  width: 25%;
+  padding-top: 10px;
+  padding-right: 10px;
+}
