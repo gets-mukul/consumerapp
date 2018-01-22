@@ -1,0 +1,86 @@
+<%= content_for :body_class, "inner_body white_back pad_15" %>
+<main class="margin_t_15">
+    <section class="inner_content">
+        <div class="container">
+            <div class="row contactpopup_info margin_t_15 margin_b_15">
+                <div class="col-sm-12 box pad_0 margin_0">
+				<div class="row space_bottom">
+					<div class="col-sm-12 col-md-6 col-md-offset-3">
+						<div>
+							<div class="icon_circle_back_lg yellow_back">
+								<i class="fa fa-exclamation" aria-hidden="true"></i>
+							</div>
+						</div>
+						
+						<!-- Payment Failure Block-->
+						<div><h1 class="space_top" style="font-size: 28px">Payment Processing</h1></div>
+						<div><p style="font-size: 16px">
+							The bank you chose is taking unusually long to respond. Your transaction ID is <b>RE1225233dc83a99ce201801182047480000</b>, we'll contact you in case the transaction succeeds. If you've already received failure message from your bank, <%= link_to "click here", ('/consult/payment?city=null') %> to pay.
+    						</p>
+                            <p>Feel free to contact us any time by email or WhatsApp below.</p>
+                        </div>
+						
+						<div class="space_top">
+							<p style="font-size: 16px">You can contact us for any questions or help at:</p>
+						</div>
+						<div class="text-center font_h5 hidden-xs">
+                            <a href="mailto:consult@remedicohealth.com" class="contact-us">
+                                <span class="font_weight_med color_blue" style="font-size: 16px">
+                                    <i class="inline fa fa-envelope-o color_blue"></i>
+                                    consult@remedicohealth.com
+                                </span>
+                            </a>
+                            <a href="tel:+918433484696" class="contact-us">
+                                <span class="font_weight_med color_blue space_left" style="font-size: 16px">
+                                    <i class="inline fa fa-whatsapp color_blue"></i>
+                                    <nobr>+91 8433 848 969</nobr>
+                                </span>
+                            </a>
+		                </div>
+						<div class="text-center font_h5 visible-xs">
+						    <br/>
+                            <a href="mailto:consult@remedicohealth.com" class="contact-us">
+                                <span class="font_weight_med color_blue" style="font-size: 16px;">
+                                    <i class="inline fa fa-envelope-o color_blue"></i>
+                                    consult@remedicohealth.com
+                                </span>
+                            </a>
+                            <a href="tel:+918433484696" class="contact-us">
+                                <div class="font_weight_med color_blue" style="font-size: 16px; margin-top: 5px">
+                                    <i class="inline fa fa-whatsapp color_blue"></i>
+                                    <nobr>+91 8433 848 969</nobr>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+
+<script>
+  $(function() {
+    mixpanel.track("Page Loaded", {
+      "Page Name": "Payments Failure Page",
+      "Condition Name": 'n/a',
+    });
+    window._fbq.push(['track', 'Payments Failure Page Load',{'Status': 'failure', 'Page URL':'payment/failure'}]);
+
+  });
+</script>
+<!--Start of Tawk.to Script-->
+<div id='tawk_59dc7c6cc28eca75e4625231'></div>
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date(); Tawk_API.embedded='tawk_59dc7c6cc28eca75e4625231';
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/59dc7c6cc28eca75e4625231/1bs8d2k4t';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);})();
+</script>
+<!--End of Tawk.to Script-->

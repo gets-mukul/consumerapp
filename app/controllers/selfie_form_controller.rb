@@ -6,12 +6,13 @@ class SelfieFormController < ApplicationController
   end
 
   def create
-    Rails.logger.info "Registering selfie user #{params['name']}"
+    Rails.logger.info "Registering selfie user #{params}"
 
     # check if patient exists
-    patient = Patient.where(:mobile => params['mobile']).first_or_create(:name => params['name'].downcase.titleize.strip!, :pay_status => 'selfie checkup')
+    patient = Patient.where(:mobile => params['mobile']).first_or_create(:name => params['name'].downcase.titleize.strip!, :email => params['email'].downcase.strip!, :pay_status => 'selfie checkup')
 
     if patient
+      patient.update({ :email => params['email'].downcase.strip!}) if patient.email.blank?
       # create a selfie form
       selfie_image = SelfieImage.create({:image => params["file_upload"]})
 

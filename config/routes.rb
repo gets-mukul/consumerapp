@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       post '/failure', to: 'payment#failure'
       get '/failure', to: 'payment#failure'
       get '/flag', to: 'payment#flag'
+      get '/pending', to: 'payment#pending'
       get '/success_free', to: 'payment#success_free'
       get '/instant_payment' => 'payment#instant_payment', defaults: {format: 'json'}
     end
