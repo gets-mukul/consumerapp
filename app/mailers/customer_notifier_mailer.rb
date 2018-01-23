@@ -4,7 +4,7 @@ class CustomerNotifierMailer < ApplicationMailer
     @user = user
     @selfie_link = selfie_link
     mail( :to =>  @user.email,
-    :subject => "Remedico: Selfie Diagnosis is ready!" )
+    :subject => "Remedico: Your Selfie Diagnosis!" )
   end
 
 end
