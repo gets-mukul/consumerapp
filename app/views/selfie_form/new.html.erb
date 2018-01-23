@@ -115,6 +115,7 @@
   #p_3ea7_1{font-size: 18px; font-weight: 400; line-height: 20px}
   #button_3ea7_0{margin-top:2%;}
   #sub_3ea7_0{margin-top: -11px; margin-bottom: 28px; font-size: 14px;}
+  #sub_3ea7_1{margin-top: -11px; margin-bottom: 28px; font-size: 14px;}
   #selfie-photo{ margin-left: 15%; }
   #p_3ea7_2{margin-top: 5px; margin-bottom: 28px; font-size: 16px;}
   #div_3ea7_1{text-align:center;}
@@ -188,8 +189,8 @@
         
         <div class="field scrollable-field" id="scroll_element_2">
           <label class-"form-label">What is your name?*</label>
-          <input type="text" name="name" class="form-border" id="name"/>
-          <div id="error_name" for="name" class="alert text-danger font_h4">Please enter a valid name.</div>
+          <input type="text" name="fullname" class="form-border" id="fullname"/>
+          <div id="error_fullname" for="fullname" class="alert text-danger font_h4">Please enter a valid name.</div>
           <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
         </div>
         
@@ -208,7 +209,7 @@
 
         <div class="field scrollable-field" id="scroll_element_4">
           <label class-"form-label">What is your email id?*</label>
-          <sub id="sub_3ea7_0">We will be send your diagnosis to you via mail.</sub><br>
+          <sub id="sub_3ea7_1">We will be send your diagnosis to you via mail.</sub><br>
 
           <input id="email" type="email" name="email" class="form-border inline-email-field"  placeholder="greatskin@gmail.com" />
           <div id="error_email" for="email" class="alert text-danger font_h4">This email is not valid.</div>
@@ -360,12 +361,12 @@
     var value;
     value = input_field.val();
     switch (input_field.attr('id')) {
-      case 'name':
+      case 'fullname':
         if (/^[A-z ']{2,}$/.test(value)) {
-          $('#error_name').hide();
+          $('#error_fullname').hide();
           return true;
         } else {
-          $('#error_name').show();
+          $('#error_fullname').show();
           return false;
         }
         break;
@@ -461,7 +462,7 @@
       fields.removeClass('active');
       var formData = new FormData();
       formData.append('file_upload', $('#file_upload')[0].files[0]);
-      formData.append('name', $(inputs[0]).val());
+      formData.append('fullname', $(inputs[0]).val());
       formData.append('mobile', $(inputs[1]).val());
       formData.append('email', $(inputs[2]).val());
       formData.append('referrer', $('#referrer').val());

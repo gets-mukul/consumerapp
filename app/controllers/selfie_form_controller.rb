@@ -9,10 +9,15 @@ class SelfieFormController < ApplicationController
     Rails.logger.info "Registering selfie user #{params}"
 
     # check if patient exists
-    patient = Patient.where(:mobile => params['mobile']).first_or_create(:name => params['name'].downcase.titleize.strip!, :email => params['email'].downcase.strip!, :pay_status => 'selfie checkup')
+    patient = Patient.find_by :mobile => params['mobile']
 
     if patient
       patient.update({ :email => params['email'].downcase.strip!}) if patient.email.blank?
+    else
+      patient = Patient.create({:name => params['fullname'].downcase.titleize.strip!, :mobile => params['mobile'], :email => params['email'].downcase.strip!, :pay_status => 'selfie checkup'})
+    end
+
+    if patient
       # create a selfie form
       selfie_image = SelfieImage.create({:image => params["file_upload"]})
 
