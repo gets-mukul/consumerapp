@@ -49,7 +49,7 @@ class SelfieFormController < ApplicationController
       if @selfie_form
         # if key is valid render the diagnosis page
         @conditions = @selfie_form.conditions.pluck(:inline_desc)
-        @login_link = "/consult/patients?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}"
+        @login_link = "/consult/patients?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
         render 'selfie_diagnosis'
       end
     end
