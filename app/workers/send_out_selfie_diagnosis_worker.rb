@@ -10,7 +10,7 @@ class SendOutSelfieDiagnosisWorker
     
     selfie_forms.each do |selfie_form|
       SmsServiceController.send_selfie_diagnosis_sms(selfie_form.id)
-      if patient.email.present?
+      if selfie_form.patient.email.present?
         CustomerNotifierMailer.send_selfie_diagnosis_mail(selfie_form.patient, selfie_form.diagnosis_link)
       end
     end

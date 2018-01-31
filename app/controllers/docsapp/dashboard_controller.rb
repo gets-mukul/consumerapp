@@ -9,7 +9,9 @@ class Docsapp::DashboardController < Docsapp::ApplicationController
         Rails.logger.info "Diagnosing selfies, doctor: #{current_doctor.short_name}"
         Rails.logger.info 'diagnosis start'
         @conditions = Condition.all
-        @selfie_forms = SelfieForm.where(:status => 'pending', :doctor => current_doctor).order('created_at desc')
+        # @selfie_forms = SelfieForm.where(:status => 'pending', :doctor => current_doctor).order('created_at desc')
+        @selfie_forms = SelfieForm.where(:id => SelfieImage.select(:selfie_form_id), :status => 'pending', :doctor => current_doctor).order('created_at desc')
+
     end
     
     def save_condition
