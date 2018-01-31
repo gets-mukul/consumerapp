@@ -1,25 +1,39 @@
 class SelfieFormController < ApplicationController
   require 'urlsafe_encrypt'
-  skip_before_action :verify_authenticity_token, only: [:create]
+  skip_before_action :verify_authenticity_token, only: [:create_image, :create_patient]
 
   def thank_you
   end
 
-  def create
-    Rails.logger.info "Registering selfie user #{params}"
+  def create_image
+    Rails.logger.info "SelfieFormController: create_image"
+
+    # create a selfie image
+    selfie_image = SelfieImage.create({:image => params[:file_upload]})
+
+    unless selfie_image.image.nil?
+      session[:selfie_image_id] = selfie_image.id
+      render :json => { :value => "success" }
+    else
+      render :json => { :value => "failure" }
+    end
+  end
+
+  def create_patient
+    Rails.logger.info "SelfieFormController: create_patient with params #{params}"
 
     # check if patient exists
-    patient = Patient.find_by :mobile => params['mobile']
+    patient = Patient.find_by :mobile => params[:mobile]
 
     if patient
-      patient.update({ :email => params['email'].downcase.strip!}) if patient.email.blank?
+      patient.update({ :email => params[:email].downcase.strip}) if patient.email.blank?
     else
-      patient = Patient.create({:name => params['fullname'].downcase.titleize.strip!, :mobile => params['mobile'], :email => params['email'].downcase.strip!, :pay_status => 'selfie checkup'})
+      patient = Patient.create({:name => params[:fullname].downcase.titleize.strip, :mobile => params[:mobile], :email => params[:email].downcase.strip, :pay_status => 'selfie checkup'})
     end
 
     if patient
       # create a selfie form
-      selfie_image = SelfieImage.create({:image => params["file_upload"]})
+      selfie_image = SelfieImage.find(session[:selfie_image_id])
 
       if selfie_image
         @selfie_form = SelfieForm.new
@@ -36,7 +50,7 @@ class SelfieFormController < ApplicationController
         end
       end
     end
-    render :json => { :value => "unable to process" }
+    render :json => { :value => "failure" }
   end
 
   def selfie_diagnosis
