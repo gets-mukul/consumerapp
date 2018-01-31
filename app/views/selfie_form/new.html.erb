@@ -175,10 +175,6 @@
   .selfie-container-2 {
     margin-bottom: 50vh;
   }
-  .submit_button {
-    display: none;
-    margin-top: 25vh;
-  }
 
 </style>
 
@@ -269,7 +265,7 @@
             <label class-"form-label">What is your email id?*</label>
             <sub id="sub_3ea7_1">We will be send your diagnosis to you via mail.</sub><br>
 
-            <input id="email" type="email" name="email" class="form-border inline-email-field"  placeholder="greatskin@gmail.com" />
+            <input id="email" type="email" name="email" class="form-border inline-email-field" />
             <div id="error_email" for="email" class="alert text-danger font_h4">This email is not valid.</div>
             <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
           </div>
@@ -335,6 +331,9 @@
     activeField.find('input').focus();
     setActiveTab();
     event.stopPropagation();
+    ga('send', 'event', 'selfie_form', 'Clickstart');
+    window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'start'}]);
+    mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name': 'start'});
   });
   
   fields.click(function() {
@@ -420,8 +419,6 @@
       case 'email':
         if (/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(value)) {
           $('#error_email').hide();
-          $('.submit_button').show();
-          customScrollToElement($('.submit_button'));
           return true;
         } else {
           $('#error_email').show();
@@ -438,6 +435,7 @@
         }
         break;
       default:
+        $('.submit_button').show();
         return true;
     }
   };
@@ -494,9 +492,9 @@
       fields.removeClass('active');
       var formData = new FormData();
       formData.append('file_upload', $('#file_upload')[0].files[0]);
-      ga('send', 'event', 'selfie_form', 'ClickSubmitButton');
-      window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Submit'}]);
-      mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Submit'});
+      ga('send', 'event', 'selfie_form', 'ClickConfirmImageButton');
+      window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'ConfirmImage'}]);
+      mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'ConfirmImage'});
       $.ajax({
         url: '/consult/selfie_form/create_image',
         data: formData,
@@ -579,7 +577,7 @@
       formData.append('utm_campaign', $('#utm_campaign').val());
       ga('send', 'event', 'selfie_form', 'ClickSubmitButton');
       window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Submit'}]);
-      mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Submit'});
+      mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Submit',});
       e.stopPropagation();
       $.ajax({
         url: '/consult/selfie_form/create_patient',
