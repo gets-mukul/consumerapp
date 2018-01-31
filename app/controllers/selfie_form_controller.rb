@@ -11,7 +11,7 @@ class SelfieFormController < ApplicationController
     # create a selfie image
     selfie_image = SelfieImage.create({:image => params[:file_upload]})
 
-    if selfie_image
+    unless selfie_image.image.nil?
       session[:selfie_image_id] = selfie_image.id
       render :json => { :value => "success" }
     else
