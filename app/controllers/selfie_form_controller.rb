@@ -9,9 +9,9 @@ class SelfieFormController < ApplicationController
     Rails.logger.info "SelfieFormController: create_image"
 
     # create a selfie image
-    selfie_image = SelfieImage.create({:image => params[:file_upload]})
+    selfie_image = SelfieImage.new({:image => params[:file_upload]})
 
-    unless selfie_image.image.nil?
+    if selfie_image.save and !selfie_image.image.nil?
       session[:selfie_image_id] = selfie_image.id
       render :json => { :value => "success" }
     else
