@@ -213,7 +213,7 @@
             <div class="col-sm-6 col-sm-offset-3 margin_25">
               <label for="file_upload" class="selfie_btn" id="upload">Upload</label>
               <input id="file_upload" type="file" name="image" accept="image/*" onchange="saveImage(this);" />
-              <div id="error_file_upload" for="file_upload" class="alert text-danger font_h4">Please upload your selfie.</div>
+              <div id="error_file_upload" for="file_upload" class="alert text-danger font_h4">Please upload your selfie. Make sure the image is less than 2MB.</div>
             </div>
 
             <div class="file_upload_confirmation_buttons" style="display: none;">
@@ -468,6 +468,11 @@
       $('#upload').hide();
       $('.file_upload_confirmation_buttons').show();
       customScrollToElement($('.file_upload_confirmation_buttons'));
+      var size = input.files[0].size/1000000;
+      if (size > 2) {
+        $('#error_file_upload').text("The file you've uploaded is " + size + "Mb. Please upload an image < 2MB.");
+        $('#error_file_upload').show();
+      }
     }
   }
 
@@ -481,6 +486,7 @@
     ga('send', 'event', 'selfie_form', 'ClickCancelButton');
     window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Cancel'}]);
     mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Cancel',});
+    $('#error_file_upload').hide();
   });
 
   // on confirm uploaded image button
@@ -532,7 +538,14 @@
             inputs = $('.scrollable-field input:visible');
             setActiveTab();
           } else {
-            alert('Selfie image upload failed. Please try again.');
+            var size = input.files[0].size/1000000;
+            if (size > 2) {
+              $('#error_file_upload').text("The file you've uploaded is " + size + "Mb");
+              $('#error_file_upload').show();
+              alert('Selfie image upload failed as the image uploaded is > 2MB limit. Please try again.');
+            } else {
+              alert('Selfie image upload failed. Please try again.');
+            }
             resetProgressBar();
             $('#cancel_btn').click();
             activeIndex = 1;
