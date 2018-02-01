@@ -7,4 +7,16 @@ class CustomerNotifierMailer < ApplicationMailer
     :subject => "Remedico: Your Selfie Diagnosis!" )
   end
 
+  def send_selfie_bad_photo_mail(user)
+    @user = user
+    mail( :to =>  @user.email,
+    :subject => "Remedico: Selfie Diagnosis!" )
+  end
+
+  def send_selfie_no_condition_mail(user)
+    @user = user
+    mail( :to =>  @user.email,
+    :subject => "Remedico: Your Selfie Diagnosis!" )
+  end
+
 end
