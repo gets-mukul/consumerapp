@@ -49,3 +49,28 @@ $ ->
       "Value": $(this)[0].title
     });
     $('#payBtn').click()
+
+  $('#change-email').click (e) ->
+    $('#email-static').hide()
+    $("input#email").val($('#current_user_email').html())
+    $('#email-editable').show()
+
+  $('#change-email-controls-cancel').click (e) ->
+    $('#email-editable').hide()
+    $('#email-static').show()
+
+  $('#change-email-controls-submit').click (e) ->
+    email = $("input#email").val()
+    if (/^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/.test(email))
+      $('input#email').attr('disabled', true)
+      $.ajax '/consult/patients/set_patient_email',
+      type: 'POST'
+      dataType: 'json'
+      data: 'email=' + email
+      success: (data, textStatus, jqXHR) ->
+        $('#email-editable').hide()
+        $('#current_user_email').html(data["email"])
+        $('#email-static').show()
+        $('input#email').removeAttr('disabled')
+      error: (jqXHR, textStatus, errorThrown) ->
+        $('input#email').removeAttr('disabled')
