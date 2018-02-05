@@ -14,8 +14,8 @@
         <!-- small box -->
         <div class="small-box bg-aqua">
           <div class="inner">
-            <h3><%= SelfieForm.where(:status => 'pending', :doctor => current_doctor).count() %></h3>
-
+            <!--<h3><= SelfieForm.where(:status => 'pending', :doctor => current_doctor).count() %></h3>-->
+            <h3><%= SelfieForm.where(:status => 'pending', :doctor => current_doctor, :id => SelfieImage.select(:selfie_form_id)).count() %></h3>
             <p>New Selfie-CheckUps</p>
           </div>
           <div class="icon">

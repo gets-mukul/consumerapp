@@ -42,27 +42,29 @@ class SmsServiceController < ApplicationController
       req_options = {
         use_ssl: uri.scheme == "https",
       }
+      begin
+        json = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+          http.request(request)
+        end
+        response = ""
+        response = JSON.parse(json.body)
 
-      json = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-        http.request(request)
-      end
-      response = ""
-      response = JSON.parse(json.body)
-
-      @sms = SmsService.new({
-        patient_id: patient.id,
-        sms_type: template
-      })
-      unless response["SMSMessage"].nil?
-        @sms.assign_attributes({
-          sms_id: response["SMSMessage"]["Sid"],
-          detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
-          status: response["SMSMessage"]["Status"],
-          date_sent: response["SMSMessage"]["DateSent"]
+        @sms = SmsService.new({
+          patient_id: patient.id,
+          sms_type: template
         })
+        unless response["SMSMessage"].nil?
+          @sms.assign_attributes({
+            sms_id: response["SMSMessage"]["Sid"],
+            detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
+            status: response["SMSMessage"]["Status"],
+            date_sent: response["SMSMessage"]["DateSent"]
+          })
+        end
+        @sms.consultation_id = consultation.id if consultation.present?
+        @sms.save!
+      rescue
       end
-      @sms.consultation_id = consultation.id if consultation.present?
-      @sms.save!
     end
   end
 

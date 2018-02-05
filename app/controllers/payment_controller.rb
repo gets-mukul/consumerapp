@@ -22,7 +22,10 @@ class PaymentController < ApplicationController
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
     logger.info params
     session[:error_msg] = ""
-    if !request.referer.nil? and URI.parse(request.referer).path.start_with?("/consult/consultation_form", "/to/")
+    # Rails.logger.info 'Payments Controller: Request Referrer'
+    # Rails.logger.info request.referer
+    # if !request.referer.nil? and URI.parse(request.referer).path.start_with?("/consult/consultation_form", "/to/")
+    unless params[:age].blank?
       current_user.age = params[:age] unless params[:age].blank?
       current_user.city = params[:city] unless params[:city].blank?
       current_user.sex = params[:sex] unless params[:sex].blank?
@@ -214,7 +217,7 @@ class PaymentController < ApplicationController
         current_user.update({pay_status: "processing"})
         current_consultation.update({ pay_status: "processing", user_status: 'processing' })
 
-        DeliverAdminPendingTransactionMailsWorker.perform_in(30.minutes, current_payment.id)
+        AdminTransactionMailer.send_pending_transaction_mail(current_payment).deliver_later
         render 'pending'
       end
     # elsif current_payment.pg_type=='RAZORPAY'
