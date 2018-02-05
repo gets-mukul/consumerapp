@@ -15,7 +15,7 @@
 						<!-- Payment Failure Block-->
 						<div><h1 class="space_top" style="font-size: 28px">Payment Processing</h1></div>
 						<div><p style="font-size: 16px">
-							The bank you chose is taking unusually long to respond. Your transaction ID is <b>RE1225233dc83a99ce201801182047480000</b>, we'll contact you in case the transaction succeeds. If you've already received failure message from your bank, <%= link_to "click here", ('/consult/payment?city=null') %> to pay.
+							The bank you chose is taking unusually long to respond. Your transaction ID is <b><%= session[:txnid] %></b>, we'll contact you in case the transaction succeeds. If you've already received failure message from your bank, <%= link_to "click here", ('/consult/payment?city=null') %> to pay.
     						</p>
                             <p>Feel free to contact us any time by email or WhatsApp below.</p>
                         </div>
