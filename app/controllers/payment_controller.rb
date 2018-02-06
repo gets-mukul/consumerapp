@@ -258,7 +258,6 @@ class PaymentController < ApplicationController
       response = Razorpay::Payment.fetch(params[:payment_id])
       if (response.status=='authorized')
         response = response.capture({amount:amount})
-        current_payment.update({status: response.status, pg_type: 'RAZORPAY'})
 
         # assign_consultation_to_doctor current_consultation
         current_user.update({pay_status: "paid"})
@@ -275,7 +274,7 @@ class PaymentController < ApplicationController
 
         UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
-        current_payment.update({mode: mode, status: 'paid', bank_ref_num: response.id})
+        current_payment.update({pg_type: 'RAZORPAY', mode: mode, status: 'paid', bank_ref_num: response.id})
         CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later if Rails.env.production?
         coupon = Coupon.find_by_id current_consultation.coupon_id
         if coupon
