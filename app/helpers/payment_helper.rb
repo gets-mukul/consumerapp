@@ -47,6 +47,23 @@ module PaymentHelper
     }
   end
 
+  def build_paytm_params_update
+    txnid = session[:txnid]
+    amount = current_consultation.amount.round(2)
+    {
+      :MID => Rails.application.secrets.MID,
+      :CHANNEL_ID => "WEB",
+      :TXN_AMOUNT	=> amount.to_s,
+      :INDUSTRY_TYPE_ID => Rails.application.secrets.INDUSTRY_TYPE_ID,
+      :WEBSITE => Rails.application.secrets.WEBSITE,
+      :CUST_ID => current_user.id,
+      :ORDER_ID => txnid,
+      :EMAIL => "",
+      :MOBILE_NO	=> current_user.mobile,
+      :CALLBACK_URL => Rails.application.secrets.DOMAIN + '/payment/success'
+    }
+  end
+
   def checksum params, current_payment
     add_charge = params["additionalCharges"]
     status = params["status"]

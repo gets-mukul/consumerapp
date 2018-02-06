@@ -78,6 +78,11 @@ class PaymentController < ApplicationController
     logger.info params
 
     payment_params = build_paytm_params
+    # remove NB, DC, CC
+    payment_params[:PAYMENT_MODE_ONLY] = "YES";
+    payment_params[:AUTH_MODE] = "USRPWD";
+    payment_params[:PAYMENT_TYPE_ID] = "PPI"
+
     checksum_hash = new_pg_checksum(payment_params, PAYTM_MERCHANT_KEY).gsub("\n",'')
     current_user.payments.create(user_payment_params(payment_params, "pending", "PAYTM"))
     # current_payment.update(user_payment_params(payment_params, "pending", "PAYTM"))
@@ -92,14 +97,37 @@ class PaymentController < ApplicationController
     return render html: @content_paytm.html_safe
   end
 
+  def payment_paytm_update
+    payment_params = build_paytm_params_update
+    # remove NB, DC, CC
+    payment_params[:PAYMENT_MODE_ONLY] = "YES";
+    payment_params[:AUTH_MODE] = "USRPWD";
+    payment_params[:PAYMENT_TYPE_ID] = "PPI"
+
+    current_payment.update(:pg_type => "PAYTM")
+    checksum_hash = new_pg_checksum(payment_params, PAYTM_MERCHANT_KEY).gsub("\n",'')
+    current_payment.update(user_payment_params(payment_params, "pending", "PAYTM"))
+    @content_paytm = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=ISO-8859-I\"><title>Paytm</title></head><body><center><h2>Redirecting to Paytm </h2><br /><h1>Please do not refresh this page...</h1></center><form method=\"post\" action=\"#{PAYTM_INITIAL_TRASACTION_URL}\" name=\"f1\">"
+      keys = payment_params.keys
+      keys.each do |k|
+        @content_paytm +=  "<input type=\"hidden\" name=\"#{k}\" value=\"#{payment_params[k]}\">"
+      end
+    @content_paytm = @content_paytm + "<input type=\"hidden\" name=\"CHECKSUMHASH\" value=\"#{checksum_hash}\"></form><script type=\"text/javascript\">document.f1.submit();</script></body></html>"
+    logger.info "patient: #{current_user.name} redirected to paytm"
+    logger.info @content_paytm
+    return render html: @content_paytm.html_safe
+  end
+
   def initiate_payment
     logger.info "Payment Controller: in initiate_payment. Issue payment for #{current_consultation.id}"
-    logger.info "Payment Controller: #{session[:txnid]}"
-    if session[:txnid].blank?
-      logger.info "Payment Controller: txn id blank. Build new transaction"
-      payment_params = { :txnid => build_transaction_id, :amount => current_consultation.amount.round(2) }
-      current_user.payments.create(user_payment_params(payment_params, "pending", "RAZORPAY"))
-    end
+    # logger.info "Payment Controller: #{session[:txnid]}"
+    # if session[:txnid].blank?
+    logger.info "Payment Controller: Build new transaction"
+    payment_params = { :txnid => build_transaction_id, :amount => current_consultation.amount.round(2) }
+    current_user.payments.create(user_payment_params(payment_params, "pending", "RAZORPAY"))
+    # session[:txnid] = current_user.payments.last.txnid
+    logger.info session[:txnid]
+    # end
     render :json => { :value => "success" }
   end
 
@@ -134,12 +162,12 @@ class PaymentController < ApplicationController
     # redirect to page for paid consultations
     logger.info "Payment Controller: in success"
     logger.info params
-    # if params[:pg_type]=="RAZORPAY"
-    #   current_payment.update({:pg_type => "RAZORPAY"})
-    # end
+    if params[:pg_type]=="RAZORPAY"
+      current_payment.update({:pg_type => "RAZORPAY"})
+    end
 
-    # if current_payment.pg_type=='PAYTM'
-      # issuing paytm payment
+    if current_payment.pg_type=='PAYTM'
+      issuing paytm payment
       posted_hash = params["hash"]
       paytm_params = Hash.new
       params.keys.each do |k|
@@ -218,53 +246,52 @@ class PaymentController < ApplicationController
         current_consultation.update({ pay_status: "processing", user_status: 'processing' })
 
         AdminTransactionMailer.send_pending_transaction_mail(current_payment).deliver_later
+        FetchPaymentStatusWorker.perform_in(20.minutes, current_payment.id) if Rails.env.production?
+
         render 'pending'
       end
-    # elsif current_payment.pg_type=='RAZORPAY'
+    elsif current_payment.pg_type=='RAZORPAY'
 
-    #   # issuing razorpay payment
-    #   logger.info params
-    #   amount = current_consultation.amount*100
-    #   response = Razorpay::Payment.fetch(params[:payment_id])
-    #   if (response.status=='authorized')
-    #     logger.info "CAPTURING PAYMENT"
-    #     response = response.capture({amount:amount})
-    #     current_payment.update({status: response.status, pg_type: 'RAZORPAY'})
+      # issuing razorpay payment
+      Rails.logger.info params
+      amount = current_consultation.amount*100
+      response = Razorpay::Payment.fetch(params[:payment_id])
+      if (response.status=='authorized')
+        response = response.capture({amount:amount})
 
-    #     # assign_consultation_to_doctor current_consultation
-    #     current_user.update({pay_status: "paid"})
-    #     current_consultation.update({ pay_status: "paid", user_status: 'paid' })
+        # assign_consultation_to_doctor current_consultation
+        current_user.update({pay_status: "paid"})
+        current_consultation.update({ pay_status: "paid", user_status: 'paid' })
 
-    #     mode = case response.method
-    #     when "netbanking"
-    #       "netbanking - " + response.bank
-    #     when  "wallet"
-    #       "wallet - " + response.wallet
-    #     else
-    #       response.method
-    #     end
+        mode = case response.method
+        when "netbanking"
+          "netbanking - " + response.bank
+        when  "wallet"
+          "wallet - " + response.wallet
+        else
+          response.method
+        end
 
-    #     UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
-    #     SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
-    #     current_payment.update({mode: mode, status: 'paid', bank_ref_num: response.id})
-    #     # CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later if Rails.env.production?
-    #     CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later if Rails.env.production?
-    #     coupon = Coupon.find_by_id current_consultation.coupon_id
-    #     if coupon
-    #       coupon.increment!(:count, 1)
-    #       coupon.update(status: 'coupon used')
-    #     end
+        UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
+        SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
+        current_payment.update({pg_type: 'RAZORPAY', mode: mode, status: 'paid', bank_ref_num: response.id})
+        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later if Rails.env.production?
+        coupon = Coupon.find_by_id current_consultation.coupon_id
+        if coupon
+          coupon.increment!(:count, 1)
+          coupon.update(status: 'coupon used')
+        end
 
-    #     render 'success'
-    #     unregister_consultation
-    #     unregister
-    #   elsif
-    #     session[:error_msg] = "Authorization Error!"
-    #     logger.info response
-    #     ErrorEmailer.error_email("razorpay payment not authorized for " + current_user.name).deliver
-    #     redirect_to :failure
-    #   end
-    # end
+        render 'success'
+        unregister_consultation
+        unregister
+      elsif
+        session[:error_msg] = "Authorization Error!"
+        logger.info response
+        ErrorEmailer.error_email("razorpay payment not authorized for " + current_user.name).deliver
+        redirect_to :failure
+      end
+    end
   end
 
   def failure

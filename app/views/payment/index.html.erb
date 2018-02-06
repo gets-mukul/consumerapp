@@ -292,7 +292,7 @@
       </div>
       <div class="col-sm-12 sticky-footer">
         <div class="text-center">
-            <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "paytmPayBtn") do %>
+            <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
               <i class="fa fa-lock" aria-hidden="true"></i> <span class="version_experiment">PAY Rs. <%= @amount %> SECURELY NOW</span>
             <% end %>
         </div>
@@ -351,7 +351,6 @@ $(function() {
         document.body.appendChild(mapForm);
 
         mapForm.submit();
-
       },
       "external": {
         wallets: ['paytm'],
@@ -361,7 +360,7 @@ $(function() {
             var mapForm = document.createElement("form");
             mapForm.target = "_self";
             mapForm.method = "POST";
-            mapForm.action = "/consult/payment/payment_paytm";
+            mapForm.action = "/consult/payment/payment_paytm_update";
             var mapInput = document.createElement("input");
             mapInput.name = "authenticity_token"
             mapInput.value = "<%= form_authenticity_token %>"
@@ -394,7 +393,6 @@ $(function() {
       }
   };
   var rzp1 = new Razorpay(options);
-
   $('.sticky-footer').on('click', '#payBtn', function () {
     rzp1.open();
     $.ajax({
@@ -447,7 +445,7 @@ $(function() {
           "Page URL": "payment/index",
         });
         window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
-    //     return false;
+    //    return false;
     //   },
     //   error: function (response) {
     //     return false;
