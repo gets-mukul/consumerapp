@@ -167,7 +167,7 @@ class PaymentController < ApplicationController
     end
 
     if current_payment.pg_type=='PAYTM'
-      issuing paytm payment
+      # issuing paytm payment
       posted_hash = params["hash"]
       paytm_params = Hash.new
       params.keys.each do |k|
