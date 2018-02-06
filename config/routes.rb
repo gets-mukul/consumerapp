@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post '/payment', to: 'payment#issue_payment'
     scope 'payment' do
       post '/payment_paytm', to: 'payment#issue_payment_paytm'
+      post '/payment_paytm_update', to: 'payment#payment_paytm_update'
       post '/initiate_payment', to: 'payment#initiate_payment'
 
       post '/success', to: 'payment#success'
