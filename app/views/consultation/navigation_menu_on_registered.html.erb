@@ -17,13 +17,13 @@
               </section>
               <section class="space_top space_bottom">
                 <div class="btns_info text-center">
-                    <%= link_to "CONTINUE YOUR CONSULTATION", consultation_initiate_path(:id => @fetched_consultation.id, :link => '/consult/consultation_form/' + @fetched_consultation.category), :class => 'action_btn  primary' %>
+                    <%= link_to "CONTINUE YOUR CONSULTATION", consultation_initiate_path(:id => @fetched_consultation.id, :link => '/consult/consultation_form/' + @fetched_consultation.category), :class => 'action_btn  primary', onclick: "ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickNavRegContinueButton'});" %>
                 </div>
                 <div class=" text-center">
                     <b>OR</b>
                 </div>
                 <div class="btns_info text-center">
-                    <%= link_to "START A NEW CONSULTATION", consultation_index__path, :class => 'action_btn secondary' %>
+                    <%= link_to "START A NEW CONSULTATION", consultation_index__path, :class => 'action_btn secondary', onclick: "ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickNavRegStartNewButton'});" %>
                 </div>
               </section>
             </div>
