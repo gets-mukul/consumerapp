@@ -613,14 +613,14 @@
 
 @media (max-height: 680px) {
     .list_btn_dark.sticky-footer.hover, .list_btn_dark.sticky-footer.hover:hover, .list_btn_dark.sticky-footer.hover:focus {
-        padding: 12px 50px;
+        padding: 16px 50px;
     }
 }
 
 /* large screens */
 @media only screen and (min-width: 768px) {
     .list_btn_dark.sticky-footer.hover, .list_btn_dark.sticky-footer.hover:hover, .list_btn_dark.sticky-footer.hover:focus {
-        padding: 12px 50px;
+        padding: 16px 50px;
     }
 }
 
