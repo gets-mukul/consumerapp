@@ -4,6 +4,32 @@ ActiveAdmin.register Payment do
   scope :all, :default => true, show_count: false
   scope "Paid", show_count: false
 
+  filter :patient_name, as: :string
+  filter :consultation_id, as: :numeric, :label => 'Consultation ID'
+  filter :txnid
+  filter :status
+  filter :amount
+  filter :mode
+  filter :pg_type
+  filter :bank_ref_num
+  filter :created_at
+  filter :updated_at
+
+  index do
+    column :id
+    column :txnid
+    column :status
+    column :amount
+    column :mode
+    column :pg_type
+    column :bank_ref_num
+    column :patient
+    column :consultation
+    column :created_at
+    column :updated_at
+    actions
+  end
+
   controller do
     include Pundit
     protect_from_forgery

@@ -8,12 +8,12 @@ ActiveAdmin.register Consultation do
   scope "Free", show_count: false
   scope "Payment Failed", show_count: false
 
-  filter :patient
-  filter :coupon
+  filter :patient_name, as: :string
+  filter :id, :label => 'Consultation ID'
+  filter :coupon_coupon_code, as: :string, :label => 'Coupon code'
   filter :category, :as => :select
   filter :user_status
   filter :amount
-  filter :pay_status
   filter :created_at
   filter :updated_at
 
