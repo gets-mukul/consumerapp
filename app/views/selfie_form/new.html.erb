@@ -237,7 +237,6 @@
         </div>
       <% end %>
       <br/>
-      <%= form_tag({:controller => "selfie_form", :action => "create_patient"}, :method => "post", :class => "form", :id => "selfie_form", :multipart => true) do %>
 
         <div class="selfie-container-2">
 
@@ -282,7 +281,6 @@
         <input type="hidden" id="referrer" name="referrer" value="">
         <input type="hidden" id="utm_campaign" name="utm_campaign" value="<%= params['utm_campaign'] %>">
 
-      <% end %>
       <!--FORM END-->
     </div>
   </div>
