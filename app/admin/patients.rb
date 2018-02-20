@@ -9,6 +9,14 @@ ActiveAdmin.register Patient do
   scope "Payment Failed", show_count: false
   scope "Paid", show_count: false
 
+  filter :id, :label => 'Patient ID'
+  filter :mobile
+  filter :email
+  filter :name
+  filter :pay_status
+  filter :created_at
+  filter :updated_at
+
   index do
     column :id do |p|
       link_to p.id, admin_patient_path(p.id)

@@ -3,7 +3,7 @@ ActiveAdmin.register SelfieForm do
   permit_params :doctor_id, :diagnosis_link, :status
 
   filter :id
-  filter :patient
+  filter :patient_name, as: :string
   filter :status, :as => :select
   filter :doctor, :as => :select
   filter :created_at

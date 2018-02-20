@@ -42,7 +42,6 @@ class SelfieFormController < ApplicationController
 
         # save
         if @selfie_form.save
-          Rails.logger.info @selfie_form
           # register patient
           register_selfie_checkup_user patient
           render :json => { :value => "success" }

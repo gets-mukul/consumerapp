@@ -37,8 +37,8 @@ module PatientsHelper
       # patient source does not exist, store them
       patient_source_params = {
         patient: current_user,
-        local_referrer: params[:referrer].downcase,
-        utm_campaign: params[:utm_campaign].downcase
+        local_referrer: (params[:referrer]||'').downcase,
+        utm_campaign: (params[:utm_campaign]||'').downcase
       }
       patient_source = PatientSource.create(patient_source_params)
       session[:patient_source_id] = patient_source.id
