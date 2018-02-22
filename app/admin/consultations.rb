@@ -9,6 +9,7 @@ ActiveAdmin.register Consultation do
   scope "Payment Failed", show_count: false
 
   filter :patient_name, as: :string
+  filter :patient_mobile, as: :string
   filter :id, :label => 'Consultation ID'
   filter :coupon_coupon_code, as: :string, :label => 'Coupon code'
   filter :category, :as => :select
@@ -281,14 +282,17 @@ ActiveAdmin.register Consultation do
     column :amount
     column :pay_status
 
-    column :updated_at
-
-    column "Local Referrer" do |cs|
+    column "Local referrer" do |cs|
       PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:local_referrer).collect {|obj| obj.present? ? obj : "nil"} * ", "
     end
 
-    column "UTM Campaign" do |cs|
+    column "UTM campaign" do |cs|
       PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:utm_campaign).collect {|obj| obj.present? ? obj : "nil"} * ", "
     end
+
+    column "Paid at" do |cs|
+      Payment.where(:consultation_id => cs.id, :status => "paid").pluck(:updated_at).join(', ')
+    end
+
   end
 end

@@ -5,6 +5,7 @@ ActiveAdmin.register Payment do
   scope "Paid", show_count: false
 
   filter :patient_name, as: :string
+  filter :patient_mobile, as: :string
   filter :consultation_id, as: :numeric, :label => 'Consultation ID'
   filter :txnid
   filter :status
