@@ -10,6 +10,7 @@ class Consultation < ApplicationRecord
   scope "Paid", -> { where(pay_status: 'paid') }
   scope "Free", -> { where(pay_status: 'free') }
   scope "Payment Failed", -> { where("pay_status like 'payment failed%'")}
+  scope "Red Flags", -> { where("user_status like 'red flag%'")}
   
   after_initialize :set_defaults, unless: :persisted?
   

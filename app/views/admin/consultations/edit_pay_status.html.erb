@@ -4,7 +4,7 @@
     <label for="admin_user_email" class="label">Email</label>
     <span id="admin_user_email"><%= @consultation.id %></span>
 </li>
-<%= f.input :pay_status, :include_blank => false, :collection => ["payment failed", "payment pending", "payment failed : Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.", "payment cancelled by patient", "free", "paid"] %>
+<%= f.input :pay_status, :include_blank => false, :collection => ["payment failed", "payment pending", "red flag", "free consultation done", "paid"] %>
 
 <li class="select input required" id="payment_pg_type_input"><label for="payment_pg_type" class="label">Payment Gateway Type</label>
   <select name="payment[pg_type]" id="payment_pg_type_input">

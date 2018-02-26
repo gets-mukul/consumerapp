@@ -3,7 +3,7 @@ class PaymentController < ApplicationController
   require 'net/http'
   require 'net/https'
   require 'encrypt'
-  # require 'razorpay'
+  require 'razorpay'
   PAYU_IN_PAYMENT_URL = Rails.application.secrets.PAYMENT_URL
   PAYTM_MERCHANT_KEY = Rails.application.secrets.PAYTM_MERCHANT_KEY
   PAYTM_INITIAL_TRASACTION_URL = Rails.application.secrets.PAYTM_INITIAL_TRASACTION_URL
@@ -32,10 +32,6 @@ class PaymentController < ApplicationController
       current_user.save!
     end
     if params[:city].blank?
-      logger.info "Payment Controller: payment city blank for #{current_consultation.id}"
-      session[:error_msg] = 'Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.'
-      logger.info "Payment Controller: error msg ${session[:error_msg]} set"
-
       session[:tmp_age] = nil
       unless params[:age].empty?
         session[:tmp_age] = params[:age] if !params[:age].to_i.between?(3, 65)
@@ -178,18 +174,15 @@ class PaymentController < ApplicationController
 
       checksum_hash = params["CHECKSUMHASH"]
       if params["STATUS"] == "TXN_FAILURE"
-        session[:error_msg] = "#{current_user.name} has cancelled the payment"
+        session[:error_msg] = "user cancelled the payment"
         logger.error "looks like #{current_user.name} has cancelled the payment"
-        current_user.update({pay_status: "payment cancelled by patient"})
-        current_consultation.update({ pay_status: "payment cancelled by patient", user_status: 'payment failed' })
         current_payment.update({mode: '', status: 'cancelled_by_customer', bank_ref_num: params['BANKTXNID']})
-        ErrorEmailer.error_email(session[:error_msg]).deliver
+        ErrorEmailer.error_email("#{current_user.name} has cancelled the payment").deliver
         redirect_to :failure
       elsif not new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
         session[:error_msg] = "Invalid Checksum!"
         logger.error "invalid checksum for #{current_user.name}"
-        current_user.update({pay_status: "payment failed|invalid checksum"})
-        current_consultation.update({ pay_status: "payment failed|invalid checksum", user_status: 'payment failed' })
+        current_payment.update({status: 'Invalid Checksum!'})
         ErrorEmailer.error_email("invalid checksum for " + current_user.name).deliver
         redirect_to :failure
       elsif params["STATUS"] == "TXN_SUCCESS"
@@ -288,6 +281,7 @@ class PaymentController < ApplicationController
       elsif
         session[:error_msg] = "Authorization Error!"
         logger.info response
+        current_payment.update({status: 'Authorization Error!'})
         ErrorEmailer.error_email("razorpay payment not authorized for " + current_user.name).deliver
         redirect_to :failure
       end
@@ -295,23 +289,30 @@ class PaymentController < ApplicationController
   end
 
   def failure
-    logger.error "Payment Controller: in payment failure for patient: #{current_user.name}"
     logger.info "Payment Controller: error msg ${session[:error_msg]} set"
     session[:error_msg] ||= params['error_Message'] + "|" + params['unmappedstatus']
-    current_user.update({pay_status: "payment failed : #{session[:error_msg]}"})
-    current_consultation.update({ pay_status: "payment failed : #{session[:error_msg]}", user_status: "payment failed : #{session[:error_msg]}" })
+    current_user.update({pay_status: "payment failed: #{session[:error_msg]}"})
+    current_consultation.update({ pay_status: "payment failed: #{session[:error_msg]}", user_status: "payment failed" })
     render 'failure'
   end
 
   def flag
-    logger.error "Payment Controller: in payment red flag for patient: #{current_user.name}"
-    logger.info "Payment Controller: error msg ${session[:error_msg]} set"
-    session[:error_msg] ||= params['error_Message'] + "|" + params['unmappedstatus']
-    current_user.update({pay_status: "payment failed : #{session[:error_msg]}"})
-    current_consultation.update({ pay_status: "payment failed : #{session[:error_msg]}", user_status: "payment failed : #{session[:error_msg]}" })
-
     @age = session[:tmp_age] if session[:tmp_age]
+
     render 'flag'
+    session[:error_status] = '';
+    if session[:tmp_age]
+      session[:error_status] = 'age';
+    else
+      if ['Acne', 'Hairfall or Hair Thinning', 'Dandruff', 'Stretch Marks'].include? current_consultation.category
+        session[:error_status] = 'personal or family history of skin cancer';
+      elsif ['Pigmentation and Dark Circles', 'Eczema, Psoriasis and Rash', 'Skin Growth (Moles, Warts)'].include? current_consultation.category
+        session[:error_status] = session[:tmp_red_flag]
+      end
+    end
+    current_user.update({pay_status: "red flag: #{session[:error_status]}"})
+    current_consultation.update({ pay_status: "red flag: #{session[:error_status]}", user_status: "red flag" })
+
   end
 
   def instant_payment

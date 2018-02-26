@@ -12,10 +12,10 @@ class ConsultationController < ApplicationController
     @fetched_consultation = Consultation.where(:patient_id => current_user.id).last
     if @fetched_consultation.present?
       # show the associated view depending on patient's previous consultation's status
-      if @fetched_consultation.user_status == 'registered'
+      if @fetched_consultation.user_status.start_with? 'registered'
         Rails.logger.info 'Consultation Controller: Rendering navigation menu - registered'
         render 'navigation_menu_on_registered'
-      elsif ['form filled', 'payment failed : ', 'processing'].include? @fetched_consultation.user_status
+      elsif @fetched_consultation.user_status.start_with?('form filled', 'payment failed', 'processing')
         Rails.logger.info 'Consultation Controller: Rendering navigation menu - form filled'
         render 'navigation_menu_on_form_filled'
       end
@@ -73,7 +73,7 @@ class ConsultationController < ApplicationController
   # end
 
   def self.latest_order
-    @@latest_order = ["paid", "payment failed", "processing", "free consultation done", "form filled", "registered"]
+    @@latest_order = ["paid", "payment failed", "processing", "free consultation done", "form filled", "registered", "red flag"]
   end
 
   def create

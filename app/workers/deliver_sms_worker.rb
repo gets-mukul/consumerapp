@@ -10,12 +10,12 @@ class DeliverSMSWorker
 		unless sent_sms.present?
 			consultation = Consultation.where(patient_id: id).where("created_at >= ?", DateTime.now-0.5).order('id desc')
 			if consultation.present?
-				latest_order = ["paid", "payment failed", "processing", "free consultation done", "form filled", "registered"]
+				latest_order = ["paid", "free consultation done", "payment failed", "processing", "form filled", "red flag", "registered"]
 				sorted_consultation = consultation.sort_by{|x| latest_order.index x.user_status}[0]
 				puts sorted_consultation.id
-				if sorted_consultation.user_status == 'form filled'
+				if sorted_consultation.user_status.start_with?('form fill', 'payment failed', 'processing')
 					SmsServiceController.send_sms(id, "form filled", sorted_consultation.id)
-				elsif sorted_consultation.user_status == 'registered'
+				elsif sorted_consultation.user_status.start_with? 'register'
 					SmsServiceController.send_sms(id, "registered", sorted_consultation.id)
 				end
 			else

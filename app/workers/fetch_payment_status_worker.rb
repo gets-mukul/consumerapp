@@ -35,9 +35,9 @@ class FetchPaymentStatusWorker
       # CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later
       CustomerPaymentNotifierMailer.send_user_payment_mail(payment.patient, payment, '').deliver_later
     else
-      error_msg = "#{payment.patient.name} has cancelled the payment"
-      payment.patient.update({pay_status: "payment cancelled by patient"})
-      payment.consultation.update({ pay_status: "payment cancelled by patient", user_status: 'payment failed' })
+      error_msg = "user cancelled the payment"
+      payment.patient.update({pay_status: "payment failed: user cancelled the payment"})
+      payment.consultation.update({ pay_status: "payment failed: user cancelled the payment", user_status: 'payment failed' })
       payment.update({mode: '', status: 'cancelled_by_customer', bank_ref_num: response['BANKTXNID']})
       ErrorEmailer.error_email(error_msg).deliver
     end
