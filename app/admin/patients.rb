@@ -8,6 +8,7 @@ ActiveAdmin.register Patient do
   scope "Free", show_count: false
   scope "Payment Failed", show_count: false
   scope "Paid", show_count: false
+  scope "Red Flags", show_count: false
 
   filter :id, :label => 'Patient ID'
   filter :mobile

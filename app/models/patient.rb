@@ -4,6 +4,8 @@ class Patient < ApplicationRecord
   scope "Free", -> { where(pay_status: 'free') }
   scope "Payment Pending", -> { where(pay_status: 'payment pending') }
   scope "Payment Failed", -> { where("pay_status like 'payment failed%'")}
+  scope "Red Flags", -> { where("pay_status like 'red flag%'")}
+
   
   alias_attribute :phone_no, :mobile
   #validates :email, :presence => true, format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }

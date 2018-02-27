@@ -7,6 +7,7 @@ ActiveAdmin.register Consultation do
   scope "Paid", show_count: false
   scope "Free", show_count: false
   scope "Payment Failed", show_count: false
+  scope "Red Flags", show_count: false
 
   filter :patient_name, as: :string
   filter :patient_mobile, as: :string
@@ -251,7 +252,7 @@ ActiveAdmin.register Consultation do
       
       f.input :coupon
       f.input :category, :include_blank => false, :collection => ['Skin Growth (Moles, Warts)', 'Acne', 'Pigmentation and Dark Circles', 'Eczema, Psoriasis and Rash', 'Stretch Marks', 'Dandruff', 'Hairfall or Hair Thinning'] 
-      f.input :user_status, :include_blank => false, :collection => ["payment failed", "form filled", "payment failed : Sorry, but we cannot treat your ailment. Please schedule an appointment at a nearby hospital.", "free consultation done", "registered"] #, "paid"]
+      f.input :user_status, :include_blank => false, :collection => ["payment failed", "form filled", "red flag", "free consultation done", "registered"]
       f.actions
     end
   end
