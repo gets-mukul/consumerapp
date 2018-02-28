@@ -56,4 +56,44 @@ ActiveAdmin.register Payment do
       end
   end
 
+  csv force_quotes: true, col_sep: ',' do
+    column :created_at
+    column "Consultation id" do |payment|
+      payment.consultation.id
+    end
+    column :patient
+    column "Mobile" do |payment|
+      payment.patient.mobile
+    end
+    column "Age" do |payment|
+      payment.patient.age
+    end
+    column "Sex" do |payment|
+      payment.patient.sex
+    end
+    column "City" do |payment|
+      payment.patient.city
+    end
+    column "Category" do |payment|
+      payment.consultation.category
+    end
+    column "User Status" do |payment|
+      payment.consultation.user_status
+    end
+    column "Coupon" do |payment|
+      payment.consultation.coupon
+    end
+    column :amount, :label => 'Amount'
+    column "Pay Status" do |payment|
+      payment.consultation.pay_status
+    end
+    column "Local referrer" do |payment|
+      PatientSource.where(:patient_id => payment.consultation.id).order(:created_at).pluck(:local_referrer).collect {|obj| obj.present? ? obj : "nil"} * ", "
+    end
+    column "UTM campaign" do |payment|
+      PatientSource.where(:consultation_id => payment.consultation.id).order(:created_at).pluck(:utm_campaign).collect {|obj| obj.present? ? obj : "nil"} * ", "
+    end
+    column :updated_at, :label => 'Paid at'
+  end
+
 end

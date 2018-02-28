@@ -13,9 +13,8 @@ ActiveAdmin.register SelfieForm do
   # scope "Created today"
   scope "To be diagnosed", :default => true
   scope "Unclear photos"
-  scope "To be sent out"
   scope "No conditions"
-  scope "Sent"
+  scope "Diagnosed"
   scope :all
   actions :all, :except => [:new, :destroy]
   
@@ -122,4 +121,15 @@ ActiveAdmin.register SelfieForm do
       end
   end
 
+  csv force_quotes: true, col_sep: ',' do
+    column :created_at
+    column :id, :label => 'Selfie form id'
+    column :patient
+    column "Mobile" do |cs|
+      cs.patient.mobile
+    end
+    column :status
+    column :diagnosis_link
+    column :updated_at
+  end
 end

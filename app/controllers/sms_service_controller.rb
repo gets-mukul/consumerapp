@@ -105,7 +105,7 @@ class SmsServiceController < ApplicationController
         status: response["SMSMessage"]["Status"],
         date_sent: response["SMSMessage"]["DateSent"]
       })
-      selfie_form.update({status: 'sms - '+ response["SMSMessage"]["Status"]})
+      selfie_form.update({status: 'diagonsed-sms-'+ response["SMSMessage"]["Status"]})
     end
     @sms.save!
   end
