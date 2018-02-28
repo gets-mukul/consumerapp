@@ -122,4 +122,15 @@ ActiveAdmin.register SelfieForm do
       end
   end
 
+  csv force_quotes: true, col_sep: ',' do
+    column :created_at
+    column :id, :label => 'Selfie form id'
+    column :patient
+    column "Mobile" do |cs|
+      cs.patient.mobile
+    end
+    column :status
+    column :diagnosis_link
+    column :updated_at
+  end
 end
