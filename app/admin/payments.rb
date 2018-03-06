@@ -88,10 +88,10 @@ ActiveAdmin.register Payment do
       payment.consultation.pay_status
     end
     column "Local referrer" do |payment|
-      PatientSource.where(:patient_id => payment.consultation.id).order(:created_at).pluck(:local_referrer).collect {|obj| obj.present? ? obj : "nil"} * ", "
+      PatientSource.where(:patient_id => payment.consultation.patient_id).order(:created_at).pluck(:local_referrer).collect {|obj| obj.present? ? obj : "nil"} * ", "
     end
     column "UTM campaign" do |payment|
-      PatientSource.where(:consultation_id => payment.consultation.id).order(:created_at).pluck(:utm_campaign).collect {|obj| obj.present? ? obj : "nil"} * ", "
+      PatientSource.where(:patient_id => payment.consultation.patient_id).order(:created_at).pluck(:utm_campaign).collect {|obj| obj.present? ? obj : "nil"} * ", "
     end
     column :updated_at, :label => 'Paid at'
   end
