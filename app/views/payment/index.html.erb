@@ -11,105 +11,103 @@
 
 <main id="form-step-4" style="width: 100%; overflow-y: hidden; overflow-x: hidden">
 
-  <!-- version blue checkout, no delivery info, one button begin -->
-  <div class="version_1">
-    <!-- content section begin -->
-    <section class="inner_content pad_15">
-      <div class="container">
-        <div class="row contactpopup_info">
-          <div class="col-sm-12 box pad_0 margin_0">
-            <div   class="row space_bottom">
-              <div class="col-sm-12 col-md-6 col-md-offset-3">
-                <div class="margin_b_25"><h1 style="font-size:28px">Almost done, <span customer-name><%=current_user.name %></span>!</h1></div>
+  <!-- content section begin -->
+  <section class="inner_content pad_15">
+    <div class="container">
+      <div class="row contactpopup_info">
+        <div class="col-sm-12 box pad_0 margin_0">
+          <div   class="row space_bottom">
+            <div class="col-sm-12 col-md-6 col-md-offset-3">
+              <div class="margin_b_25"><h1 style="font-size:28px">Almost done, <span customer-name><%=current_user.name %></span>!</h1></div>
 
-                <!-- three step process desktop version -->
-                <div class="row desktop margin_b_25">
-                  <div class="col-md-12 margin_t_25">
-                    <img src="<%= asset_path("progress_bar_web.png") %>" />
-                  </div>
+              <!-- three step process desktop version -->
+              <div class="row desktop margin_b_25">
+                <div class="col-md-12 margin_t_25">
+                  <img src="<%= asset_path("progress_bar_web.png") %>" />
                 </div>
-                <!-- three step process mobile version -->
-                <div class="row mobile margin_b_25">
-                  <div class="col-md-12 margin_t_10">
-                    <img src="<%= asset_path("progress_bar_mobile.png") %>" />
-                  </div>
-                </div>
-
-                <!-- blue checkout format start -->
-                <div class="row margin_t_15">
-                  <table class="billing-information col-md-12 col-sm-12 col-xs-12 p_16">
-                    <thead>
-                      <tr class="text-uppercase">
-                        <th class="text-center color_blue" colspan="2"><b>Treatment Summary</b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <table class="treatment-plan-table text-left">
-                            <tr class="row">
-                              <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('treatment-plan-min.png') %>"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9">Treatment Plan for</br><%= @current_consultation.category %></td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="amount-right"><span class="element-number">Rs. 350</span></td>
-                      </tr>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td>
-                          <table class="support-table margin_b_10 text-left">
-                            <tr>
-                              <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('support-min.png') %>"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9"><span class="element-number">30</span> days support during your treatment</td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="amount-right color_green">FREE</td>
-                      </tr>
-                      <% if @current_consultation.coupon %>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td>
-                          <table class="support-table margin_b_10 text-left">
-                            <tr>
-                              <td class="col-md-3 col-sm-3 col-xs-3"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9 text-uppercase color_green">Promo applied</td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="color_green amount-right">-Rs. <span class="element-number"><%= (350-@current_consultation.amount) %></span></td>
-                      </tr>
-                      <% end %>
-                    </tbody>
-                    <tfoot>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td class="amount-right element-number" colspan="2"><strong><span class="text-uppercase">Total </span> Rs. <%= @current_consultation.amount %></strong></td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                <!-- blue checkout format end -->
-
               </div>
+              <!-- three step process mobile version -->
+              <div class="row mobile margin_b_25">
+                <div class="col-md-12 margin_t_10">
+                  <img src="<%= asset_path("progress_bar_mobile.png") %>" />
+                </div>
+              </div>
+
+              <!-- blue checkout format start -->
+              <div class="row margin_t_15">
+                <table class="billing-information col-md-12 col-sm-12 col-xs-12 p_16">
+                  <thead>
+                    <tr class="text-uppercase">
+                      <th class="text-center color_blue" colspan="2"><b>Treatment Summary</b></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <table class="treatment-plan-table text-left">
+                          <tr class="row">
+                            <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('treatment-plan-min.png') %>"></td>
+                            <td class="col-md-9 col-sm-9 col-xs-9">Treatment Plan for</br><%= @current_consultation.category %></td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="amount-right"><span class="element-number">Rs. 350</span></td>
+                    </tr>
+                    <tr><td class="hr-line" colspan="2"><div></div></td></tr>
+                    <tr>
+                      <td>
+                        <table class="support-table margin_b_10 text-left">
+                          <tr>
+                            <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('support-min.png') %>"></td>
+                            <td class="col-md-9 col-sm-9 col-xs-9"><span class="element-number">30</span> days support during your treatment</td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="amount-right color_green">FREE</td>
+                    </tr>
+                    <% if @current_consultation.coupon %>
+                    <tr><td class="hr-line" colspan="2"><div></div></td></tr>
+                    <tr>
+                      <td>
+                        <table class="support-table margin_b_10 text-left">
+                          <tr>
+                            <td class="col-md-3 col-sm-3 col-xs-3"></td>
+                            <td class="col-md-9 col-sm-9 col-xs-9 text-uppercase color_green">Promo applied</td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="color_green amount-right">-Rs. <span class="element-number"><%= (350-@current_consultation.amount) %></span></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                  <tfoot>
+                    <tr><td class="hr-line" colspan="2"><div></div></td></tr>
+                    <tr>
+                      <td class="amount-right element-number" colspan="2"><strong><span class="text-uppercase">Total </span> Rs. <%= @current_consultation.amount %></strong></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- blue checkout format end -->
+
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- content section end -->
+    </div>
+  </section>
+  <!-- content section end -->
 
     <!-- satisfaction guaranteed section begin -->
-    <section class="satisfaction space_bottom">
-      <div class="row text-center space_bottom space_top dotted-lines">
+    <section class="satisfaction space_bottom version-1">
+      <div class="row text-center space_bottom space_top">
         <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-          <div class="row margin_t_25 margin_b_15">
+          <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 satisfaction-content">
+              <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_blue_light_sm.png") %>" alt="Remedico"></span>
               <div class="row">
-                <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_blue_light_sm.png") %>" alt="Remedico"></span>
                 <div class="text-left">
-                  <h5 class="sub-title color_blue">100% satisfaction</h5>
+                  <h5 class="sub-title">100% satisfaction</h5>
                   <p class="p_16 margin_b_0">If you're not satisfied with your consultation, we will refund your fee.</p>
                 </div>
               </div>
@@ -120,164 +118,24 @@
     </section>
     <!-- satisfaction guaranteed section end -->
 
-    <!--master card, paytm logo start-->
-    <div class="row">
-      <div class="col-sm-12 text-center space_bottom margin_t_15">
-        <img src="<%= asset_path("payment_options/master_card_visa_paytm.png") %>" class="img-responsive" alt="Satisfaction-Payment-Gateway" style="display: inline-block; max-height: 25px;">
-      </div>
-    </div>
-    <!--master card, paytm logo end-->
-  </div>
-  <!-- version end -->
-
-  <!-- version blue checkout, delivery info, one button begin -->
-  <div class="version_2">
-    <!-- content section begin -->
-    <section class="inner_content pad_15">
-      <div class="container">
-        <div class="row contactpopup_info">
-          <div class="col-sm-12 box pad_0 margin_0">
-            <div   class="row space_bottom">
-              <div class="col-sm-12 col-md-6 col-md-offset-3">
-                <div class="margin_b_25"><h1 style="font-size:28px">Almost done, <span customer-name><%=current_user.name %></span>!</h1></div>
-
-                <!-- three step process desktop version -->
-                <div class="row desktop margin_b_25">
-                  <div class="col-md-12 margin_t_25">
-                    <img src="<%= asset_path("progress_bar_web.png") %>" />
-                  </div>
-                </div>
-                <!-- three step process mobile version -->
-                <div class="row mobile margin_b_25">
-                  <div class="col-md-12 margin_t_10">
-                    <img src="<%= asset_path("progress_bar_mobile.png") %>" />
-                  </div>
-                </div>
-
-                <!-- blue checkout format start -->
-                <div class="row margin_t_15">
-                  <table class="billing-information col-md-12 col-sm-12 col-xs-12 p_16">
-                    <thead>
-                      <tr class="text-uppercase">
-                        <th class="text-center color_blue" colspan="2"><b>Treatment Summary</b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <table class="treatment-plan-table text-left">
-                            <tr class="row">
-                              <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('treatment-plan-min.png') %>"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9">Treatment Plan for</br><%= @current_consultation.category %></td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="amount-right"><span class="element-number">Rs. 350</span></td>
-                      </tr>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td>
-                          <table class="support-table margin_b_10 text-left">
-                            <tr>
-                              <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('support-min.png') %>"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9"><span class="element-number">30</span> days support during your treatment</td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="amount-right color_green">FREE</td>
-                      </tr>
-                      <% if @current_consultation.coupon %>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td>
-                          <table class="support-table margin_b_10 text-left">
-                            <tr>
-                              <td class="col-md-3 col-sm-3 col-xs-3"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9 text-uppercase color_green">Promo applied</td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="color_green amount-right">-Rs. <span class="element-number"><%= (350-@current_consultation.amount) %></span></td>
-                      </tr>
-                      <% end %>
-                    </tbody>
-                    <tfoot>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td class="amount-right element-number" colspan="2"><strong><span class="text-uppercase">Total </span> Rs. <%= @current_consultation.amount %></strong></td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                <!-- blue checkout format end -->
-
-                <!-- deliver time -->
-                <div class="row margin_t_25">
-                  <table class="delivery-information col-md-12 col-sm-12 col-xs-12 p_16">
-                    <tbody>
-                      <tr>
-                        <td class="text-left">Delivery by</td>
-                        <!-- 24 hours + 5:30 hours -->
-                        <td class="amount-right"><strong>Tomorrow, <span class="element-number">
-                          <%= (Time.now + 1770.minutes).strftime("%l %p") %>
-                          </span></strong></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <!--delivery email-->
-                <div class="row margin_t_25">
-                  <table class="delivery-information col-md-12 col-sm-12 col-xs-12 p_16" id="email-static">
-                    <tbody>
-                      <tr>
-                        <td class="text-left">Delivery to</td>
-                        <td class="amount-right"><strong><span id="current_user_email"><%= @current_consultation.patient.email %></span></strong></td>
-                      </tr>
-                      <tr>
-                        <td class="text-left"></td>
-                        <td class="change-email pull-right"><button id="change-email">(change)</button></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <table class="delivery-information col-md-12 col-sm-12 col-xs-12 p_16" id="email-editable">
-                    <tbody>
-                      <tr>
-                        <td class="text-left">Delivery to</td>
-                        <td class="amount-right">
-                          <input type="text" id="email" size="25" class="text-right"></input>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="text-left"></td>
-                        <td class="change-email-controls pull-right">
-                          <div class="row">
-                            <div class="col-xs-3 col-sm-3 col xs-3"><span id="change-email-controls-submit"><i class="fa fa-check"></i></span></div>
-                            <div class="col-xs-3 col-sm-3 col xs-3"><span id="change-email-controls-cancel"><i class="fa fa-times"></i></span></div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- content section end -->
-
     <!-- satisfaction guaranteed section begin -->
-    <section class="satisfaction space_bottom">
-      <div class="row text-center space_bottom space_top dotted-lines">
+    <section class="satisfaction space_bottom version-2">
+      <div class="row text-center space_bottom space_top">
         <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-          <div class="row margin_t_25">
+          <div class="row">
             <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 satisfaction-content">
+              <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_green_sm.png") %>" alt="Remedico"></span>
               <div class="row">
-                <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_blue_light_sm.png") %>" alt="Remedico"></span>
                 <div class="text-left">
-                  <h5 class="sub-title color_blue">100% satisfaction</h5>
-                  <p class="p_16 margin_b_0">If you're not satisfied with your consultation, we will refund your fee.</p>
+                  <h5 class="sub-title">100% satisfaction guaranteed</h5>
+                  <p class="p_16 margin_b_0">If you're not happy with your treatment, we'll refund your fee.</p>
+                </div>
+                <div class="star-ratings-container">
+                  <div class="star-ratings">
+                      <div class="star-ratings-top"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                      <div class="star-ratings-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                  </div>
+                  <p>Average customer rating</p>
                 </div>
               </div>
             </div>
@@ -287,209 +145,21 @@
     </section>
     <!-- satisfaction guaranteed section end -->
 
-    <!--master card, paytm logo start-->
-    <div class="row">
-      <div class="col-sm-12 text-center space_bottom margin_t_15">
-        <img src="<%= asset_path("payment_options/master_card_visa_paytm.png") %>" class="img-responsive" alt="Satisfaction-Payment-Gateway" style="display: inline-block; max-height: 25px;">
-      </div>
+
+  <!--master card, paytm logo start-->
+  <div class="row">
+    <div class="col-sm-12 text-center space_bottom margin_t_15">
+      <img src="<%= asset_path("payment_options/master_card_visa_paytm.png") %>" class="img-responsive" alt="Satisfaction-Payment-Gateway" style="display: inline-block; max-height: 25px;">
     </div>
-    <!--master card, paytm logo end-->
-
   </div>
-  <!-- version end -->
+  <!--master card, paytm logo end-->
 
-  <!-- version one button begin -->
-  <div class="version_3">
-    <!-- content section begin -->
-    <section class="inner_content pad_15">
-      <div class="container">
-        <div class="row contactpopup_info">
-          <div class="col-sm-12 box pad_0 margin_0">
-            <div class="row">
-              <div class="col-sm-12 col-md-6 col-md-offset-3">
-                <div class="margin_b_25"><h1 style="font-size:28px">Almost done, <span customer-name><%=current_user.name %></span>!</h1></div>
-                
-                <!-- three step process desktop version -->
-                <div class="row desktop">
-                  <div class="col-md-12 margin_t_25">
-                    <img src="<%= asset_path("progress_bar_web.png") %>" />
-                  </div>
-                </div>
-                <!-- three step process mobile version -->
-                <div class="row mobile">
-                  <div class="col-md-12 margin_t_10">
-                    <img src="<%= asset_path("progress_bar_mobile.png") %>" />
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- content section end -->
-
-    <!-- satisfaction guaranteed section begin -->
-    <section class="satisfaction space_bottom">
-      <div class="row text-center space_bottom space_top dotted-lines">
-        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-          <div class="row margin_t_25 margin_b_15">
-            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 satisfaction-content">
-              <div class="row">
-                <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_blue_light_sm.png") %>" alt="Remedico"></span>
-                <div class="text-left">
-                  <h5 class="sub-title color_blue">100% satisfaction</h5>
-                  <p class="p_16 margin_b_0">If you're not satisfied with your consultation, we will refund your fee.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- satisfaction guaranteed section end -->
-
-    <!--master card, paytm logo start-->
-    <div class="row">
-      <div class="col-sm-12 text-center space_bottom margin_t_15">
-        <img src="<%= asset_path("payment_options/master_card_visa_paytm.png") %>" class="img-responsive" alt="Satisfaction-Payment-Gateway" style="display: inline-block; max-height: 25px;">
-      </div>
-    </div>
-    <!--master card, paytm logo end-->
-
-  </div>
-  <!-- version end -->
-
-  <!-- version green two payment links start -->
-  <div class="version_4">
-    <!-- content section begin -->
-    <section class="inner_content margin_b_25 pad_15">
-      <div class="container">
-        <div class="row contactpopup_info">
-          <div class="col-sm-12 box pad_0 margin_0 green_back">
-            <div   class="row space_bottom">
-              <div class="col-sm-12 col-md-6 col-md-offset-3">
-                <div class="margin_b_25"><h1 style="font-size:28px">Almost done, <span customer-name><%=current_user.name %></span>!</h1>
-                </div>
-
-                <!-- three step process desktop version -->
-                <div class="row desktop margin_b_25">
-                  <div class="col-md-12 margin_t_25">
-                    <img src="<%= asset_path("progress_bar_web.png") %>" />
-                  </div>
-                </div>
-                <!-- three step process mobile version -->
-                <div class="row mobile margin_b_25">
-                  <div class="col-md-12 margin_t_10">
-                    <img src="<%= asset_path("progress_bar_mobile.png") %>" />
-                  </div>
-                </div>
-
-                <!-- blue checkout format start -->
-                <div class="row margin_t_10">
-                  <table class="billing-information col-md-12 col-sm-12 col-xs-12 p_16">
-                    <thead>
-                      <tr class="text-uppercase">
-                        <th class="text-center color_blue" colspan="2"><b>Treatment Summary</b></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <table class="treatment-plan-table text-left">
-                            <tr class="row">
-                              <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('treatment-plan-min.png') %>"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9">Treatment Plan for</br><%= @current_consultation.category %></td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="amount-right"><span class="element-number">Rs. 350</span></td>
-                      </tr>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td>
-                          <table class="support-table margin_b_10 text-left">
-                            <tr>
-                              <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('support-min.png') %>"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9"><span class="element-number">30</span> days support during your treatment</td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="amount-right color_green">FREE</td>
-                      </tr>
-                      <% if @current_consultation.coupon %>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td>
-                          <table class="support-table margin_b_10 text-left">
-                            <tr>
-                              <td class="col-md-3 col-sm-3 col-xs-3"></td>
-                              <td class="col-md-9 col-sm-9 col-xs-9 text-uppercase color_green">Promo applied</td>
-                            </tr>
-                          </table>
-                        </td>
-                        <td class="color_green amount-right">-Rs. <span class="element-number"><%= (350-@current_consultation.amount) %></span></td>
-                      </tr>
-                      <% end %>
-                    </tbody>
-                    <tfoot>
-                      <tr><td class="hr-line" colspan="2"><div></div></td></tr>
-                      <tr>
-                        <td class="amount-right element-number" colspan="2"><strong><span class="text-uppercase">Total </span> Rs. <%= @current_consultation.amount %></strong></td>
-                      </tr>
-                    </tfoot>
-                  </table>
-                </div>
-                <!-- blue checkout format end -->
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="inner_content pad_15 payment_options green_back">
-      <div class="container">
-        <div class="row contactpopup_info">
-          <h5 class="sub-title color_white">Choose your payment method</h5>
-          <div class="col-sm-12 box pad_0 margin_0 green_back">
-            <div   class="row space_bottom">
-              <div class="col-sm-12 col-md-6 col-md-offset-3">
-                <div class="text-left">
-                  <div class="row">
-                    <label id="paytm" class="col-md-12 col-sm-12 col-xs-12 list_btn text-center">
-                      <span><img src="<%= asset_path("payment_options/paytm.png") %>" class="img-responsive" alt="Satisfaction-Payment-Gateway" style="display: inline-block; max-height: 25px;"> wallet</span>
-                      <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                    </label>
-                  </div>
-                  <div class="row">
-                    <label id="others" class="col-md-12 col-sm-12 col-xs-12 list_btn text-center">
-                      <span><i class="fa fa-credit-card" aria-hidden="true"></i>Cards / Net banking / UPI</span>
-                      <i class="fa fa-chevron-right" aria-hidden="true"></i>
-                    </label>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="text-center money-back">
-            <i class="fa fa-shield" aria-hidden="true"></i>100% money-back guarantee</div>
-        </div>
-      </div>
-    </section>
-
-  </div>
-  <!-- version green two payment links end -->
-
-
-  <section class="version_4_hidden">
+  <section>
     <div class="row">
       <div class="col-sm-12 sticky-footer">
         <div class="text-center">
             <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
-              <i class="fa fa-lock" aria-hidden="true"></i> <span class="version_experiment">PAY Rs. <%= @amount %> SECURELY NOW</span>
+              <i class="fa fa-lock" aria-hidden="true"></i> PAY Rs. <%= @amount %> <span class="version-1">SECURELY</span> NOW
             <% end %>
         </div>
       </div>
@@ -497,7 +167,7 @@
   </section>
 
   <!-- footer begin -->
-  <section class="version_4_hidden" style="height: 60px;">
+  <section style="height: 60px;">
     <br/>
   </section>
   <!-- footer end -->

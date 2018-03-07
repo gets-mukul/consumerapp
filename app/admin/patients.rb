@@ -74,7 +74,6 @@ ActiveAdmin.register Patient do
           column "Consultation ID" do |ps| 
             link_to ps.consultation_id, admin_consultation_path(ps.consultation_id)  if ps.consultation_id? 
           end
-          column :consultation_id
           column :local_referrer
           column :utm_campaign
         end
