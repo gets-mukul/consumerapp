@@ -76,8 +76,12 @@ a:hover {
     }   
 }
 
+.version-2 {
+  display: none;
+}
+
 .satisfaction {
-  background-color: #f7fcfc;
+  // background-color: #f7fcfc;
 }
 
 .satisfaction .dotted-lines {
@@ -121,93 +125,115 @@ a:hover {
   padding-right: 10px;
 }
 
-.version_1, .version_2, .version_3, .version_4 {
+.satisfaction {
+  // background-color: #fafafa;
+}
+.satisfaction .dotted-lines {
+  // border-top: 1.5px dotted #c0c0c0; border-bottom: 1.5px dotted #c0c0c0;
+}
 
-  .satisfaction {
-    background-color: #fafafa;
-  }
-  .satisfaction .dotted-lines {
-    border-top: 1.5px dotted #c0c0c0; border-bottom: 1.5px dotted #c0c0c0;
-  }
-  table.billing-information {
-    border: 1px solid #17a0b6;
-    background-color: #f7fcfc;
-  }
-  .billing-information > tfoot {
-    border-bottom: 1px solid #17a0b6;
-  }
-  .billing-information > thead th, .billing-information > tfoot td {
-    padding: 10px;
-    padding-left: 10px;
-  }
-  .delivery-information td:nth-child(odd) {
-    width: 1%;
-    white-space: nowrap;
-  }
-  .hr-line {
-    padding: 0 10px!important;
-  }
-  .hr-line div {
-    padding: 0!important;
-    height: 1px;
-    background-color: #17a0b640;
-  }
-  .satisfaction {
-    background-color: #fafafa;
-  }
-  .billing-information tbody, .billing-information tfoot {
-    font: normal 16px 'ralewayregular';
-  }
-  .delivery-information {
-    font: normal 16px 'ralewayregular';
-  }
-  .element-number {
-    font-family: 'pt_sansregular';
-  }
-  .billing-information > tbody tr.promo-section td {
-    padding-left: 45px;
-    padding-top: 4px;
-    white-space: nowrap;
-    width: 1%;
-  }
-  #change-email {
-    outline: none;
-  }
-  .change-email button {
-    background: none;
-    border: 0;
-    color: #17a6b0;
-    margin-top: -2px;
-    outline: none;
-  }
-  .change-email {
-    margin-top: -2px;
-    padding-top: 0!important;
-  }
-  .change-email-controls span {
-    background: none;
-    border: 0;
-    outline: none;
-    cursor: pointer;
-  }
-  #change-email-controls-submit {
-    color: #17b06e;
-  }
-  #change-email-controls-cancel {
-    color: #b02e17;  
-  }
-  .change-email-controls span i {
-    font-size: 18px!important;
-  }
-  .change-email-controls .row {
-    margin-right: -25px;
-  }
-  #email-editable {
-    display: none;
-  }
-  .margin_b_45 {
-    margin-bottom: 45px;
-  }
+.star-ratings-container {
+  text-align: center;
+  padding-top: 20px;
+}
+.star-ratings {
+  display: inline-block;
+  text-align: left;
+  font-size: 25px;
+  letter-spacing: 2px;
+  line-height: 25px;
+  position: relative;
+  text-shadow: 0px 1px 0 #a2a2a2;
+}
+.star-ratings-top {
+  color: #FFD500;
+  position: absolute;
+  width: 93%; /* change this to edit star percent */
+  overflow: hidden;
+}
+
+.star-ratings-container p {
+  font-size: 16px;
+}
+
+table.billing-information {
+  border: 1px solid #17a0b6;
+  background-color: #f7fcfc;
+}
+.billing-information > tfoot {
+  border-bottom: 1px solid #17a0b6;
+}
+.billing-information > thead th, .billing-information > tfoot td {
+  padding: 10px;
+  padding-left: 10px;
+}
+.delivery-information td:nth-child(odd) {
+  width: 1%;
+  white-space: nowrap;
+}
+.hr-line {
+  padding: 0 10px!important;
+}
+.hr-line div {
+  padding: 0!important;
+  height: 1px;
+  background-color: #17a0b640;
+}
+.satisfaction {
+  // background-color: #fafafa;
+}
+.billing-information tbody, .billing-information tfoot {
+  font: normal 16px 'ralewayregular';
+}
+.delivery-information {
+  font: normal 16px 'ralewayregular';
+}
+.element-number {
+  font-family: 'pt_sansregular';
+}
+.billing-information > tbody tr.promo-section td {
+  padding-left: 45px;
+  padding-top: 4px;
+  white-space: nowrap;
+  width: 1%;
+}
+#change-email {
+  outline: none;
+}
+.change-email button {
+  background: none;
+  border: 0;
+  color: #17a6b0;
+  margin-top: -2px;
+  outline: none;
+}
+.change-email {
+  margin-top: -2px;
+  padding-top: 0!important;
+}
+.change-email-controls span {
+  background: none;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+}
+#change-email-controls-submit {
+  color: #17b06e;
+}
+#change-email-controls-cancel {
+  color: #b02e17;
+}
+.change-email-controls span i {
+  font-size: 18px!important;
+}
+.change-email-controls .row {
+  margin-right: -25px;
+}
+#email-editable {
+  display: none;
+}
+.margin_b_45 {
+  margin-bottom: 45px;
 }
 
 .payment_options {
@@ -294,9 +320,4 @@ a:hover {
     margin-bottom: 20px;
     font-size: 18px;
  }
-
-}
-
-.version_2, .version_3, .version_4 {
-  display: none;
 }
