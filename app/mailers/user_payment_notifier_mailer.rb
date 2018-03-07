@@ -11,8 +11,7 @@ class UserPaymentNotifierMailer < ApplicationMailer
 
   def send_user_form_filled_mail(id)
     @consultation = Consultation.find_by_id id
-
-    @payment_link = "bit.do/rmpay?p=" + encrypt(@consultation)
+    @payment_link = "https://remedicohealth.com/consult/payment/instant_payment?p=" + encrypt(@consultation) + "&utm_source=trnsctnl_email&utm_medium=email&referrer=email&utm_campaign=trnsctnl_email"
 
     # @payment_link = ""
     # if @consultation.amount == 350

@@ -25,7 +25,11 @@ ActiveAdmin.register Consultation do
   action_item :edit_pay_status, only: [:show, :edit] do
     link_to 'Update Pay Status', edit_pay_status_admin_consultation_path
   end
-  
+
+  action_item :fetch_follow_up_link, only: [:show] do
+    link_to 'Followup', fetch_follow_up_link_admin_consultation_path, :remote => true
+  end
+
   controller do
     include Pundit
     include PaymentHelper
@@ -160,8 +164,19 @@ ActiveAdmin.register Consultation do
               ""
             end
           }
-
           row("Login link") { "bit.do/rme?p=" + encrypt(consultation.patient) }
+
+          attributes_table do
+            row("Payment link") {
+              if consultation.user_status != 'registered'
+                "bit.do/rmpay?p=" + encrypt(consultation) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm"
+              else
+                ""
+              end
+            }
+            row("Login link") { "bit.do/rme?p=" + encrypt(consultation.patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm" }
+          end
+
 
           panel "Patient" do
             table_for Patient.select(:id, :mobile, :email).where(:id => consultation.patient_id)  do
@@ -177,6 +192,9 @@ ActiveAdmin.register Consultation do
 
       div class: "col-md-6 col-sm-12 col-xs-12" do
         active_admin_comments
+      end
+
+      div class: "modal", style: "display:none;padding:20px;overflow-wrap:break-word;" do
       end
     end
 
@@ -256,9 +274,20 @@ ActiveAdmin.register Consultation do
       f.actions
     end
   end
-  
+
   member_action :edit_pay_status, :method => :get do
     @consultation = resource
+  end
+
+  member_action :fetch_follow_up_link, :method => :get do
+    if resource.pay_status == 'paid'
+      @link = "https://remedica.typeform.com/to/LzSsEC?name="+resource.patient.name.parameterize(separator: '%20')+"&mobile="+resource.patient.mobile+"&condition="+resource.category.parameterize(separator: '%20')
+    else
+      @link = ""
+    end
+    respond_to do |format|
+      format.js
+    end
   end
 
   csv force_quotes: true, col_sep: ',' do

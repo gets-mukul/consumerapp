@@ -15,7 +15,7 @@ module ConsultationHelper
   end
 
   def unregister_consultation
-    Rails.logger.debug { "In unregister" }
+    Rails.logger.info "In unregister"
     @current_consultation = nil
   end
 
