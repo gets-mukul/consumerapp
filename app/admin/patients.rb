@@ -2,6 +2,7 @@ ActiveAdmin.register Patient do
   require 'encrypt'
   actions :all, :except => [:new, :destroy]
   permit_params :name, :mobile, :email
+
   
   scope :all, :default => true, show_count: false
   scope "Payment Pending", show_count: false
@@ -48,6 +49,10 @@ ActiveAdmin.register Patient do
       row :created_at
       row :updated_at
       row("Login link") { "bit.do/rme?p=" + encrypt(patient) }
+
+      attributes_table do
+        row("Login link full") { "bit.do/rme?p=" + encrypt(patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm"}
+      end
 
       active_admin_comments
       
