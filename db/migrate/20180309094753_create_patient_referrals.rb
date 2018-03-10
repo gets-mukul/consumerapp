@@ -12,6 +12,7 @@ class CreatePatientReferrals < ActiveRecord::Migration[5.0]
       t.integer :referrer_amount,  :limit => 2
       t.integer :referee_amount,   :limit => 2
 
+      t.timestamps
     end
   end
 end
