@@ -48,9 +48,10 @@ module PatientsHelper
   end
 
   def setup_patient_referrals
-    prev_referral = PatientReferral.find_by ({:referrer_id => decrypt(params[:refpt], 0), :referee => current_user.id})
+    decrypted_id = decrypt(params[:refpt], 0)
+    prev_referral = PatientReferral.find_by ({:referrer_id => decrypted_id, :referee => current_user.id})
     PatientReferral.create({:referrer => Patient.find(decrypted_id), :referee => current_user}) unless prev_referral
     session[:coupon_applied] = true
-    session[:promo_code] = 'REFER50'
+    session[:promo_code] = 'REFER100'
   end
 end

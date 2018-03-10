@@ -7,6 +7,6 @@ class PatientReferral < ApplicationRecord
   
   def set_defaults
 	  self.referrer_amount ||= 50
-    self.referee_amount ||= 50
+    self.referee_amount ||= 100
   end
 end
