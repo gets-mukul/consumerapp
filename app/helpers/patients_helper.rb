@@ -9,6 +9,7 @@ module PatientsHelper
     logger.info "Registered #{user.name}, condition: #{params[:condition]}"
     setup_patient_source
     DeliverSMSWorker.perform_in(1.hours, user.id) if Rails.env.production?
+    setup_patient_referrals if params[:refpt]
   end
 
   def unregister
@@ -44,5 +45,14 @@ module PatientsHelper
       session[:patient_source_id] = patient_source.id
       logger.info "Setting up utm campaign for #{patient_source_params}"
     end
+  end
+
+  def setup_patient_referrals
+    decrypted_id = decrypt(params[:refpt], 0)
+    prev_referral = PatientReferral.find_by ({:referrer_id => decrypted_id, :referee => current_user.id})
+    PatientReferral.create({:referrer => Patient.find(decrypted_id), :referee => current_user}) unless prev_referral
+    PatientSource.find(session[:patient_source_id]).update({:local_referrer => 'referral_link'});
+    session[:coupon_applied] = true
+    session[:promo_code] = 'REFER100'
   end
 end

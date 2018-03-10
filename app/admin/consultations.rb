@@ -86,6 +86,8 @@ ActiveAdmin.register Consultation do
                 resource.patient.payments.create(payment_params)
               end
             end
+            patient_referral = PatientReferral.where(:referee => resource.patient, :paid => false).last
+            patient_referral.update({:consultation => resource, :paid => true}) if patient_referral
           end
           resource.save
         end

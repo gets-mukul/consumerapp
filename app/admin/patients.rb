@@ -49,6 +49,7 @@ ActiveAdmin.register Patient do
       row :created_at
       row :updated_at
       row("Login link") { "bit.do/rme?p=" + encrypt(patient) }
+      row("Customer Referral link") { Rails.application.secrets.DOMAIN_NAME+"/?refpt=" + encrypt(patient) }
 
       attributes_table do
         row("Login link full") { "bit.do/rme?p=" + encrypt(patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm"}

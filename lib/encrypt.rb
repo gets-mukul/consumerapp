@@ -4,7 +4,6 @@ def encrypt input
 end
 
 def decrypt (input, type)
-	logger.info input
 	if input.length == 10
 		d = [input.slice(0..1), input.slice(2..9)]
 		pos = d[1].index('E') + 1

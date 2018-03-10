@@ -223,6 +223,8 @@ class PaymentController < ApplicationController
           coupon.update(status: 'coupon used')
         end
         render 'success'
+        patient_referral = PatientReferral.where(:referee => current_user, :paid => false).last
+        patient_referral.update({:consultation => current_consultation, :paid => true}) if patient_referral
         unregister_consultation
         unregister
       else
@@ -276,6 +278,8 @@ class PaymentController < ApplicationController
         end
 
         render 'success'
+        patient_referral = PatientReferral.where(:referee => current_user, :paid => false).last
+        patient_referral.update({:consultation => current_consultation, :paid => true}) if patient_referral
         unregister_consultation
         unregister
       elsif
