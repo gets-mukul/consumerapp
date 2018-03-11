@@ -98,53 +98,32 @@
   </section>
   <!-- content section end -->
 
-    <!-- satisfaction guaranteed section begin -->
-    <section class="satisfaction space_bottom version-1">
-      <div class="row text-center space_bottom space_top">
-        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-          <div class="row">
-            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 satisfaction-content">
-              <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_blue_light_sm.png") %>" alt="Remedico"></span>
-              <div class="row">
-                <div class="text-left">
-                  <h5 class="sub-title">100% satisfaction</h5>
-                  <p class="p_16 margin_b_0">If you're not satisfied with your consultation, we will refund your fee.</p>
+  <!-- satisfaction guaranteed section begin -->
+  <section class="satisfaction space_bottom">
+    <div class="row text-center space_bottom space_top">
+      <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 satisfaction-content">
+            <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_green_sm.png") %>" alt="Remedico"></span>
+            <div class="row">
+              <div class="text-left">
+                <h5 class="sub-title">100% satisfaction guaranteed</h5>
+                <p class="p_16 margin_b_0">If you're not happy with your treatment, we'll refund your fee.</p>
+              </div>
+              <div class="star-ratings-container">
+                <div class="star-ratings">
+                    <div class="star-ratings-top"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="star-ratings-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 </div>
+                <p>Average customer rating</p>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-    <!-- satisfaction guaranteed section end -->
-
-    <!-- satisfaction guaranteed section begin -->
-    <section class="satisfaction space_bottom version-2">
-      <div class="row text-center space_bottom space_top">
-        <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
-          <div class="row">
-            <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 satisfaction-content">
-              <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_green_sm.png") %>" alt="Remedico"></span>
-              <div class="row">
-                <div class="text-left">
-                  <h5 class="sub-title">100% satisfaction guaranteed</h5>
-                  <p class="p_16 margin_b_0">If you're not happy with your treatment, we'll refund your fee.</p>
-                </div>
-                <div class="star-ratings-container">
-                  <div class="star-ratings">
-                      <div class="star-ratings-top"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                      <div class="star-ratings-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                  </div>
-                  <p>Average customer rating</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- satisfaction guaranteed section end -->
-
+    </div>
+  </section>
+  <!-- satisfaction guaranteed section end -->
 
   <!--master card, paytm logo start-->
   <div class="row">
@@ -159,7 +138,7 @@
       <div class="col-sm-12 sticky-footer">
         <div class="text-center">
             <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
-              <i class="fa fa-lock" aria-hidden="true"></i> PAY Rs. <%= @amount %> <span class="version-1">SECURELY</span> NOW <i class="fa fa-chevron-right" aria-hidden="true"></i>
+              <i class="fa fa-lock" aria-hidden="true"></i> PAY Rs. <%= @amount %> NOW <i class="fa fa-chevron-right" aria-hidden="true"></i>
             <% end %>
         </div>
       </div>
@@ -380,62 +359,6 @@ $(function() {
       }
     }
   }
-
-  $('.version_4').on('click', '#paytm', function () {
-    var mapForm = document.createElement("form");
-    mapForm.target = "_self";
-    mapForm.method = "POST";
-    mapForm.action = "/consult/payment/payment_paytm";
-    var mapInput = document.createElement("input");
-    mapInput.name = "authenticity_token"
-    mapInput.value = "<%= form_authenticity_token %>"
-    mapInput.type = "hidden"
-    var mapInput2 = document.createElement("input");
-    mapInput2.name = "pg_type"
-    mapInput2.value = "PAYTM"
-    mapInput2.type = "hidden"
-
-    mapForm.appendChild(mapInput);
-    mapForm.appendChild(mapInput2);
-    document.body.appendChild(mapForm);
-
-    mapForm.submit();
-
-    
-    ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton', eventLabel: 'PaytmV7.4'});
-    mixpanel.track("Button Clicked", {
-      "Button Name": "Payment Button",
-      "Condition Name": "n/a",
-      "Page URL": "payment/index",
-      "Sub Button Name": "PaytmV7.4"
-    });
-    window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index', 'Button Version': 'PaytmV7.4'}]);
-  });
-
-  $('.version_4').on('click', '#others', function () {
-    var rzp2 = new Razorpay(options_razorpay);
-    rzp2.open();
-    $.ajax({
-      type: "POST",
-      url: "/consult/payment/initiate_payment",
-      success: function (response) {
-        return false;
-      },
-      error: function (response) {
-        return false;
-      }
-    })
-
-    ga('send', 'event', { eventCategory: 'consultation', eventAction: 'clickPayButton', eventLabel: 'RazorpayV7.4'});
-    mixpanel.track("Button Clicked", {
-      "Button Name": "Payment Button",
-      "Condition Name": "n/a",
-      "Page URL": "payment/index",
-      "Sub Button Name": "RazorpayV7.4"
-    });
-    window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index', 'Button Version': 'RazorpayV7.4'}]);
-  });
-
 });
 
 </script>
