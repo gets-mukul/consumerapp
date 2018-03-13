@@ -74,6 +74,10 @@ Rails.application.routes.draw do
   
     scope '/admin' do
       devise_scope :admin_user do
+
+        require 'sidekiq/web'
+        mount Sidekiq::Web => '/sidekiq-usage/sidekiq'
+
         authenticated :admin do
           root to: 'dashboard#index', as: 'authenticated_admin_user_root'
         end
