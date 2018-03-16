@@ -108,7 +108,7 @@ class MyConsultationController < ApplicationController
           coupon.increment!(:count, 1)
           coupon.update(status: 'coupon used')
         end
-        
+        CustomerPaymentNotifierMailer.send_user_reverse_payment_mail(my_consultation).deliver_later
         render 'payment_success'
       else
         url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
@@ -122,15 +122,13 @@ class MyConsultationController < ApplicationController
 
         my_consultation.update({ pay_status: "processing", user_status: 'processing' })
 
-        AdminTransactionMailer.send_pending_transaction_mail(current_payment).deliver_later
-        FetchPaymentStatusWorker.perform_in(20.minutes, current_payment.id) if Rails.env.production?
-
         redirect_to '/my_consultation/failure'
       end
     elsif my_consultation.pg_type=='RAZORPAY'
       amount = my_consultation.amount*100
       response = Razorpay::Payment.fetch(params[:payment_id])
       if (response.status=='authorized')
+        CustomerPaymentNotifierMailer.send_user_reverse_payment_mail(my_consultation).deliver_later
         render 'payment_success'
   
         response = response.capture({amount:amount})

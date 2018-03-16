@@ -1,0 +1,28 @@
+Hi Team,
+
+===============================================
+REVERSE PAYMENT FLOW ALERT
+===============================================
+
+We just received a patient, <%= @my_consultation.name %>, via the reverse payment flow
+
+===============================================
+The user payment details are as follows:
+
+Transaction ID : <%= @my_consultation.txnid %>
+
+Patient Name : <%= @my_consultation.name %>
+
+Patient Email : <%= @my_consultation.email %>
+
+Patient Contact : <%= @my_consultation.mobile %>
+
+Amount : <%= @my_consultation.amount %>
+
+Payment Mode : <%= @my_consultation.mode %>
+
+PG Type : <%= @my_consultation.pg_type %>
+
+Bank Ref # : <%= @my_consultation.bank_ref_num %>
+
+Date: <%= @my_consultation.updated_at %>

@@ -72,10 +72,10 @@
                           <tr class="row">
                             <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('treatment-plan-min.png') %>"></td>
                             <td class="col-md-9 col-sm-9 col-xs-9">
-                              <% if @current_consultation.category == "General Skin Care" %>
+                              <% if my_consultation.category == "General Skin Care" %>
                                 General skin care plan
                               <% else %>
-                                Treatment Plan for</br><%= @current_consultation.category %>
+                                Treatment Plan for</br><%= my_consultation.category %>
                               <% end %>
                             </td>
                           </tr>
