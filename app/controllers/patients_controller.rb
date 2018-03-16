@@ -88,7 +88,8 @@ class PatientsController < ApplicationController
         "Dandruff",
         "Eczema, Psoriasis and Rash",
         "Stretch Marks",
-        "Skin Growth (Moles, Warts)"
+        "Skin Growth (Moles, Warts)",
+        "General Skin Care"
       ]
     end
     # use callbacks to share common setup or constraints between actions.

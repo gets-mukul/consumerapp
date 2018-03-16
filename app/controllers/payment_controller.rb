@@ -308,7 +308,7 @@ class PaymentController < ApplicationController
     if session[:tmp_age]
       session[:error_status] = 'age';
     else
-      if ['Acne', 'Hairfall or Hair Thinning', 'Dandruff', 'Stretch Marks'].include? current_consultation.category
+      if ['Acne', 'Hairfall or Hair Thinning', 'Dandruff', 'Stretch Marks', 'General Skin Care'].include? current_consultation.category
         session[:error_status] = 'personal or family history of skin cancer';
       elsif ['Pigmentation and Dark Circles', 'Eczema, Psoriasis and Rash', 'Skin Growth (Moles, Warts)'].include? current_consultation.category
         session[:error_status] = session[:tmp_red_flag]
