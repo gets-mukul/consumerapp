@@ -1,0 +1,49 @@
+<%= content_for :body_class, "inner_body white_back pad_15" %>
+
+<!-- header logo begin -->
+<div class="container">
+  <div class="row text-center space_top">
+    <img src="https://remedicohealth.com/images/footer_logo_blue1-min.png" alt="Remedico">
+  </div>
+</div>
+<!-- header logo end -->
+
+<main class="margin_t_15">
+  <section class="inner_content">
+    <div class="container">
+      <div class="row contactpopup_info margin_t_15">
+        <div class="col-sm-12 box pad_0 margin_0">
+          <div class="row space_bottom">
+            <div class="col-sm-12 col-md-6 col-md-offset-3">
+              <div><h1 class="space_top" style="font-size: 28px">Payment Successful</h1></div>
+              <div style="margin-top: 20px">
+                <p style="font-size: 16px; line-height: 1.4; margin-bottom: 20px">
+                Thanks <span customer-name><%= my_consultation.name.titleize %></span>, we are ready to start your consultation. Select <strong>Start your consultation</strong> to begin your consultation.
+                </p>
+              </div>
+              <section class="space_top space_bottom">
+                <div class="btns_info text-center">
+                  <%= link_to "START YOUR CONSULTATION", '/my_consultation/consultation_form/'+my_consultation.category, :class => 'action_btn primary', onclick: "ga('send', 'event', { eventCategory: 'rev-consultation', eventAction: 'rev-clickPaymentSuccessStartButton'});" %>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  /* save the current window state on load */
+  if (window.history && window.history.pushState) {
+    /* added city parameter manually */
+    window.history.pushState('forward', null, './payment_success');
+
+    /* trigger on back button */
+    window.onpopstate = function(e) {
+      e.preventDefault();
+    }
+  }
+  window.onbeforeunload = function() {e.preventDefault()}
+</script>

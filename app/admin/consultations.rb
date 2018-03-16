@@ -161,22 +161,22 @@ ActiveAdmin.register Consultation do
 
           row("Payment link") {
             if consultation.user_status != 'registered'
-              "bit.do/rmpay?p=" + encrypt(consultation)
+              "https://bit.do/rmpay?p=" + encrypt(consultation)
             else
               ""
             end
           }
-          row("Login link") { "bit.do/rme?p=" + encrypt(consultation.patient) }
+          row("Login link") { "https://bit.do/rme?p=" + encrypt(consultation.patient) }
 
           attributes_table do
             row("Payment link") {
               if consultation.user_status != 'registered'
-                "bit.do/rmpay?p=" + encrypt(consultation) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm"
+                "https://bit.do/rmpay?p=" + encrypt(consultation) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm"
               else
                 ""
               end
             }
-            row("Login link") { "bit.do/rme?p=" + encrypt(consultation.patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm" }
+            row("Login link") { "https://bit.do/rme?p=" + encrypt(consultation.patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm" }
           end
 
 
@@ -315,11 +315,11 @@ ActiveAdmin.register Consultation do
     column :pay_status
 
     column "Local referrer" do |cs|
-      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:local_referrer).collect {|obj| obj.present? ? obj : "nil"} * ", "
+      PatientSource.where(:patient_id => cs.patient_id).order(:created_at).pluck(:local_referrer).collect {|obj| obj.present? ? obj : "nil"} * ", "
     end
 
     column "UTM campaign" do |cs|
-      PatientSource.where(:consultation_id => cs.id).order(:created_at).pluck(:utm_campaign).collect {|obj| obj.present? ? obj : "nil"} * ", "
+      PatientSource.where(:patient_id => cs.patient_id).order(:created_at).pluck(:utm_campaign).collect {|obj| obj.present? ? obj : "nil"} * ", "
     end
 
     column "Paid at" do |cs|
