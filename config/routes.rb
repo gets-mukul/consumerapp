@@ -98,7 +98,7 @@ Rails.application.routes.draw do
     post '/initiate_payment', to: 'my_consultation#initiate_payment'
     post '/payment_paytm_update', to: 'my_consultation#payment_paytm_update'
     post '/payment_success', to: 'my_consultation#payment_success'
-    get '/payment_success', to: 'my_consultation#payment_success'
+    get '/payment_success', to: 'my_consultation#continue_consultation'
     get '/consultation_form/:condition', to: 'my_consultation#consultation_form'
     get '/success', to: 'my_consultation#success'
     get '/failure', to: 'my_consultation#failure'
