@@ -10,8 +10,8 @@ class MyConsultationController < ApplicationController
   include PaymentHelper
   include PaytmHelper
   
-  skip_before_action :verify_authenticity_token, only: [:create, :success, :failure, :initiate_payment]
-  before_action :check_my_consultation, except: [:create, :failure]
+  skip_before_action :verify_authenticity_token, only: [:create, :success, :failure, :initiate_payment, :continue_consultation]
+  before_action :check_my_consultation, except: [:create, :failure, :continue_consultation]
 
   def create
     unless my_consultation
@@ -154,7 +154,22 @@ class MyConsultationController < ApplicationController
       end
     end
   end
-  
+
+  def continue_consultation
+    if my_consultation && (['paid', 'red flag'].include? my_consultation.user_status)
+      return
+    else
+      if params[:mobile]
+        @my_consultation = MyConsultation.find_by :mobile => params[:mobile], :user_status => ['paid', 'red flag']
+        if @my_consultation
+          register_my_consultation @my_consultation
+          return
+        end
+      end
+    end
+    redirect_to '/'
+  end
+
   def failure
     my_consultation.update({ pay_status: "payment failed: #{session[:error_msg]}", user_status: "payment failed" })
   end
