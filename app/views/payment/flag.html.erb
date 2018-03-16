@@ -23,8 +23,7 @@
             						</p><br/>
             					</div>
     						<% else %>
-                               
-            					<% if ['Acne', 'Hairfall or Hair Thinning', 'Dandruff', 'Stretch Marks'].include? current_consultation.category %>
+                                <% if ['Acne', 'Hairfall or Hair Thinning', 'Dandruff', 'Stretch Marks', 'General Skin Care'].include? current_consultation.category %>
             					    <div>
             					        <p style="font-size: 16px">
         							    We are sorry <span customer-name><%= current_user.name.titleize %></span>, based on your response below we are unable to treat you. We recommend that you see a doctor in person.

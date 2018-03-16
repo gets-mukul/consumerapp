@@ -37,6 +37,7 @@ $ ->
       when 'Stretch Marks' then btnname += 'StretchMarks'
       when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
       when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
+      when 'General Skin Care' then btnname += 'GeneralSkinCare'
       else btnname += condition
     btnname += 'Button'
     ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})
@@ -74,6 +75,7 @@ $ ->
           when 'Stretch Marks' then btnname += 'StretchMarks'
           when 'Hairfall or Hair Thinning' then btnname += 'Hairfall'
           when 'Pigmentation, Tanning and Dark Circles' then btnname += 'Pigmentation'
+          when 'General Skin Care' then btnname += 'GeneralSkinCare'
           else btnname += condition
         btnname += 'Button'
         ga('send', 'event', { eventCategory: 'consultation', eventAction: btnname})

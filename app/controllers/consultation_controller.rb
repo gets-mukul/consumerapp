@@ -59,7 +59,8 @@ class ConsultationController < ApplicationController
       "Dandruff" => "https://remedica.typeform.com/to/WqEAeB",
       "Eczema, Psoriasis and Rash" => "https://remedica.typeform.com/to/VuHuwt",
       "Stretch Marks" => "https://remedica.typeform.com/to/lSTMhj",
-      "Skin Growth (Moles, Warts)" => "https://remedica.typeform.com/to/qs6Oc7"
+      "Skin Growth (Moles, Warts)" => "https://remedica.typeform.com/to/qs6Oc7",
+      "General Skin Care" => "https://remedica.typeform.com/to/iR4wrM"
     }
 
     @condition_form = typeform[@condition] << "?mobile=#{current_user.mobile}&name=#{current_user.name}"

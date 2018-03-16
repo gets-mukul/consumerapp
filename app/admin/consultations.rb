@@ -271,7 +271,7 @@ ActiveAdmin.register Consultation do
       end
       
       f.input :coupon
-      f.input :category, :include_blank => false, :collection => ['Skin Growth (Moles, Warts)', 'Acne', 'Pigmentation and Dark Circles', 'Eczema, Psoriasis and Rash', 'Stretch Marks', 'Dandruff', 'Hairfall or Hair Thinning'] 
+      f.input :category, :include_blank => false, :collection => ['Skin Growth (Moles, Warts)', 'Acne', 'Pigmentation and Dark Circles', 'Eczema, Psoriasis and Rash', 'Stretch Marks', 'Dandruff', 'Hairfall or Hair Thinning', 'General Skin Care']
       f.input :user_status, :include_blank => false, :collection => ["payment failed", "form filled", "red flag", "free consultation done", "registered"]
       f.actions
     end

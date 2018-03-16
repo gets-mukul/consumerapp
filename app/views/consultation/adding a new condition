@@ -1,0 +1,16 @@
+
+-------------------------------------------------------------
+					ADDING A NEW CONDITION
+-------------------------------------------------------------
+Rails app
+
+app/admin/consultations.rb
+app/assets/javascripts/consultation.rb
+app/controllers/consultation_controller.rb
+app/controllers/payment_controller.rb
+app/views/consultation/index.html.erb
+app/views/payment/flag.html.erb
+
+
+
+app/views/layouts/application.html.erb?
