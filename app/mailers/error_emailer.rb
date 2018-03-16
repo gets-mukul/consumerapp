@@ -4,6 +4,6 @@ class ErrorEmailer < ApplicationMailer
     # @user = user
     # @payment = payment
     @msg = msg
-    mail( :to => ["bh.ranjit@gmail.com ","rohitkhatana.khatana@gmail.com"], :subject => "Remedico: Payment failure." )
+    mail( :to => ["bh.ranjit@gmail.com"], :subject => "Remedico: Payment failure." )
   end
 end

@@ -89,6 +89,19 @@ Rails.application.routes.draw do
       end
     end
   end
-  
-end
 
+  scope '/my_consultation' do
+    post '/create' => 'my_consultation#create'
+    get '/create' => 'my_consultation#create'
+    get '/save_condition/:condition' => 'my_consultation#save_condition'
+    get '/payment', to: 'my_consultation#payment'
+    post '/initiate_payment', to: 'my_consultation#initiate_payment'
+    post '/payment_paytm_update', to: 'my_consultation#payment_paytm_update'
+    post '/payment_success', to: 'my_consultation#payment_success'
+    get '/payment_success', to: 'my_consultation#payment_success'
+    get '/consultation_form/:condition', to: 'my_consultation#consultation_form'
+    get '/success', to: 'my_consultation#success'
+    get '/failure', to: 'my_consultation#failure'
+    get '/flag', to: 'my_consultation#flag'
+  end
+end
