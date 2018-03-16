@@ -1,0 +1,39 @@
+.timeline-content-wrapper {
+  padding: 0 20px;
+  margin-top: 50px;
+  
+  .timeline-content {
+    display: flex;
+    padding-bottom: 50px;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .timeline-content img {
+    min-width: 65px;
+  }
+  
+  .timeline-content .timeline-content-text {
+    padding-left: 20px;
+  }
+  
+  h5.sub-title {
+    margin-top: 0;
+  }
+  
+  .timeline-content .icon {
+    height: fit-content;
+    position: relative;
+  }
+
+  .timeline-content.dashed-line .icon:after {
+    content: "";
+    width: 0px;
+    border-left: 1px dashed #707070;
+    display: block;
+    position: absolute;
+    left: 35px;
+    z-index: -1;
+    height: 100px;
+  }
+}

@@ -1,0 +1,341 @@
+<%= content_for :body_class, "inner_body white_back" %>
+<%= content_for :turn_turbolinks, "data-turbolinks=false" %>
+
+<!-- header logo begin -->
+<div class="container">
+  <div class="row text-center space_top">
+    <img src="https://remedicohealth.com/images/footer_logo_blue1-min.png" alt="Remedico">
+  </div>
+</div>
+<!-- header logo end -->
+
+<main id="form-step-4" style="width: 100%; overflow-y: hidden; overflow-x: hidden">
+
+  <!-- content section begin -->
+  <section class="inner_content pad_15">
+    <div class="container">
+      <div class="row contactpopup_info">
+        <div class="col-sm-12 box pad_0 margin_0">
+          <div   class="row space_bottom">
+            <div class="col-sm-12 col-md-6 col-md-offset-3">
+              <div class="margin_b_25"><h1 style="font-size:28px">Welcome, <span customer-name><%=my_consultation.name %></span>!</h1></div>
+
+              <div style="margin-top: 20px">
+                <p style="font-size: 16px; line-height: 1.2; margin-bottom: 20px">
+                  We're thrilled to help you get better <%= (['Hairfall or Hair Thinning', 'Dandruff'].include? my_consultation.category) ? 'hair' : 'skin' %>. Click pay now to pay for your consultation and get started.
+                </p>
+              </div>
+              
+              <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="row timeline-content-wrapper">
+                    
+                    <div class="text-left timeline-content dashed-line">
+                      <div class="icon" id="step-1"><img src="<%= asset_path('payment.png') %>"></div>
+                      <div class="text-left timeline-content-text">
+                        <h5 class="sub-title">Payment</h5>
+                        <p class="p_16 margin_b_0">Once you're done with the payment, we can continue to the consultation.</p>
+                      </div>
+                    </div>
+      
+                    <div class="text-left timeline-content dashed-line">
+                      <div class="icon" id="step-2"><img src="<%= asset_path('questionnaire.png') %>"></div>
+                      <div class="text-left timeline-content-text">
+                        <h5 class="sub-title">Questionnaire</h5>
+                        <p class="p_16 margin_b_0">Answer a few questions, take some photos with your smartphone, and you're done.</p>
+                      </div>
+                    </div>
+      
+                    <div class="text-left timeline-content">
+                      <div class="icon" id="step-3"><img src="<%= asset_path('treatment.png') %>"></div>
+                      <div class="text-left timeline-content-text">
+                        <h5 class="sub-title">Treatment Plan</h5>
+                        <p class="p_16 margin_b_0">Once you're done with the payment, we can continue to the consultation.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- blue checkout format start -->
+              <div class="row margin_t_15">
+                <table class="billing-information col-md-12 col-sm-12 col-xs-12 p_16">
+                  <thead>
+                    <tr class="text-uppercase">
+                      <th class="text-center color_blue" colspan="2"><b>Treatment Summary</b></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <table class="treatment-plan-table text-left">
+                          <tr class="row">
+                            <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('treatment-plan-min.png') %>"></td>
+                            <td class="col-md-9 col-sm-9 col-xs-9">
+                              <% if @current_consultation.category == "General Skin Care" %>
+                                General skin care plan
+                              <% else %>
+                                Treatment Plan for</br><%= @current_consultation.category %>
+                              <% end %>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="amount-right"><span class="element-number">Rs. 350</span></td>
+                    </tr>
+                    <tr><td class="hr-line" colspan="2"><div></div></td></tr>
+                    <tr>
+                      <td>
+                        <table class="support-table margin_b_10 text-left">
+                          <tr>
+                            <td class="col-md-3 col-sm-3 col-xs-3"><img src="<%= asset_path('support-min.png') %>"></td>
+                            <td class="col-md-9 col-sm-9 col-xs-9"><span class="element-number">30</span> days support during your treatment</td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="amount-right color_green">FREE</td>
+                    </tr>
+                    <% if my_consultation.coupon %>
+                    <tr><td class="hr-line" colspan="2"><div></div></td></tr>
+                    <tr>
+                      <td>
+                        <table class="support-table margin_b_10 text-left">
+                          <tr>
+                            <td class="col-md-3 col-sm-3 col-xs-3"></td>
+                            <td class="col-md-9 col-sm-9 col-xs-9 text-uppercase color_green">Promo applied</td>
+                          </tr>
+                        </table>
+                      </td>
+                      <td class="color_green amount-right">-Rs. <span class="element-number"><%= (350-my_consultation.amount) %></span></td>
+                    </tr>
+                    <% end %>
+                  </tbody>
+                  <tfoot>
+                    <tr><td class="hr-line" colspan="2"><div></div></td></tr>
+                    <tr>
+                      <td class="amount-right element-number" colspan="2"><strong><span class="text-uppercase">Total </span> Rs. <%= my_consultation.amount %></strong></td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- blue checkout format end -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- content section end -->
+
+  <!-- satisfaction guaranteed section begin -->
+  <section class="satisfaction space_bottom">
+    <div class="row text-center space_bottom space_top">
+      <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-12 satisfaction-content">
+            <span class="item-icon"><img class="icon-set" style="max-width:90%" src="<%= asset_path("satisfaction_icon_green_sm.png") %>" alt="Remedico"></span>
+            <div class="row">
+              <div class="text-left">
+                <h5 class="sub-title">100% satisfaction guaranteed</h5>
+                <p class="p_16 margin_b_0">If you're not happy with your treatment, we'll refund your fee.</p>
+              </div>
+              <div class="star-ratings-container">
+                <div class="star-ratings">
+                    <div class="star-ratings-top"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                    <div class="star-ratings-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                </div>
+                <p>Average customer rating</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- satisfaction guaranteed section end -->
+
+  <!--master card, paytm logo start-->
+  <div class="row">
+    <div class="col-sm-12 text-center space_bottom margin_t_15">
+      <img src="<%= asset_path("payment_options/master_card_visa_paytm.png") %>" class="img-responsive" alt="Satisfaction-Payment-Gateway" style="display: inline-block; max-height: 25px;">
+    </div>
+  </div>
+  <!--master card, paytm logo end-->
+
+  <section>
+    <div class="row">
+      <div class="col-sm-12 sticky-footer">
+        <div class="text-center">
+            <%= button_tag(name: "type", class: "list_btn_dark hover sticky-footer", :id=> "payBtn") do %>
+              <i class="fa fa-lock" aria-hidden="true"></i> PAY Rs. <%= my_consultation.amount %> NOW <i class="fa fa-chevron-right" aria-hidden="true"></i>
+            <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- footer begin -->
+  <section style="height: 60px;">
+    <br/>
+  </section>
+  <!-- footer end -->
+</main>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script type="text/javascript">
+
+var styleSheet = document.createElement("style");
+styleSheet.setAttribute("id", "dashedline");
+document.head.appendChild(styleSheet);
+var elements;
+
+function setUpDashedLineHeight() {
+  elements =  $('.timeline-content.dashed-line')[0];
+  var imgHeight = $('.timeline-content .icon')[0].offsetHeight;
+  var height = elements.offsetHeight - imgHeight - 10;
+  var styleStr = ".timeline-content.dashed-line .icon:after {height: " + height + "px;left: "+(imgHeight/2)+"px}";
+  // styleSheet.innerHTML = styleStr;
+  $('head style#dashedline').html(styleStr);
+}
+
+function updateDashedLineHeight() {
+  elements =  $('.timeline-content.dashed-line')[0];
+  var imgHeight = $('.timeline-content .icon')[0].offsetHeight;
+  var height = elements.offsetHeight - imgHeight - 10;
+
+  styleSheet.innerHTML = styleSheet.innerHTML.replace(/height: [0-9.]+px/, "height: " + height + "px");
+  styleSheet.innerHTML = styleSheet.innerHTML.replace(/left: [0-9.]+px/, "left: " + (imgHeight/2) + "px");
+  $('head style#dashedline').html(styleSheet.innerHTML);
+
+}
+
+setUpDashedLineHeight();
+
+window.addEventListener("resize", function() {
+  updateDashedLineHeight();
+});
+
+window.addEventListener('pageshow', function(event) {
+  updateDashedLineHeight();
+});
+
+$(function() {
+  
+  var options_razorpay_paytm = {
+      "key": "<%= Rails.application.secrets.RAZOR_PAY_KEY_ID %>",
+      "amount": "<%= my_consultation.amount*100 %>",
+      "name": "Remedico",
+      "description": "Treatment plan",
+      "image": "<%= asset_path('logo100x100.png') %>",
+      "handler": function (response){
+        var mapForm = document.createElement("form");
+        mapForm.target = "_self";
+        mapForm.method = "POST";
+        mapForm.action = "/my_consultation/payment_success";
+
+        var mapInput = document.createElement("input");
+        mapInput.type = "hidden";
+        mapInput.name = "payment_id";
+        mapInput.value = response.razorpay_payment_id;
+
+        var mapInput2 = document.createElement("input");
+        mapInput2.name = "authenticity_token"
+        mapInput2.value = "<%= form_authenticity_token %>"
+        mapInput2.type = "hidden"
+
+        var mapInput3 = document.createElement("input");
+        mapInput3.name = "pg_type"
+        mapInput3.value = "RAZORPAY"
+        mapInput3.type = "hidden"
+
+        mapForm.appendChild(mapInput);
+        mapForm.appendChild(mapInput2);
+        mapForm.appendChild(mapInput3);
+        document.body.appendChild(mapForm);
+
+        mapForm.submit();
+      },
+      "external": {
+        wallets: ['paytm'],
+        handler: function(data) {
+          // write code on how to handle the external wallet here, based on the param 'data'
+          if(data.wallet === "paytm") {
+            var mapForm = document.createElement("form");
+            mapForm.target = "_self";
+            mapForm.method = "POST";
+            mapForm.action = "/my_consultation/payment_paytm_update";
+            var mapInput = document.createElement("input");
+            mapInput.name = "authenticity_token"
+            mapInput.value = "<%= form_authenticity_token %>"
+            mapInput.type = "hidden"
+            var mapInput2 = document.createElement("input");
+            mapInput2.name = "pg_type"
+            mapInput2.value = "PAYTM"
+            mapInput2.type = "hidden"
+        
+            mapForm.appendChild(mapInput);
+            mapForm.appendChild(mapInput2);
+            document.body.appendChild(mapForm);
+
+            mapForm.submit();
+          }
+        }
+      },
+      "prefill": {
+          "name": "<%= my_consultation.name %>",
+          "contact": "<%= my_consultation.mobile %>",
+          "email": "<%= my_consultation.email %>"
+      },
+      "theme": {
+          "color": "#17a6b0"
+      },
+      "modal": {
+          "ondismiss": function(){
+            ga('send', 'event', { eventCategory: 'rev-consultation', eventAction: 'rev-RazorpayModalDismissed'});
+          }
+      }
+  };
+
+  var rzp1 = new Razorpay(options_razorpay_paytm);
+  $('.sticky-footer').on('click', '#payBtn', function () {
+    rzp1.open();
+    $.ajax({
+      type: "POST",
+      url: "/my_consultation/initiate_payment",
+      success: function (response) {
+        return false;
+      },
+      error: function (response) {
+        return false;
+      }
+    })
+    ga('send', 'event', { eventCategory: 'rev-consultation', eventAction: 'rev-clickPayButton'});
+    window._fbq.push(['track', 'Reverse Payment Button Clicked',{'Page URL':'payment/index'}]);
+  });
+
+  /* save the current window state on load */
+  if (window.history && window.history.pushState) {
+    /* added city parameter manually */
+    window.history.pushState('forward', null, './payment');
+
+    /* trigger on back button */
+    window.onpopstate = function(e) {
+      var state = $('.razorpay-container').css('display');
+      if (state=='none') {
+        var r = confirm("Warning: Are you sure you want to cancel your consultation?");
+        if (r == true) {
+          window.location = '/'
+          return false;
+        } else {
+        e.preventDefault();
+        }
+      } else if (state='block') {
+        rzp1.close();
+      }
+    }
+  }
+});
+
+
+
+</script>

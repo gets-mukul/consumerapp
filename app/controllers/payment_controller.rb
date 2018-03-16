@@ -12,12 +12,16 @@ class PaymentController < ApplicationController
   include PaytmHelper
   # include DoctorHelper
   # before_action :check_current_user, :check_current_consultation, except: [:instant_payment]
-  before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create]
+  before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create, :index]
   # before_action :fetch_matched_consultation_doctor, except: [:instant_payment]
   after_action :update_payment, only: [:failure]
   skip_before_action :verify_authenticity_token, only: [:success, :failure, :initiate_payment]
 
   def index
+    if session[:my_consultation_id]
+      redirect_to '/my_consultation/success?age='+params[:age]+'&city='+params[:city]+'&sex='+params[:sex]+'&redflag='+params[:redflag]
+      return
+    end
     Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
     logger.info params
