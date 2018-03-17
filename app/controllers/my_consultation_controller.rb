@@ -14,6 +14,13 @@ class MyConsultationController < ApplicationController
   before_action :check_my_consultation, except: [:create, :failure, :continue_consultation]
 
   def create
+    if session[:promo_code]
+      coupon = Coupon.find_by coupon_code: session[:promo_code]
+      if coupon.discount_amount == 350
+        redirect_to '/consult/patients?name='+params[:name]+'&mobile='+params[:mobile]+'&referrer='+(params[:referrer]||'')+'&utm_campaign='+(params[:utm_campaign]||'')
+        return
+      end
+    end
     unless my_consultation
       # create new my_consultation  
       @my_consultation = MyConsultation.find_or_initialize_by(my_consultation_params)
@@ -28,6 +35,11 @@ class MyConsultationController < ApplicationController
         redirect_to '/my_consultation/payment' if @my_consultation.blank?
       else
         return redirect_to "/"
+      end
+    else
+      if (['paid', 'form started', 'red flag'].include? my_consultation.user_status)
+        redirect_to '/my_consultation/payment_success?mobile='+my_consultation.mobile
+        return
       end
     end
   end
@@ -108,7 +120,7 @@ class MyConsultationController < ApplicationController
           coupon.increment!(:count, 1)
           coupon.update(status: 'coupon used')
         end
-        CustomerPaymentNotifierMailer.send_user_reverse_payment_mail(my_consultation).deliver_later
+        CustomerPaymentNotifierMailer.send_user_reverse_payment_mail(my_consultation).deliver_later if Rails.env.production?
         render 'payment_success'
       else
         url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
@@ -128,7 +140,7 @@ class MyConsultationController < ApplicationController
       amount = my_consultation.amount*100
       response = Razorpay::Payment.fetch(params[:payment_id])
       if (response.status=='authorized')
-        CustomerPaymentNotifierMailer.send_user_reverse_payment_mail(my_consultation).deliver_later
+        CustomerPaymentNotifierMailer.send_user_reverse_payment_mail(my_consultation).deliver_later if Rails.env.production?
         render 'payment_success'
   
         response = response.capture({amount:amount})
@@ -156,11 +168,11 @@ class MyConsultationController < ApplicationController
   end
 
   def continue_consultation
-    if my_consultation && (['paid', 'red flag'].include? my_consultation.user_status)
+    if my_consultation && (['paid', 'form started', 'red flag'].include? my_consultation.user_status)
       return
     else
       if params[:mobile]
-        @my_consultation = MyConsultation.find_by :mobile => params[:mobile], :user_status => ['paid', 'red flag']
+        @my_consultation = MyConsultation.find_by :mobile => params[:mobile], :user_status => ['paid', 'form started', 'red flag']
         if @my_consultation
           register_my_consultation @my_consultation
           return
