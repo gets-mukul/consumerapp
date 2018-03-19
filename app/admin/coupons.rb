@@ -136,7 +136,7 @@ ActiveAdmin.register Coupon do
         # else
         #   ""
         # end
-        "remedicohealth.com/?applied=true&promo=" + c.coupon_code
+        "https://remedicohealth.com/?applied=true&promo=" + c.coupon_code
       end
       active_admin_comments
     end
