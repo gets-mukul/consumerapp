@@ -22,7 +22,8 @@
 
               <div style="margin-top: 20px">
                 <p style="font-size: 16px; line-height: 1.2; margin-bottom: 20px">
-                  We're thrilled to help you get better <%= (['Hairfall or Hair Thinning', 'Dandruff'].include? my_consultation.category) ? 'hair' : 'skin' %>. Click pay now to pay for your consultation and get started.
+                  We're thrilled to help you get better <%= (['Hairfall or Hair Thinning', 'Dandruff'].include? my_consultation.category) ? 'hair' : 'skin' %>. Click <b>Pay Now</b> to pay for your consultation and get started.
+
                 </p>
               </div>
               
@@ -34,7 +35,7 @@
                       <div class="icon" id="step-1"><img src="<%= asset_path('payment.png') %>"></div>
                       <div class="text-left timeline-content-text">
                         <h5 class="sub-title">Payment</h5>
-                        <p class="p_16 margin_b_0">Once you're done with the payment, we can continue to the consultation.</p>
+                        <p class="p_16 margin_b_0">Pay just Rs. <%= my_consultation.amount %> for your consultation with one of our dermatologists</p>
                       </div>
                     </div>
       
@@ -42,7 +43,7 @@
                       <div class="icon" id="step-2"><img src="<%= asset_path('questionnaire.png') %>"></div>
                       <div class="text-left timeline-content-text">
                         <h5 class="sub-title">Questionnaire</h5>
-                        <p class="p_16 margin_b_0">Answer a few questions, take some photos with your smartphone, and you're done.</p>
+                        <p class="p_16 margin_b_0">We'll ask for some photos and info about your symptoms. All in just 5 minutes</p>
                       </div>
                     </div>
       
@@ -50,7 +51,7 @@
                       <div class="icon" id="step-3"><img src="<%= asset_path('treatment.png') %>"></div>
                       <div class="text-left timeline-content-text">
                         <h5 class="sub-title">Treatment Plan</h5>
-                        <p class="p_16 margin_b_0">Once you're done with the payment, we can continue to the consultation.</p>
+                        <p class="p_16 margin_b_0">You'll get a personal treatment plan from our dermatologists, including diagnosis, prescription and detailed instructions</p>
                       </div>
                     </div>
                   </div>
@@ -75,7 +76,7 @@
                               <% if my_consultation.category == "General Skin Care" %>
                                 General skin care plan
                               <% else %>
-                                Treatment Plan for</br><%= my_consultation.category %>
+                                Treatment Plan for</br>General Skin Care
                               <% end %>
                             </td>
                           </tr>

@@ -59,7 +59,18 @@ class MyConsultationController < ApplicationController
   end
   
   def payment_paytm_update
-    payment_params = build_paytm_params_update
+    payment_params = {
+      :MID => Rails.application.secrets.MID,
+      :CHANNEL_ID => "WEB",
+      :TXN_AMOUNT	=> my_consultation.amount.to_s,
+      :INDUSTRY_TYPE_ID => Rails.application.secrets.INDUSTRY_TYPE_ID,
+      :WEBSITE => Rails.application.secrets.WEBSITE,
+      :CUST_ID => my_consultation.id,
+      :ORDER_ID => session[:txnid],
+      :EMAIL => "",
+      :MOBILE_NO	=> my_consultation.mobile,
+      :CALLBACK_URL => Rails.application.secrets.DOMAIN + '/payment/success'
+    }
     # remove NB, DC, CC
     payment_params[:PAYMENT_MODE_ONLY] = "YES";
     payment_params[:AUTH_MODE] = "USRPWD";
