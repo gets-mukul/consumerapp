@@ -11,7 +11,10 @@ class SendOutSelfieDiagnosisWorker
     selfie_forms.each do |selfie_form|
       SmsServiceController.send_selfie_diagnosis_sms(selfie_form.id)
       if selfie_form.patient.email.present?
-        CustomerNotifierMailer.send_selfie_diagnosis_mail(selfie_form.patient, selfie_form.diagnosis_link)
+        CustomerNotifierMailer.send_selfie_diagnosis_mail(selfie_form.patient, selfie_form.diagnosis_link).deliver_later()
+        selfie_form.update(:status => 'diagonsed-sms-mailed')
+      else
+        selfie_form.update(:status => 'diagonsed-sms-no-email')
       end
     end
 
@@ -20,7 +23,7 @@ class SendOutSelfieDiagnosisWorker
 
     selfie_forms.each do |selfie_form|
       if selfie_form.patient.email.present?
-        CustomerNotifierMailer.send_selfie_bad_photo_mail(selfie_form.patient)
+        CustomerNotifierMailer.send_selfie_bad_photo_mail(selfie_form.patient).deliver_later()
         selfie_form.update(:status => 'bad-photo-mailed')
       else
         selfie_form.update(:status => 'bad-photo-no-email')
@@ -32,7 +35,7 @@ class SendOutSelfieDiagnosisWorker
 
     selfie_forms.each do |selfie_form|
       if selfie_form.patient.email.present?
-        CustomerNotifierMailer.send_selfie_no_condition_mail(selfie_form.patient)
+        CustomerNotifierMailer.send_selfie_no_condition_mail(selfie_form.patient).deliver_later()
         selfie_form.update(:status => 'no-condition-mailed')
       else
         selfie_form.update(:status => 'no-condition-no-email')

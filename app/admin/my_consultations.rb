@@ -12,4 +12,18 @@ ActiveAdmin.register MyConsultation do
 #   permitted
 # end
 
+  filter :name
+  filter :mobile
+  filter :email
+  filter :coupon_coupon_code, as: :string, :label => 'Coupon code'
+  filter :category, :as => :select
+  filter :user_status
+  filter :pay_status
+  filter :amount
+  filter :txn_id
+  filter :local_referrer
+  filter :utm_campaign
+  filter :created_at
+  filter :updated_at
+
 end
