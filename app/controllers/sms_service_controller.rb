@@ -8,12 +8,12 @@ class SmsServiceController < ApplicationController
     case template
     when "registered"
       patient = Patient.find_by_id patient_id
-      login_link = "bit.do/rme?p=" + encrypt(patient)
-      sms = "Hi, thanks for checking out Remedico! Continue your consultation here: #{login_link} If you have any questions, WhatsApp us at 8433848969 - Remedico"
+      login_link = "https://bit.do/rme?p=" + encrypt(patient)
+      sms = "Hi, thanks for checking out Remedico! Continue your consultation here: #{login_link} If you have any questions, WhatsApp us at 8433848969"
       return sms
     when "form filled"
       consultation = Consultation.find_by_id consultation_id
-      payment_link = "bit.do/rmpay?p=" + encrypt(consultation)
+      payment_link = "https://bit.do/rmpay?p=" + encrypt(consultation)
       name = consultation.patient.name.split[0]
       sms = "Hi #{name}! Thanks for trying out Remedico! You filled in a questionnaire but we didn't receive the payment. To get your treatment plan from our dermatologists within 24 hours, click here to pay #{payment_link} Questions? whatsapp us at 8433848969"
       return sms
@@ -70,7 +70,7 @@ class SmsServiceController < ApplicationController
 
   # usage: message_body("Kelly", 1234)
   def self.selfie_diagnosis_message_body(name, selfie_link)
-    login_link = "bit.do/remedico-selfie?s=" + selfie_link.split('=').last
+    login_link = "https://bit.do/remedico-selfie?s=" + selfie_link.split('=').last
     sms = "Hi #{name}! Your selfie diagnosis is ready. Check it out at #{login_link} -Team Remedico"
     return sms
   end
@@ -105,7 +105,7 @@ class SmsServiceController < ApplicationController
         status: response["SMSMessage"]["Status"],
         date_sent: response["SMSMessage"]["DateSent"]
       })
-      selfie_form.update({status: 'diagonsed-sms-'+ response["SMSMessage"]["Status"]})
+      selfie_form.update({status: 'diagonsed-sms'})
     end
     @sms.save!
   end
