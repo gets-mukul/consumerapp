@@ -40,7 +40,9 @@ class ConsultationController < ApplicationController
     register_consultation @consultation
     unless session[:promo_code].nil?
       coupon = Coupon.find_by coupon_code: session[:promo_code]
-      @consultation.update({:amount => (350 - coupon.discount_amount), :coupon_id => coupon.id});
+      if @conultation.coupon.nil? || (@conultation.coupon.discount < coupon.discount_amount)
+        @consultation.update({:amount => (350 - coupon.discount_amount), :coupon_id => coupon.id});
+      end
     end
     redirect_to params[:link]
   end
@@ -94,7 +96,9 @@ class ConsultationController < ApplicationController
         consultation_params = {}
         unless session[:promo_code].nil?
           coupon = Coupon.find_by coupon_code: session[:promo_code]
-          consultation_params[:amount] = 350 - coupon.discount_amount
+          if @conultation.coupon.nil? || (@conultation.coupon.discount < coupon.discount_amount)
+            consultation_params[:amount] = 350 - coupon.discount_amount
+          end
           consultation_params[:coupon_id] = coupon.id
         end
   

@@ -137,11 +137,11 @@ class PaymentController < ApplicationController
     render 'success_free'
 
     # initiate job - send user mail
-    UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
+    CustomerPaidMailer.send_customer_txn_mail(current_consultation).deliver_later if current_user.email.present? and Rails.env.production?
     # initiate job - send sms
     SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
     # initiate job - send admin mail for free consultation
-    FreeConsultationNotifierMailer.send_free_consultation_notifier_mail(current_consultation).deliver_later if Rails.env.production?
+    AdminTransactionMailer.send_free_consultation_notifier_mail(current_consultation).deliver_later if Rails.env.production?
 
     # update details
     # assign_consultation_to_doctor current_consultation
@@ -181,13 +181,13 @@ class PaymentController < ApplicationController
         session[:error_msg] = "user cancelled the payment"
         logger.error "looks like #{current_user.name} has cancelled the payment"
         current_payment.update({mode: '', status: 'cancelled_by_customer', bank_ref_num: params['BANKTXNID']})
-        ErrorEmailer.error_email("#{current_user.name} has cancelled the payment").deliver
+        AdminTransactionMailer.error_email("#{current_user.name} has cancelled the payment").deliver
         redirect_to :failure
       elsif not new_pg_verify_checksum(paytm_params, checksum_hash, PAYTM_MERCHANT_KEY)
         session[:error_msg] = "Invalid Checksum!"
         logger.error "invalid checksum for #{current_user.name}"
         current_payment.update({status: 'Invalid Checksum!'})
-        ErrorEmailer.error_email("invalid checksum for " + current_user.name).deliver
+        AdminTransactionMailer.error_email("invalid checksum for " + current_user.name).deliver
         redirect_to :failure
       elsif params["STATUS"] == "TXN_SUCCESS"
         url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
@@ -213,13 +213,13 @@ class PaymentController < ApplicationController
         current_consultation.update({ pay_status: "paid", user_status: 'paid' })
 
         # initiate job - send user mail
-        UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
+        CustomerPaidMailer.send_customer_txn_mail(current_consultation).deliver_later if current_user.email.present? and Rails.env.production?
         # initiate job - send sms
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
         current_payment.update({mode: params['PAYMENTMODE'], status: 'paid', bank_ref_num: params['BANKTXNID']})
         # initiate job - send admin mail a paid consultation
-        # CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later
-        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later
+        # AdminTransactionMailer.send_user_payment_mail(current_user, current_payment, current_consultation.doctor.short_name).deliver_later
+        AdminTransactionMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later
         
         coupon = Coupon.find_by_id current_consultation.coupon_id
         if coupon
@@ -244,7 +244,6 @@ class PaymentController < ApplicationController
         current_user.update({pay_status: "processing"})
         current_consultation.update({ pay_status: "processing", user_status: 'processing' })
 
-        AdminTransactionMailer.send_pending_transaction_mail(current_payment).deliver_later
         FetchPaymentStatusWorker.perform_in(20.minutes, current_payment.id) if Rails.env.production?
 
         render 'pending'
@@ -271,10 +270,10 @@ class PaymentController < ApplicationController
           response.method
         end
 
-        UserPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment).deliver_later if current_user.email.present? and Rails.env.production?
+        CustomerPaidMailer.send_customer_txn_mail(current_consultation).deliver_later if current_user.email.present? and Rails.env.production?
         SmsServiceController.send_sms(current_user.id, 'paid', current_consultation.id) if Rails.env.production?
         current_payment.update({pg_type: 'RAZORPAY', mode: mode, status: 'paid', bank_ref_num: response.id})
-        CustomerPaymentNotifierMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later if Rails.env.production?
+        AdminTransactionMailer.send_user_payment_mail(current_user, current_payment, '').deliver_later if Rails.env.production?
         coupon = Coupon.find_by_id current_consultation.coupon_id
         if coupon
           coupon.increment!(:count, 1)
@@ -290,7 +289,7 @@ class PaymentController < ApplicationController
         session[:error_msg] = "Authorization Error!"
         logger.info response
         current_payment.update({status: 'Authorization Error!'})
-        ErrorEmailer.error_email("razorpay payment not authorized for " + current_user.name).deliver
+        AdminTransactionMailer.error_email("razorpay payment not authorized for " + current_user.name).deliver
         redirect_to :failure
       end
     end

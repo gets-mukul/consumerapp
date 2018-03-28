@@ -13,6 +13,11 @@ send_out_selfie_diagnosis_job:
   class: "SendOutSelfieDiagnosisWorker"
   queue: default
 
+send_out_daily_emails_job:
+  cron: "0 18 * * *" # execute every day at 7pm
+  class: "SendOutDailyEmailsWorker"
+  queue: default
+
 # update_google_sheets_job:
 #   cron: "0 */3 * * *" # execute every 3 hours
 #   class: "UpdateSheetsWorker"

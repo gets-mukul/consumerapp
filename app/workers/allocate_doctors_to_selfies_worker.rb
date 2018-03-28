@@ -1,6 +1,6 @@
 class AllocateDoctorsToSelfiesWorker
   include Sidekiq::Worker
-  sidekiq_options :retry => 2
+  sidekiq_options :queue => :low, :retry => 2
 
   def perform()
     puts "RUNNING CRON JOB - ALLOCATING DOCTORS TO SELFIES"
