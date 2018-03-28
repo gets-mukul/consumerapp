@@ -11,7 +11,10 @@ class Consultation < ApplicationRecord
   scope "Free", -> { where(pay_status: 'free') }
   scope "Payment Failed", -> { where("pay_status like 'payment failed%'")}
   scope "Red Flags", -> { where("user_status like 'red flag%'")}
-  
+
+  # created between [from, to] ex: Consultation.created_between(-1, -1) => yesterday
+  scope :created_between, lambda {|start_day, end_day| where('updated_at >= :start and updated_at < :end', :start => (start_day).days.from_now.beginning_of_day, :end   => (end_day+1).days.from_now.beginning_of_day)}
+
   after_initialize :set_defaults, unless: :persisted?
   
   def set_defaults

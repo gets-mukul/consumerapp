@@ -22,6 +22,22 @@ class PatientsController < ApplicationController
     end
   end
 
+  # GET /patients
+  def login_with_coupon
+    @coupon = Coupon.find_by coupon_code: session[:promo]
+    if @coupon and @coupon.status != 'coupon used' and @coupon.count < @coupon.max_count
+      @coupon.update(status: 'coupon entered')
+      session[:coupon_applied] = true
+      session[:promo_code] = coupon_name
+    end
+
+    if params[:url]=='patients'
+      redirect_to patients_path(params.permit(:name, :mobile, :utm_source, :utm_medium, :utm_campaign, :condition))
+    elsif params[:url]=='payment'
+      redirect_to instant_payment_path(params.permit(:p, :utm_source, :utm_medium, :utm_campaign))
+    end
+  end
+
   # POST /patients
   def create_with_coupon
     if params[:coupon] == "SODELHI"
@@ -103,9 +119,9 @@ class PatientsController < ApplicationController
         register @patient
         logger.info "Patient Controller: successfully saved new patient with patient id #{@patient.id}"
         if session[:promo_code].present?
-          NewUserNotifierMailer.send_new_user_mail(@patient, session[:promo_code]).deliver_later
+          AdminNotifierMailer.send_new_user_mail(@patient, session[:promo_code]).deliver_later
         else
-          NewUserNotifierMailer.send_new_user_mail(@patient).deliver_later
+          AdminNotifierMailer.send_new_user_mail(@patient).deliver_later
         end
         logger.info "Patient Controller: mailed admin details of new patient with patient id #{@patient.id}"
         return redirect_to "/consult"
@@ -120,7 +136,7 @@ class PatientsController < ApplicationController
       @patient = Patient.new(patient_params)
       if @patient.save
         register @patient
-        NewUserNotifierMailer.send_new_user_mail_with_insta(@patient, params[:insta], session[:promo_code]).deliver_later
+        AdminNotifierMailer.send_new_user_mail_with_insta(@patient, params[:insta], session[:promo_code]).deliver_later
         @coupon.update(status: 'coupon attached')
         logger.info "Patient Controller: successfully saved free coupon new patient with patient id #{@patient.id}"
         render :json => { :value => "success", :discount_price => 'FREE' }

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
     get '/patients/instant_login' => 'patients#instant_login', defaults: {format: 'json'}
     post '/patients/set_patient_email' => 'patients#set_patient_email', defaults: {format: 'json'}
+    get '/patients/coupon_login/' => 'patients#login_with_coupon', defaults: {format: 'json'}
 
     post '/patients/:coupon' => 'patients#create_with_coupon', defaults: {format: 'json'}
     get '/patients/:coupon' => 'patients#create_with_coupon', defaults: {format: 'json'}

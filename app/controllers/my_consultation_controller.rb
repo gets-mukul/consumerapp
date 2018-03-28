@@ -113,7 +113,7 @@ class MyConsultationController < ApplicationController
         session[:error_msg] = "Invalid Checksum!"
         logger.error "invalid checksum for #{my_consultation.name}"
         my_consultation.update({pay_status: 'Invalid Checksum!'})
-        ErrorEmailer.error_email("invalid checksum for " + my_consultation.name).deliver
+        AdminTransactionMailer.error_email("invalid checksum for " + my_consultation.name).deliver
         redirect_to '/my_consultation/failure'
       elsif params["STATUS"] == "TXN_SUCCESS"
         url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
@@ -131,7 +131,7 @@ class MyConsultationController < ApplicationController
           coupon.increment!(:count, 1)
           coupon.update(status: 'coupon used')
         end
-        CustomerPaymentNotifierMailer.send_user_reverse_payment_mail(my_consultation).deliver_later if Rails.env.production?
+        AdminTransactionMailer.send_user_reverse_payment_mail(my_consultation).deliver_later if Rails.env.production?
         render 'payment_success'
       else
         url = URI.parse("https://secure.paytm.in/oltp/HANDLER_INTERNAL/getTxnStatus")
@@ -151,7 +151,7 @@ class MyConsultationController < ApplicationController
       amount = my_consultation.amount*100
       response = Razorpay::Payment.fetch(params[:payment_id])
       if (response.status=='authorized')
-        CustomerPaymentNotifierMailer.send_user_reverse_payment_mail(my_consultation).deliver_later if Rails.env.production?
+        AdminTransactionMailer.send_user_reverse_payment_mail(my_consultation).deliver_later if Rails.env.production?
         render 'payment_success'
   
         response = response.capture({amount:amount})

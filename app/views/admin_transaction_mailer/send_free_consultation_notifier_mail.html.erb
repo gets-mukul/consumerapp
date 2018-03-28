@@ -3,7 +3,7 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Form Fills</title>
+    <title>Free consultation notice.</title>
     <style>
       /* -------------------------------------
           GLOBAL RESETS
@@ -55,7 +55,7 @@
       .content {
         box-sizing: border-box;
         display: block;
-        margin: 0 auto;
+        Margin: 0 auto;
         max-width: 580px;
         padding: 10px; }
 
@@ -64,6 +64,7 @@
       ------------------------------------- */
       .main {
         background: #fff;
+        border-radius: 3px;
         width: 100%; }
 
       .wrapper {
@@ -95,7 +96,7 @@
         font-weight: 400;
         line-height: 1.4;
         margin: 0;
-        margin-bottom: 30px; }
+        Margin-bottom: 30px; }
 
       h1 {
         font-size: 35px;
@@ -109,8 +110,8 @@
         font-family: sans-serif;
         font-size: 14px;
         font-weight: normal;
-        margin: 0; 
-        padding: 15px 0;}
+        margin: 0;
+        Margin-bottom: 15px; }
         p li,
         ul li,
         ol li {
@@ -132,7 +133,9 @@
         .btn table {
           width: auto; }
         .btn table td {
-          background-color: #ffffff;}
+          background-color: #ffffff;
+          border-radius: 5px;
+          text-align: left; }
         .btn a {
           background-color: #ffffff;
           border: solid 1px #17a6b0;
@@ -210,7 +213,10 @@
         table[class=body] p,
         table[class=body] ul,
         table[class=body] ol,
+        table[class=body] td,
         table[class=body] span,
+        table[class=body] a {
+          font-size: 16px !important; }
         table[class=body] .wrapper,
         table[class=body] .article {
           padding: 10px !important; }
@@ -255,17 +261,7 @@
         .btn-primary a:hover {
           background-color: #34495e !important;
           border-color: #34495e !important; } }
-        .no-style, .no-style a, .no-style * {
-          border: none;
-          background-color: white;
-          color: #222;
-          text-decoration: none;
-          line-height: 1.2;
-          padding: 5px;
-          font-weight: 400;
-          text-transform: lowercase;
-        }
-        .inner-table td { padding: 5px; }
+
     </style>
   </head>
   <body class="">
@@ -276,7 +272,7 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader">Transaction status pending for more than 30 minutes!</span>
+            <span class="preheader">A new user signed up for Remedico!</span>
             <table class="main">
 
               <!-- START MAIN CONTENT AREA -->
@@ -285,35 +281,32 @@
                   <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p><img src="<%= image_url("/assets/remedico1.png") %>" alt="Remedico" /></p>
+                        <p><img src="<%= image_url("/assets/remedico1.png") %>" alt="Remedico Logo" /></p>
                         <p>Hi Ranjit,</p>
-                        <p>Looks like there was a transaction whose status has been pending for more than 30 minutes. We are considering this a failed trasaction.</p>
-                        <p>The details are as follows: </p>
-                        <table border="0" cellpadding="0" cellspacing="0" class="btn" font-size="12px">
+                        <p><%= @consultation.patient.name %> has done a free consultation</p>
+                        <p>The consultation details are as follows: </p>
+                        <table border="0" cellpadding="" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
                               <td align="left">
-                                <table border="0" cellpadding="0" cellspacing="0" class="inner-table">
-                                  <thead style="color: #17a6b0; font-weight: 600;">
+                                <table border="0" cellpadding="10px" cellspacing="0">
+                                  <thead>
                                     <tr>
-                                      <td>c id</td>
-                                      <td>p id</td>
-                                      <td>name</td>
-                                      <td>mobile</td>
-                                      <td>created at</td>
-                                      <td>transaction id</td>
+                                      <td>Detail</td>
+                                      <td>Value</td>
                                     </tr>
                                   </thead>
                                   <br>
                                   <tbody>
                                     <tr>
-                                        <td><%= @payment.consultation.id %></td>
-                                        <td><%= @patient.id %></td>
-                                        <td><%= @patient.name %></td>
-                                        <td><%= @patient.mobile %></td>
-                                        <td><%= @payment.created_at %></td>
-                                        <td><%= @payment.txnid %></td>
+                                      <td>Patient Name</td>
+                                      <td><%= @consultation.patient.name %></td>
                                     </tr>
+                                    <tr>
+                                      <td>Coupon used</td>
+                                      <td><%= @coupon.coupon_code %></td>
+                                    </tr>
+                                    <br><br>
                                   </tbody>
                                 </table>
                               </td>
@@ -327,7 +320,7 @@
               </tr>
 
               <!-- END MAIN CONTENT AREA -->
-            </table>
+              </table>
 
             <!-- START FOOTER -->
             <div class="footer">
