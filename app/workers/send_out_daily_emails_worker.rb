@@ -11,25 +11,25 @@ class SendOutDailyEmailsWorker
     # day 7
     consultations = Consultation.created_between(-7, -7).where(:user_status => 'paid')
     consultations.each do |consultation|
-      CustomerPaidMailer.send_customer_how_is_it_going_mail(consultation).deliver_later
+      CustomerPaidMailer.send_customer_how_is_it_going_mail(consultation).deliver_later if consultation.patient.email.present?
     end
     
     # day 10
     consultations = Consultation.created_between(-10, -10).where(:user_status => 'paid')
     consultations.each do |consultation|
-      CustomerPaidMailer.send_customer_cross_sell_mail(consultation).deliver_later
+      CustomerPaidMailer.send_customer_cross_sell_mail(consultation).deliver_later if consultation.patient.email.present?
     end
     
     # day 14
     consultations = Consultation.created_between(-14, -14).where(:user_status => 'paid')
     consultations.each do |consultation|
-      CustomerPaidMailer.send_customer_referral_mail(consultation).deliver_later
+      CustomerPaidMailer.send_customer_referral_mail(consultation).deliver_later if consultation.patient.email.present?
     end
     
     # day 18
     consultations = Consultation.created_between(-18, -18).where(:user_status => 'paid')
     consultations.each do |consultation|
-      CustomerPaidMailer.send_customer_follow_up_mail(consultation).deliver_later
+      CustomerPaidMailer.send_customer_follow_up_mail(consultation).deliver_later if consultation.patient.email.present?
     end
     
     # form filled mails
