@@ -12,7 +12,7 @@ class PaymentController < ApplicationController
   include PaytmHelper
   # include DoctorHelper
   # before_action :check_current_user, :check_current_consultation, except: [:instant_payment]
-  before_filter :check_if_reverse_flow, only [:index]
+  before_filter :check_if_reverse_flow, only: [:index]
   before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create]
   # before_action :fetch_matched_consultation_doctor, except: [:instant_payment]
   after_action :update_payment, only: [:failure]
