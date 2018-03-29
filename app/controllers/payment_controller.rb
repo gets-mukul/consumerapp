@@ -22,6 +22,8 @@ class PaymentController < ApplicationController
       redirect_to '/my_consultation/success?age='+params[:age]+'&city='+params[:city]+'&sex='+params[:sex]+'&redflag='+params[:redflag]
       return
     end
+    check_current_user
+    check_current_consultation
     Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
     logger.info params
