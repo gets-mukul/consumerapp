@@ -65,6 +65,13 @@ ActiveAdmin.register Payment do
     column "Mobile" do |payment|
       payment.patient.mobile
     end
+    column :txnid
+    column :status
+    column :amount
+    column :mode
+    column :pg_type
+    column :bank_ref_num
+
     column "Age" do |payment|
       payment.patient.age
     end
