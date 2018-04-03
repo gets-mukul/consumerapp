@@ -40,7 +40,7 @@ class ConsultationController < ApplicationController
     register_consultation @consultation
     unless session[:promo_code].nil?
       coupon = Coupon.find_by coupon_code: session[:promo_code]
-      if @conultation.coupon.nil? || (@conultation.coupon.discount < coupon.discount_amount)
+      if @consultation.coupon.nil? || (@consultation.coupon.discount_amount < coupon.discount_amount)
         @consultation.update({:amount => (350 - coupon.discount_amount), :coupon_id => coupon.id});
       end
     end
@@ -86,9 +86,8 @@ class ConsultationController < ApplicationController
     if consultation.present?
 
       # get the consultation with latest status from these consultations
-      sorted_consultation = consultation.sort_by{|x| ConsultationController.latest_order.index x.user_status}[0]
-      @consultation = Consultation.find_by_id sorted_consultation.id
-  
+      @consultation = consultation.sort_by{|x| ConsultationController.latest_order.index x.user_status}[0]
+
       unless @consultation.pay_status == 'paid'
   
         # update consultation details
@@ -96,7 +95,7 @@ class ConsultationController < ApplicationController
         consultation_params = {}
         unless session[:promo_code].nil?
           coupon = Coupon.find_by coupon_code: session[:promo_code]
-          if @conultation.coupon.nil? || (@conultation.coupon.discount < coupon.discount_amount)
+          if @consultation.coupon.nil? || (@consultation.coupon.discount_amount < coupon.discount_amount)
             consultation_params[:amount] = 350 - coupon.discount_amount
           end
           consultation_params[:coupon_id] = coupon.id
