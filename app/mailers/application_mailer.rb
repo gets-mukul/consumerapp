@@ -1,3 +1,3 @@
 class ApplicationMailer < ActionMailer::Base
-    default :from => %(Remedico <noreply@remedicohealth.com>)
+    default :from => %(Aisha from Remedico <noreply@remedicohealth.com>)
 end

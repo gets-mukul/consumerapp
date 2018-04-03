@@ -57,7 +57,7 @@ class PaymentController < ApplicationController
           responses = response["responses"]
           mobile_nos = responses.collect { |x| x["hidden"]["mobile"] }
           idx = mobile_nos.index(current_user.mobile)
-          mail = responses[idx]["answers"]["email_58205238"] || responses[idx]["answers"]["email_58205344"] || responses[idx]["answers"]["email_58205331"] || responses[idx]["answers"]["email_58205400"] || responses[idx]["answers"]["email_58205374"] || responses[idx]["answers"]["email_58205430"] || ""
+          mail = responses[idx]["answers"]["email_58205238"] || responses[idx]["answers"]["email_58205344"] || responses[idx]["answers"]["email_58205331"] || responses[idx]["answers"]["email_58205400"] || responses[idx]["answers"]["email_58205374"] || responses[idx]["answers"]["email_58205430"] || responses[idx]["answers"]["email_K7KKS3RFcNMg"] || ""
           if !mail.empty?
             current_user.update(email: mail)
           end
