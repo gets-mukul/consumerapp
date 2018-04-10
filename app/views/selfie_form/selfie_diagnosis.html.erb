@@ -304,17 +304,11 @@
   
   <div class="content">
     <div class="margin_b_15">
-      It seems that you may have <%= @conditions.length < 3 ? @conditions.to_sentence(:two_words_connector => ', as well as ').html_safe : @conditions[2..-1].unshift((@conditions[0..1].to_sentence(:two_words_connector => ', as well as '))).to_sentence(:words_connector => ', ', :last_word_connector => ', and ').html_safe %>.
+      <%= @inline_description.html_safe %>
     </div>
     
-    <% if @selfie_form.conditions.length==1 %>
-      <%= @selfie_form.conditions[0].desc.html_safe %>
-    <% else %>
-      <% @selfie_form.conditions.each do |condition| %>
-        <div class="condition-title">About <%= condition.title %></div>
-        <%= condition.desc.html_safe %>
-      <% end %>
-    <% end %>
+    <%= @description.html_safe %>
+
   </div>
 
 </div>

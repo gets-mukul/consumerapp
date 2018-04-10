@@ -22,6 +22,11 @@ class SelfieFormController < ApplicationController
   def create_patient
     Rails.logger.info "SelfieFormController: create_patient with params #{params}"
 
+    unless session[:selfie_image_id]
+      render :json => { :value => "failure" }
+      return
+    end
+
     # check if patient exists
     patient = Patient.find_by :mobile => params[:mobile]
 
@@ -36,7 +41,10 @@ class SelfieFormController < ApplicationController
       selfie_image = SelfieImage.find(session[:selfie_image_id])
 
       if selfie_image
-        @selfie_form = SelfieForm.new
+
+        @selfie_form = SelfieForm.where(patient_id: patient.id).where("created_at >= ?", DateTime.now-0.004).order('id desc').first
+        @selfie_form = SelfieForm.new if @selfie_form.nil?
+
         @selfie_form.patient = patient
         @selfie_form.selfie_image = selfie_image
 
@@ -61,8 +69,49 @@ class SelfieFormController < ApplicationController
       @selfie_form = SelfieForm.find(urlsafe_decrypt(key))
       if @selfie_form
         # if key is valid render the diagnosis page
-        @conditions = @selfie_form.conditions.pluck(:inline_desc)
+        @conditions = @selfie_form.conditions.select(:key, :title, :inline_desc, :desc)
+        @inline_descriptors = @conditions.collect(&:inline_desc)
         @login_link = "/consult/patients?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
+
+        @inline_description = ''
+        @description = ''
+
+        if (['acne', 'acne excorie'] - @conditions.pluck(:title)).empty?
+          @inline_descriptors.delete_at @inline_descriptors.index('<b><i>acne vulgaris</i></b>, commonly known as acne')
+        end
+        @inline_description = 'It seems that you may have ' + (@inline_descriptors.length < 3 ? @inline_descriptors.to_sentence(:two_words_connector => ', as well as ').html_safe : @inline_descriptors[2..-1].unshift((@inline_descriptors[0..1].to_sentence(:two_words_connector => ', as well as '))).to_sentence(:words_connector => ', ', :last_word_connector => ', and ')) + '.'
+
+        if @conditions.length==1
+          @description += @conditions[0].desc
+        else
+          if (['acne', 'acne excorie'] - @conditions.collect(&:title)).empty?
+
+            (@conditions.reject { |c| ['acne', 'acne excorie'].include? c.title }).each do |condition|
+              @description += '<div class="condition-title">About ' + condition.title + '</div>' + condition.desc
+            end
+
+            (@conditions.select { |c| c.title=='acne excorie' }).each do |condition|
+              @description += '<div class="condition-title">About ' + condition.title + '</div>' + condition.desc
+            end
+
+          elsif (['acne', 'truncal acne'] - @conditions.collect(&:title)).empty?
+            (@conditions.reject { |c| ['acne', 'truncal acne'].include? c.title }).each do |condition|
+              @description += '<div class="condition-title">About '+condition.title+ '</div>' + condition.desc
+            end
+            (@conditions.select { |c| c.title=='acne' }).each do |condition|
+              @description += '<div class="condition-title">About '+ condition.title + '</div>' + condition.desc
+            end
+
+            (@conditions.select { |c| c.title=='truncal acne' }).each do |condition|
+              @description += condition.desc.split("\n").last
+            end
+          else
+            @conditions.each do |condition|
+              @description += ('<div class="condition-title">About ' + condition.title + '</div>' + condition.desc)
+            end
+          end
+        end
+
         render 'selfie_diagnosis'
       end
     end
