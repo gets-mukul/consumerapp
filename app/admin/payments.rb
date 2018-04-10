@@ -65,6 +65,9 @@ ActiveAdmin.register Payment do
     column "Mobile" do |payment|
       payment.patient.mobile
     end
+    column "Email" do |payment|
+      payment.patient.email
+    end
     column :txnid
     column :status
     column :amount

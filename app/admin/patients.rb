@@ -58,7 +58,7 @@ ActiveAdmin.register Patient do
       }
 
       attributes_table do
-        row("Login link full") { "https://bit.do/rme?p=" + encrypt(patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm"}
+        row("Login link full") { "https://bit.do/rme?p=" + encrypt(patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish"}
       end
 
       active_admin_comments

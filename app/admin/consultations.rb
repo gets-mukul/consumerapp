@@ -171,12 +171,12 @@ ActiveAdmin.register Consultation do
           attributes_table do
             row("Payment link") {
               if consultation.user_status != 'registered'
-                "https://bit.do/rmpay?p=" + encrypt(consultation) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm"
+                "https://bit.do/rmpay?p=" + encrypt(consultation) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish"
               else
                 ""
               end
             }
-            row("Login link") { "https://bit.do/rme?p=" + encrypt(consultation.patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_pnm" }
+            row("Login link") { "https://bit.do/rme?p=" + encrypt(consultation.patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish" }
           end
 
 
@@ -263,8 +263,8 @@ ActiveAdmin.register Consultation do
   form do |f|
     f.inputs "Edit" do
 
-      li class: "email input required stringish" do
-        label "Email", class: "label"
+      li class: "name input required stringish" do
+        label "name", class: "label"
         span do
           strong { resource.patient }
         end
