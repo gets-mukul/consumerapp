@@ -12,6 +12,7 @@ class SendOutDailyEmailsWorker
     consultations = Consultation.created_between(-7, -7).where(:user_status => 'paid')
     consultations.each do |consultation|
       CustomerPaidMailer.send_customer_how_is_it_going_mail(consultation).deliver_later if consultation.patient.email.present?
+      SmsServiceController.send_sms(consultation.patient.id, 'paid_check_if_started', consultation.id)
     end
     
     # day 10
@@ -30,6 +31,7 @@ class SendOutDailyEmailsWorker
     consultations = Consultation.created_between(-18, -18).where(:user_status => 'paid')
     consultations.each do |consultation|
       CustomerPaidMailer.send_customer_follow_up_mail(consultation).deliver_later if consultation.patient.email.present?
+      SmsServiceController.send_sms(consultation.patient.id, 'paid_follow_up', consultation.id)
     end
     
     # form filled mails

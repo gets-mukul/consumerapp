@@ -19,6 +19,14 @@ class SmsServiceController < ApplicationController
       return sms
     when "paid"
       return "Thanks for using Remedico! Our dermatologists are reviewing your case and if everything is in order, you can expect a treatment plan within 24 hours - Remedico"
+    when "paid_check_if_started"
+      name = consultation.patient.name.split[0]
+      sms = "Hey #{name}, just checking if you've started ur treatment plan. If you've got problems with ur treatment plan, click https://bit.do/wtpp to msg us"
+      return sms
+    when "paid_follow_up"
+      name = consultation.patient.name.split[0]
+      sms = "Hey #{name}, a quick reminder that your follow-up is due. Don't worry follow-ups are just Rs.100. Just msg us on https://bit.do/flwp when you're ready"
+      return sms
     else
       return ""
     end
