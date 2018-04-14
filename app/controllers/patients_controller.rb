@@ -14,7 +14,7 @@ class PatientsController < ApplicationController
     if @patient
       # patient exists in local database. Log them in
       register @patient
-      redirect_to "/consult"
+      redirect_to "/consult?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
       # render json: { :message =>"Patient found. Logging in." }, :status => 200
     else
       # patient exists in local database. Store their details
@@ -24,15 +24,17 @@ class PatientsController < ApplicationController
 
   # GET /patients
   def login_with_coupon
-    @coupon = Coupon.find_by coupon_code: session[:promo]
+    @coupon = Coupon.find_by coupon_code: params[:promo]
     if @coupon and @coupon.status != 'coupon used' and @coupon.count < @coupon.max_count
       @coupon.update(status: 'coupon entered')
       session[:coupon_applied] = true
-      session[:promo_code] = coupon_name
+      session[:promo_code] = params[:promo]
     end
 
     if params[:url]=='patients'
-      redirect_to patients_path(params.permit(:name, :mobile, :utm_source, :utm_medium, :utm_campaign, :condition))
+      @patient = Patient.find_by_mobile(patient_params[:mobile])
+      register @patient
+      redirect_to "/consult?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
     elsif params[:url]=='payment'
       redirect_to instant_payment_path(params.permit(:p, :utm_source, :utm_medium, :utm_campaign))
     end
@@ -71,17 +73,17 @@ class PatientsController < ApplicationController
     logger.info "Patient Controller: instant login with patient id #{id}"
     if id.nil?
       # id does not exist
-      redirect_to "/"
+      redirect_to "/?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
     else
       # id exists, get patient with that id
       @patient = Patient.find_by_id id
       if @patient
         logger.info "Patient Controller: instant login successful for patient id #{id}"
         register @patient
-        return redirect_to "/consult"
+        return redirect_to "/consult?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
       else
         logger.info "Patient Controller: instant login patient does not exist for patient id #{id}"
-        redirect_to "/"
+        redirect_to "/?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
       end
     end
   end
@@ -124,7 +126,7 @@ class PatientsController < ApplicationController
           AdminNotifierMailer.send_new_user_mail(@patient).deliver_later
         end
         logger.info "Patient Controller: mailed admin details of new patient with patient id #{@patient.id}"
-        return redirect_to "/consult"
+        return redirect_to "/consult?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
         # render json: { :message => "Patient found. Logging in." }, :status => 200
       else
         logger.info "Patient Controller: failed saving new patient with patient id #{@patient.id}"

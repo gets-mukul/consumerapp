@@ -332,16 +332,16 @@ class PaymentController < ApplicationController
     logger.info "Payment Controller: in instant payment with id #{id}"
     if id.nil?
       # id does not exist
-      redirect_to "/"
+      redirect_to "/?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
     else
        # id exists, get consultation with that id
       @consultation = Consultation.find_by_id id
       if @consultation
         register_consultation @consultation
         register @consultation.patient
-        return redirect_to "/consult/payment?city=null"
+        return redirect_to "/consult/payment?city=null&"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
       else
-        redirect_to "/"
+        redirect_to "/?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
       end
     end
   end
