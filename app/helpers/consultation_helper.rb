@@ -11,6 +11,12 @@ module ConsultationHelper
       patient_source = PatientSource.find_by_id session[:patient_source_id]
       patient_source.update({consultation_id: consultation.id})
     end
+    unless session[:promo_code].nil?
+      coupon = Coupon.find_by coupon_code: session[:promo_code]
+      if @consultation.coupon.nil? || (@consultation.coupon.discount_amount < coupon.discount_amount)
+        @consultation.update({:amount => (350 - coupon.discount_amount), :coupon_id => coupon.id});
+      end
+    end
     logger.info "Registered #{consultation.patient.name}, condition: #{session[:condition]}"
   end
 

@@ -38,12 +38,12 @@ class ConsultationController < ApplicationController
     @consultation = Consultation.find(params[:id])
     params[:condition] = @consultation.category
     register_consultation @consultation
-    unless session[:promo_code].nil?
-      coupon = Coupon.find_by coupon_code: session[:promo_code]
-      if @consultation.coupon.nil? || (@consultation.coupon.discount_amount < coupon.discount_amount)
-        @consultation.update({:amount => (350 - coupon.discount_amount), :coupon_id => coupon.id});
-      end
-    end
+    # unless session[:promo_code].nil?
+    #   coupon = Coupon.find_by coupon_code: session[:promo_code]
+    #   if @consultation.coupon.nil? || (@consultation.coupon.discount_amount < coupon.discount_amount)
+    #     @consultation.update({:amount => (350 - coupon.discount_amount), :coupon_id => coupon.id});
+    #   end
+    # end
     redirect_to params[:link]
   end
 
@@ -80,7 +80,6 @@ class ConsultationController < ApplicationController
   end
 
   def create
-    Rails.logger.info("Consultation Controller: Create new user");
     # check if this patient started a consultation exists in the last ~30 mins
     consultation = Consultation.where(patient_id: current_user.id).where("created_at >= ?", DateTime.now-0.02).order('id desc')
     if consultation.present?
@@ -89,19 +88,18 @@ class ConsultationController < ApplicationController
       @consultation = consultation.sort_by{|x| ConsultationController.latest_order.index x.user_status}[0]
 
       unless @consultation.pay_status == 'paid'
-  
+
         # update consultation details
+
+        # unless session[:promo_code].nil?
+        #   coupon = Coupon.find_by coupon_code: session[:promo_code]
+        #   if @consultation.coupon.nil? || (@consultation.coupon.discount_amount < coupon.discount_amount)
+        #     consultation_params[:amount] = 350 - coupon.discount_amount
+        #   end
+        #   consultation_params[:coupon_id] = coupon.id
+        # end
+
         @consultation.update({category: @condition})
-        consultation_params = {}
-        unless session[:promo_code].nil?
-          coupon = Coupon.find_by coupon_code: session[:promo_code]
-          if @consultation.coupon.nil? || (@consultation.coupon.discount_amount < coupon.discount_amount)
-            consultation_params[:amount] = 350 - coupon.discount_amount
-          end
-          consultation_params[:coupon_id] = coupon.id
-        end
-  
-        @consultation.update(consultation_params)
         register_consultation @consultation
         return
       end
@@ -112,12 +110,12 @@ class ConsultationController < ApplicationController
       patient: current_user,
       category: @condition
     }
-    unless session[:promo_code].nil?
-      coupon = Coupon.find_by coupon_code: session[:promo_code]
-      consultation_params[:amount] = 350 - coupon.discount_amount
-      consultation_params[:coupon_id] = coupon.id
-    end
-    logger.info consultation_params
+    # unless session[:promo_code].nil?
+    #   coupon = Coupon.find_by coupon_code: session[:promo_code]
+    #   consultation_params[:amount] = 350 - coupon.discount_amount
+    #   consultation_params[:coupon_id] = coupon.id
+    # end
+    # logger.info consultation_params
 
     @consultation = Consultation.create(consultation_params)
     logger.info @consultation
