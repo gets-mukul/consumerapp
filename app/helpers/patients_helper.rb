@@ -5,6 +5,7 @@ module PatientsHelper
 
   def register user
     session[:user_id] = user.id
+    session[:consultation_id] = nil
     session[:condition] = params[:condition]
     logger.info "Registered #{user.name}, condition: #{params[:condition]}"
     setup_patient_source
