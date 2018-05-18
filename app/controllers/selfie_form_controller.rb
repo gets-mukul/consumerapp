@@ -68,6 +68,7 @@ class SelfieFormController < ApplicationController
     if key
       @selfie_form = SelfieForm.find(urlsafe_decrypt(key))
       if @selfie_form
+        register_selfie_checkup_user @selfie_form.patient
         # if key is valid render the diagnosis page
         @conditions = @selfie_form.conditions.select(:key, :title, :inline_desc, :desc)
         @inline_descriptors = @conditions.collect(&:inline_desc)

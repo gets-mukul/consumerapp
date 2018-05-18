@@ -25,7 +25,7 @@
     </section>
 </main> -->
 
-<%if @condition %>
+<%if @condition.present? %>
   <script type="text/javascript">
     location.href = "/consult/consultation_form/<%= @condition %>?<%= params.permit(:utm_source, :utm_medium, :utm_campaign).to_query %>"
   </script>
