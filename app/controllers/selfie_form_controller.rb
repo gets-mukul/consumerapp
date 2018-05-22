@@ -15,6 +15,7 @@ class SelfieFormController < ApplicationController
       session[:selfie_image_id] = selfie_image.id
       render :json => { :value => "success" }
     else
+      Rails.logger.debug "SelfieImage: Image upload failed."
       render :json => { :value => "failure" }
     end
   end
