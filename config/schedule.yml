@@ -23,26 +23,22 @@ send_out_daily_emails_job:
 #   class: "UpdateSheetsWorker"
 #   queue: default
 
-send_out_doctor_daily_selfie_checkup_stats_job:
-  cron: "0 10 * * *" # execute every day at  10am for Dr. Gaurangi and Dr. Sana
-  class: "SendOutDailySelfieCheckupStatsWorker"
-  queue: low
-  smth: [2, 8]
-
-send_out_doctor_daily_selfie_checkup_stats_job:
+send_out_doctor_daily_selfie_checkup_stats_job_06:
   cron: "0 6 * * *" # execute every day at  6am for Dr. Asmita
   class: "SendOutDailySelfieCheckupStatsWorker"
-  queue: low
-  smth: [7]
+  args: [7]
 
-send_out_doctor_daily_selfie_checkup_stats_job:
+send_out_doctor_daily_selfie_checkup_stats_job_09:
   cron: "0 9 * * *" # execute every day at  9am for Dr. Sonam
   class: "SendOutDailySelfieCheckupStatsWorker"
-  queue: low
-  smth: [1]
+  args: [1]
 
-send_out_doctor_daily_selfie_checkup_stats_job:
+send_out_doctor_daily_selfie_checkup_stats_job_10:
+  cron: "0 10 * * *" # execute every day at  10am for Dr. Gaurangi and Dr. Sana
+  class: "SendOutDailySelfieCheckupStatsWorker"
+  args: [2, 8]
+
+send_out_doctor_daily_selfie_checkup_stats_job_19:
   cron: "0 19 * * *" # execute every day at  7pm for Dr. Ankita
   class: "SendOutDailySelfieCheckupStatsWorker"
-  queue: low
-  smth: [3]
+  args: [3]
