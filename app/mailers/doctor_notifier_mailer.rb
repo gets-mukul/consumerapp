@@ -4,7 +4,7 @@ class DoctorNotifierMailer < ApplicationMailer
     @doctor = doctor
     @stats = stats
 
-    # mail( :to => "jesse.dhara@gmail.com",
+    # mail( :to => "jesse@remedicohealth.com",
     mail( :to => @doctor.email,
     :subject => "Remedico: Selfie Checkup stats" )
   end
