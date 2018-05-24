@@ -29,11 +29,11 @@
   .selfie_btn {
     display: inline-block;
     cursor: pointer;
-    background-color: #17a6b0;
+    background-color: #17b06e;
     color: #fff;
     width: auto;
     padding: 15px 20px;
-    font-size: 25px;
+    font-size: 20px;
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
@@ -51,9 +51,10 @@
     border: none;
     color: #fff;
     margin-top: 2%;
+    border: 2px solid #17b06e
   }
-  input:focus {
-    outline: none;
+  input:focus, button:focus {
+    outline: none!important;
   }
   .select2-container--default .select2-selection--multiple {
     background-color: #30aeb759;
@@ -64,11 +65,12 @@
   div.field {
     text-align: left;
     margin-left: 5%;
+    margin-right: 5%;
   }
   div .field label {
-    font-size: 2em;
+    font-size: 2rem;
     font-weight: 300;
-    line-height: 1.125em;
+    line-height: 2.2rem;
   }
   .form-border {
     border-bottom: 3px solid #000000cf;
@@ -102,10 +104,15 @@
   input[type="file"] {
     display: none;
   }
-  #h1_3ea7_0{font-size: 20px; font-weight: 600;}
+  #h1_3ea7_0{font-weight: 600;}
   #p_3ea7_0{font-size: 18px; font-weight: 400; line-height: 20px}
-  #p_3ea7_1{font-size: 18px; font-weight: 400; line-height: 20px}
-  #button_3ea7_0{margin-top:2%;}
+  #p_3ea7_1{font-size: 20px; font-weight: 400; line-height: 24px}
+  #button_3ea7_0{
+    margin-top: 6%;
+    -webkit-box-shadow: 0 3px 12px 0 rgba(128, 128, 128, 1);
+    -moz-box-shadow: 0 3px 12px 0 rgba(128, 128, 128, 1);
+    box-shadow: 0 3px 12px 0 rgba(128, 128, 128, 1);
+  }
   #sub_3ea7_0{margin-top: -11px; margin-bottom: 28px; font-size: 14px;}
   #sub_3ea7_1{margin-top: -11px; margin-bottom: 28px; font-size: 14px;}
   #selfie-photo{ margin-left: 15%; }
@@ -114,9 +121,9 @@
   #div_3ea7_3{ background-color: #fafafa;border-top: 1px solid rgba(0, 0, 0, 0.25);border-bottom: 1px solid rgba(0, 0, 0, 0.25); }
 
   .inverted_selfie_btn {
-    border: 2px solid #17a6b0;
+    border: 2px solid #0F7277;
     background-color: white;
-    color: #17a6b0;
+    color: #0F7277;
   }
 
   /*SquareButtons*/
@@ -160,133 +167,150 @@
   .selfie-container-1 {
     margin-bottom: 200px;
   }
+
   #scroll_element_1 {
-    margin-top: 25vh;
-    margin-bottom: 50vh;
+    padding-top: 14vh;
+    padding-bottom: 50vh;
+    background-color: #8ebcbe;
+    margin-top: 0;
   }
+  #scroll_element_1 img.border-bottom {
+    border-bottom: 1px solid #606060;
+  }
+
   #scroll_element_2 {
-    margin-bottom: 75px;
+    margin-bottom: 50px;
+  }
+  #scroll_element_2 ul {
+    margin: 15px 0 20px 20px;
+    font-size: 1.6rem;
   }
   #scroll_element_6 {
     margin-top: 10px;
     margin-bottom: 50vh;
   }
+  .selfie_btn-sm {
+    padding: 15px 60px;
+  }
+  .progress {
+    margin: 20px;
+  }
+
 </style>
 
-<div class="container">
-  <div class="col-sm-12">
-    <div class="wrapper">
+<div class="selfie_form">
+  <div class="wrapper">
 
-      <!--FORM START-->
+    <!--FORM START-->
+    
+    <%= form_tag({:controller => "selfie_form", :action => "create_image"}, :method => "post", :class => "form", :id => "selfie_form", :multipart => true) do %>
       
-      <%= form_tag({:controller => "selfie_form", :action => "create_image"}, :method => "post", :class => "form", :id => "selfie_form", :multipart => true) do %>
-        
-        <div class="selfie-container-1">
-        
-          <div class="full-vh scrollable-field active" id="scroll_element_1">
-            <div><img src="https://remedicohealth.com/images/footer_logo_blue1-min.png" alt="Remedico - Logo"/ id="tries"></div>
+      <div class="selfie-container-1">
+      
+        <div class="full-vh scrollable-field active" id="scroll_element_1">
+          <div><img height="22" src="https://remedicohealth.com/images/remedico_white1.png" alt="Remedico - Logo"/ id="tries"></div>
 
-            <div><h1 id="h1_3ea7_0">Selfie Checkup</h1></div>
-            <div><p id="p_3ea7_0">Welcome to your FREE selfie checkup!</p></div>
+          <div><h1 id="h1_3ea7_0">Free Selfie Checkup</h1></div>
 
-            <div class="margin_5"><p id="p_3ea7_1">Simply submit a selfie, and our dermatologists will give you a free diagnosis.</p></div>
-            <div><button type="button" class="selfie_btn" id="button_3ea7_0">Start</button></div>
+          <div class="margin_15"><p id="p_3ea7_1">Simply submit a selfie, and our dermatologists will give you a free diagnosis.</p></div>
 
+          <div><img class="border-bottom" width="250" src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/taking_selfie.png" alt="" /></div>
+
+          <div><button type="button" class="selfie_btn selfie_btn-sm" id="button_3ea7_0">START</button></div>
+
+        </div>
+
+        <!--TAKE SELFIE-->
+
+        <div class="field scrollable-field" id="scroll_element_2">
+          <label class="form-label">We will need a clear selfie of your face.
+            <ul>
+              <li>The photo should be clear, sharp, and in focus. Use your back camera if possible</li>
+              <li>Your full face should be clearly visible. Remove glasses, scarves and hats <span style="color:red;font-size:20px;">❌</span> <span style="color:#000;font-size:20px;">🕶</span> <span style="color:#000;font-size:20px;">🎩</span></li>
+              <li>Do not apply any filters to the photo <span style="color:#000;font-size:20px;">😊</span></li>
+            </ul>
+ 
+          <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
+              <div id="div_3ea7_1"><img src="<%= asset_path('selfie_form_info_graphic.png') %>" alt="Take a selfie using your phone camera, and come back here" id="image_preview" /></div>
+            </div>
           </div>
 
-          <!--TAKE SELFIE-->
+          <div class="col-sm-6 col-sm-offset-3 margin_25 text-center">
+            <label for="file_upload" class="selfie_btn selfie_btn-sm" id="upload">UPLOAD</label>
+            <input id="file_upload" type="file" name="image" accept="image/*" onchange="saveImage(this);" />
+            <div id="error_file_upload" for="file_upload" class="alert text-danger font_h4">Please upload your selfie. Make sure the image is less than 2MB.</div>
+          </div>
 
-          <div class="field scrollable-field" id="scroll_element_2">
-            <label class="form-label">We will need a clear selfie of your face.<br/><p id="p_3ea7_2">Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. <br/>Ensure your profile is fully visible.<br/>Please remove SPECTACLES, GLASSES and SHADES, and abstain from using filters.</p></label><br/>
-            <div class="row">
-              <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
-                <div id="div_3ea7_1"><img src="<%= asset_path('selfie_form_info_graphic.png') %>" alt="Take a selfie using your phone camera, and come back here" id="image_preview" /></div>
-              </div>
-            </div>
-
-            <div class="col-sm-6 col-sm-offset-3 margin_25">
-              <label for="file_upload" class="selfie_btn" id="upload">Upload</label>
-              <input id="file_upload" type="file" name="image" accept="image/*" onchange="saveImage(this);" />
-              <div id="error_file_upload" for="file_upload" class="alert text-danger font_h4">Please upload your selfie. Make sure the image is less than 2MB.</div>
-            </div>
-
-            <div class="file_upload_confirmation_buttons" style="display: none;">
+          <div class="file_upload_confirmation_buttons" style="display: none;">
+            <div class="container">
               <div class="row text-center margin_25">
-                <!--confirm button -->
-                <div class="col-sm-4 col-sm-offset-2 col-xs-6">
-                  <button type="button" class="selfie_btn" id="confirm_btn">Confirm</button>
-                </div>
                 <!--try again button-->
+                <div class="col-sm-4 col-sm-offset-2 col-xs-6">
+                  <button type="button" class="selfie_btn inverted_selfie_btn" id="cancel_btn">TRY AGAIN</button>
+                </div>
+                <!--confirm button -->
                 <div class="col-sm-4 col-xs-6">
-                  <button type="button" class="selfie_btn inverted_selfie_btn" id="cancel_btn">Try Again</button>
+                  <button type="button" class="selfie_btn" id="confirm_btn">CONFIRM</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="form-group margin_25">
-            <div class="progress" style="display: none">
-              <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
-            </div>
+        </div>
+        <div class="form-group margin_25">
+          <div class="progress" style="display: none">
+            <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
           </div>
         </div>
-      <% end %>
-      <br/>
+      </div>
+    <% end %>
+    <br/>
 
-        <div class="selfie-container-2">
+      <div class="selfie-container-2">
 
-          <!--NAME-->
+        <!--NAME-->
 
-          <div class="field scrollable-field" id="scroll_element_3">
-            <label class-"form-label">What is your name?*</label>
-            <input type="text" name="fullname" class="form-border" id="fullname"/>
-            <div id="error_fullname" for="fullname" class="alert text-danger font_h4">Please enter a valid name.</div>
-            <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
-          </div>
-
-          <!--MOBILE-->
-
-          <div class="field scrollable-field" id="scroll_element_4">
-            <label class-"form-label">What is your mobile number?*</label>
-            <sub id="sub_3ea7_0">We will send your diagnosis to you via sms.</sub><br>
-            <input id="mobile" type="number" name="mobile" class="form-border input-number–noSpinners" />
-            <div id="error_mobile" for="mobile" class="alert text-danger font_h4">This mobile number is not valid.</div>
-            <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
-          </div>
-
-          <!--EMAIL-->
-
-          <div class="field scrollable-field" id="scroll_element_5">
-            <label class-"form-label">What is your email id?*</label>
-            <sub id="sub_3ea7_1">We will send your diagnosis to you via mail as well.</sub><br>
-            <input id="email" type="email" name="email" class="form-border inline-email-field" />
-            <div id="error_email" for="email" class="alert text-danger font_h4">This email is not valid.</div>
-            <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
-          </div>
-
-          <!--SUBMIT FORM -->
-
-          <div class="field scrollable-field" id="scroll_element_6">
-            <button id="submit_button" class="selfie_btn submit_button">Submit</button>
-          </div>
-
+        <div class="field scrollable-field" id="scroll_element_3">
+          <label class-"form-label">What is your name?*</label>
+          <input type="text" name="fullname" class="form-border" id="fullname"/>
+          <div id="error_fullname" for="fullname" class="alert text-danger font_h4">Please enter a valid name.</div>
+          <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
         </div>
 
-        <input type="hidden" id="referrer" name="referrer" value="">
-        <input type="hidden" id="utm_campaign" name="utm_campaign" value="<%= params['utm_campaign'] %>">
+        <!--MOBILE-->
 
-      <!--FORM END-->
-    </div>
+        <div class="field scrollable-field" id="scroll_element_4">
+          <label class-"form-label">What is your mobile number?*</label>
+          <sub id="sub_3ea7_0">We will send your diagnosis to you via sms.</sub><br>
+          <input id="mobile" type="number" name="mobile" class="form-border input-number–noSpinners" />
+          <div id="error_mobile" for="mobile" class="alert text-danger font_h4">This mobile number is not valid.</div>
+          <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
+        </div>
+
+        <!--EMAIL-->
+
+        <div class="field scrollable-field" id="scroll_element_5">
+          <label class-"form-label">What is your email id?*</label>
+          <sub id="sub_3ea7_1">We will send your diagnosis to you via mail as well.</sub><br>
+          <input id="email" type="email" name="email" class="form-border inline-email-field" />
+          <div id="error_email" for="email" class="alert text-danger font_h4">This email is not valid.</div>
+          <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
+        </div>
+
+        <!--SUBMIT FORM -->
+
+        <div class="field scrollable-field" id="scroll_element_6">
+          <button id="submit_button" class="selfie_btn submit_button">SUBMIT</button>
+        </div>
+
+      </div>
+
+      <input type="hidden" id="referrer" name="referrer" value="">
+      <input type="hidden" id="utm_campaign" name="utm_campaign" value="<%= params['utm_campaign'] %>">
+
+    <!--FORM END-->
   </div>
 </div>
-
-<div>
-  <div class="col-xs-12 navbar-fixed-bottom" id="div_3ea7_3">
-  <div class="row" id="bottomNav">
-   <div class="col-xs-4 text-center"><a href="#"><img src="<%= asset_path('footer_logo_blue1-min.png') %>" alt="Remedico - Logo" style="margin: 6px 0;"/></a></div>
-  </div>
-  </div>
-</div>
-
 <script>
 
   $(function() {
