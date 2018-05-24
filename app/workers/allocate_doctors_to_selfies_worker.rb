@@ -6,7 +6,7 @@ class AllocateDoctorsToSelfiesWorker
     puts "RUNNING CRON JOB - ALLOCATING DOCTORS TO SELFIES"
 
     # get all available doctors
-    doctors = Doctor.where(:available_for_selfie_checkup => true)
+    doctors = Doctor.order("RANDOM()").where(:available_for_selfie_checkup => true)
     # get all the pending selfies
     pending_selfies = SelfieForm.where('doctor_id is null')
     # extract the pending selfie ids
