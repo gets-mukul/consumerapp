@@ -223,13 +223,19 @@
         <!--TAKE SELFIE-->
 
         <div class="field scrollable-field" id="scroll_element_2">
-          <label class="form-label">We will need a clear selfie of your face.
-            <ul>
-              <li>The photo should be clear, sharp, and in focus. Use your back camera if possible</li>
-              <li>Your full face should be clearly visible. Remove glasses, scarves and hats <span style="color:red;font-size:20px;">❌</span> <span style="color:#000;font-size:20px;">🕶</span> <span style="color:#000;font-size:20px;">🎩</span></li>
-              <li>Do not apply any filters to the photo <span style="color:#000;font-size:20px;">😊</span></li>
-            </ul>
- 
+          <div class="container"> 
+            <div class="row">
+              <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-12">
+                <label class="form-label">We will need a clear selfie of your face.</label>
+                <ul>
+                  <li>The photo should be clear, sharp, and in focus. Use your back camera if possible</li>
+                  <li>Your full face should be clearly visible. Remove glasses, scarves and hats <span style="color:red;font-size:20px;">❌</span> <span style="color:#000;font-size:20px;">🕶</span> <span style="color:#000;font-size:20px;">🎩</span></li>
+                  <li>Do not apply any filters to the photo <span style="color:#000;font-size:20px;">😊</span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+   
           <div class="row">
             <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1">
               <div id="div_3ea7_1"><img src="<%= asset_path('selfie_form_info_graphic.png') %>" alt="Take a selfie using your phone camera, and come back here" id="image_preview" /></div>
