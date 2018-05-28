@@ -7,11 +7,11 @@ class SmsServiceController < ApplicationController
   def self.message_body(patient, template, consultation)
     case template
     when "registered"
-      login_link = "https://bit.do/rmlg?p=" + encrypt(patient)
+      login_link = "https://bit.do/rmlgn?p=" + encrypt(patient)
       sms = "Hi, thanks for checking out Remedico! Continue your consultation here: #{login_link} If you have any questions, WhatsApp us at 8433848969"
       return sms
     when "form filled"
-      payment_link = "https://bit.do/rmpy?p=" + encrypt(consultation)
+      payment_link = "https://bit.do/rempy?p=" + encrypt(consultation)
       name = patient.name.split[0]
       sms = "Hi #{name}! Thanks for trying out Remedico! You filled in a questionnaire but we didn't receive the payment. To get your treatment plan from our dermatologists within 24 hours, click here to pay #{payment_link} Questions? whatsapp us at 8433848969"
       return sms
@@ -76,7 +76,7 @@ class SmsServiceController < ApplicationController
 
   # usage: message_body("Kelly", 1234)
   def self.selfie_diagnosis_message_body(name, selfie_link)
-    login_link = "https://bit.do/rem-selfie?s=" + selfie_link.split('=').last
+    login_link = "https://bit.do/rmselfie?s=" + selfie_link.split('=').last
     sms = "Hi #{name}! Your selfie diagnosis is ready. Check it out at #{login_link} -Team Remedico"
     return sms
   end
