@@ -21,7 +21,7 @@ class CustomerPaidMailer < ApplicationMailer
   def send_customer_cross_sell_mail consultation
     @consultation = consultation
     @skin_hair = (['Hairfall or Hair Thinning', 'Dandruff'].include? @consultation.category) ? 'hair' : 'skin'
-    @new_consultation_link = "https://remedicohealth.com/consult/patients/coupon_login?promo=CMAIL100&utm_source=paid&utm_medium=email&utm_campaign=pd_cross_sell_mail_d10_v1&condition=General%20Skin%20Care&name="+@consultation.patient.name+"&mobile="+@consultation.patient.mobile
+    @new_consultation_link = "https://remedicohealth.com/consult/patients/coupon_login?promo=CMAIL100&utm_source=paid&utm_medium=email&utm_campaign=email_pd_cross_sell_mail_d10_v1&condition=General%20Skin%20Care&name="+@consultation.patient.name+"&mobile="+@consultation.patient.mobile
     headers['X-SMTPAPI'] = { category: ["paid", "pd_cross_sell_mail_d10_v1"] }.to_json
 
     mail( :to => @consultation.patient.email, :subject => "Need any other help?" )
