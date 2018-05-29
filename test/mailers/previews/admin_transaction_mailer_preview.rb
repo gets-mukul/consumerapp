@@ -7,6 +7,11 @@ class AdminTransactionMailerPreview < ActionMailer::Preview
   
   def send_user_payment_mail
     AdminTransactionMailer.send_user_payment_mail(Patient.find(4287), Payment.find(1208), '')
+
+    # c = Consultation.find(101)
+    # @user = c.patient
+    # @payment = Payment.where(:consultation => c).first
+    # AdminTransactionMailer.send_user_payment_mail(@user, @payment, '')
   end
 
   def send_user_reverse_payment_mail
