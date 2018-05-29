@@ -16,6 +16,8 @@ class AdminTransactionMailer < ApplicationMailer
     @payment = payment
     @doctor = doctor
     @selfie = SelfieForm.where(:patient => @user).first
+    @patient_source = PatientSource.where(:patient => @user).order(:created_at).pluck(:created_at, :local_referrer, :utm_campaign)
+
     mail( :to => Rails.application.secrets.ADMIN_EMAIL,
     :subject => "Remedico: User payment notice" )
   end
