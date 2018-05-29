@@ -345,6 +345,27 @@
                                       <td>Assigned Doctor</td>
                                       <td><%= @doctor %></td>
                                     </tr>
+                                    <tr>
+                                      <td colspan="2"><b>Patient Source</b></td>
+                                    </tr>
+                                    <tr>
+                                      <td colspan="2">
+                                        <table style="width:100%;table-layout: fixed;">
+                                          <tr>
+                                            <th style="width:24%">Date</th>
+                                            <th style="width:38%">Referrer</th>
+                                            <th style="width:38%">Campaign</th>
+                                          </tr>
+                                          <% @patient_source.each do |date, referrer, campaign| %>
+                                            <tr>
+                                              <td style="width:24%"><%= date.strftime('%d-%m-%y %H:%M') %></td>
+                                              <td style="width:38%"><%= referrer || 'nil' %></td>
+                                              <td style="width:38%"><%= campaign || 'nil' %></td>
+                                            </tr>
+                                          <% end %>
+                                        </table>
+                                      </td>
+                                    </tr>
                                     <% unless @selfie.nil? %>
                                     <tr>
                                       <td colspan="2"><b>Selfie checkup exists</b></td>
