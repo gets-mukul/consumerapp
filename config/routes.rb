@@ -1,5 +1,25 @@
 Rails.application.routes.draw do
+
   scope '/consult' do
+
+    namespace :api do
+      namespace :v1 do
+        get 'coupon/:promo_code' => "coupon#apply", :as => 'coupon_apply'
+
+        scope 'patient' do
+          post '/' => "patient#create", :as => 'patient', defaults: {format: 'json'}
+          get '/' => "patient#create", :as => 'patient_post', defaults: {format: 'json'}
+
+          # remove this
+          get '/unregister' => "patient#unregister_patient", :as => 'unregister_patient', defaults: {format: 'json'}
+        end
+
+        get '/consult', to: 'consultation#index'
+        get '/', to: 'consultation#index'
+
+      end
+    end
+
     get '/promo/:promo_code' => 'coupon#apply'
 
     post '/patients' => 'patients#create', defaults: {format: 'json'}

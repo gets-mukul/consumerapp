@@ -4,8 +4,36 @@
 # model remove the '{}' from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
 #
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+SOCIAL100:
+  coupon_code: SOCIAL100
+  discount_amount: 100
+  status: coupon unused
+  expires_on:
+  count: 0
+  max_count: 2147483647
+
+
+SOCIAL150:
+  coupon_code: SOCIAL150
+  discount_amount: 100
+  status: coupon unused
+  expires_on:
+  count: 0
+  max_count: 2147483647
+
+EXPIRED100:
+  coupon_code: EXPIRED100
+  discount_amount: 100
+  status: coupon entered
+  expires_on: 2017-09-29 07:52:11
+  count: 0
+  max_count: 2147483647
+
+USED100:
+  coupon_code: USED100
+  discount_amount: 100
+  status: coupon used
+  expires_on:
+  count: 1
+  max_count: 1
