@@ -74,6 +74,7 @@ class SelfieFormController < ApplicationController
         @conditions = @selfie_form.conditions.select(:key, :title, :inline_desc, :desc)
         @inline_descriptors = @conditions.collect(&:inline_desc)
         @login_link = "/consult/patients?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
+        @login_link2 = "/my_consultation/create?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
 
         @inline_description = ''
         @description = ''

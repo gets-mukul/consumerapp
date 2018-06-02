@@ -1,7 +1,14 @@
 class ConsultationController < ApplicationController
   # before_action :check_current_user
+  before_filter :check_if_reverse_flow, only: [:index]
   before_filter :check_current_user, except: [:new, :create]
-  
+
+  def check_if_reverse_flow
+    if session[:my_consultation_id]
+      redirect_to '/my_consultation/create'
+      return
+    end
+  end
 
   def index
     # fetch current user and condition from session if user choce a condition
