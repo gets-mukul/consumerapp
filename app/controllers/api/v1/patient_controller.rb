@@ -1,7 +1,6 @@
 class Api::V1::PatientController < Api::V1::ApiController
-  skip_before_action :verify_authenticity_token, raise: false
-  # before_action :set_patient, only: [:show, :edit, :update, :destroy]
-  # respond_to :json
+  # skip_before_action :verify_authenticity_token
+
 
   def create
     # check if patient exists in database
@@ -20,7 +19,10 @@ class Api::V1::PatientController < Api::V1::ApiController
     end
 
     register @patient
-    redirect_to '/consult/api/v1/consult'
+    Rails.logger.info '----------- registered patient'
+    Rails.logger.info session['user_id']
+
+    render json: fetch_consultations, status: :ok
   end
 
   # never trust parameters from the scary internet, only allow the white list through.

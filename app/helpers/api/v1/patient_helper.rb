@@ -5,6 +5,7 @@ module Api::V1::PatientHelper
   end
 
   def register user
+    session[:user_id] = user.id
     session[:consultation_id] = nil
     session[:condition] = params[:condition]
     logger.info "Registered #{user.name}, condition: #{params[:condition]}"

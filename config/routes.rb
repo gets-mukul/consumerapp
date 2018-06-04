@@ -14,9 +14,6 @@ Rails.application.routes.draw do
           get '/unregister' => "patient#unregister_patient", :as => 'unregister_patient', defaults: {format: 'json'}
         end
 
-        get '/consult', to: 'consultation#index'
-        get '/', to: 'consultation#index'
-
       end
     end
 
