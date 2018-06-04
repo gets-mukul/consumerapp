@@ -54,4 +54,11 @@ Rails.application.configure do
 
   # For devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  config.action_dispatch.default_headers = {
+    'Access-Control-Allow-Origin' => 'http://127.0.0.1:3000',
+    'Access-Control-Allow-Headers' => 'Content-Type, Authorization, Content-Length, X-Requested-With',
+    'Access-Control-Request-Methods' => 'GET, POST, PUT, DELETE, OPTIONS',
+    'Access-Control-Allow-Credentials' => true
+  }
 end
