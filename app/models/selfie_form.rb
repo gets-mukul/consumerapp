@@ -11,6 +11,7 @@ class SelfieForm < ApplicationRecord
   scope "Unclear photos", -> { where("status like 'bad%'") }
   scope "No conditions", -> { where("status like 'no-cond%'") }
   scope "Diagnosed", -> { where("status like 'diag%'") }
+  scope "Diagnosis sent", -> { where("(status like 'diag%') and (status like '%sms%' or status like '%mail%') ") }
 
   def set_defaults
 	  self.status ||= 'pending'

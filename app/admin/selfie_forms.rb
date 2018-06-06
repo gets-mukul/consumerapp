@@ -15,6 +15,7 @@ ActiveAdmin.register SelfieForm do
   scope "Unclear photos"
   scope "No conditions"
   scope "Diagnosed"
+  scope "Diagnosis sent"
   scope :all
   actions :all, :except => [:new, :destroy]
   
@@ -123,13 +124,14 @@ ActiveAdmin.register SelfieForm do
 
   csv force_quotes: true, col_sep: ',' do
     column :created_at
-    column :id, :label => 'Selfie form id'
-    column :patient
-    column "Mobile" do |cs|
-      cs.patient.mobile
+    column 'Selfie form id' do |selfie_form|
+      selfie_form.id
     end
+    column :patient
     column :status
-    column :diagnosis_link
     column :updated_at
+    column "Conditions" do |selfie_form|
+      selfie_form.conditions.join(', ')
+    end
   end
 end

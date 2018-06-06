@@ -6,11 +6,19 @@ class CustomerSelfieCheckupMailerPreview < ActionMailer::Preview
   end
 
   def send_customer_no_condition_mail
-    CustomerSelfieCheckupMailer.send_customer_no_condition_mail(Patient.find(93))
+    CustomerSelfieCheckupMailer.send_customer_no_condition_mail(SelfieForm.find(66).patient)
   end
 
   def send_customer_bad_photo_mail
     CustomerSelfieCheckupMailer.send_customer_bad_photo_mail(Patient.find(93))
+  end
+
+  def send_customer_recommend_consult_mail
+    CustomerSelfieCheckupMailer.send_customer_recommend_consult_mail(SelfieForm.find(96))
+  end
+
+  def send_customer_recommend_visiting_a_doctor_mail
+    CustomerSelfieCheckupMailer.send_customer_recommend_visiting_a_doctor_mail(SelfieForm.find(67))
   end
 
 end

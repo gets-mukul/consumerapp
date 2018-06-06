@@ -1,0 +1,201 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+<!-- NAME:1 COLUMN - FULL WIDTH -->
+<!--[if gte mso 15]>
+<xml>
+  <o:OfficeDocumentSettings>
+  <o:AllowPNG/>
+  <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+  
+<body style="height:100%;margin:0;padding:0;width:100%;">
+
+<div style="background: #17a6b0 ;padding: 20px 0px 0px 6%;
+">
+  <div id="logo" style="width: 90%;text-align: left;padding-bottom: 12px;padding-top: 10px;"><img alt="" src="https://remedicohealth.com/images/remedico_white1.png" style="width: 34%;max-width: 120px;" /></div>
+
+  <div class="author" style="width: 90%;margin: 10px 0px 0px;">
+    <div class="width-auto" style="display: inline-block;vertical-align: top;"><img alt="" id="author" src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/static/image_<%= @selfie_form.doctor.code %>.png" style="width: 105%;    margin-bottom: 20px;" /></div>
+
+    <div id="aname" style="display: inline-block;padding-left: 12px;margin-top: -2px;">
+      <div class="author_name">
+        <p style="font-family: Arial, Helvetica, sans-serif;color:#fff;text-transform:uppercase;margin:0!important;"><span>DIAGNOSIS for <span style="display:block; line-height:normal"><%= @selfie_form.patient.name %></span></span></p>
+      </div>
+
+      <p class="prepared" style="font-family: Arial, Helvetica, sans-serif;color:#fff;margin-top:4px!important;"><span><%= @selfie_form.doctor.full_name %></span></p>
+    </div>
+  </div>
+</div>
+<!-- header end -->
+
+<!-- message section start    -->
+<div style="background: #fff;padding:30px 0px 30px 0;">
+  <div style="text-align: left;padding: 0px 6%;">
+
+    <div style="font-family: Arial, Helvetica, sans-serif; font-weight:bold; font-size: 14px; color: #515151 ; text-align:left; line-height: 24px;margin-bottom:15px">Hi <%= @selfie_form.patient.name %>,</div>
+
+    <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#515151;line-height:20px;margin-bottom:15px">
+    While normally I would be able to provide a diagnosis based on your photo, in your case, your condition requires you to visit a dermatologist in person to get it checked.
+    </div>
+
+    <div style="font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#515151;line-height:20px;margin-bottom:15px">
+    I would strongly recommend that you get this checked <b>as soon as possible</b>. This condition requires a professional dermatologist at a clinic to diagnose and prescribe you the right treatment.
+    </div>
+
+    <div style="display: block;">
+      <div style="display: inline-block;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#515151;line-height:20px;margin-bottom:8px;width: 90%;">
+      Signed,</div>
+    </div>
+
+    <div style="display: block;" max-width: 90%>
+      <img src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/static/signature_<%= @selfie_form.doctor.code %>.jpg">   
+    </div>
+    
+    <div style="display: block;">
+      <div style="display: inline-block;font-family:Arial, Helvetica, sans-serif;font-size:14px;color:#515151;line-height:20px;margin-top:12px;margin-bottom:8px;width: 90%;">
+      <b>Dr. Gaurangi Shrawat</b></br> MD (Dermatology & VD)</div>
+    </div>
+
+  </div>
+</div>
+<!-- message section end -->
+
+
+<!-- footer start -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tr>
+    <td align="center" valign="top" id="templateFooter" style="background-color:#333333;background-image:none;background-repeat:no-repeat;background-position:center;background-size:cover;border-top:0;border-bottom:0;padding-top:9px;padding-bottom:50px;">
+      <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" class="templateContainer" style="max-width:600px;">
+        <tr>
+          <td valign="top" class="footerContainer">
+            <!--[if (gte mso 9)|(IE)]>
+            <table align="center" border="0" cellspacing="0" cellpadding="0" width="600" style="width:600px;">
+            <tr>
+            <td align="center" valign="top" width="600" style="width:600px;">
+            <![endif]-->
+            <!-- contacts start -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" class="mcnTextBlock" style="min-width:100%;">
+              <tbody class="mcnTextBlockOuter">
+                <tr>
+                  <td valign="top" class="mcnTextBlockInner" style="padding-top:9px;">
+                    <!--[if mso]>
+                    <table align="left" border="0" cellspacing="0" cellpadding="0" width="100%" style="width:100%;">
+                    <tr>
+                    <![endif]-->
+                    
+                    <!--[if mso]>
+                    <td valign="top" width="300" style="width:300px;">
+                    <![endif]-->
+                    <table align="left" border="0" cellpadding="0" cellspacing="0" style="max-width:300px;" width="100%"><tbody>
+                      <tr>
+                        <td style="padding:4px 6px 0 36px;"><img src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/social/blue_wa.png" height="14" width="14"></td>
+                        <td class="mcnTextContent" style="text-align:left;"><span style="color:#A9A9A9;"><a href="https://api.whatsapp.com/send?phone=918433848969" style="font-size:14px;line-height:150%;font-family:Helvetica;text-decoration:none;color:#1b9da6;">+918433848969</a></span>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="padding:4px 6px 0 36px;"><img src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/social/blue_email.png" height="14" width="14"></td>
+                        <td class="mcnTextContent" style="text-align:left">                                
+                          <span style="color:#A9A9A9"><a href="mailto:consult@remedicohealth.com" style="font-size:14px;line-height:150%;font-family:Helvetica;text-decoration:none;color:#1b9da6;">consult@remedicohealth.com</a></span>
+                        </td>
+                      </tr>
+                    </tbody></table>
+                    <!--[if mso]>
+                    </td>
+                    </tr>
+                    </table>
+                    <![endif]-->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- contacts stop -->
+
+            <!-- horizontal line start -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;">
+              <tbody>
+                <tr>
+                  <td style="min-width:100%; padding:18px;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;border-top:2px solid #999999;">
+                      <tbody><tr>
+                        <td>
+                          <span></span>
+                        </td>
+                      </tr>
+                    </tbody></table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- horizontal line end -->
+
+            <!-- social icons start -->
+            <table border="0" cellpadding="0" cellspacing="0" width="100%" style="min-width:100%;">
+              <tbody><tr>
+                <td align="center" valign="top" style="padding:9px">
+                  <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="display:inline;">
+                    <tbody><tr>
+                      <td align="center" valign="middle">
+                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                          <tbody><tr>
+                            <!--facebook -->
+                            <td style="padding:9px;" align="center" valign="middle" width="24">
+                              <a href="http://www.facebook.com/remedico" target="_blank"><img src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/social/gray_fb.png" style="display:block;" height="24" width="24"></a>
+                            </td>
+                            <!-- twitter -->
+                            <td style="padding:9px;" align="center" valign="middle" width="24">
+                              <a href="http://www.twitter.com/remedicohealth" target="_blank"><img src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/social/gray_twt.png" style="display:block;" height="24" width="24"></a>
+                            </td>
+                            <!-- instagram -->
+                            <td style="padding:9px;" align="center" valign="middle" width="24">
+                              <a href="http://instagram.com/remedico" target="_blank"><img src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/social/gray_ig.png" style="display:block;" height="24" width="24"></a>
+                            </td>
+                            <!-- snapchat -->
+                            <td style="padding:9px;" align="center" valign="middle" width="24">
+                              <a href="https://www.snapchat.com/add/remedico" target="_blank"><img src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/social/gray_sc.png" style="display:block;" height="24" width="24"></a>
+                            </td>
+                          </tr></tbody>
+                      </table>
+                      </td>
+                    </tr></tbody>
+                  </table>
+                </td>
+              </tr></tbody>
+            </table>
+            <!-- social icons end -->
+
+            <!-- logo start -->
+            <div>
+              <a href="https://remedicohealth.com">
+                <table align="center" border="0" cellpadding="0" cellspacing="0" style="max-width:100%;min-width:100%;" width="100%"><tbody>
+                  <tr style="line-height:150%;text-align:center;">
+                    <td>
+                      <img src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/icons/footer_logo_blue1-min.png" />
+                    </td>
+                  </tr>
+                </tbody></table>
+              </a>
+            </div>
+            <!-- logo end -->
+
+            <!--[if (gte mso 9)|(IE)]>
+            </td>
+            </tr>
+            </table>
+            <![endif]-->
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- footer end -->
+
+</body>
+</html>
