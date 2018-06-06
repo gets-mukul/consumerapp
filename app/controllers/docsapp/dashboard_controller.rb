@@ -25,7 +25,7 @@ class Docsapp::DashboardController < Docsapp::ApplicationController
             selfie_form.diagnosis_link = Rails.application.secrets.DOMAIN_NAME + "/consult/selfie-diagnosis?s=" + urlsafe_encrypt(selfie_form.id)
         end
         selfie_form.update({:status => params["status"]})
-        if ['diagnosed', 'no-condition'].include? params["status"]
+        unless params["status"].equal? 'bad-photo'
             current_doctor.increment!(:selfies_count, 1) 
         end
         render :json => { :value => "updated" }

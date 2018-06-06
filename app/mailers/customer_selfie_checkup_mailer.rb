@@ -24,4 +24,19 @@ class CustomerSelfieCheckupMailer < ApplicationMailer
     mail( :to => @user.email, :subject => "Oops! We want to see. how you look" )
   end
 
+  def send_customer_recommend_consult_mail(selfie_form)
+    @selfie_form = selfie_form
+    @link = "https://remedicohealth.com/consult/patients/instant_login?p=" + encrypt(@selfie_form.patient) + "&utm_source=selfiecheckup&utm_medium=email&utm_campaign=email_sc_recommend_consult_d0_v1"
+    headers['X-SMTPAPI'] = { category: ["selfiecheckup", "sc_recommend_consult_d0_v1"] }.to_json
+
+    mail( :to => @selfie_form.patient.email, :subject => "Hi #{@selfie_form.patient.name}, I've checked your selfie." )
+  end
+
+  def send_customer_recommend_visiting_a_doctor_mail(selfie_form)
+    @selfie_form = selfie_form
+    headers['X-SMTPAPI'] = { category: ["selfiecheckup", "sc_recommend_visiting_a_doctor_d0_v1"] }.to_json
+    mail( :to => @selfie_form.patient.email, :subject => "Hi #{@selfie_form.patient.name}, I've checked your selfie." )
+  end
+
+
 end
