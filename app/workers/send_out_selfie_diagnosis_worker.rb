@@ -11,7 +11,8 @@ class SendOutSelfieDiagnosisWorker
     selfie_forms.each do |selfie_form|
       SmsServiceController.send_selfie_diagnosis_sms(selfie_form.id)
       if selfie_form.patient.email.present?
-        CustomerSelfieCheckupMailer.send_customer_diagnosis_mail(selfie_form.patient, selfie_form.diagnosis_link).deliver_later()
+        diagnosis_link = "https://remedicohealth.com/selfie-diagnosis?"+selfie_form.diagnosis_link.split("?")[1]
+        CustomerSelfieCheckupMailer.send_customer_diagnosis_mail(selfie_form.patient, diagnosis_link).deliver_later()
         selfie_form.update(:status => 'diagonsed-sms-mailed')
       else
         selfie_form.update(:status => 'diagonsed-sms-no-email')
