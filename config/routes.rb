@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
   scope '/consult' do
+
+    namespace :api do
+      namespace :v1 do
+        get 'selfie-form/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
+      end
+    end
+
     get '/promo/:promo_code' => 'coupon#apply'
 
     post '/patients' => 'patients#create', defaults: {format: 'json'}
