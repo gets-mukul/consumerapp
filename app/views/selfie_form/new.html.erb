@@ -106,8 +106,8 @@
   }
   #h1_3ea7_0{font-weight: 600;}
   #p_3ea7_0{font-size: 18px; font-weight: 400; line-height: 20px}
-  #p_3ea7_1{font-size: 20px; font-weight: 400; line-height: 24px}
-  #button_3ea7_0{
+  .p_3ea7_1{font-size: 20px; font-weight: 400; line-height: 24px}
+  #start_button{
     margin-top: 6%;
     -webkit-box-shadow: 0 3px 12px 0 rgba(128, 128, 128, 1);
     -moz-box-shadow: 0 3px 12px 0 rgba(128, 128, 128, 1);
@@ -161,6 +161,10 @@
     width: 100%;
     font-size: initial;
   }
+  .file_upload_confirmation_buttons2 button {
+    width: 100%;
+    font-size: initial;
+  }
   .selfie-container-2 {
     display: none;
   }
@@ -185,17 +189,81 @@
     margin: 15px 0 20px 20px;
     font-size: 1.6rem;
   }
-  #scroll_element_6 {
-    margin-top: 10px;
+  #scroll_element_6, #scroll_element_7 {
     margin-bottom: 50vh;
   }
   .selfie_btn-sm {
     padding: 15px 60px;
   }
   .progress {
-    margin: 20px;
+    margin: 0 auto;
+    width: 85%;
   }
-
+  /* The container */
+  .skin-type-quiz .container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  /* Hide the browser's default radio button */
+  .skin-type-quiz .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+  }
+  /* Create a custom radio button */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+  }
+  /* On mouse-over, add a grey background color */
+  .skin-type-quiz .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  /* When the radio button is checked, add a blue background */
+  .skin-type-quiz .container input:checked ~ .checkmark {
+    background-color: #0F7277;
+  }
+  /* Create the indicator (the dot/circle - hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  /* Show the indicator (dot/circle) when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  /* Style the indicator (dot/circle) */
+  .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+  }
+  .radio-button-container label {
+    font-size: 1.8rem!important;
+  }
+  .selfie-container-3 {
+    display: none;
+  }
+  .version-2 {
+    display: none;
+  }
 </style>
 
 <div class="selfie_form">
@@ -212,11 +280,11 @@
 
           <div><h1 id="h1_3ea7_0">Free Selfie Checkup</h1></div>
 
-          <div class="margin_15"><p id="p_3ea7_1">Simply submit a selfie, and our dermatologists will give you a free diagnosis.</p></div>
+          <div class="margin_15"><p class="p_3ea7_1">Simply submit a selfie, and our dermatologists will give you a free diagnosis.</p></div>
 
           <div><img class="border-bottom" width="250" src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/taking_selfie.png" alt="" /></div>
 
-          <div><button type="button" class="selfie_btn selfie_btn-sm" id="button_3ea7_0">START</button></div>
+          <div><button type="button" class="selfie_btn selfie_btn-sm" id="start_button">START</button></div>
 
         </div>
 
@@ -263,8 +331,8 @@
             </div>
           </div>
         </div>
-        <div class="form-group margin_25">
-          <div class="progress" style="display: none">
+        <div class="form-group">
+          <div id="progressbar-1" class="progress" style="display: none">
             <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
           </div>
         </div>
@@ -277,7 +345,7 @@
         <!--NAME-->
 
         <div class="field scrollable-field" id="scroll_element_3">
-          <label class-"form-label">What is your name?*</label>
+          <label class="form-label">What is your name?*</label>
           <input type="text" name="fullname" class="form-border" id="fullname"/>
           <div id="error_fullname" for="fullname" class="alert text-danger font_h4">Please enter a valid name.</div>
           <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
@@ -286,7 +354,7 @@
         <!--MOBILE-->
 
         <div class="field scrollable-field" id="scroll_element_4">
-          <label class-"form-label">What is your mobile number?*</label>
+          <label class="form-label">What is your mobile number?*</label>
           <sub id="sub_3ea7_0">We will send your diagnosis to you via sms.</sub><br>
           <input id="mobile" type="number" name="mobile" class="form-border input-number–noSpinners" />
           <div id="error_mobile" for="mobile" class="alert text-danger font_h4">This mobile number is not valid.</div>
@@ -296,7 +364,7 @@
         <!--EMAIL-->
 
         <div class="field scrollable-field" id="scroll_element_5">
-          <label class-"form-label">What is your email id?*</label>
+          <label class="form-label">What is your email id?*</label>
           <sub id="sub_3ea7_1">We will send your diagnosis to you via mail as well.</sub><br>
           <input id="email" type="email" name="email" class="form-border inline-email-field" />
           <div id="error_email" for="email" class="alert text-danger font_h4">This email is not valid.</div>
@@ -305,15 +373,63 @@
 
         <!--SUBMIT FORM -->
 
-        <div class="field scrollable-field" id="scroll_element_6">
-          <button id="submit_button" class="selfie_btn submit_button">SUBMIT</button>
+        <div class="field scrollable-field version-1" id="scroll_element_7">
+          <button id="submit_button_version_1" class="selfie_btn submit_button">SUBMIT</button>
         </div>
 
+        <div class="field scrollable-field version-2" id="scroll_element_6">
+          <div class="file_upload_confirmation_buttons2">
+            <div class="container">
+              <div class="row text-center margin_25">
+                <div class="margin_15"><p class="p_3ea7_1">Would you like to know about your skin type?</p></div>
+                <!--confirm button -->
+                <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+                  <button type="button" class="selfie_btn" id="get_skin_type">YES</button>
+                </div>
+                <!--try again button-->
+                <div class="col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1 margin_t_15">
+                  <button type="button" class="selfie_btn inverted_selfie_btn" id="submit_button">NO</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+          <div id="progressbar-2" class="progress" style="display: none">
+            <div class="progress-bar progress-bar-success myprogress" role="progressbar" style="width:0%">0%</div>
+          </div>
+        </div>
       </div>
 
       <input type="hidden" id="referrer" name="referrer" value="">
       <input type="hidden" id="utm_campaign" name="utm_campaign" value="<%= params['utm_campaign'] %>">
 
+      <div class="selfie-container-3 version-2">
+
+        <% @quiz["questions"].each_with_index do |question, index| %>
+          <div class="field scrollable-field skin-type-quiz" id="skin_type_quiz[<%= index %>]">
+            <label class="form-label skin-type-quiz-question"><%= question["question"] %>*</label>
+            <div class="margin_t_15">
+            <% question["options"].each_with_index do |option, option_index| %>
+              <label class="container"><%= option %>
+                <input type="radio" name="question[<%= index %>]" id="question[<%= index %>][<%= option_index %>]" value="<%= option %>">
+                <span class="checkmark"></span>
+              </label>
+            <% end %>
+            </div>
+            <div for="email" class="alert text-danger font_h4 error_radio">This field is mandatory.</div>
+            <div><button type="button" class="selfie_btn scroll_to_next">Ok</button></div>
+          </div>
+        <% end %>
+
+        <!--SUBMIT FORM -->
+
+        <div class="field scrollable-field" id="scroll_element_7">
+          <button id="save_skin_type_button" class="selfie_btn submit_button">SUBMIT</button>
+        </div>
+      </div>
     <!--FORM END-->
   </div>
 </div>
@@ -353,7 +469,7 @@
     }
   };
 
-  $('#button_3ea7_0').on('click', function(event) {
+  $('#start_button').on('click', function(event) {
     activeIndex = 1;
     var activeField = fields.eq(activeIndex);
     activeField.addClass('active');
@@ -375,14 +491,30 @@
       event.preventDefault();
       parent_field = this.closest('.scrollable-field');
       var input_field = fields.eq(fields.index(parent_field)).find('input');
-      if (validate_data(input_field)) {
-        index = fields.index(parent_field) + 1;
-        scrollToActiveField(fields[index]);
-        var id = input_field.attr('id');
-        if (id) {
-          ga('send', 'event', 'selfie_form', 'Click'+id);
-          window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':id}]);
-          mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':id,});
+      if (input_field.length == 1) {
+        if (validate_data(input_field)) {
+          index = fields.index(parent_field) + 1;
+          scrollToActiveField(fields[index]);
+          var id = input_field.attr('id');
+          if (id) {
+            ga('send', 'event', 'selfie_form', 'Click'+id);
+            window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':id}]);
+            mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':id,});
+          }
+        }
+      } else {
+        if (input_field.parent().find("input:checked").length == 1) {
+          input_field.closest('.scrollable-field').find('.error_radio').hide();
+          index = fields.index(parent_field) + 1;
+          scrollToActiveField(fields[index]);
+          var id = input_field.closest('.scrollable-field').attr('id')
+          if (id) {
+            ga('send', 'event', 'selfie_form', 'Click'+id);
+            window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':id}]);
+            mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':id,});
+          }
+        } else {
+          input_field.closest('.scrollable-field').find('.error_radio').show();
         }
       }
     }
@@ -394,18 +526,34 @@
     parent_field = this.closest('.scrollable-field');
     var input_field = fields.eq(fields.index(parent_field)).find('input');
     e.preventDefault();
-    if (validate_data(input_field)) {
-      index = fields.index(parent_field) + 1;
-      activeIndex = index;
-      setActiveTab();
-      scrollToActiveField(fields[index]);
-      var id = input_field.attr('id');
-      if (id) {
-        ga('send', 'event', 'selfie_form', 'Click'+id);
-        window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':id}]);
-        mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':id,});
+    if (input_field.length == 1) {
+      if (validate_data(input_field)) {
+        index = fields.index(parent_field) + 1;
+        activeIndex = index;
+        setActiveTab();
+        scrollToActiveField(fields[index]);
+        var id = input_field.attr('id');
+        if (id) {
+          ga('send', 'event', 'selfie_form', 'Click'+id);
+          window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':id}]);
+          mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':id,});
+        }
       }
-    }
+    } else {
+        if (input_field.parent().find("input:checked").length == 1) {
+          input_field.closest('.scrollable-field').find('.error_radio').hide();
+          index = fields.index(parent_field) + 1;
+          scrollToActiveField(fields[index]);
+          var id = input_field.closest('.scrollable-field').attr('id')
+          if (id) {
+            ga('send', 'event', 'selfie_form', 'Click'+id);
+            window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':id}]);
+            mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':id,});
+          }
+        } else {
+          input_field.closest('.scrollable-field').find('.error_radio').show();
+        }
+      }
     e.stopPropagation();
   });
   
@@ -422,7 +570,6 @@
     //   window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':id}]);
     //   mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':id,});
     }
-
   };
   
   scrollToActiveFieldByIndex = function(index) {
@@ -550,13 +697,13 @@
         xhr: function () {
           var xhr = new window.XMLHttpRequest();
           xhr.upload.addEventListener("progress", function (evt) {
-            $('.progress').show();
+            $('#progressbar-1').show();
             customScrollToElement($('.progress'));
             if (evt.lengthComputable) {
               var percentComplete = evt.loaded / evt.total;
               percentComplete = parseInt(percentComplete * 100);
-              $('.myprogress').text(percentComplete + '%');
-              $('.myprogress').css('width', percentComplete + '%');
+              $('#progressbar-1 .myprogress').text(percentComplete + '%');
+              $('#progressbar-1 .myprogress').css('width', percentComplete + '%');
             }
           }, false);
           return xhr;
@@ -603,10 +750,79 @@
     $('.myprogress').css('width', '0%');
   }
 
-  // on user details submit button
-  $('.submit_button').on('click', function(e) {
+  $('#get_skin_type').on('click', function(e) {
     e.stopPropagation();
+    var i=0, parent_field, returned_value=true;
+    while (i < inputs.length) {
+      returned_value &= validate_data(inputs.eq(i));
+      i++;
+    }
+    if (!returned_value) {
+      parent_field = $('.wrapper form').find('.alert:visible').eq(0).closest('.scrollable-field');
+      activeIndex = fields.index(parent_field);
+      e.stopPropagation();
+      setActiveTab();
+    } else {
+      $('.file_upload_confirmation_buttons').hide();
+      $('#upload').hide();
+      fields.removeClass('active');
+      var formData = new FormData();
+      formData.append('fullname', $(inputs[0]).val());
+      formData.append('mobile', $(inputs[1]).val());
+      formData.append('email', $(inputs[2]).val());
+      formData.append('referrer', $('#referrer').val());
+      formData.append('utm_campaign', $('#utm_campaign').val());
+      ga('send', 'event', 'selfie_form', 'ClickSubmitButton');
+      window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Submit'}]);
+      mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Submit',});
+      e.stopPropagation();
+      $.ajax({
+        url: '/consult/selfie_form/create_patient',
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        // progress bar
+        xhr: function () {
+          var xhr = new window.XMLHttpRequest();
+          xhr.upload.addEventListener("progress", function (evt) {
+            $('#progressbar-2').show();
+            customScrollToElement($('.progress'));
+            if (evt.lengthComputable) {
+              var percentComplete = evt.loaded / evt.total;
+              percentComplete = parseInt(percentComplete * 100);
+              $('#progressbar-2 .myprogress').text(percentComplete + '%');
+              $('#progressbar-2 .myprogress').css('width', percentComplete + '%');
+            }
+          }, false);
+          return xhr;
+        },
+        success: function (response) {
+          if(response.value == "success") {
+            resetProgressBar();
+            $('.selfie-container-2').hide();
+            $('.selfie-container-3').show();
+            activeIndex = 0;
+            fields = $('.scrollable-field:visible');
+            inputs = $('.scrollable-field input:visible');
+            setActiveTab();
+          } else {
+            alert("We're unable to store your details. Please try again.");
+            activeIndex = 0;
+            setActiveTab();
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("We're unable to store your details. Please try again.");
+          activeIndex = 0;
+          setActiveTab();
+        }
+      });
+    }
+  });
 
+  $('#submit_button_version_1').on('click', function(e) {
+    e.stopPropagation();
     var i=0, parent_field, returned_value=true;
     while (i < inputs.length) {
       returned_value &= validate_data(inputs.eq(i));
@@ -653,6 +869,97 @@
         }
       });
     }
+  });
+
+
+  // on user details submit button
+  $('#submit_button').on('click', function(e) {
+    e.stopPropagation();
+    var i=0, parent_field, returned_value=true;
+    while (i < inputs.length) {
+      returned_value &= validate_data(inputs.eq(i));
+      i++;
+    }
+    if (!returned_value) {
+      parent_field = $('.wrapper form').find('.alert:visible').eq(0).closest('.scrollable-field');
+      activeIndex = fields.index(parent_field);
+      e.stopPropagation();
+      setActiveTab();
+    } else {
+      $('.file_upload_confirmation_buttons').hide();
+      $('#upload').hide();
+      fields.removeClass('active');
+      var formData = new FormData();
+      formData.append('fullname', $(inputs[0]).val());
+      formData.append('mobile', $(inputs[1]).val());
+      formData.append('email', $(inputs[2]).val());
+      formData.append('referrer', $('#referrer').val());
+      formData.append('utm_campaign', $('#utm_campaign').val());
+      ga('send', 'event', 'selfie_form', 'ClickSubmitButton');
+      window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Submit'}]);
+      mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Submit',});
+      e.stopPropagation();
+      $.ajax({
+        url: '/consult/selfie_form/create_patient',
+        data: formData,
+        processData: false,
+        contentType: false,
+        type: 'POST',
+        success: function (response) {
+          if(response.value == "success") {
+            window.location.href = "/consult/selfie_form/thank_you";
+          } else {
+            alert("We're unable to store your details. Please try again.");
+            activeIndex = 0;
+            setActiveTab();
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown) {
+          alert("We're unable to store your details. Please try again.");
+          activeIndex = 0;
+          setActiveTab();
+        }
+      });
+    }
+  });
+
+  $('#save_skin_type_button').on('click', function(e) {
+    e.stopPropagation();
+
+    var skin_type_questions = $(".skin-type-quiz");
+    var skin_type_responses = {};
+    for (var i=0; i<skin_type_questions.length; i++) {
+      var checked_value = $(skin_type_questions[i]).find("input:checked").val();
+
+      if (!checked_value) {
+        parent_field = $(skin_type_questions[i]).closest('.scrollable-field');
+        parent_field.find('.error_radio').show();
+        activeIndex = fields.index(parent_field);
+        e.stopPropagation();
+        setActiveTab();
+        return;
+      }
+      skin_type_responses[$(skin_type_questions[i]).find('label.skin-type-quiz-question').html()] = checked_value;
+    }
+    $.ajax({
+      url: '/consult/api/v1/selfie-form/save-my-skin-type',
+      data: {responses: skin_type_responses, questions: <%= @quiz["questions"].to_json.html_safe %>},
+      type: 'POST',
+      success: function (response) {
+        if(response.value == "success") {
+          window.location.href = "/consult/selfie_form/thank_you";
+        } else {
+          alert("We're unable to store your details. Please try again.");
+          activeIndex = 0;
+          setActiveTab();
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        alert("We're unable to store your details. Please try again.");
+        activeIndex = 0;
+        setActiveTab();
+      }
+    });
   });
 
   $('input').on('touchstart', function() {

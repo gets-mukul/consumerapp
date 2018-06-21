@@ -1,0 +1,2 @@
+class SimpleQuiz < ApplicationRecord
+end
