@@ -16,6 +16,7 @@ class AdminTransactionMailer < ApplicationMailer
     @payment = payment
     @doctor = doctor
     @selfie = SelfieForm.where(:patient => @user).first
+    @simple_quiz_response = SimpleQuizResponse.find_by(:patient => @user)
     @patient_source = PatientSource.where(:patient => @user).order(:created_at).pluck(:created_at, :local_referrer, :utm_campaign)
 
     # mail( :to => Rails.application.secrets.ADMIN_EMAIL,

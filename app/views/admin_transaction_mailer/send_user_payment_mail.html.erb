@@ -367,21 +367,27 @@
                                       </td>
                                     </tr>
                                     <% unless @selfie.nil? %>
-                                    <tr>
-                                      <td colspan="2"><b>Selfie checkup exists</b></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Selfie ID</td>
-                                      <td><%= @selfie.id %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Selfie Diagnosis</td>
-                                      <td><%= @selfie.conditions.to_sentence %></td>
-                                    </tr>
-                                    <tr>
-                                      <td>Selfie Diagnosed by</td>
-                                      <td><%= @selfie.doctor %></td>
-                                    </tr>
+                                      <tr>
+                                        <td colspan="2"><b>Selfie checkup exists</b></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Selfie ID</td>
+                                        <td><%= @selfie.id %></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Selfie Diagnosis</td>
+                                        <td><%= @selfie.conditions.to_sentence %></td>
+                                      </tr>
+                                      <tr>
+                                        <td>Selfie Diagnosed by</td>
+                                        <td><%= @selfie.doctor %></td>
+                                      </tr>
+                                    <% end %>
+                                    <% unless @simple_quiz_response.nil? %>
+                                      <tr>
+                                        <td>Diagnosed skin type</td>
+                                        <td><%= @simple_quiz_response.diagnosis.sub_category %></td>
+                                      </tr>
                                     <% end %>
                                     <br><br>
                                   </tbody>

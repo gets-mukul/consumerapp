@@ -5,6 +5,10 @@ class SelfieFormController < ApplicationController
   def thank_you
   end
 
+  def new
+    @quiz = SimpleQuiz.find_by :content_type => "skin type quiz"
+  end
+
   def create_image
     Rails.logger.info "SelfieFormController: create_image"
 

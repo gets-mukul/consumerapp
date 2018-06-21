@@ -1,11 +1,7 @@
 class Api::V1::SelfieFormController < Api::V1::ApiController
-
-  # SelfieForm2 = Struct.new(:doctor, :patient)
-  # Doctor2 = Struct.new(:code, :full_name)
-  # Patient2 = Struct.new(:name)
+  skip_before_action :verify_authenticity_token
 
   def get_diagnosis
-
     # customer's diagnosis link
     # fetch key from params
     key = params["selfie_id"]
@@ -57,22 +53,32 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
           end
         end
 
-        render json: { 
-          status: 'selfie found', 
-          diagnosis: {
-            inline_description: inline_description,
-            login_link: login_link,
-            description: description,
-            selfie_form: {
-              doctor: {
-                code: selfie_form.doctor.code,
-                full_name: selfie_form.doctor.full_name,
-              },
-              patient: {
-                name: selfie_form.patient.name,
-              }
+        diagnosis = {
+          inline_description: inline_description,
+          login_link: login_link,
+          description: description,
+          selfie_form: {
+            doctor: {
+              code: selfie_form.doctor.code,
+              full_name: selfie_form.doctor.full_name,
+            },
+            patient: {
+              name: selfie_form.patient.name,
             }
+          },
+        }
+
+        simple_quiz_response = SimpleQuizResponse.find_by :patient => selfie_form.patient
+        if simple_quiz_response
+          diagnosis["skin_type_quiz"] = {
+            description: simple_quiz_response.diagnosis.content,
+            category: simple_quiz_response.diagnosis.sub_category
           }
+        end
+
+        render json: {
+          status: 'selfie found',
+          diagnosis: diagnosis
         }, status: :found
         return
       end
@@ -80,5 +86,42 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
     render json: { status: 'selfie not found' }, status: :not_found  
     rescue ActiveRecord::RecordNotFound
       render json: { status: 'selfie not found' }, status: :not_found  
+  end
+
+  def save_my_skin_type
+    types = Array.new(5, [])
+    quiz = params["questions"].to_h.map {|x| x[1] }
+    quiz.each do |element|
+      element["options"].each_with_index do |option, id|
+        types[id] |= [option]
+      end
+    end
+
+    max_values = { :id => 0, :value => 0}
+
+    types.each_with_index do |type, id|
+      len = (type & params[:responses].values).length
+      max_values = { :id => id, :value => len} if len > max_values[:value]
+    end
+
+    diagnosis = nil
+
+    case max_values[:id]
+    when 0
+      diagnosis = Diagnosis.find_by(sub_category: "Oily Scalp/Oily hair", category: "skin type quiz")
+    when 1
+      diagnosis = Diagnosis.find_by(sub_category: "Dry Skin", category: "skin type quiz")
+    when 2
+      diagnosis = Diagnosis.find_by(sub_category: "Combination Skin", category: "skin type quiz")
+    when 3
+      diagnosis = Diagnosis.find_by(sub_category: "Sensitive Skin", category: "skin type quiz")
+    when 4
+      diagnosis = Diagnosis.find_by(sub_category: "Normal Skin", category: "skin type quiz")
+    end
+
+    simple_quiz_response = SimpleQuizResponse.new(:patient => current_user, :diagnosis => diagnosis, :responses => params[:responses], :simple_quiz => (SimpleQuiz.find_by :content_type => "skin type quiz"))
+    simple_quiz_response.save!
+
+    render json: { value: 'success', params: params }, status: :ok
   end
 end

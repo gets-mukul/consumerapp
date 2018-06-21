@@ -115,4 +115,37 @@ class SmsServiceController < ApplicationController
     end
     @sms.save!
   end
+
+  def self.send_doctor_stats_sms(doctor, stats)
+    message = "Remedico: Selfie checkup stats\r\n\r\nPending Selfies: " + stats[:overdue] + "\r\nOverdue Selfies: " + stats[:pending]
+    puts "SENDING DOCTOR SMS >"
+    uri = URI.parse("https://api.exotel.com/v1/Accounts/"+Rails.application.secrets.EXOTEL_SID+"/Sms/send.json")
+    request = Net::HTTP::Post.new(uri)
+    request.basic_auth(Rails.application.secrets.EXOTEL_SID, Rails.application.secrets.EXOTEL_TOKEN);
+    request.body = "From=02233756413&To="+doctor.mobile+"&Body="+message
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    json = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+    response = ""
+    response = JSON.parse(json.body)
+
+    @sms = SmsService.new({
+      sms_type: "doctor selfie stats"
+    })
+    unless response["SMSMessage"].nil?
+      @sms.assign_attributes({
+        sms_id: response["SMSMessage"]["Sid"],
+        detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
+        status: response["SMSMessage"]["Status"],
+        date_sent: response["SMSMessage"]["DateSent"]
+      })
+    end
+    @sms.save!
+  end
+
 end

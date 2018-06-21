@@ -4,6 +4,8 @@ Rails.application.routes.draw do
     namespace :api do
       namespace :v1 do
         get 'selfie-form/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
+        post 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+        get 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
       end
     end
 
