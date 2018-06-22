@@ -772,9 +772,14 @@
       formData.append('email', $(inputs[2]).val());
       formData.append('referrer', $('#referrer').val());
       formData.append('utm_campaign', $('#utm_campaign').val());
-      ga('send', 'event', 'selfie_form', 'ClickSubmitButton');
+      ga('send', 'event', 'selfie_form', 'ClickSubmitButton', 'Submit - Skin type quiz was shown');
       window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Submit'}]);
       mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Submit',});
+
+      ga('send', 'event', 'selfie_form', 'ClickGetMySkinTypeButton');
+      window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Get My Skin Type'}]);
+      mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'GetMySkinType',});
+
       e.stopPropagation();
       $.ajax({
         url: '/consult/selfie_form/create_patient',
@@ -843,7 +848,7 @@
       formData.append('email', $(inputs[2]).val());
       formData.append('referrer', $('#referrer').val());
       formData.append('utm_campaign', $('#utm_campaign').val());
-      ga('send', 'event', 'selfie_form', 'ClickSubmitButton');
+      ga('send', 'event', 'selfie_form', 'ClickSubmitButton', 'Submit - Skin type quiz was not shown');
       window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Submit'}]);
       mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Submit',});
       e.stopPropagation();
@@ -871,7 +876,6 @@
     }
   });
 
-
   // on user details submit button
   $('#submit_button').on('click', function(e) {
     e.stopPropagation();
@@ -895,9 +899,14 @@
       formData.append('email', $(inputs[2]).val());
       formData.append('referrer', $('#referrer').val());
       formData.append('utm_campaign', $('#utm_campaign').val());
-      ga('send', 'event', 'selfie_form', 'ClickSubmitButton');
+      ga('send', 'event', 'selfie_form', 'ClickSubmitButton', 'Submit - Skin type quiz was shown');
       window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Submit'}]);
       mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'Submit',});
+
+      ga('send', 'event', 'selfie_form', 'ClickDontGetMySkinTypeButton');
+      window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Dont Get My Skin Type'}]);
+      mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'DontGetMySkinType',});
+      
       e.stopPropagation();
       $.ajax({
         url: '/consult/selfie_form/create_patient',
@@ -941,6 +950,9 @@
       }
       skin_type_responses[$(skin_type_questions[i]).find('label.skin-type-quiz-question').html()] = checked_value;
     }
+    ga('send', 'event', 'selfie_form', 'ClickSaveSkinTypeButton');
+    window._fbq.push(['track', 'Button Clicked', {'Page URL':'/consult/selfie_form', 'Button Name':'Save Skin Type'}]);
+    mixpanel.track('Button Clicked', { 'Page URL': '/consult/selfie_form', 'Button Name':'SaveSkinType',});
     $.ajax({
       url: '/consult/api/v1/selfie-form/save-my-skin-type',
       data: {responses: skin_type_responses, questions: <%= @quiz["questions"].to_json.html_safe %>},
