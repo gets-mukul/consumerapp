@@ -19,6 +19,10 @@ Rails.application.routes.draw do
           post '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
           get '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
         end
+
+        if Rails.env.development?
+          get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
+        end
       end
     end
 
