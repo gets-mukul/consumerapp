@@ -5,6 +5,10 @@ class SelfieFormController < ApplicationController
   def thank_you
   end
 
+  def new
+    @quiz = SimpleQuiz.find_by :content_type => "skin type quiz"
+  end
+
   def create_image
     Rails.logger.info "SelfieFormController: create_image"
 
@@ -62,6 +66,8 @@ class SelfieFormController < ApplicationController
   end
 
   def selfie_diagnosis
+    redirect_to "/selfie-diagnosis?s=#{params[:s]}"
+    return
     # customer's diagnosis link
     # fetch key from params
     key = params["s"]
@@ -73,7 +79,9 @@ class SelfieFormController < ApplicationController
         # if key is valid render the diagnosis page
         @conditions = @selfie_form.conditions.select(:key, :title, :inline_desc, :desc)
         @inline_descriptors = @conditions.collect(&:inline_desc)
+
         @login_link = "/consult/patients?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
+        @login_link2 = "/my_consultation/create?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
 
         @inline_description = ''
         @description = ''
@@ -118,4 +126,5 @@ class SelfieFormController < ApplicationController
       end
     end
   end
+
 end

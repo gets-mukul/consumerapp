@@ -14,6 +14,11 @@ Rails.application.routes.draw do
           get '/unregister' => "patient#unregister_patient", :as => 'unregister_patient', defaults: {format: 'json'}
         end
 
+        scope 'selfie-form' do
+          get '/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
+          post '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+          get '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+        end
       end
     end
 

@@ -11,7 +11,7 @@
 
 $(document).on 'turbolinks:load', ->
 
-  $('.swiper-controllers .btn').click ->
+  $('.swiper-controllers .controller-btn').click ->
     status = $(this).attr('id')
     id = $('.swiper-slide-active .swiper-text .swiper-id').attr('id')
     if id
@@ -20,7 +20,7 @@ $(document).on 'turbolinks:load', ->
 
       confirmed = false
       if status == 'diagnosed'
-        if conditions != null
+        if (conditions != null && conditions.length != 0)
           params = { id: id, status: 'diagnosed', conditions: conditions }
           confirmed = true
         else
@@ -32,6 +32,24 @@ $(document).on 'turbolinks:load', ->
       else if status == 'bad-photo'
         if confirm('Are you sure this selfie is not clear?') == true
           params = { id: id, status: 'bad-photo' }
+          confirmed = true
+        else
+          confirmed = false
+      else if status == 'no-condition'
+        if confirm('Are you sure this person has no skin issues?') == true
+          params = { id: id, status: 'no-condition' }
+          confirmed = true
+        else
+          confirmed = false
+      else if status == 'recommend-consult'
+        if confirm('Confirmation: Are you sure you want to recommend a consultation to this patient?') == true
+          params = { id: id, status: 'recommend-consult' }
+          confirmed = true
+        else
+          confirmed = false
+      else if status == 'recommend-visiting-a-doctor'
+        if confirm('Confirmation: Are you sure you want to recommend visiting a doctor in person?') == true
+          params = { id: id, status: 'recommend-visiting-a-doctor' }
           confirmed = true
         else
           confirmed = false
@@ -48,5 +66,9 @@ $(document).on 'turbolinks:load', ->
             console.log "something went wrong"
           success: (data, textStatus, jqXHR) ->
             console.log "saved"
+
+  $('.btn.dropdown-toggle').click ->
+    console.log 'clicked'
+    $(".dropdown-menu-custom").toggleClass("display-none");
 
   return

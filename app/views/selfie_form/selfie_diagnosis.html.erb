@@ -1,3 +1,4 @@
+<%= content_for :turn_turbolinks, "data-turbolinks=false" %>
 <%= content_for :header_content, "
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous' media='none' onload='if(media!=\"all\")media=\"all\"'>
   <meta name='theme-color' content='#17a6b0' />".html_safe %>
@@ -80,7 +81,7 @@
     padding-left:8px;
   }
   .selfie-diagnosis.footer {
-    background:url(http://thedemolabs.com/demo/remedica/email_template/img/footer_image.png);
+    background:url(https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/static/footer_image.png);
     background-repeat: repeat;
     padding:30px 0;
     text-align: center;
@@ -260,17 +261,21 @@
     color: #dddddd;
   }
 
+  .variation-2 {
+    display: none;
+  }
+
 </style>
 
 <!--logo begin-->
-<div id="logo" style=""><img alt="" src="http://remedicohealth.com/images/remedico_white1.png"/></div>
+<div id="logo" style=""><img alt="" src="https://remedicohealth.com/images/remedico_white1.png"/></div>
 <!--logo end-->
 
 <!--header start-->
 <div class="container-fluid selfie-diagnosis header">
   <div class="author">
     <div class="width-auto doctor-container">
-      <img alt="" class="doctor-avatar" src="http://remedicohealth.com/images/email/image_<%= @selfie_form.doctor.code %>.png" />
+      <img alt="" class="doctor-avatar" src="https://remedicohealth.com/images/email/image_<%= @selfie_form.doctor.code %>.png" />
     </div>
     
     <div class="author-secton">
@@ -297,7 +302,7 @@
   
   <div class="head">
     <div class="img-holder">
-      <img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/abt_ur_condition_icon.png" />
+      <img alt="" src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/static/abt_ur_condition_icon.png" />
     </div>
     <div class="about">About your condition</div>
   </div>
@@ -315,10 +320,15 @@
 <!--section end - About your condition-->
 
 <!--button start-->
-<div class="selfie-diagnosis sticky-btn  text-center top-btn">
+<div class="selfie-diagnosis sticky-btn  text-center top-btn variation-1">
   <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'top','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'top', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
 </div>
+<!--button end-->
 
+<!--button start-->
+<div class="selfie-diagnosis sticky-btn  text-center top-btn variation-2">
+  <a href="<%= @login_link2 %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'top','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'top', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
+</div>
 <!--button end-->
 
 <!--section start - Treatment Plan-->
@@ -326,7 +336,7 @@
   
   <div class="head">
     <div class="img-holder">
-      <img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/treatment_plan_icon.png" />
+      <img alt="" src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/static/treatment_plan_icon.png" />
     </div>
     <div class="about">Treatment Plan</div>
   </div>
@@ -441,14 +451,20 @@
 
   <div class="head">
     <div class="img-holder">
-      <img alt="" src="http://thedemolabs.com/demo/remedica/email_template/img/follow_up_icon.png" />
+      <img alt="" src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/email/static/follow_up_icon.png" />
     </div>
     <div class="about">Next steps</div>
   </div>
 
   <!--button start-->
-  <div class="selfie-diagnosis sticky-btn text-center bottom-btn">
+  <div class="selfie-diagnosis sticky-btn text-center bottom-btn variation-1">
     <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'bottom','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'bottom', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
+  </div>
+  <!--button end-->
+
+  <!--button start-->
+  <div class="selfie-diagnosis sticky-btn text-center bottom-btn variation-2">
+    <a href="<%= @login_link2 %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'bottom','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'bottom', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
   </div>
   <!--button end-->
 

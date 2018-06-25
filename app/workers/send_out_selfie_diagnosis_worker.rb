@@ -41,5 +41,29 @@ class SendOutSelfieDiagnosisWorker
         selfie_form.update(:status => 'no-condition-no-email')
       end
     end
+
+    # get all the selfies with a consultation recommendation
+    selfie_forms = SelfieForm.where(:status => 'recommend-consult')
+
+    selfie_forms.each do |selfie_form|
+      if selfie_form.patient.email.present?
+        CustomerSelfieCheckupMailer.send_customer_recommend_consult_mail(selfie_form).deliver_later()
+        selfie_form.update(:status => 'recommend-consult-mailed')
+      else
+        selfie_form.update(:status => 'recommend-consult-no-email')
+      end
+    end
+
+        # get all the selfies with a consultation recommendation
+    selfie_forms = SelfieForm.where(:status => 'recommend-visiting-a-doctor')
+
+    selfie_forms.each do |selfie_form|
+      if selfie_form.patient.email.present?
+        CustomerSelfieCheckupMailer.send_customer_recommend_consult_mail(selfie_form).deliver_later()
+        selfie_form.update(:status => 'recommend-visiting-a-doctor-mailed')
+      else
+        selfie_form.update(:status => 'recommend-visiting-a-doctor-no-email')
+      end
+    end
   end
 end

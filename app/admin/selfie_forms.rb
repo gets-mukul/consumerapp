@@ -15,6 +15,7 @@ ActiveAdmin.register SelfieForm do
   scope "Unclear photos"
   scope "No conditions"
   scope "Diagnosed"
+  scope "Diagnosis sent"
   scope :all
   actions :all, :except => [:new, :destroy]
   
@@ -73,7 +74,7 @@ ActiveAdmin.register SelfieForm do
     column :doctor
     column :diagnosis_link
     column "Shortened URL" do |selfie_form|
-       selfie_form.diagnosis_link ? "bit.do/remedico-selfie?s=" + selfie_form.diagnosis_link.split('=').last : ""
+      selfie_form.diagnosis_link ? "bit.do/rmselfie?s=" + selfie_form.diagnosis_link.split('=').last : ""
     end
     column :updated_at
     actions
@@ -87,7 +88,7 @@ ActiveAdmin.register SelfieForm do
       row("Image") { image_tag selfie_form.selfie_image.image_url(:medium).to_s if selfie_form.selfie_image }
       row :status
       row :diagnosis_link
-      row("Sortened URL") { selfie_form.diagnosis_link ? "bit.do/remedico-selfie?s=" + selfie_form.diagnosis_link.split('=').last : "" }
+      row("Sortened URL") { selfie_form.diagnosis_link ? "bit.do/rmselfie?s=" + selfie_form.diagnosis_link.split('=').last : "" }
       row :doctor
       row :created_at
       row :updated_at
@@ -123,13 +124,14 @@ ActiveAdmin.register SelfieForm do
 
   csv force_quotes: true, col_sep: ',' do
     column :created_at
-    column :id, :label => 'Selfie form id'
-    column :patient
-    column "Mobile" do |cs|
-      cs.patient.mobile
+    column 'Selfie form id' do |selfie_form|
+      selfie_form.id
     end
+    column :patient
     column :status
-    column :diagnosis_link
     column :updated_at
+    column "Conditions" do |selfie_form|
+      selfie_form.conditions.join(', ')
+    end
   end
 end

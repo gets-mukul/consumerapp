@@ -40,21 +40,61 @@
           <div class="col-sm-12 col-md-6 text-center">
             
             <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
+            <!-- <div class="swiper-pagination"></div>
             <div><label class="condition-key-label">Select Conditions</label></div>
-            <%= select_tag :key,
+            <= select_tag :key,
               options_from_collection_for_select(@conditions, "key", "key"),
               { :multiple => true, :class => 'js-example-basic-multiple pull-left', :placeholder => 'Enter Conditions' }
-            %>
+            %> -->
           </div>
+
           <div class="swiper-controllers col-sm-12 col-md-6 text-center">
+            <div class="flex-box-wrapper">
+              <div class="flex-0">
+                <div class="dropup h-100">
+                  <div class="h-100">
+                    <button type="button" class="btn h-100 secondary-btn dropdown-toggle" data-toggle="dropdown">
+                      &nbsp;&nbsp;<i class="fa fa-ellipsis-v" aria-hidden="true"></i>&nbsp;&nbsp;
+                    </button>
+                  </div>
+                  <div class="dropdown-menu-custom display-none">
+                    <div class="dropdown-item"><button type="button" class="btn controller-btn" id="bad-photo">Bad photo</button></div>
+                    <div class="dropdown-item"><button type="button" class="btn controller-btn" id="no-condition">No condition</button></div>
+                    <div class="dropdown-item"><button type="button" class="btn controller-btn" id="recommend-consult">Recommend consult</button></div>
+                    <div class="dropdown-item"><button type="button" class="btn controller-btn" id="recommend-visiting-a-doctor">Recommend seeing doctor in person</button></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="flex-1">
+                <div class="flex-box-wrapper">
+                  <div class="flex-1">
+                    <div><label class="condition-key-label">Select Conditions</label></div>
+                    <%= select_tag :key,
+                      options_from_collection_for_select(@conditions, "key", "key"),
+                      { :multiple => true, :class => 'js-example-basic-multiple pull-left', :placeholder => 'Enter Conditions' }
+                    %>
+                  </div>
+                  <div class="flex-0"><nobr class="h-100"><div class="swiper-pagination h-100"></div></nobr></div>
+                </div>
+              </div>
+              <div class="flex-0">
+                <div class="h-100">
+                  <button type="button" class="btn h-100 green-btn controller-btn" id="diagnosed">
+                    &nbsp;&nbsp;<i class="fa fa-play" aria-hidden="true"></i>&nbsp;&nbsp;
+                  </button>
+                </div>
+              </div>
+            <div>
+          </div>
+<!--           <div class="swiper-controllers col-sm-12 col-md-6 text-center">
             <button class='btn btn-secondary btn-circle btn-xl condition-btn-bad-photo' id="bad-photo">
               <i class="fa fa-times-circle" aria-hidden="true"></i><br>
             </button>
             <button class='btn btn-success btn-circle btn-xl condition-btn-add' id="diagnosed" >
               <i class="fa fa-paper-plane" aria-hidden="true"></i><br> Send
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

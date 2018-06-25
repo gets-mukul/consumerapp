@@ -13,6 +13,7 @@ class SendOutDailySelfieCheckupStatsWorker
 			puts "SENDING EMAILS TO #{doctor.email}"
 			unless stats[:overdue].zero?
 				DoctorNotifierMailer.send_selfie_stats_mail(doctor, stats).deliver_later()
+				SmsServiceController.send_doctor_stats_sms(doctor, stats)
 			end
 		end
 		puts "DELIVERED DOCTOR MAILS"

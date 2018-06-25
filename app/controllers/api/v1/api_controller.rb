@@ -3,6 +3,7 @@ class Api::V1::ApiController < ActionController::Base
   include Api::V1::PatientHelper
   include Api::V1::ConsultationHelper
 
+
   # Security note: controllers with no-CSRF protection must disable the Devise fallback,
   # see #49 for details.
   # acts_as_token_authentication_handler_for User, fallback: :none
