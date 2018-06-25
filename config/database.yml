@@ -94,3 +94,11 @@ production:
   password: <%= ENV['REMEDICO_DATABASE_PASSWORD'] %>
   host: prod-rds-postgres.czkfg6sul0zu.ap-southeast-1.rds.amazonaws.com
   port: 5432
+
+external_production:
+  <<: *default
+  database: remedico_production
+  username: remedico
+  password: <%= ENV['REMEDICO_DATABASE_PASSWORD'] %>
+  host: prod-rds-postgres.czkfg6sul0zu.ap-southeast-1.rds.amazonaws.com
+  port: 5432
