@@ -5,6 +5,10 @@ class SelfieFormController < ApplicationController
   def thank_you
   end
 
+  def new
+    @quiz = SimpleQuiz.find_by :content_type => "skin type quiz"
+  end
+
   def create_image
     Rails.logger.info "SelfieFormController: create_image"
 
@@ -77,6 +81,7 @@ class SelfieFormController < ApplicationController
         @inline_descriptors = @conditions.collect(&:inline_desc)
 
         @login_link = "/consult/patients?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
+        @login_link2 = "/my_consultation/create?name=#{@selfie_form.patient.name}&mobile=#{@selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
 
         @inline_description = ''
         @description = ''

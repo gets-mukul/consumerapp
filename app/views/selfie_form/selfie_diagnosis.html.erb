@@ -1,3 +1,4 @@
+<%= content_for :turn_turbolinks, "data-turbolinks=false" %>
 <%= content_for :header_content, "
   <link href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous' media='none' onload='if(media!=\"all\")media=\"all\"'>
   <meta name='theme-color' content='#17a6b0' />".html_safe %>
@@ -260,6 +261,10 @@
     color: #dddddd;
   }
 
+  .variation-2 {
+    display: none;
+  }
+
 </style>
 
 <!--logo begin-->
@@ -315,10 +320,15 @@
 <!--section end - About your condition-->
 
 <!--button start-->
-<div class="selfie-diagnosis sticky-btn  text-center top-btn">
+<div class="selfie-diagnosis sticky-btn  text-center top-btn variation-1">
   <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'top','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'top', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
 </div>
+<!--button end-->
 
+<!--button start-->
+<div class="selfie-diagnosis sticky-btn  text-center top-btn variation-2">
+  <a href="<%= @login_link2 %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'top','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'top', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
+</div>
 <!--button end-->
 
 <!--section start - Treatment Plan-->
@@ -447,8 +457,14 @@
   </div>
 
   <!--button start-->
-  <div class="selfie-diagnosis sticky-btn text-center bottom-btn">
+  <div class="selfie-diagnosis sticky-btn text-center bottom-btn variation-1">
     <a href="<%= @login_link %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'bottom','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'bottom', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
+  </div>
+  <!--button end-->
+
+  <!--button start-->
+  <div class="selfie-diagnosis sticky-btn text-center bottom-btn variation-2">
+    <a href="<%= @login_link2 %>" class="action_btn primary" onclick="ga('send', 'event', 'selfie-diagnosis', 'ClickCTA');window._fbq.push(['track', 'CTA Clicked', {'Position':'bottom','Page URL':'/consult/selfie-diagnosis','Color':'#17a6b0'}]);mixpanel.track('CTA Clicked', { 'Position': 'bottom', 'Page URL': '/consult/selfie-diagnosis', 'Color': '#17a6b0', });"><i class="fa fa-medkit" aria-hidden="true"></i>&nbsp;Get Your Treatment Plan</a>
   </div>
   <!--button end-->
 

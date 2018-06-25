@@ -48,7 +48,7 @@ RAILS_ENV=production rake assets:clobber
 RAILS_ENV=production rake assets:precompile
 
 # Run sidekiq
-bundle exec sidekiq -d -L shared/log/sidekiq.log -q default -q mailers -c 8
+bundle exec sidekiq -d -L shared/log/sidekiq.log -q default -q mailers -q low -c 8
 
 # Test sidekiq on local
 bundle exec sidekiq -e production
