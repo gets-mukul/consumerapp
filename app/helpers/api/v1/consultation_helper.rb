@@ -13,9 +13,9 @@ module Api::V1::ConsultationHelper
       # show them the respective page
       session[:consultation_id] = @consultation.id
       if @consultation.user_status.start_with? 'registered'
-        return { status: 'registered', condition: @consultation.category }
+        return { status: 'registered', condition: @consultation.category, _session: request.session_options[:id], name: current_user.name }
       elsif @consultation.user_status.start_with?('form filled', 'payment failed', 'processing')
-        return { status: 'form_filled', condition: @consultation.category }
+        return { status: 'form_filled', condition: @consultation.category, _session: request.session_options[:id], name: current_user.name }
       end
     end
 
