@@ -20,6 +20,10 @@ Rails.application.routes.draw do
           get '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
         end
 
+        scope 'questionnaire' do
+          get '/' => 'questionnaire#index'
+        end
+
         if Rails.env.development?
           get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
         end
