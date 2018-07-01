@@ -38,12 +38,12 @@ gem 'google-api-client'
 gem 'razorpay'
 # Log entries
 gem 'le'
+# Use activeadmin for admin panel
+gem 'activeadmin'
 # Use carrier wave for imsges
 gem 'carrierwave', '~> 1.0'
 gem 'mini_magick'
 gem 'fog'
-# Use activeadmin for admin panel
-gem 'activeadmin', github: 'activeadmin'
 # Use devise to set up admin users on admin panel
 gem 'devise'
 # Use pundit for authorization of admin users
@@ -54,6 +54,9 @@ group :development, :test do
   gem 'byebug', platform: :mri
   gem 'better_errors'
   gem 'binding_of_caller'
+  # aws S3 bucket
+  gem 'aws-sdk', '~> 2'
+  gem 'rack-cors', :require => 'rack/cors'
 end
 
 group :development do

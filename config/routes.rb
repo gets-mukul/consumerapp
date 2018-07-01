@@ -3,13 +3,21 @@ Rails.application.routes.draw do
 
     namespace :api do
       namespace :v1 do
-        get 'selfie-form/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
-        post 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
-        get 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+        scope 'selfie-form' do
+          post '/create' => 'selfie_form#create', defaults: {format: 'json'}
+          get '/get-skin-type-quiz' => 'selfie_form#skin_type_quiz', defaults: {format: 'json'}
+
+          get '/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
+          post '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+          get '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+        end
 
         if Rails.env.development?
           get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
         end
+
+        get 'get-s3-policy/:folder_name' => 's3_bucket#get_s3_policy'
+
       end
     end
 

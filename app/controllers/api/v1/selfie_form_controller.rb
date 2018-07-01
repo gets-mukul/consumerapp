@@ -124,4 +124,48 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
 
     render json: { value: 'success', params: params }, status: :ok
   end
+
+  def create
+    unless params[:imageUrl].present? and params[:patient][:fullname].present? and params[:patient][:mobile].present? and params[:patient][:email].present?
+      render :json => { :message => 'required fields are empty' }, :status => :bad_request
+      return
+    end
+
+    # check if patient with given details exists patient
+    patient = Patient.find_by :mobile => params[:patient][:mobile]
+
+    # if patient exists, update their details, else create
+    if patient
+      patient.update({ :email => params[:patient][:email].downcase.strip}) if patient.email.blank?
+    else
+      patient = Patient.create({:name => params[:patient][:fullname].downcase.titleize.strip, :mobile => params[:patient][:mobile], :email => params[:patient][:email].downcase.strip, :pay_status => 'selfie checkup'})
+    end
+
+    # create selfie form for patient with the given image
+    if patient
+      # create selfie image
+      selfie_image = SelfieImage.new({:image => params[:image_url]})
+      # create selfie form
+      selfie_form = SelfieForm.new({ :patient => patient, :selfie_image => selfie_image })
+
+      # save
+      if selfie_form.save
+        # register patient
+        register_selfie_checkup_user patient
+        render :json => { :message => 'successful' }, :status => :created
+        return
+      end
+    end
+
+    render :json => { :message => 'failed to upload' }, :status => :bad_request
+  end
+
+  def skin_type_quiz
+    quiz = SimpleQuiz.find_by :content_type => "skin type quiz"
+    if quiz
+      render :json => { :questions => quiz.questions }, :status => :ok
+    else
+      render :json => { :message => 'failed' }, :status => :not_found
+    end
+  end
 end
