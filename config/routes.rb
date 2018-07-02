@@ -16,7 +16,7 @@ Rails.application.routes.draw do
           get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
         end
 
-        get 'get-s3-policy/:folder_name' => 's3_bucket#get_s3_policy'
+        get 'get-s3-policy' => 's3_bucket#get_s3_policy'
 
       end
     end

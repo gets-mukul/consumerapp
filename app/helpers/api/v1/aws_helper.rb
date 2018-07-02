@@ -2,13 +2,13 @@ module Api::V1::AwsHelper
   require 'aws-sdk'
   
   class RemedicoS3
-    def self.post_data_for_images folder_name
+    def self.post_data_for_images
       s3 = Aws::S3::Resource.new :region => 'ap-southeast-1'
       bucket = s3.bucket('remedico-test')
       
       
       post_helper = DirectPostHelper.new bucket
-      folder = "uploads/#{folder_name}/"
+      folder = "uploads/"
       Rails.logger.info folder
       # custom_params = {'content-type' => 'image/*', 'acl' => 'public-read'}
       custom_params = {'acl' => 'public-read'}
