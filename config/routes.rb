@@ -58,9 +58,9 @@ Rails.application.routes.draw do
     get '/terms_of_use', to: 'static_pages#terms_of_use'
     get '/', to: 'consultation#index'
     
-    get '/selfie_form', to: redirect('/selfie-checkup-form')
-    get '/selfie_form/new', to: redirect('/selfie-checkup-form')
-    get '/selfie-diagnosis', to: redirect('consult/selfie-diagnosis')
+    get '/selfie_form', to: redirect('/selfie-form')
+    get '/selfie_form/new', to: redirect('/selfie-form')
+    get '/selfie-diagnosis', to: redirect('/selfie-diagnosis')
     # get '/selfie_form', to: '/selfie-checkup-form'
     # get '/selfie_form/new', to: '/selfie-checkup-form'
 
