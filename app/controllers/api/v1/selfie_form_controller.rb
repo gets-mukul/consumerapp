@@ -138,7 +138,14 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
     if patient
       patient.update({ :email => params[:patient][:email].downcase.strip}) if patient.email.blank?
     else
-      patient = Patient.create({:name => params[:patient][:fullname].downcase.titleize.strip, :mobile => params[:patient][:mobile], :email => params[:patient][:email].downcase.strip, :pay_status => 'selfie checkup'})
+      patient = Patient.create({
+        :name => params[:patient][:fullname].downcase.titleize.strip, 
+        :mobile => params[:patient][:mobile], 
+        :email => params[:patient][:email].downcase.strip, 
+        :pay_status => 'selfie checkup',
+        :local_referrer => (params[:patient][:referrer]||'').downcase,
+        :utm_campaign => (params[:patient][:utm_campaign]||'').downcase
+      })
     end
 
     # create selfie form for patient with the given image
