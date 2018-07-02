@@ -84,8 +84,8 @@ ActiveAdmin.register SelfieForm do
     attributes_table do
       row :patient
       row("Mobile") { selfie_form.patient.mobile }
-      row("Image URL") { selfie_form.selfie_image.image_url.to_s if selfie_form.selfie_image }
-      row("Image") { image_tag selfie_form.selfie_image.image_url(:medium).to_s if selfie_form.selfie_image }
+      row("Image URL") { selfie_form.selfie_image.image.to_s if selfie_form.selfie_image }
+      row("Image") { image_tag selfie_form.selfie_image.image.to_s if selfie_form.selfie_image }
       row :status
       row :diagnosis_link
       row("Sortened URL") { selfie_form.diagnosis_link ? "bit.do/rmselfie?s=" + selfie_form.diagnosis_link.split('=').last : "" }
