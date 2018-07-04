@@ -22,7 +22,7 @@ module ConsultationHelper
 
   def unregister_consultation
     Rails.logger.info "In unregister"
-    @current_consultation = nil
+    session[:consultation_id] = nil
   end
 
   def check_current_consultation
