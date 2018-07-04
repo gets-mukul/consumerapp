@@ -66,7 +66,7 @@ class PaymentController < ApplicationController
       end
 
       # update user status
-      current_consultation.update(user_status: 'form filled')
+      current_consultation.update(user_status: 'form filled', pay_status: 'payment pending')
 
       # fetch consultation fee
       @amount = current_consultation.amount

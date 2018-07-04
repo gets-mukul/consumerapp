@@ -4,7 +4,7 @@ module Api::V1::AwsHelper
   class RemedicoS3
     def self.post_data_for_images
       s3 = Aws::S3::Resource.new :region => 'ap-southeast-1'
-      bucket = s3.bucket('remedico-test')
+      bucket = s3.bucket(Rails.application.secrets.S3_BUCKET)
       
       
       post_helper = DirectPostHelper.new bucket

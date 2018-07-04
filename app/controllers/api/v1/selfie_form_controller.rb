@@ -143,7 +143,6 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
         :mobile => params[:patient][:mobile], 
         :email => params[:patient][:email].downcase.strip, 
         :pay_status => 'selfie checkup',
-        :local_referrer => (params[:patient][:referrer]||'').downcase,
         :utm_campaign => (params[:patient][:utm_campaign]||'').downcase
       })
     end
@@ -151,7 +150,7 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
     # create selfie form for patient with the given image
     if patient
       # create selfie image
-      selfie_image = SelfieImage.new({:image => params[:image_url]})
+      selfie_image = SelfieImage.new({:image => params[:imageUrl]})
       # create selfie form
       selfie_form = SelfieForm.new({ :patient => patient, :selfie_image => selfie_image })
 
