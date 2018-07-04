@@ -1,5 +1,5 @@
 ActiveAdmin.register Coupon do
-  permit_params :discount_amount, :coupon_code, :expires_on, :max_count, :coupon_category, :expires_on, :coupon_n_coupons_to_generate
+  permit_params :discount_amount, :coupon_code, :expires_on, :max_count, :coupon_category, :coupon_n_coupons_to_generate
   config.clear_action_items!
   
   action_item :new, only: :index do
@@ -26,8 +26,8 @@ ActiveAdmin.register Coupon do
     end
 
     def update
-      params["coupon"]["max_count"] = params["coupon"]["max_count"].empty? ? 2147483647 : params["coupon"]["max_count"]
-      super
+      params["coupon"]["max_count"] = 2147483647 if params["coupon"]["max_count"].empty?
+      update!
     end
 
     def create(options={}, &block)
@@ -35,22 +35,10 @@ ActiveAdmin.register Coupon do
         discount_amount: params["coupon"]["discount_amount"],
         status: "coupon unused",
         count: 0,
-        max_count: params["coupon"]["max_count"]
+        max_count: ((params["coupon"]["max_count"] = 2147483647 if params["coupon"]["max_count"].empty?) || params["coupon"]["max_count"]),
+        expires_on: params["coupon"]["expires_on"]
       }
-      if params["coupon"]["max_count"] == ''
-        hash[:max_count] = 2147483647
-      else
-        hash[:max_count] =  params["coupon"]["max_count"]
-      end
-      
-      hash[:max_count] = params["coupon"]["max_count"].empty? ? 2147483647 : params["coupon"]["max_count"]
-      
-      expires_on = params["expires_on"]
-      expires_on.delete_if { expires_on["date(1i)"].blank? || expires_on["date(2i)"].blank? || expires_on["date(3i)"].blank? }
-      if expires_on.present?
-        hash[:expires_on] = DateTime.new(*expires_on.values.map(&:to_i))
-      end
-      
+
       if params['generate_checkbox'] != 'on'
         hash[:coupon_code] = params["coupon"]["coupon_code"].upcase
 
