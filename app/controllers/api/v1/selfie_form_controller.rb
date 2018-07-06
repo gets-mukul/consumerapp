@@ -88,43 +88,6 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
       render json: { status: 'selfie not found' }, status: :not_found  
   end
 
-  def save_my_skin_type
-    types = Array.new(5, [])
-    quiz = params["questions"].to_h.map {|x| x[1] }
-    quiz.each do |element|
-      element["options"].each_with_index do |option, id|
-        types[id] |= [option]
-      end
-    end
-
-    max_values = { :id => 0, :value => 0}
-
-    types.each_with_index do |type, id|
-      len = (type & params[:responses].values).length
-      max_values = { :id => id, :value => len} if len > max_values[:value]
-    end
-
-    diagnosis = nil
-
-    case max_values[:id]
-    when 0
-      diagnosis = Diagnosis.find_by(sub_category: "Oily Scalp/Oily hair", category: "skin type quiz")
-    when 1
-      diagnosis = Diagnosis.find_by(sub_category: "Dry Skin", category: "skin type quiz")
-    when 2
-      diagnosis = Diagnosis.find_by(sub_category: "Combination Skin", category: "skin type quiz")
-    when 3
-      diagnosis = Diagnosis.find_by(sub_category: "Sensitive Skin", category: "skin type quiz")
-    when 4
-      diagnosis = Diagnosis.find_by(sub_category: "Normal Skin", category: "skin type quiz")
-    end
-
-    simple_quiz_response = SimpleQuizResponse.new(:patient => current_user, :diagnosis => diagnosis, :responses => params[:responses], :simple_quiz => (SimpleQuiz.find_by :content_type => "skin type quiz"))
-    simple_quiz_response.save!
-
-    render json: { value: 'success', params: params }, status: :ok
-  end
-
   def create
     unless params[:imageUrl].present? and params[:patient][:fullname].present? and params[:patient][:mobile].present? and params[:patient][:email].present?
       render :json => { :message => 'required fields are empty' }, :status => :bad_request
@@ -154,6 +117,10 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
       # create selfie form
       selfie_form = SelfieForm.new({ :patient => patient, :selfie_image => selfie_image })
 
+      if params[:skinTypeQuiz]
+        save_my_skin_type(params[:skinTypeQuiz], patient)
+      end
+
       # save
       if selfie_form.save
         # register patient
@@ -174,4 +141,20 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
       render :json => { :message => 'failed' }, :status => :not_found
     end
   end
+
+  private
+    def save_my_skin_type(options, user)
+      choices = {0 => "oily", 1 => "dry", 2 => "combination", 3 => "senstitive", 4 => "normal"}
+      types = []
+
+      options[:questions].each do |question|
+        types.push(choices[question["options"].find_index(options[:responses][question["question"]])])
+      end
+      classes = {["oily", "oily", "oily", "oily", "oily"]=>"oily", ["oily", "oily", "oily", "oily", "dry"]=>"oily",["oily", "oily", "oily", "oily", "combination"]=>"oily", ["oily", "oily", "oily", "oily", "sensitive"]=>"oily sensitive", ["oily", "oily", "oily", "oily", "normal"]=>"oily", ["oily", "oily", "oily", "dry", "dry"]=>"combination", ["oily", "oily", "oily", "dry", "combination"]=>"combination", ["oily", "oily", "oily", "dry", "sensitive"]=>"combination sensitive", ["oily", "oily", "oily", "dry", "normal"]=>"combination", ["oily", "oily", "oily", "combination", "combination"]=>"combination", ["oily", "oily", "oily", "combination", "sensitive"]=>"combination sensitive", ["oily", "oily", "oily", "combination", "normal"]=>"combination", ["oily", "oily", "oily", "sensitive", "sensitive"]=>"oily sensitive", ["oily", "oily", "oily", "sensitive", "normal"]=>"oily sensitive",["oily", "oily", "oily", "normal", "normal"]=>"oily",["oily", "oily", "dry", "dry", "dry"]=>"combination", ["oily", "oily", "dry", "dry", "combination"]=>"combination", ["oily", "oily", "dry", "dry", "sensitive"]=>"combination sensitive", ["oily", "oily", "dry", "dry", "normal"]=>"combination",["oily", "oily", "dry", "combination", "combination"]=>"combination",["oily", "oily", "dry", "combination", "sensitive"]=>"combination sensitive", ["oily", "oily", "dry", "combination", "normal"]=>"combination",["oily", "oily", "dry", "sensitive", "sensitive"]=>"combination sensitive", ["oily", "oily", "dry", "sensitive", "normal"]=>"combination sensitive", ["oily", "oily", "dry", "normal", "normal"]=>"combination",["oily", "oily", "combination", "combination", "combination"]=>"combination", ["oily", "oily", "combination", "combination", "sensitive"]=>"combination sensitive",["oily", "oily", "combination", "combination", "normal"]=>"combination", ["oily", "oily", "combination", "sensitive", "sensitive"]=>"combination sensitive", ["oily", "oily", "combination", "sensitive", "normal"]=>"combination sensitive",["oily", "oily", "combination", "normal", "normal"]=>"combination", ["oily", "oily", "sensitive", "sensitive", "sensitive"]=>"oily sensitive", ["oily", "oily", "sensitive", "sensitive", "normal"]=>"oily sensitive",["oily", "oily", "sensitive", "normal", "normal"]=>"oily sensitive",["oily", "oily", "normal", "normal", "normal"]=>"normal to oily",["oily", "dry", "dry", "dry", "dry"]=>"dry",["oily", "dry", "dry", "dry", "combination"]=>"combination",["oily", "dry", "dry", "dry", "sensitive"]=>"combination sensitive",["oily", "dry", "dry", "dry", "normal"]=>"combination",["oily", "dry", "dry", "combination", "combination"]=>"combination",["oily", "dry", "dry", "combination", "sensitive"]=>"combination sensitive", ["oily", "dry", "dry", "combination", "normal"]=>"combination",["oily", "dry", "dry", "sensitive", "sensitive"]=>"combination sensitive", ["oily", "dry", "dry", "sensitive", "normal"]=>"combination sensitive", ["oily", "dry", "dry", "normal", "normal"]=>"combination",["oily", "dry", "combination", "combination", "combination"]=>"combination",["oily", "dry", "combination", "combination", "sensitive"]=>"combination sensitive", ["oily", "dry", "combination", "combination", "normal"]=>"combination",["oily", "dry", "combination", "sensitive", "sensitive"]=>"combination sensitive", ["oily", "dry", "combination", "sensitive", "normal"]=>"combination sensitive", ["oily", "dry", "combination", "normal", "normal"]=>"combination",["oily", "dry", "sensitive", "sensitive", "sensitive"]=>"combination sensitive", ["oily", "dry", "sensitive", "sensitive", "normal"]=>"combination sensitive", ["oily", "dry", "sensitive", "normal", "normal"]=>"combination sensitive", ["oily", "dry", "normal", "normal", "normal"]=>"combination",["oily", "combination", "combination", "combination", "combination"]=>"combination",["oily", "combination", "combination", "combination", "sensitive"]=>"combination sensitive", ["oily", "combination", "combination", "combination", "normal"]=>"combination",["oily", "combination", "combination", "sensitive", "sensitive"]=>"combination sensitive", ["oily", "combination", "combination", "sensitive", "normal"]=>"combination sensitive", ["oily", "combination", "combination", "normal", "normal"]=>"combination",["oily", "combination", "sensitive", "sensitive", "sensitive"]=>"combination sensitive",["oily", "combination", "sensitive", "sensitive", "normal"]=>"combination sensitive", ["oily", "combination", "sensitive", "normal", "normal"]=>"combination sensitive", ["oily", "combination", "normal", "normal", "normal"]=>"combination",["oily", "sensitive", "sensitive", "sensitive", "sensitive"]=>"sensitive",["oily", "sensitive", "sensitive", "sensitive", "normal"]=>"sensitive",["oily", "sensitive", "sensitive", "normal", "normal"]=>"sensitive",["oily", "sensitive", "normal", "normal", "normal"]=>"sensitive",["oily", "normal", "normal", "normal", "normal"]=>"normal",["dry", "dry", "dry", "dry", "dry"]=>"dry",["dry", "dry", "dry", "dry", "combination"]=>"dry",["dry", "dry", "dry", "dry", "sensitive"]=>"dry sensitive",["dry", "dry", "dry", "dry", "normal"]=>"dry",["dry", "dry", "dry", "combination", "combination"]=>"combination",["dry", "dry", "dry", "combination", "sensitive"]=>"combination sensitive", ["dry", "dry", "dry", "combination", "normal"]=>"combination",["dry", "dry", "dry", "sensitive", "sensitive"]=>"dry sensitive",["dry", "dry", "dry", "sensitive", "normal"]=>"dry sensitive",["dry", "dry", "dry", "normal", "normal"]=>"dry",["dry", "dry", "combination", "combination", "combination"]=>"combination",["dry", "dry", "combination", "combination", "sensitive"]=>"combination sensitive", ["dry", "dry", "combination", "combination", "normal"]=>"combination",["dry", "dry", "combination", "sensitive", "sensitive"]=>"combination sensitive", ["dry", "dry", "combination", "sensitive", "normal"]=>"combination sensitive", ["dry", "dry", "combination", "normal", "normal"]=>"combination",["dry", "dry", "sensitive", "sensitive", "sensitive"]=>"dry sensitive", ["dry", "dry", "sensitive", "sensitive", "normal"]=>"dry sensitive",["dry", "dry", "sensitive", "normal", "normal"]=>"dry sensitive",["dry", "dry", "normal", "normal", "normal"]=>"normal to dry",["dry", "combination", "combination", "combination", "combination"]=>"combination", ["dry", "combination", "combination", "combination", "sensitive"]=>"combination sensitive", ["dry", "combination", "combination", "combination", "normal"]=>"combination", ["dry", "combination", "combination", "sensitive", "sensitive"]=>"combination sensitive", ["dry", "combination", "combination", "sensitive", "normal"]=>"combination sensitive", ["dry", "combination", "combination", "normal", "normal"]=>"combination", ["dry", "combination", "sensitive", "sensitive", "sensitive"]=>"dry sensitive",  ["dry", "combination", "sensitive", "sensitive", "normal"]=>"combination sensitive", ["dry", "combination", "sensitive", "normal", "normal"]=>"combination sensitive", ["dry", "combination", "normal", "normal", "normal"]=>"combination", ["dry", "sensitive", "sensitive", "sensitive", "sensitive"]=>"sensitive", ["dry", "sensitive", "sensitive", "sensitive", "normal"]=>"sensitive", ["dry", "sensitive", "sensitive", "normal", "normal"]=>"sensitive", ["dry", "sensitive", "normal", "normal", "normal"]=>"sensitive", ["dry", "normal", "normal", "normal", "normal"]=>"normal", ["combination", "combination", "combination", "combination", "combination"]=>"combination", ["combination", "combination", "combination", "combination", "sensitive"]=>"combination sensitive", ["combination", "combination", "combination", "combination", "normal"]=>"combination", ["combination", "combination", "combination", "sensitive", "sensitive"]=>"combination sensitive", ["combination", "combination", "combination", "sensitive", "normal"]=>"combination sensitive", ["combination", "combination", "combination", "normal", "normal"]=>"combination", ["combination", "combination", "sensitive", "sensitive", "sensitive"]=>"combination sensitive", ["combination", "combination", "sensitive", "sensitive", "normal"]=>"combination sensitive", ["combination", "combination", "sensitive", "normal", "normal"]=>"combination sensitive", ["combination", "combination", "normal", "normal", "normal"]=>"combination", ["combination", "sensitive", "sensitive", "sensitive", "sensitive"]=>"sensitive", ["combination", "sensitive", "sensitive", "sensitive", "normal"]=>"sensitive", ["combination", "sensitive", "sensitive", "normal", "normal"]=>"combination sensitive", ["combination", "sensitive", "normal", "normal", "normal"]=>"combination sensitive", ["combination", "normal", "normal", "normal", "normal"]=>"normal", ["sensitive", "sensitive", "sensitive", "sensitive", "sensitive"]=>"sensitive", ["sensitive", "sensitive", "sensitive", "sensitive", "normal"]=>"sensitive", ["sensitive", "sensitive", "sensitive", "normal", "normal"]=>"sensitive", ["sensitive", "sensitive", "normal", "normal", "normal"]=>"sensitive", ["sensitive", "normal", "normal", "normal", "normal"]=>"normal", ["normal", "normal", "normal", "normal", "normal"]=>"normal"}
+
+      diagnosis = Diagnosis.find_by(sub_category: classes[types], category: "skin type quiz")
+      simple_quiz_response = SimpleQuizResponse.new(:patient => user, :diagnosis => diagnosis, :responses => options[:responses], :simple_quiz => (SimpleQuiz.find_by :content_type => "skin type quiz"))
+      simple_quiz_response.save!
+    end
+
 end
