@@ -103,9 +103,10 @@
       </div>
     </div>
   </section>
-  <!-- content section end -->
 
-  <!-- satisfaction guaranteed section begin -->
+<!--Satisfaction guaranteed with no change starts-->
+<div class="old-guaranteed-section">
+
   <section class="satisfaction space_bottom">
     <div class="row text-center space_bottom space_top">
       <div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
@@ -119,10 +120,10 @@
               </div>
               <div class="star-ratings-container">
                 <div class="star-ratings">
-                    <div class="star-ratings-top"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
-                    <div class="star-ratings-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                  <div class="star-ratings-top"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                  <div class="star-ratings-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
                 </div>
-                <p>Average customer rating</p>
+                <p  >Average customer rating</p>
               </div>
             </div>
           </div>
@@ -130,7 +131,49 @@
       </div>
     </div>
   </section>
-  <!-- satisfaction guaranteed section end -->
+</div>
+<!--Satisfaction guaranteed with no change ends-->
+
+
+<!--Satisfaction guaranteed with change starts-->
+<div class="new-guaranteed-section pad_15">
+  <section class="new-guaranteed-rating pad_15">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+          <div class="row text-style no-gutter">
+           <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 guaranteed-img text-center" >
+              <div classs="container">
+                <div class="row no-gutter">
+                  <img alt="success_rate" src="https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/success_rate_image.png">
+                </div>
+                <div class="row no-gutter">
+                  <div class="new-star-ratings-container">
+                    <div class="new-star-ratings">
+                      <div class="star-ratings-top"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+                      <div class="star-ratings-bottom"><span>★</span><span>★</span><span>★</span><span>★</span><span style="color: white">★</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xs-6 col-sm-4 col-md-6 col-lg-6 satisfaction-text">
+              <div class="row text-left no-gutter">
+                <h2><strong>Satisfaction guaranteed</strong></h2>
+              </div>
+              <div class="row text-left no-gutter">
+                <p class="text-style">If your <%= @current_consultation.category %> doesn't improve, we will refund your fee.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</div>
+
+<!--Satisfaction guaranteed with change end-->
 
   <!--master card, paytm logo start-->
   <div class="row">
