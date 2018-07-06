@@ -132,10 +132,25 @@ a:hover {
   text-align: center;
   padding-top: 20px;
 }
+
+.new-star-ratings-container {
+  text-align: center;
+  padding-top: 5px;
+}
 .star-ratings {
   display: inline-block;
   text-align: left;
   font-size: 25px;
+  letter-spacing: 2px;
+  line-height: 25px;
+  position: relative;
+  text-shadow: 0px 1px 0 #a2a2a2;
+}
+
+.new-star-ratings {
+  display: inline-block;
+  text-align: left;
+  font-size: 19px;
   letter-spacing: 2px;
   line-height: 25px;
   position: relative;
@@ -323,4 +338,52 @@ table.billing-information {
     font-size: 16px;
     padding-left: 4px;
   }
+}
+
+.new-guaranteed-rating{
+  background-color: white;
+  color: black;
+  margin-bottom: 15px;
+}
+
+.text-style{
+  h2 {
+    font-weight: 550;
+    font-family: pt_sansregular;
+    font-size: 20px;
+  }
+  p {
+    font: normal 16px 'ralewayregular';
+    margin-top: 18px;
+  }
+}
+
+.satisfactio-text{
+  p {
+    width: 229px;
+  }
+}
+@media only screen and (max-width: 600px){
+  .guaranteed-img {
+    max-width: 170px;
+  }
+  .new-guaranteed-rating {
+    p {
+      margin-top: 12px;
+    }
+  }
+
+  .satisfaction-text{
+    p {
+      margin-left: 6px;
+    }
+  }
+}
+
+.old-guaranteed-section {
+  display: block;
+}
+
+.new-guaranteed-section {
+  display: none;
 }
