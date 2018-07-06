@@ -1215,6 +1215,50 @@ Diagnosis.create([
       ]
     }
   },
+  {
+    :category => "skin type quiz",
+    :sub_category => "normal to oily",
+    :content => {
+      :title =>  "normal to oily skin",
+      :sub_title => "It seems like you have <b>normal to oily skin</b>. ",
+      :paras => [
+        {
+          :content => "You may find that you have enlarged pores and blackheads, pimples and blemishes on your face. Your complexion may be shiny because of the excess oil produced. Besides this, weather, puberty, hormones, and even stress can also cause or contribute to oily skin. ",
+          :things_you_can_do => {
+            :title => "Some things you can do: ",
+            :content => [
+              "<b>Wash your skin regularly</b> - once or twice a day at least,  and more if you are working out / sweating a lot. ",
+              "<b>Use a gentle cleanser / face wash</b> whenever you wash, and do not scrub your face! ",
+              "If you get pimples, <b>do not pop or pick at them</b> - not only does this spread infection, it can leave scars which are very stubborn. ",
+              "Use skin care and cosmetic products that <b>do not clog pores</b> - they are usually labeled as <b>non-comedogenic</b>. "
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    :category => "skin type quiz",
+    :sub_category => "normal to dry",
+    :content => {
+      :title =>  "normal to dry skin",
+      :sub_title => "It seems like you have <b>normal to dry skin</b>. ",
+      :paras => [
+        {
+          :content => "Your skin may have pores that are small, and your skin may have visible lines. You may also have red patches and reduced elasticity in your skin, causing a dull complexion. Dry skin is easily irritated and so it can crack, itch or get inflamed easily. ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this: ",
+            :content => [
+              "<b>Don’t take long showers</b> as that can dry out your skin. Also, too much soap can decrease your skin’s natural moisture.",
+              "Use soaps or cleansers that are <b>gentle on the skin</b>. Here are some tips - use ones that do not have beads or other scrub particles, as they can irritate the skin. If your skin is very sensitive to ingredients such as <i>salicylic acid</i>, make sure to read the labels carefully. Do not use your face wash more than once a day for your skin, as that can dry out your skin even more!",
+              "<b>Moisturize</b> after a shower and through the day to help your skin heal. Read labels - they usually let you know what type of skin what moisturizer is for. Your goal is to find ones that are suitable for sensitive skin and for dry skin.",
+              "Avoid medications and products that cause <b>excessive drying</b>, or ensure you moisturise if you need to take medications. Medicines such an antibiotics or even acne medications can dry out your skin. Read side effects of any medicine that you are taking, and ask your doctor if you can take an alternative. However, we realise this is sometimes not possible. So if you need to take these medicines, make sure to moisturize a little extra while you are on the course!",
+            ]
+          }
+        }
+      ]
+    }
+  }
 ])
 
 
