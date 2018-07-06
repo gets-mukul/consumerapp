@@ -882,120 +882,385 @@ end
 #   i += 1
 # end
 
-SimpleQuiz.create({
-  :content_type => "skin type quiz",
-  :questions => [
-    {
-      :id => 1,
-      :question => "How does your skin look like at the end of the day?",
-      :options => ["Shiny", "Dull and dry", "My central T zone is shiny, and the rest is dry", "Reddish and rashy", "None of the above"]
-    },
-    {
-      :id => 2,
-      :question => "If you touch your face first thing in the morning before washing, how does it feel?",
-      :options => ["Slimy or oily ", "Dry", "Slimy or oil at some areas, dry at other areas", "Sore or rashy", "None of the above"]
-    },
-    {
-      :id => 3,
-      :question => "What would you say is your major skin issue?",
-      :options => ["Acne / pimples ", "Stretchy and dull skin", "Acne / pimples on forehead and nose, but cheeks are dry and dull", "Redness", "None of the above"]
-    },
-    {
-      :id => 4,
-      :question => "How does it feel after you've washed your face with your face wash?",
-      :options => ["Still not clean", "Tight and stretched", "Clean and bright at some areas, tight and stretched at other areas", "Itchy and rashy", "Clean and bright"]
-    },
-    {
-      :id => 5,
-      :question => "Do you feel the need to use a moisturiser during the day?",
-      :options => ["Never, my skin already feels oily", "Always", "Sometimes yes, sometimes no", "Yes, but I need to be careful, as all creams don't suit my skin", "None of the above"]
-    }
-  ]
-})
+# SimpleQuiz.create({
+#   :content_type => "skin type quiz",
+#   :questions => [
+#     {
+#       :id => 1,
+#       :question => "How does your skin look like at the end of the day?",
+#       :options => ["Shiny", "Dull and dry", "My central T zone is shiny, and the rest is dry", "Reddish and rashy", "None of the above"]
+#     },
+#     {
+#       :id => 2,
+#       :question => "If you touch your face first thing in the morning before washing, how does it feel?",
+#       :options => ["Slimy or oily ", "Dry", "Slimy or oil at some areas, dry at other areas", "Sore or rashy", "None of the above"]
+#     },
+#     {
+#       :id => 3,
+#       :question => "What would you say is your major skin issue?",
+#       :options => ["Acne / pimples ", "Stretchy and dull skin", "Acne / pimples on forehead and nose, but cheeks are dry and dull", "Redness", "None of the above"]
+#     },
+#     {
+#       :id => 4,
+#       :question => "How does it feel after you've washed your face with your face wash?",
+#       :options => ["Still not clean", "Tight and stretched", "Clean and bright at some areas, tight and stretched at other areas", "Itchy and rashy", "Clean and bright"]
+#     },
+#     {
+#       :id => 5,
+#       :question => "Do you feel the need to use a moisturiser during the day?",
+#       :options => ["Never, my skin already feels oily", "Always", "Sometimes yes, sometimes no", "Yes, but I need to be careful, as all creams don't suit my skin", "None of the above"]
+#     }
+#   ]
+# })
 
+
+# Diagnosis.create([
+#   {
+#     :category => "skin type quiz",
+#     :sub_category => "Oily Scalp/Oily hair",
+#     :content => {
+#       :title =>  "oily skin",
+#       :paras => ["You may find that you have enlarged pores and blackheads, pimples and blemishes on your face. Your complexion may be shiny because of the excess oil produced. Besides this, weather, puberty, hormones, and even stress can also cause or contribute to oily skin."],
+#       :things_you_can_do => {
+#         :title => "Some things you can do:",
+#         :content => [
+#           "<b>Wash your skin regularly</b> - once or twice a day at least,  and more if you are working out / sweating a lot.",
+#           "<b>Use a gentle cleanser / face wash</b> whenever you wash, and do not scrub your face!",
+#           "If you get pimples, <b>do not pop or pick at them</b> - not only does this spread infection, it can leave scars which are very stubborn.",
+#           "Use skin care and cosmetic products that <b>do not clog pores</b> - they are usually labeled as <b>non-comedogenic</b>."
+#         ]
+#       }
+#     }
+#   },
+#   {
+#     :category => "skin type quiz",
+#     :sub_category => "Dry Skin",
+#     :content => {
+#       :title =>  "dry skin",
+#       :paras => ["Your pores are small, and your skin may have visible lines. You may also have red patches and reduced elasticity in your skin, causing a dull complexion. Dry skin is easily irritated and so it can crack, itch or get inflamed easily."],
+#       :things_you_can_do => {
+#         :title => "Some things you can do:",
+#         :content => [
+#           "<b>Don’t take long showers</b> as that can dry out your skin. Also, too much soap can decrease your skin’s natural moisture.",
+#           "Use soaps or cleansers that are <b>gentle on the skin</b>. Here are some tips - use ones that do not have beads or other scrub particles, as they can irritate the skin. If your skin is very sensitive to ingredients such as <i>salicylic acid</i>, make sure to read the labels carefully. Do not use your face wash more than once a day for your skin, as that can dry out your skin even more!",
+#           "<b>Moisturize</b> after a shower and through the day to help your skin heal. Read labels - they usually let you know what type of skin what moisturizer is for. Your goal is to find ones that are suitable for sensitive skin and for dry skin.",
+#           "Avoid medications and products that cause <b>excessive drying</b>, or ensure you moisturise if you need to take medications. Medicines such an antibiotics or even acne medications can dry out your skin. Read side effects of any medicine that you are taking, and ask your doctor if you can take an alternative. However, we realise this is sometimes not possible. So if you need to take these medicines, make sure to moisturize a little extra while you are on the course!",
+#         ]
+#       }
+#     }
+#   },
+#   {
+#     :category => "skin type quiz",
+#     :sub_category => "Combination Skin",
+#     :content => {
+#       :title => "combination skin",
+#       :paras => [
+#         "This means you may have some areas on your face that are oily, while some are dry, with different textures too. The most commonly oily area is your <b>T-zone</b> (which includes the nose, forehead and chin), resulting in your skin appearing shiny. Your <b>pores</b> may look larger and you may have <b>blackheads</b>. Given that your skin has multiple different areas, your skin care routine has to tend to them differently!",
+#         "Combination skin is hard to take care of because you have to tend to different areas differently. For oily parts, make sure you <b>wash your face twice daily</b> and more if you go out into the sun. For the dry areas, <b>moisturize</b> with lotion everytime you wash your face so it does not dry out."
+#       ],
+#     },
+#   },
+#   {
+#     :category => "skin type quiz",
+#     :sub_category => "Sensitive Skin",
+#     :content => {
+#       :title => "sensitive skin",
+#       :paras => [
+#         "You may have dry areas on your skin, redness and sometimes even itching and burning."
+#       ],
+#       :things_you_can_do => {
+#         :title => "Some things you can do:",
+#         :content => [
+#           "Usually, there is a <b>trigger</b> to this type of skin, and if you do find out what that is, avoid it as soon as possible. The most common trigger is <b>skin care products and makeup</b>, so read your labels carefully! Always watch what you put on your face - whether it is makeup, face washes or even lotions. Read labels to make sure the product is made for sensitive skin - that is key when it comes to your skin type.",
+#           "The sun is also a major trigger, so <b>always wear sunscreen</b> even if you're only going out for a short while. UV rays can destroy the texture of your skin and sun burns are just not fun."
+#         ]
+#       }
+#     },
+#   },
+#   {
+#     :category => "skin type quiz",
+#     :sub_category => "Normal Skin",
+#     :content => {
+#       :title => "normal skin",
+#       :paras => [
+#         "You have normal skin! Your skin has a balance between moisture and oil production; it is neither too dry nor too oily. Your pores are not large and visible, allowing for a smooth complexion. Your skin is probably not sensitive to products or sunlight."
+#       ],
+#       :things_you_can_do => {
+#         :title => "Of course now you have to maintain it! So here are some tips:",
+#         :content => [
+#           "<b>Always use sunscreen!</b> Even if you’re going out for a short while, make it part of your daily routine.",
+#           "<b>Avoid washing your face too much</b> - this can make it dry. Twice daily works great!",
+#           "If you use any <b>cosmetic products</b>, remove them from your face before bed - for example, powders, makeup, etc.",
+#         ]
+#       }
+#     },
+#   }
+# ])
+
+oily = Diagnosis.find_by :category => 'skin type quiz', :sub_category => 'Oily Scalp/Oily hair'
+oily.update(
+  {
+    :category => "skin type quiz",
+    :sub_category => "oily",
+    :content => {
+      :title =>  "oily skin",
+      :sub_title => "It seems like you have <b>oily skin</b>. ",
+      :paras => [
+        {
+          :content => "You may find that you have enlarged pores and blackheads, pimples and blemishes on your face. Your complexion may be shiny because of the excess oil produced. Besides this, weather, puberty, hormones, and even stress can also cause or contribute to oily skin. ",
+          :things_you_can_do => {
+            :title => "Some things you can do: ",
+            :content => [
+              "<b>Wash your skin regularly</b> - once or twice a day at least,  and more if you are working out / sweating a lot. ",
+              "<b>Use a gentle cleanser / face wash</b> whenever you wash, and do not scrub your face! ",
+              "If you get pimples, <b>do not pop or pick at them</b> - not only does this spread infection, it can leave scars which are very stubborn. ",
+              "Use skin care and cosmetic products that <b>do not clog pores</b> - they are usually labeled as <b>non-comedogenic</b>. "
+            ]
+          }
+        }
+      ]
+    }
+  }
+)
+
+dry = Diagnosis.find_by :category => 'skin type quiz', :sub_category => 'Dry Skin'
+dry.update(
+  {
+    :category => "skin type quiz",
+    :sub_category => "dry",
+    :content => {
+      :title =>  "dry skin",
+      :sub_title => "It seems like you have <b>dry skin</b>. ",
+      :paras => [
+        {
+          :content => "Since your skin is <b>dry</b>, your pores are small, and your skin may have visible lines. You may also have red patches and reduced elasticity in your skin, causing a dull complexion. Dry skin is easily irritated and so it can crack, itch or get inflamed easily. ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this: ",
+            :content => [
+              "<b>Don’t take long showers</b> as that can dry out your skin. Also, too much soap can decrease your skin’s natural moisture.",
+              "Use soaps or cleansers that are <b>gentle on the skin</b>. Here are some tips - use ones that do not have beads or other scrub particles, as they can irritate the skin. If your skin is very sensitive to ingredients such as <i>salicylic acid</i>, make sure to read the labels carefully. Do not use your face wash more than once a day for your skin, as that can dry out your skin even more!",
+              "<b>Moisturize</b> after a shower and through the day to help your skin heal. Read labels - they usually let you know what type of skin what moisturizer is for. Your goal is to find ones that are suitable for sensitive skin and for dry skin.",
+              "Avoid medications and products that cause <b>excessive drying</b>, or ensure you moisturise if you need to take medications. Medicines such an antibiotics or even acne medications can dry out your skin. Read side effects of any medicine that you are taking, and ask your doctor if you can take an alternative. However, we realise this is sometimes not possible. So if you need to take these medicines, make sure to moisturize a little extra while you are on the course!",
+            ]
+          }
+        }
+      ]
+    }
+  }
+)
+
+combination = Diagnosis.find_by :category => 'skin type quiz', :sub_category => 'Combination Skin'
+combination.update(
+  {
+    :category => "skin type quiz",
+    :sub_category => "combination",
+    :content => {
+      :title =>  "combination skin",
+      :sub_title => "It seems like you have <b>combination skin</b>. ",
+      :paras => [
+        {
+          :content => "Since your skin is a <b>combination</b> type, you may have some areas on your face that are oily, while some are dry, with different textures too. The most commonly oily area is your <b>T-zone</b> (which includes the nose, forehead and chin), resulting in your skin appearing shiny. Your <b>pores</b> may look larger and you may have <b>blackheads</b>. Given that your skin has multiple different areas, your skin care routine has to tend to them differently! ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this: ",
+            :content => [
+              "Combination skin is hard to take care of because you have to tend to different areas differently. For oily parts, make sure you <b>wash your face twice daily</b> and more if you go out into the sun. For the dry areas, <b>moisturize</b> with lotion everytime you wash your face so it does not dry out."
+            ]
+          }
+        }
+      ]
+    }
+  }
+)
+
+sensitive = Diagnosis.find_by :category => 'skin type quiz', :sub_category => 'Sensitive Skin'
+sensitive.update(
+  {
+    :category => "skin type quiz",
+    :sub_category => "sensitive",
+    :content => {
+      :title =>  "sensitive skin",
+      :sub_title => "It seems like you have <b>sensitive skin</b>. ",
+      :paras => [
+        {
+          :content => "You may have dry areas on your skin, redness and sometimes even itching and burning. ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this: ",
+            :content => [
+              "Usually, there is a <b>trigger</b> to this type of skin, and if you do find out what that is, avoid it as soon as possible. The most common trigger is <b>skin care products and makeup</b>, so read your labels carefully! Always watch what you put on your face - whether it is makeup, face washes or even lotions. Read labels to make sure the product is made for sensitive skin - that is key when it comes to your skin type.",
+              "The sun is also a major trigger, so <b>always wear sunscreen</b> even if you're only going out for a short while. UV rays can destroy the texture of your skin and sun burns are just not fun."
+            ]
+          }
+        }
+      ]
+    }
+  }
+)
+
+normal = Diagnosis.find_by :category => 'skin type quiz', :sub_category => 'Normal Skin'
+normal.update(
+  {
+    :category => "skin type quiz",
+    :sub_category => "normal",
+    :content => {
+      :title =>  "sensitive skin",
+      :sub_title => "It seems like you have <b>normal skin</b>. ",
+      :paras => [
+        {
+          :content => "Your skin has a balance between moisture and oil production; it is neither too dry nor too oily. Your pores are not large and visible, allowing for a smooth complexion. Your skin is probably not sensitive to products or sunlight. ",
+          :things_you_can_do => {
+            :title => "Of course now you have to maintain it! So here are some tips: ",
+            :content => [
+              "<b>Always use sunscreen!</b> Even if you’re going out for a short while, make it part of your daily routine.",
+              "<b>Avoid washing your face too much</b> - this can make it dry. Twice daily works great!",
+              "If you use any <b>cosmetic products</b>, remove them from your face before bed - for example, powders, makeup, etc.",
+            ]
+          }
+        }
+      ]
+    }
+  }
+)
 
 Diagnosis.create([
   {
     :category => "skin type quiz",
-    :sub_category => "Oily Scalp/Oily hair",
+    :sub_category => "oily sensitive",
     :content => {
-      :title =>  "oily skin",
-      :paras => ["You may find that you have enlarged pores and blackheads, pimples and blemishes on your face. Your complexion may be shiny because of the excess oil produced. Besides this, weather, puberty, hormones, and even stress can also cause or contribute to oily skin."],
-      :things_you_can_do => {
-        :title => "Some things you can do:",
-        :content => [
-          "<b>Wash your skin regularly</b> - once or twice a day at least,  and more if you are working out / sweating a lot.",
-          "<b>Use a gentle cleanser / face wash</b> whenever you wash, and do not scrub your face!",
-          "If you get pimples, <b>do not pop or pick at them</b> - not only does this spread infection, it can leave scars which are very stubborn.",
-          "Use skin care and cosmetic products that <b>do not clog pores</b> - they are usually labeled as <b>non-comedogenic</b>."
-        ]
-      }
+      :title =>  "oily sensitive skin",
+      :sub_title => "It seems like you have <b>oily sensitive skin</b>. ",
+      :paras => [
+        {
+          :content => "Since your skin is <b>oily</b>, you may find that you have enlarged pores and blackheads, pimples and blemishes on your face. Your complexion may be shiny because of the excess oil produced. Besides this, weather, puberty, hormones, and even stress can also cause or contribute to oily skin. ",
+          :things_you_can_do => {
+            :title => "Some things you can do: ",
+            :content => [
+              "<b>Wash your skin regularly</b> - once or twice a day at least,  and more if you are working out / sweating a lot. ",
+              "<b>Use a gentle cleanser / face wash</b> whenever you wash, and do not scrub your face! ",
+              "If you get pimples, <b>do not pop or pick at them</b> - not only does this spread infection, it can leave scars which are very stubborn. ",
+              "Use skin care and cosmetic products that <b>do not clog pores</b> - they are usually labeled as <b>non-comedogenic</b>. "
+            ]
+          }
+        },
+        {
+          :content => "Since your skin is also <b>sensitive</b>, you may have dry areas on your skin, redness and sometimes even itching and burning. ",
+          :things_you_can_do => {
+            :title => "Some things you can do: ",
+            :content => [
+              "Usually, there is a <b>trigger</b> to this type of skin, and if you do find out what that is, avoid it as soon as possible. The most common trigger is <b>skin care products and makeup</b>, so read your labels carefully! Always watch what you put on your face - whether it is makeup, face washes or even lotions. Read labels to make sure the product is made for sensitive skin - that is key when it comes to your skin type.",
+              "The sun is also a major trigger, so <b>always wear sunscreen</b> even if you're only going out for a short while. UV rays can destroy the texture of your skin and sun burns are just not fun."
+            ]
+          }
+        }
+      ]
     }
   },
   {
     :category => "skin type quiz",
-    :sub_category => "Dry Skin",
+    :sub_category => "dry sensitive",
     :content => {
-      :title =>  "dry skin",
-      :paras => ["Your pores are small, and your skin may have visible lines. You may also have red patches and reduced elasticity in your skin, causing a dull complexion. Dry skin is easily irritated and so it can crack, itch or get inflamed easily."],
-      :things_you_can_do => {
-        :title => "Some things you can do:",
-        :content => [
-          "<b>Don’t take long showers</b> as that can dry out your skin. Also, too much soap can decrease your skin’s natural moisture.",
-          "Use soaps or cleansers that are <b>gentle on the skin</b>. Here are some tips - use ones that do not have beads or other scrub particles, as they can irritate the skin. If your skin is very sensitive to ingredients such as <i>salicylic acid</i>, make sure to read the labels carefully. Do not use your face wash more than once a day for your skin, as that can dry out your skin even more!",
-          "<b>Moisturize</b> after a shower and through the day to help your skin heal. Read labels - they usually let you know what type of skin what moisturizer is for. Your goal is to find ones that are suitable for sensitive skin and for dry skin.",
-          "Avoid medications and products that cause <b>excessive drying</b>, or ensure you moisturise if you need to take medications. Medicines such an antibiotics or even acne medications can dry out your skin. Read side effects of any medicine that you are taking, and ask your doctor if you can take an alternative. However, we realise this is sometimes not possible. So if you need to take these medicines, make sure to moisturize a little extra while you are on the course!",
-        ]
-      }
+      :title =>  "dry sensitive skin",
+      :sub_title => "It seems like you have <b>dry sensitive skin</b>. ",
+      :paras => [
+        {
+          :content => "Since your skin is <b>dry</b>, your pores are small, and your skin may have visible lines. You may also have red patches and reduced elasticity in your skin, causing a dull complexion. Dry skin is easily irritated and so it can crack, itch or get inflamed easily. ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this: ",
+            :content => [
+              "<b>Don’t take long showers</b> as that can dry out your skin. Also, too much soap can decrease your skin’s natural moisture.",
+              "Use soaps or cleansers that are <b>gentle on the skin</b>. Here are some tips - use ones that do not have beads or other scrub particles, as they can irritate the skin. If your skin is very sensitive to ingredients such as <i>salicylic acid</i>, make sure to read the labels carefully. Do not use your face wash more than once a day for your skin, as that can dry out your skin even more!",
+              "<b>Moisturize</b> after a shower and through the day to help your skin heal. Read labels - they usually let you know what type of skin what moisturizer is for. Your goal is to find ones that are suitable for sensitive skin and for dry skin.",
+              "Avoid medications and products that cause <b>excessive drying</b>, or ensure you moisturise if you need to take medications. Medicines such an antibiotics or even acne medications can dry out your skin. Read side effects of any medicine that you are taking, and ask your doctor if you can take an alternative. However, we realise this is sometimes not possible. So if you need to take these medicines, make sure to moisturize a little extra while you are on the course!",
+            ]
+          }
+        },
+        {
+          :content => "Since your skin is also <b>sensitive</b>, you may have dry areas on your skin, redness and sometimes even itching and burning. ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this:",
+            :content => [
+              "Usually, there is a <b>trigger</b> to this type of skin, and if you do find out what that is, avoid it as soon as possible. The most common trigger is <b>skin care products and makeup</b>, so read your labels carefully! Always watch what you put on your face - whether it is makeup, face washes or even lotions. Read labels to make sure the product is made for sensitive skin - that is key when it comes to your skin type.",
+              "The sun is also a major trigger, so <b>always wear sunscreen</b> even if you're only going out for a short while. UV rays can destroy the texture of your skin and sun burns are just not fun."
+            ]
+          }
+        }
+      ]
     }
   },
   {
     :category => "skin type quiz",
-    :sub_category => "Combination Skin",
+    :sub_category => "combination sensitive",
     :content => {
-      :title => "combination skin",
+      :title =>  "combination sensitive skin",
+      :sub_title => "It seems like you have <b>combination sensitive skin</b>. ",
       :paras => [
-        "This means you may have some areas on your face that are oily, while some are dry, with different textures too. The most commonly oily area is your <b>T-zone</b> (which includes the nose, forehead and chin), resulting in your skin appearing shiny. Your <b>pores</b> may look larger and you may have <b>blackheads</b>. Given that your skin has multiple different areas, your skin care routine has to tend to them differently!",
-        "Combination skin is hard to take care of because you have to tend to different areas differently. For oily parts, make sure you <b>wash your face twice daily</b> and more if you go out into the sun. For the dry areas, <b>moisturize</b> with lotion everytime you wash your face so it does not dry out."
-      ],
-    },
+        {
+          :content => "Since your skin is a <b>combination</b> type, you may have some areas on your face that are oily, while some are dry, with different textures too. The most commonly oily area is your <b>T-zone</b> (which includes the nose, forehead and chin), resulting in your skin appearing shiny. Your <b>pores</b> may look larger and you may have <b>blackheads</b>. Given that your skin has multiple different areas, your skin care routine has to tend to them differently! ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this: ",
+            :content => [
+              "Combination skin is hard to take care of because you have to tend to different areas differently. For oily parts, make sure you <b>wash your face twice daily</b> and more if you go out into the sun. For the dry areas, <b>moisturize</b> with lotion everytime you wash your face so it does not dry out."
+            ]
+          }
+        },
+        {
+          :content => "Since your skin is also <b>sensitive</b>, you may have dry areas on your skin, redness and sometimes even itching and burning. ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this:",
+            :content => [
+              "Usually, there is a <b>trigger</b> to this type of skin, and if you do find out what that is, avoid it as soon as possible. The most common trigger is <b>skin care products and makeup</b>, so read your labels carefully! Always watch what you put on your face - whether it is makeup, face washes or even lotions. Read labels to make sure the product is made for sensitive skin - that is key when it comes to your skin type.",
+              "The sun is also a major trigger, so <b>always wear sunscreen</b> even if you're only going out for a short while. UV rays can destroy the texture of your skin and sun burns are just not fun."
+            ]
+          }
+        }
+      ]
+    }
   },
   {
     :category => "skin type quiz",
-    :sub_category => "Sensitive Skin",
+    :sub_category => "normal to oily",
     :content => {
-      :title => "sensitive skin",
+      :title =>  "normal to oily skin",
+      :sub_title => "It seems like you have <b>normal to oily skin</b>. ",
       :paras => [
-        "You may have dry areas on your skin, redness and sometimes even itching and burning."
-      ],
-      :things_you_can_do => {
-        :title => "Some things you can do:",
-        :content => [
-          "Usually, there is a <b>trigger</b> to this type of skin, and if you do find out what that is, avoid it as soon as possible. The most common trigger is <b>skin care products and makeup</b>, so read your labels carefully! Always watch what you put on your face - whether it is makeup, face washes or even lotions. Read labels to make sure the product is made for sensitive skin - that is key when it comes to your skin type.",
-          "The sun is also a major trigger, so <b>always wear sunscreen</b> even if you're only going out for a short while. UV rays can destroy the texture of your skin and sun burns are just not fun."
-        ]
-      }
-    },
+        {
+          :content => "You may find that you have enlarged pores and blackheads, pimples and blemishes on your face. Your complexion may be shiny because of the excess oil produced. Besides this, weather, puberty, hormones, and even stress can also cause or contribute to oily skin. ",
+          :things_you_can_do => {
+            :title => "Some things you can do: ",
+            :content => [
+              "<b>Wash your skin regularly</b> - once or twice a day at least,  and more if you are working out / sweating a lot. ",
+              "<b>Use a gentle cleanser / face wash</b> whenever you wash, and do not scrub your face! ",
+              "If you get pimples, <b>do not pop or pick at them</b> - not only does this spread infection, it can leave scars which are very stubborn. ",
+              "Use skin care and cosmetic products that <b>do not clog pores</b> - they are usually labeled as <b>non-comedogenic</b>. "
+            ]
+          }
+        }
+      ]
+    }
   },
   {
     :category => "skin type quiz",
-    :sub_category => "Normal Skin",
+    :sub_category => "normal to dry",
     :content => {
-      :title => "normal skin",
+      :title =>  "normal to dry skin",
+      :sub_title => "It seems like you have <b>normal to dry skin</b>. ",
       :paras => [
-        "You have normal skin! Your skin has a balance between moisture and oil production; it is neither too dry nor too oily. Your pores are not large and visible, allowing for a smooth complexion. Your skin is probably not sensitive to products or sunlight."
-      ],
-      :things_you_can_do => {
-        :title => "Of course now you have to maintain it! So here are some tips:",
-        :content => [
-          "<b>Always use sunscreen!</b> Even if you’re going out for a short while, make it part of your daily routine.",
-          "<b>Avoid washing your face too much</b> - this can make it dry. Twice daily works great!",
-          "If you use any <b>cosmetic products</b>, remove them from your face before bed - for example, powders, makeup, etc.",
-        ]
-      }
-    },
+        {
+          :content => "Your skin may have pores that are small, and your skin may have visible lines. You may also have red patches and reduced elasticity in your skin, causing a dull complexion. Dry skin is easily irritated and so it can crack, itch or get inflamed easily. ",
+          :things_you_can_do => {
+            :title => "Some things you can do for this: ",
+            :content => [
+              "<b>Don’t take long showers</b> as that can dry out your skin. Also, too much soap can decrease your skin’s natural moisture.",
+              "Use soaps or cleansers that are <b>gentle on the skin</b>. Here are some tips - use ones that do not have beads or other scrub particles, as they can irritate the skin. If your skin is very sensitive to ingredients such as <i>salicylic acid</i>, make sure to read the labels carefully. Do not use your face wash more than once a day for your skin, as that can dry out your skin even more!",
+              "<b>Moisturize</b> after a shower and through the day to help your skin heal. Read labels - they usually let you know what type of skin what moisturizer is for. Your goal is to find ones that are suitable for sensitive skin and for dry skin.",
+              "Avoid medications and products that cause <b>excessive drying</b>, or ensure you moisturise if you need to take medications. Medicines such an antibiotics or even acne medications can dry out your skin. Read side effects of any medicine that you are taking, and ask your doctor if you can take an alternative. However, we realise this is sometimes not possible. So if you need to take these medicines, make sure to moisturize a little extra while you are on the course!",
+            ]
+          }
+        }
+      ]
+    }
   }
 ])
+
 
 print i
 puts " entries created"
