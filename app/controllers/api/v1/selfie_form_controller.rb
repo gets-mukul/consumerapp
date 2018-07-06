@@ -117,7 +117,7 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
       # create selfie form
       selfie_form = SelfieForm.new({ :patient => patient, :selfie_image => selfie_image })
 
-      if params[:skinTypeQuiz]
+      if params[:skinTypeQuiz].present?
         save_my_skin_type(params[:skinTypeQuiz], patient)
       end
 
@@ -133,7 +133,7 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
     render :json => { :message => 'failed to upload' }, :status => :bad_request
   end
 
-  def skin_type_quiz
+  def get_skin_type_quiz
     quiz = SimpleQuiz.find_by :content_type => "skin type quiz"
     if quiz
       render :json => { :questions => quiz.questions }, :status => :ok

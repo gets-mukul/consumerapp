@@ -5,7 +5,7 @@ Rails.application.routes.draw do
       namespace :v1 do
         scope 'selfie-form' do
           post '/create' => 'selfie_form#create', defaults: {format: 'json'}
-          get '/get-skin-type-quiz' => 'selfie_form#skin_type_quiz', defaults: {format: 'json'}
+          get '/get-skin-type-quiz' => 'selfie_form#get_skin_type_quiz', defaults: {format: 'json'}
 
           get '/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
           post '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
