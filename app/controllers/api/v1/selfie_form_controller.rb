@@ -106,7 +106,6 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
         :mobile => params[:patient][:mobile], 
         :email => params[:patient][:email].downcase.strip, 
         :pay_status => 'selfie checkup',
-        :utm_campaign => (params[:patient][:utm_campaign]||'').downcase
       })
     end
 
