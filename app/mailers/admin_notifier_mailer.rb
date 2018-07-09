@@ -26,4 +26,10 @@ class AdminNotifierMailer < ApplicationMailer
     :subject => "Remedico: New influencer sign up." )
   end
 
+  def send_developer_error_email subject, msgs
+    @msgs = msgs
+    @subject = subject
+    mail( :to => ['jesse@remedicohealth.com'], :subject => @subject )
+  end
+
 end
