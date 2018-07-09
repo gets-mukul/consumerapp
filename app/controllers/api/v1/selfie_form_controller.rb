@@ -124,11 +124,10 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
       end
 
       # save
-      if (params[:imageUrl]!=session[:imageUrl]) and selfie_form.save
+      if selfie_form.save
         # register patient
         register_selfie_checkup_user patient
         render :json => { :message => 'successful' }, :status => :created
-        session[:imageUrl] = params[:imageUrl]
         return
       else
         session[:error_msgs]["SelfieForm#create could'nt save Selfie_form"] = selfie_form.errors.full_messages.unshift(selfie_form.attributes.to_s)
