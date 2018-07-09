@@ -19,7 +19,7 @@ class ConsultationController < ApplicationController
     @fetched_consultation = Consultation.where(:patient_id => current_user.id).last
     if @fetched_consultation.present?
       # show the associated view depending on patient's previous consultation's status
-      if @fetched_consultation.user_status.start_with? 'registered'
+      if @fetched_consultation.user_status.start_with?('registered', 'red flag')
         Rails.logger.info 'Consultation Controller: Rendering navigation menu - registered'
         render 'navigation_menu_on_registered'
       elsif @fetched_consultation.user_status.start_with?('form filled', 'payment failed', 'processing')

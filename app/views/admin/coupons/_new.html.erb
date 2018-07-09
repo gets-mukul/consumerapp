@@ -28,12 +28,7 @@
       
       <li class="datetime_select input optional" id="coupon_expires_on_input">
         <fieldset class="fragments">
-          <legend class="label"><label for="coupon_expires_on_1i">expires on</label></legend>
-          <ol class="fragments-group">
-            <li class="fragment">
-              <%= datetime_select('expires_on', 'date', :order => [:year, :month, :day, :hour,:minute], include_blank: true) %>
-            </li>
-          </ol>
+          <%= f.input :expires_on, :as => :datetime_picker, include_blank: true  %>
         </fieldset>
       </li>
       <li></li>

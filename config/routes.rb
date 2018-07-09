@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
     namespace :api do
       namespace :v1 do
+
         get 'coupon/:promo_code' => "coupon#apply", :as => 'coupon_apply'
 
         scope 'patient' do
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
         end
 
         scope 'selfie-form' do
+          post '/create' => 'selfie_form#create', defaults: {format: 'json'}
+          get '/get-skin-type-quiz' => 'selfie_form#get_skin_type_quiz', defaults: {format: 'json'}
+
           get '/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
           post '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
           get '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
@@ -27,6 +31,9 @@ Rails.application.routes.draw do
         if Rails.env.development?
           get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
         end
+
+        get 'get-s3-policy' => 's3_bucket#get_s3_policy'
+
       end
     end
 
@@ -67,12 +74,18 @@ Rails.application.routes.draw do
     get '/terms_of_use', to: 'static_pages#terms_of_use'
     get '/', to: 'consultation#index'
     
-    get '/selfie_form', to: 'selfie_form#new'
-    get '/selfie_form/new', to: 'selfie_form#new'
-    post '/selfie_form/create_image', to: 'selfie_form#create_image', defaults: {format: 'json'}
-    post '/selfie_form/create_patient', to: 'selfie_form#create_patient', defaults: {format: 'json'}
-    get '/selfie_form/thank_you', to: 'selfie_form#thank_you'
-    get '/selfie-diagnosis', to: 'selfie_form#selfie_diagnosis'
+    get '/selfie_form', to: redirect('/selfie-form')
+    get '/selfie_form/new', to: redirect('/selfie-form')
+    get '/selfie-diagnosis', to: redirect('/selfie-diagnosis')
+    # get '/selfie_form', to: '/selfie-checkup-form'
+    # get '/selfie_form/new', to: '/selfie-checkup-form'
+
+    # get '/selfie_form', to: 'selfie_form#new'
+    # get '/selfie_form/new', to: 'selfie_form#new'
+    # post '/selfie_form/create_image', to: 'selfie_form#create_image', defaults: {format: 'json'}
+    # post '/selfie_form/create_patient', to: 'selfie_form#create_patient', defaults: {format: 'json'}
+    # get '/selfie_form/thank_you', to: 'selfie_form#thank_you'
+    # get '/selfie-diagnosis', to: 'selfie_form#selfie_diagnosis'
   end
   
   scope '/docsapp' do
