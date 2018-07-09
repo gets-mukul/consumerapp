@@ -34,6 +34,7 @@ module Remedica
     # config.action_mailer.delivery_method = :smtp
 
     if Rails.env.development?
+      config.action_mailer.perform_deliveries = false
       config.middleware.insert_before 0, "Rack::Cors" do
         allow do
           origins '*'
