@@ -80,13 +80,13 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
         render json: {
           status: 'selfie found',
           diagnosis: diagnosis
-        }, status: :found
+        }, status: :ok
         return
       end
     end
-    render json: { status: 'selfie not found' }, status: :not_found  
+    render json: { status: 'selfie not found' }, status: :not_found
     rescue ActiveRecord::RecordNotFound
-      render json: { status: 'selfie not found' }, status: :not_found  
+      render json: { status: 'selfie not found' }, status: :not_found
   end
 
   def create

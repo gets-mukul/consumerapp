@@ -57,7 +57,7 @@ Rails.application.configure do
 
   # For connecting with react app
   config.action_dispatch.default_headers = {
-    'Access-Control-Allow-Origin' => '*',
+    'Access-Control-Allow-Origin' => 'http://127.0.0.1:3000',
     'Access-Control-Allow-Headers' => 'Content-Type, Authorization, Content-Length, X-Requested-With',
     'Access-Control-Request-Methods' => 'GET, POST, PUT, DELETE, OPTIONS, PATCH',
     'Access-Control-Allow-Credentials' => true

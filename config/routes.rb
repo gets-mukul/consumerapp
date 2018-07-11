@@ -2,22 +2,22 @@ Rails.application.routes.draw do
 
   scope '/consult' do
 
-    namespace :api do
+    namespace :api, defaults: {format: 'json'} do
       namespace :v1 do
 
         get 'coupon/:promo_code' => "coupon#apply", :as => 'coupon_apply'
 
         scope 'patient' do
-          post '/' => "patient#create", :as => 'patient', defaults: {format: 'json'}
-          get '/' => "patient#create", :as => 'patient_post', defaults: {format: 'json'}
+          post '/' => "patient#create", :as => 'patient'
+          get '/' => "patient#create", :as => 'patient_post'
 
           # remove this
-          get '/unregister' => "patient#unregister_patient", :as => 'unregister_patient', defaults: {format: 'json'}
+          get '/unregister' => "patient#unregister_patient", :as => 'unregister_patient'
         end
 
         scope 'selfie-form' do
-          post '/create' => 'selfie_form#create', defaults: {format: 'json'}
-          get '/get-skin-type-quiz' => 'selfie_form#get_skin_type_quiz', defaults: {format: 'json'}
+          post '/create' => 'selfie_form#create'
+          get '/get-skin-type-quiz' => 'selfie_form#get_skin_type_quiz'
 
           get '/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
           post '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
@@ -28,12 +28,15 @@ Rails.application.routes.draw do
           get '/' => 'questionnaire#index'
         end
 
+        scope 'questionnaire_responses' do
+          post '/save' => 'questionnaire_response#save'
+        end
+
         if Rails.env.development?
-          get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
+          get '/patients/get_patient_details' => 'patient#get_patient_details'
         end
 
         get 'get-s3-policy' => 's3_bucket#get_s3_policy'
-
       end
     end
 
