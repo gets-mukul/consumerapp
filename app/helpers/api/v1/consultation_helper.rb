@@ -4,29 +4,6 @@ module Api::V1::ConsultationHelper
     @current_consultation ||= Consultation.find_by(id: session[:consultation_id])
   end
 
-  def fetch_consultations
-    # fetch his 3 latest consultations and pick the one thats first according to @@latest_order
-    @consultation = Consultation.where(patient_id: current_user.id).order('created_at DESC').limit(3).sort_by{|x| Api::V1::ConsultationController.latest_order.index x.user_status}.first
-
-    if @consultation.present?
-      # consultation exists
-      # show them the respective page
-      session[:consultation_id] = @consultation.id
-      if @consultation.user_status.start_with? 'registered'
-        return { status: 'registered', condition: @consultation.category, _session: request.session_options[:id], name: current_user.name }
-      elsif @consultation.user_status.start_with?('form filled', 'payment failed', 'processing')
-        return { status: 'form_filled', condition: @consultation.category, _session: request.session_options[:id], name: current_user.name }
-      end
-    end
-
-    # consultation doesn't exist. Choose a condition/load from session
-    # if session[:condition]
-      # render questionnaire
-    # else
-      return { status: 'new' }
-    # end
-  end
-
   def register_consultation consultation
     session[:consultation_id] = consultation.id
     session[:condition] = consultation.category

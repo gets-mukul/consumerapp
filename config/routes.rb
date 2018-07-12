@@ -5,32 +5,28 @@ Rails.application.routes.draw do
     namespace :api, defaults: {format: 'json'} do
       namespace :v1 do
 
-        get 'coupon/:promo_code' => "coupon#apply", :as => 'coupon_apply'
+        get 'coupon/apply/:promo_code' => 'coupon#apply', :as => 'coupon_apply'
 
-        scope 'patient' do
-          post '/' => "patient#create", :as => 'patient'
-          get '/' => "patient#create", :as => 'patient_post'
+        # patients
+        post 'patient/create' => 'patient#create'
+        get 'patient/create' => 'patient#create'
+        get 'patient/unregister' => 'patient#unregister_patient', :as => 'unregister_patient'
 
-          # remove this
-          get '/unregister' => "patient#unregister_patient", :as => 'unregister_patient'
-        end
+        # consultations
+        get 'consultations' => 'consultation#fetch_consultations'
 
-        scope 'selfie-form' do
-          post '/create' => 'selfie_form#create'
-          get '/get-skin-type-quiz' => 'selfie_form#get_skin_type_quiz'
+        # selfie form
+        post 'selfie-form/create' => 'selfie_form#create'
+        get 'selfie-form/get-skin-type-quiz' => 'selfie_form#get_skin_type_quiz'
+        get 'selfie-form/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
+        post 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+        get 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
 
-          get '/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
-          post '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
-          get '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
-        end
+        # questionnaire
+        get '/' => 'questionnaire#index'
 
-        scope 'questionnaire' do
-          get '/' => 'questionnaire#index'
-        end
-
-        scope 'questionnaire_responses' do
-          post '/save' => 'questionnaire_response#save'
-        end
+        # questionnaire_responses
+        post '/save' => 'questionnaire_response#save'
 
         if Rails.env.development?
           get '/patients/get_patient_details' => 'patient#get_patient_details'

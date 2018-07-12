@@ -15,16 +15,13 @@ class Api::V1::PatientController < Api::V1::ApiController
       if @patient.save
         AdminNotifierMailer.send_new_user_mail(@patient, (session[:promo_code] || '') ).deliver_later
       else
-        render json: @patient.errors, status: :unprocessable_entity
-        return
+        render json: @patient.errors, status: :unprocessable_entity and return
       end
     end
 
     register @patient
-    Rails.logger.info '----------- registered patient'
-    Rails.logger.info session['user_id']
-
-    render json: fetch_consultations, status: :ok
+    render json: @patient, :only => [:name], status: :ok
+    # render json: fetch_consultations, status: :ok
   end
 
   # never trust parameters from the scary internet, only allow the white list through.
@@ -42,11 +39,11 @@ class Api::V1::PatientController < Api::V1::ApiController
     unregister
     render json: { status: 'unregistered' }, status: :ok
   end
-  
+
 
   def get_patient_details
     query_cmd = ''
-    
+
     if params['key']==Rails.application.secrets.GOOGLE_CONTACTS_APP_SCRIPTS
       case params['type']
       when 'all'
@@ -56,7 +53,7 @@ class Api::V1::PatientController < Api::V1::ApiController
       when 'all_paid'
         query_cmd = "select distinct on (p.id) p.name, p.mobile, p.email from patients p left join consultations c on p.id=c.patient_id where c.pay_status like 'paid' and EXTRACT(YEAR FROM p.created_at) = " + params['year'] + " order by p.id desc, c.id desc;"
       end
-  
+
       if query_cmd.present?
         with_external_db do
           render :json => {"status": "ok", "code": 200, "messages": [], "result": ActiveRecord::Base.connection.execute(query_cmd).values }
