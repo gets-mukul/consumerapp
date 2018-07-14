@@ -1,6 +1,6 @@
 class Api::V1::ConsultationController < Api::V1::ApiController
   # skip_before_action :verify_authenticity_token, raise: false
-  # before_action :check_current_user
+  before_filter :check_current_user
 
   def fetch_consultations
     # fetch his 3 latest consultations and pick the one thats first according to @@latest_order

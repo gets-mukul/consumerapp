@@ -29,6 +29,10 @@ class PaymentController < ApplicationController
     Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
     logger.info params
+    if (params[:type]) {
+      chatbot_handler
+      return
+    }
     session[:error_msg] = ""
     # Rails.logger.info 'Payments Controller: Request Referrer'
     # Rails.logger.info request.referer
@@ -323,7 +327,6 @@ class PaymentController < ApplicationController
     end
     current_user.update({pay_status: "red flag: #{session[:error_status]}"})
     current_consultation.update({ pay_status: "red flag: #{session[:error_status]}", user_status: "red flag" })
-
   end
 
   def instant_payment
@@ -344,6 +347,10 @@ class PaymentController < ApplicationController
         redirect_to "/?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
       end
     end
+  end
+
+  def chatbot_handler
+    
   end
 
   private

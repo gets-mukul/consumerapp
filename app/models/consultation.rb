@@ -2,6 +2,7 @@ class Consultation < ApplicationRecord
   belongs_to :patient
   belongs_to :coupon, optional: true
   belongs_to :doctor, optional: true
+  has_one :questionnaire_response
 
   validates_presence_of :user_status, :pay_status, :amount, :category, :patient
   

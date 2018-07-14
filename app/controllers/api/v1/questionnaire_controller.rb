@@ -4,30 +4,651 @@ class Api::V1::QuestionnaireController < Api::V1::ApiController
     logger.info '---------- index ---------------'
     logger.info params
     logger.info session[:response_id]
-    
+
     # unless session[:response_id]
     #   @response = QuestionnaireResponse.create
     #   session[:response_id] = @response.id
     # else
     #   @response = QuestionnaireResponse.find(session[:response_id])
     # end
-  
+
     if params[:scope] == 'all'
-      questionnaire_fake = [
-        {"id"=>1, "question"=>"%s, we're first going to ask some basic information about you.", "desc"=>"", "answers"=>nil, "field_type"=>"statement"}, {"id"=>2, "question"=>"What's your sex?*", "desc"=>"", "answers"=>["Male", "Female", "Other"], "field_type"=>"radio_other"}, {"id"=>3, "question"=>"How old are you (in years)?*", "desc"=>"For example: 18", "answers"=>nil, "field_type"=>"integer"}, {"id"=>4, "question"=>"Please tell us if you have a personal history of any of the following conditions.*", "desc"=>"If you do not have any personal history of any of the below, please select 'None of the above'.", "answers"=>["Polycistic Ovarian Disease (PCOD)", "Diabetes", "Hypertension (high blood pressure)", "Hyperthyroid", "Hypothyroid", "Asthma", "Hypercholesterolemia (high cholesterol)", "Migraine", "Psychiatric problems", "Cushing's disease", "Ovarian tumours", "Androgen secreting tumours", "Adrenal hyperplasia", "None of the above"], "field_type"=>"select_all"}, {"id"=>5, "question"=>"Please tell us if anyone in your family has a history of any of the following conditions.*", "desc"=>"", "answers"=>["Polycistic Ovarian Disease (PCOD)", "Diabetes", "Hypertension (high blood pressure)", "Hyperthyroid", "Hypothyroid", "Asthma", "Hypercholesterolemia (high cholesterol)", "Migraine", "Psychiatric problems", "Cushing's disease", "Ovarian tumours", "Androgen secreting tumours", "Adrenal hyperplasia", "None of the above"], "field_type"=>"select_all"}, {"id"=>6, "question"=>"Do you have a personal or family history of skin cancer?*", "desc"=>"", "answers"=>["Yes", "No"], "field_type"=>"radio"}, {"id"=>7, "question"=>"Thanks, %s. Now it would be great if you can help us understand more about your acne.", "desc"=>"", "answers"=>nil, "field_type"=>"statement"}, {"id"=>8, "question"=>"%s, where are you experiencing the acne?*", "desc"=>"", "answers"=>["Face - forehead", "Face - chin", "Face - jawline", "Scalp", "Chest", "Back", "Shoulders"], "field_type"=>"select_all"}, {"id"=>9, "question"=>"You will need to provide us with a photo of your face from front on.", "desc"=>"Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Pull your hair back and ensure your full face is visible.", "answers"=>nil, "field_type"=>"statement_image"}, {"id"=>10, "question"=>"Please take or attach a photo of your face from front on.", "desc"=>"If you can't take one right now, you can send it to us later.", "answers"=>nil, "field_type"=>"image_upload"}, {"id"=>11, "question"=>"You will need to provide us with a photo of your face from your left profile.", "desc"=>"Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Ensure your profile is fully visible. If hair is covering part of your face, hold it up as shown.", "answers"=>nil, "field_type"=>"statement_image"}, {"id"=>12, "question"=>"Please take or attach a photo of your face from your left profile.", "desc"=>"If you can't take one right now, you can send it to us later.", "answers"=>nil, "field_type"=>"image_upload"}, {"id"=>13, "question"=>"You will need to provide us with a photo of your face from your right profile.", "desc"=>"Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Ensure your profile is fully visible. If hair is covering part of your face, hold it up as shown.", "answers"=>nil, "field_type"=>"statement_image"}, {"id"=>14, "question"=>"Please take or attach a photo of your face from your right profile.", "desc"=>"If you can't take one right now, you can send it to us later.", "answers"=>nil, "field_type"=>"image_upload"}, {"id"=>15, "question"=>"Please take or attach a photo of the acne on your chest.", "desc"=>"If you can't take a photo right now, you can send it to us later.", "answers"=>nil, "field_type"=>"image_upload"}, {"id"=>16, "question"=>"Please take or attach a photo of the acne on your back.", "desc"=>"If you can't take a photo right now, you can send it to us later.", "answers"=>nil, "field_type"=>"image_upload"}, {"id"=>17, "question"=>"Please take or attach a photo of the acne on your shoulders.", "desc"=>"If you can't take a photo right now, you can send it to us later.", "answers"=>nil, "field_type"=>"image_upload"}, {"id"=>18, "question"=>"Thanks, %s.", "desc"=>"", "answers"=>nil, "field_type"=>"statement"}, {"id"=>19, "question"=>"Are you pregnant?", "desc"=>"", "answers"=>["Yes", "No"], "field_type"=>"radio"}, {"id"=>20, "question"=>"Are you lactating?", "desc"=>"", "answers"=>["Yes", "No"], "field_type"=>"radio"}, {"id"=>21, "question"=>"Do you have PCOD?", "desc"=>"", "answers"=>["Yes", "No / I don't know"], "field_type"=>"radio"}, {"id"=>22, "question"=>"Which medications are you taking for it?", "desc"=>"", "answers"=>["Oral contraceptive pills with oestrogen and progesterone (combined pull)", "Oral contraceptive pills with oestrogen and cyrpterone acetate", "Finasteride", "Cytomid", "Metformin", "Other"], "field_type"=>"select_all_other"}, {"id"=>23, "question"=>"Do you experience any of the following symptoms (select all that apply)?", "desc"=>"", "answers"=>["Irregular periods", "Thinning of scalp hair", "Facial hair", "Weight gain in a short time", "None of the above"], "field_type"=>"select_all"}, {"id"=>24, "question"=>"Which face products do you use (select and specify all that apply): ", "desc"=>"", "answers"=>["Face wash", "Sunscreen", "Day cream", "Night cream", "Medicated creams", "Make up", "Make up remover"], "field_type"=>"select_all"}, {"id"=>25, "question"=>"Which face wash do you use?", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>26, "question"=>"Which Sunscreen do you use?", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>27, "question"=>"how often do you use this Sunscreen", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>28, "question"=>"Which Day cream do you use?", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>29, "question"=>"Which Night cream do you use?", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>30, "question"=>"Which Medicated creams do you use?", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>31, "question"=>"Which Make up do you use?", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>32, "question"=>"Which Make up remover do you use?", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>33, "question"=>"Do you have a family history of acne?", "desc"=>"", "answers"=>["Yes", "No"], "field_type"=>"radio"}, {"id"=>34, "question"=>"Have you had any recent history of stress of the following kind?", "desc"=>"", "answers"=>["Physical - recent illness", "Physical - travel", "Physical - decreased sleep", "Physical - decreased appetite", "Physical - excessive junk food or sugar in diet", "Mental", "No recent physical or mental stress"], "field_type"=>"select_all"}, {"id"=>35, "question"=>"Is there any other information/comments that you would like to provide about your condition?", "desc"=>"", "answers"=>nil, "field_type"=>"string"}, {"id"=>36, "question"=>"", "desc"=>"", "answers"=>nil, "field_type"=>"submit"}
-        ]
-      logic_fake = {
-        "start_with":[1],"flow":{"1":{"go_to":[2]},"2":{"is_mandatory":true,"go_to":[3],"dependent_questions":[19,24]},"3":{"is_mandatory":true,"requires_check":true,"jump_logic":{"if":[{"<":[2,{"var":"value"},66]},{"var":"value_t"},{"var":"value_f"}]},"dynamic_params":{"value":3},"static_params":{"value_t":[4],"value_f":[36]},"dependent_questions":[4,36]},"4":{"is_mandatory":true,"go_to":[5]},"5":{"is_mandatory":true,"go_to":[6]},"6":{"is_mandatory":true,"requires_check":true,"jump_logic":{"if":[{"==":[{"var":"value"},"Yes"]},{"var":"value_t"},{"var":"value_f"}]},"dynamic_params":{"value":6},"static_params":{"value_t":[36],"value_f":[7]},"dependent_questions":[36,7]},"7":{"go_to":[8]},"8":{"is_mandatory":true,"requires_check":true,"jump_logic":{"merge":[{"if":[{"in":["Face - forehead",{"var":"value"}]},{"var":"value_face_forehead"},[]]},{"if":[{"in":["Face - chin",{"var":"value"}]},{"var":"value_face_chin"},[]]},{"if":[{"in":["Face - jawline",{"var":"value"}]},{"var":"value_face_jawline"},[]]},{"if":[{"in":["Scalp",{"var":"value"}]},{"var":"value_scalp"},[]]},{"if":[{"in":["Chest",{"var":"value"}]},{"var":"value_chest"},[]]},{"if":[{"in":["Back",{"var":"value"}]},{"var":"value_back"},[]]},{"if":[{"in":["Shoulders",{"var":"value"}]},{"var":"value_shoulders"},[]]}]},"dynamic_params":{"value":8},"static_params":{"value_face_forehead":[9,10,11,12,13,14],"value_face_chin":[9,10,11,12,13,14],"value_face_jawline":[9,10,11,12,13,14],"value_scalp":[9,10,11,12,13,14],"value_chest":[15],"value_back":[16],"value_shoulders":[17]},"has_sub_questions":true,"go_to":[18],"dependent_questions":[9,10,11,12,13,14,15,16,17]},"9":{},"10":{},"11":{},"12":{},"13":{},"14":{},"15":{},"16":{},"17":{},"18":{"requires_check":true,"jump_logic":{"if":[{"==":[{"var":"value"},"Female"]},{"var":"value_t"},{"var":"value_f"}]},"dynamic_params":{"value":2},"static_params":{"value_t":[19],"value_f":[24]}},"19":{"is_mandatory":true,"requires_check":true,"jump_logic":{"if":[{"==":[{"var":"value"},"Yes"]},{"var":"value_t"},{"var":"value_f"}]},"dynamic_params":{"value":19},"static_params":{"value_t":[20],"value_f":[21]},"dependent_questions":[20,21]},"20":{"is_mandatory":true,"go_to":[21]},"21":{"is_mandatory":true,"requires_check":true,"jump_logic":{"if":[{"==":[{"var":"value"},"Yes"]},{"var":"value_t"},{"var":"value_f"}]},"dynamic_params":{"value":21},"static_params":{"value_t":[22],"value_f":[23]},"dependent_questions":[22,23]},"22":{"go_to":[24]},"23":{"go_to":[24]},"24":{"is_mandatory":true,"requires_check":true,"jump_logic":{"merge":[{"if":[{"in":["Face wash",{"var":"value"}]},{"var":"value_facewash"},[]]},{"if":[{"in":["Sunscreen",{"var":"value"}]},{"var":"value_sunscreen"},[]]},{"if":[{"in":["Day cream",{"var":"value"}]},{"var":"value_day_cream"},[]]},{"if":[{"in":["Night cream",{"var":"value"}]},{"var":"value_night_cream"},[]]},{"if":[{"in":["Medicated creams",{"var":"value"}]},{"var":"value_medicated_creams"},[]]},{"if":[{"in":["Make up",{"var":"value"}]},{"var":"value_make_up"},[]]},{"if":[{"in":["Make up remover",{"var":"value"}]},{"var":"value_make_up_remover"},[]]}]},"dynamic_params":{"value":24},"static_params":{"value_facewash":[25],"value_sunscreen":[26,27],"value_day_cream":[28],"value_night_cream":[29],"value_medicated_creams":[30],"value_make_up":[31],"value_make_up_remover":[32]},"has_sub_questions":true,"go_to":[33],"dependent_questions":[25,26,27,28,29,30,31,32]},"25":{},"26":{},"27":{},"28":{},"29":{},"30":{},"31":{},"32":{},"33":{"go_to":[34]},"34":{"go_to":[35]},"35":{"go_to":[36]}}
+      logic = {
+        "start_with": [1],
+        "flow": {
+          "1": {
+            "go_to": [2]
+          },
+          "2": {
+            "is_mandatory": true,
+            "dependent_questions": [29, 30, 31, 32],
+            "go_to": [3],
+          },
+          "3": {
+            "is_mandatory": true,
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "<": [2, {
+                  "var": "value"
+                }, 66]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 3
+            },
+            "static_params": {
+              "value_t": [6],
+              "value_f": [4, 5]
+            },
+            "dependent_questions": [4, 5, 6],
+            "save_checkpoint": true
+          },
+          "4": {},
+          "5": {
+            "is_mandatory": true,
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "Edit"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 5
+            },
+            "static_params": {
+              "value_t": [3],
+              "value_f": [70]
+            },
+            "dependent_questions": [3, 70],
+            "type": "edit"
+          },
+          "6": {
+            "is_mandatory": true,
+            "go_to": [7]
+          },
+          "7": {
+            "is_mandatory": true,
+            "go_to": [8]
+          },
+          "8": {
+            "is_mandatory": true,
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "No"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 8
+            },
+            "static_params": {
+              "value_t": [11],
+              "value_f": [9, 10]
+            },
+            "dependent_questions": [11, 9, 10],
+            "save_checkpoint": true
+          },
+          "9": {},
+          "10": {
+            "is_mandatory": true,
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "Edit"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 10
+            },
+            "static_params": {
+              "value_t": [8],
+              "value_f": [70]
+            },
+            "dependent_questions": [8, 70],
+            "type": "edit"
+          },
+          "11": {
+            "go_to": [12]
+          },
+          "12": {
+            "is_mandatory": true,
+            "requires_check": true,
+            "jump_logic": {
+              "merge": [{
+                "if": [{
+                    "in": ["Face - forehead", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_face_forehead"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Face - cheek", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_face_cheek"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Face - jawline", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_face_jawline"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Scalp", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_scalp"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Chest", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_chest"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Back", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_back"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Shoulders", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_shoulders"
+                  },
+                  []
+                ]
+              }]
+            },
+            "dynamic_params": {
+              "value": 12
+            },
+            "static_params": {
+              "value_face_forehead": [13, 14, 15, 16, 17, 18],
+              "value_face_cheek": [13, 14, 15, 16, 17, 18],
+              "value_face_jawline": [13, 14, 15, 16, 17, 18],
+              "value_scalp": [13, 14, 15, 16, 17, 18],
+              "value_chest": [19],
+              "value_back": [20],
+              "value_shoulders": [21]
+            },
+            "has_sub_questions": true,
+            "go_to": [22],
+            "dependent_questions": [13, 14, 15, 16, 17, 18, 19, 20, 21],
+            "save_checkpoint": true
+          },
+          "13": {},
+          "14": {
+            "save_checkpoint": true},
+          "15": {},
+          "16": {
+            "save_checkpoint": true},
+          "17": {},
+          "18": {
+            "save_checkpoint": true},
+          "19": {},
+          "20": {},
+          "21": {},
+          "22": {
+            "is_mandatory": true,
+            "requires_check": true,
+            "jump_logic": {
+              "merge": [{
+                "if": [{
+                    "in": ["Face wash", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_facewash"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Sunscreen", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_sunscreen"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Day cream", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_day_cream"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Night cream", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_night_cream"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Medicated cream", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_medicated_cream"
+                  },
+                  []
+                ]
+              }]
+            },
+            "dynamic_params": {
+              "value": 22
+            },
+            "static_params": {
+              "value_facewash": [23],
+              "value_sunscreen": [24],
+              "value_day_cream": [25],
+              "value_night_cream": [26],
+              "value_medicated_creams": [27],
+            },
+            "has_sub_questions": true,
+            "go_to": [28],
+            "dependent_questions": [23, 24, 25, 26, 27],
+            "save_checkpoint": true
+          },
+          "23": {},
+          "24": {},
+          "25": {},
+          "26": {},
+          "27": {},
+          "28": {
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "Female"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 2
+            },
+            "static_params": {
+              "value_t": [29],
+              "value_f": [33]
+            },
+            "dependent_questions": [29, 33],
+            "save_checkpoint": true
+          },
+          "29": {
+            "is_mandatory": true,
+            "requires_check": true,
+            "jump_logic": {
+              "merge": [{
+                "if": [{
+                    "in": ["Polycistic Ovarian Disease (PCOD)", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_pcod"
+                  },
+                  []
+                ]
+              }]
+            },
+            "dynamic_params": {
+              "value": 6
+            },
+            "static_params": {
+              "value_pcod": [30],
+            },
+            "has_sub_questions": true,
+            "go_to": [32],
+            "dependent_questions": [30]
+          },
+          "30": {
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "Yes"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 30
+            },
+            "static_params": {
+              "value_t": [31],
+              "value_f": [32]
+            },
+            "dependent_questions": [31, 32]
+          },
+          "31": {
+            "is_mandatory": true,
+            "go_to": [32],
+          },
+          "32": {
+            "is_mandatory": true,
+            "go_to": [33],
+          },
+          "33": {
+            "is_mandatory": true,
+            "go_to": [34],
+            "save_checkpoint": true
+          },
+          "34": {
+            "is_mandatory": true,
+            "go_to": [35],
+          },
+          "35": {
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "Yes"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 35
+            },
+            "static_params": {
+              "value_t": [36],
+              "value_f": [37]
+            },
+            "dependent_questions": [36, 37]
+          },
+          "36": {
+            "is_mandatory": true,
+            "go_to": [37],
+          },
+          "37": {
+            "is_mandatory": true,
+            "requires_check": true,
+            "jump_logic": {
+              "merge": [{
+                "if": [{
+                    "in": ["Isotretinoin", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_isotretinoin"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Oral contraceptive pills", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_oral_contraceptive_pills"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Azithromycin / Roxithromycin", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_azithromycin_roxithromycin"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Minocycline / Doxycycline", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_minocycline_doxycycline"
+                  },
+                  []
+                ]
+              }, {
+                "if": [{
+                    "in": ["Oral steroids", {
+                      "var": "value"
+                    }]
+                  }, {
+                    "var": "value_oral_steroids"
+                  },
+                  []
+                ]
+              }]
+            },
+            "dynamic_params": {
+              "value": 37
+            },
+            "static_params": {
+              "value_isotretinoin": [38, 39, 40],
+              "value_oral_contraceptive_pills": [41, 42, 43],
+              "value_azithromycin_roxithromycin": [44, 45, 46],
+              "value_minocycline_doxycycline": [47, 48, 49],
+              "value_oral_steroids": [51, 52, 53],
+            },
+            "has_sub_questions": true,
+            "go_to": [53],
+            "dependent_questions": [38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]
+          },
+          "38": {},
+          "39": {},
+          "40": {},
+          "41": {},
+          "42": {},
+          "43": {},
+          "44": {},
+          "45": {},
+          "46": {},
+          "47": {},
+          "48": {},
+          "49": {},
+          "50": {},
+          "51": {},
+          "52": {},
+          "53": {
+            "is_mandatory": true,
+            "go_to": [54],
+            "save_checkpoint": true
+          },
+          "54": {
+            "is_mandatory": true,
+            "go_to": [55],
+          },
+          "55": {
+            "is_mandatory": true,
+            "go_to": [56],
+          },
+          "56": {
+            "is_mandatory": true,
+            "go_to": [57],
+          },
+          "57": {
+            "is_mandatory": true,
+            "go_to": [58],
+          },
+          "58": {
+            "is_mandatory": true,
+            "go_to": [59],
+          },
+          "59": {
+            "is_mandatory": true,
+            "go_to": [60],
+          },
+          "60": {
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "Yes"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 60
+            },
+            "static_params": {
+              "value_t": [61],
+              "value_f": [62]
+            },
+            "dependent_questions": [61, 62]
+          },
+          "61": {
+            "is_mandatory": true,
+            "go_to": 62
+          },
+          "62": {
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "Yes"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 62
+            },
+            "static_params": {
+              "value_t": [63],
+              "value_f": [64]
+            },
+            "dependent_questions": [63, 64]
+          },
+          "63": {
+            "is_mandatory": true,
+            "go_to": 64
+          },
+          "64": {
+            "requires_check": true,
+            "jump_logic": {
+              "if": [{
+                "==": [{
+                  "var": "value"
+                }, "Yes"]
+              }, {
+                "var": "value_t"
+              }, {
+                "var": "value_f"
+              }]
+            },
+            "dynamic_params": {
+              "value": 64
+            },
+            "static_params": {
+              "value_t": [65],
+              "value_f": [66]
+            },
+            "dependent_questions": [65, 66],
+            "save_checkpoint": true
+          },
+          "65": {
+            "is_mandatory": true,
+            "go_to": 66
+          },
+          "66": {
+            "is_mandatory": true,
+            "go_to": 67
+          },
+          "67": {
+            "is_mandatory": true,
+            "go_to": 68
+          },
+          "68": {
+            "go_to": 69
+          },
+          "69": {
+            "is_mandatory": true,
+            "go_to": 70
+          },
+          "70": {
+            "submit": true
+          }
         }
-      
-      render :json => { :questions => questionnaire_fake, :logic => logic_fake, :status => 200 }
-      
-      
+      }
+
+      render :json => { :questions => Questionnaire.all, :logic => logic, :status => :ok }
+
       # render :json => { :questions => get_questionnaire[:questionnaire], :logic => get_questionnaire[:questionnaire_logic], :status => 200 }
     elsif params[:scope] == 'save'
       # @response.update({ :responses => params[:answers] });
       render :json => { status => 204 }
-    end   
+    end
   end
 
 end

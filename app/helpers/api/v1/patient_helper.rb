@@ -17,6 +17,7 @@ module Api::V1::PatientHelper
   def unregister
     Rails.logger.info "In unregister"
     @current_user = nil
+    @curernt_consultaiton = nil
     @condition = nil
     reset_session
   end

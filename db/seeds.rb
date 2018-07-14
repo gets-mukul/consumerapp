@@ -1159,6 +1159,683 @@ end
 #   }
 # ])
 
+Questionnaire.create(
+  [
+    {
+      "question" => "$name, we're first going to ask some basic information about you.",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "statement",
+      "variables" => ["name"]
+    },
+    {
+      "question" => "What's your sex?*",
+      "desc" => "",
+      "answers" =>
+      [
+        "Male",
+        "Female"
+      ],
+      "field_type" => "radio_other"
+    },
+    {
+      "question" => "How old are you (in years)?*",
+      "desc" => "For example: 18",
+      "answers" => nil,
+      "field_type" => "integer"
+    },
+    {
+      "question" => "We are sorry $name, but we cannot treat patients over the age 65 or under 2. Hence, we recommend that you see a doctor in person.",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "statement",
+      "variables" => ["name"]
+    },
+    {
+      "question" => "If you've entered this in error, please click edit to change your answer",
+      "desc" => "",
+      "answers" =>
+      [
+        "Edit",
+        "Do not change my answer"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "Please tell us if <b>you</b> have a personal history of any of the following conditions.*",
+      "desc" => 'If you do not have any personal history of any of the below, please select "None of the above".',
+      "answers" =>
+      [
+        "Polycistic Ovarian Disease (PCOD)",
+        "Diabetes",
+        "Asthma",
+        "Hypertension (high blood pressure)",
+        "Hyperthyroid",
+        "Hypothyroid",
+        "Hypercholesterolemia (high cholesterol)",
+        "Migraine",
+        "Psychiatric problems",
+        "Cushing's disease",
+        "Ovarian tumours",
+        "Androgen secreting tumours",
+        "Adrenal hyperplasia",
+        "None of the above"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Please tell us if <b>anyone in your family</b> has a history of any of the following conditions.*",
+      "desc" => 'If nobody in your family has a history of any of the below, please select "None of the above".',
+      "answers" =>
+      [
+        "Polycistic Ovarian Disease (PCOD)",
+        "Diabetes",
+        "Asthma",
+        "Hypertension (high blood pressure)",
+        "Hyperthyroid",
+        "Hypothyroid",
+        "Hypercholesterolemia (high cholesterol)",
+        "Migraine",
+        "Psychiatric problems",
+        "Cushing's disease",
+        "Ovarian tumours",
+        "Androgen secreting tumours",
+        "Adrenal hyperplasia",
+        "None of the above"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Do you have a personal or family history of skin cancer?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "We are sorry $name, since you have a personal or family history of skin cancer, we won't be to treat you. We recommend that you see a doctor in person.",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "statement",
+      "variables" => ["name"]
+    },
+    {
+      "question" => "If you've entered this in error, please click edit to change your answer",
+      "desc" => "",
+      "answers" =>
+      [
+        "Edit",
+        "Do not change my answer"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "Thanks, $name. Now it would be great if you can help us understand more about your acne.",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "statement",
+      "variables" => ["name"]
+    },
+    {
+      "question" => "$name, where are you experiencing the acne ?*",
+      "desc" => "",
+      "answers" =>
+      [
+        "Face - forehead",
+        "Face - cheeks",
+        "Face - jawline",
+        "Scalp",
+        "Chest",
+        "Back",
+        "Shoulders"
+      ],
+      "field_type" => "select_all",
+      "variables" => ["name"]
+    },
+    {
+      "question" => "You will need to provide us with a photo of your face <b>from front on.</b>",
+      "desc" => "Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Pull your hair back and ensure your full face is visible.",
+      "answers" => nil,
+      "field_type" => "statement_image"
+    },
+    {
+      "question" => "Please take or attach a photo of your face <b>from front on</b>.",
+      "desc" => "If you can't take one right now, you can send it to us later.",
+      "answers" => nil,
+      "field_type" => "image_upload",
+      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_front.png"
+    },
+    {
+      "question" => "You will need to provide us with a photo of your face <b>from your left profile</b>.",
+      "desc" => "Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Ensure your profile is fully visible. If hair is covering part of your face, hold it up as shown.",
+      "answers" => nil,
+      "field_type" => "statement_image",
+    },
+    {
+      "question" => "Please take or attach a photo of your face <b>from your left profile</b>.",
+      "desc" => "If you can't take one right now, you can send it to us later.",
+      "answers" => nil,
+      "field_type" => "image_upload",
+      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_left.png"
+    },
+    {
+      "question" => "You will need to provide us with a photo of your face <b>from your right profile</b>.",
+      "desc" => "Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Ensure your profile is fully visible. If hair is covering part of your face, hold it up as shown.",
+      "answers" => nil,
+      "field_type" => "statement_image",
+    },
+    {
+      "question" => "Please take or attach a photo of your face <b>from your right profile</b>.",
+      "desc" => "If you can't take one right now, you can send it to us later.",
+      "answers" => nil,
+      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_right.png",
+      "field_type" => "image_upload"
+    },
+    {
+      "question" => "Please take or attach a photo of the acne on your chest.",
+      "desc" => "If you can't take a photo right now, you can send it to us later.",
+      "answers" => nil,
+      "field_type" => "image_upload"
+    },
+    {
+      "question" => "Please take or attach a photo of the acne on your <b>back</b>.",
+      "desc" => "If you can't take a photo right now, you can send it to us later.",
+      "answers" => nil,
+      "field_type" => "image_upload"
+    },
+    {
+      "question" => "Please take or attach a photo of the acne on your <b>shoulders</b>.",
+      "desc" => "If you can't take a photo right now, you can send it to us later.",
+      "answers" => nil,
+      "field_type" => "image_upload"
+    },
+    {
+      "question" => "Which face products do you use (select and specify all that apply): ",
+      "desc" => "",
+      "answers" =>
+      [
+        "Face wash",
+        "Sunscreen",
+        "Day cream",
+        "Night cream",
+        "Medicated cream",
+        "None of the above",
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Which brand / type of facewash do you use?",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Which brand / type of sunscreen do you use?",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Which brand / type of day cream do you use on your face?",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Which brand / type of night cream do you use on your face?",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Which brand / type of medicated cream do you use on your face?",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Thanks, $name",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "statement",
+      "variables" => ["name"]
+    },
+    {
+      "question" => "Are you pregnant and / or lactating?*",
+      "desc" => "",
+      "answers" =>
+      [
+        "Pregnant",
+        "Lactating",
+        "Pregnant and lactating",
+        "Not pregnant or lactating"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "You mentioned that you have a personal history of PCOD. Do you still have it?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "Which medications are you currently taking for it?*",
+      "desc" => "",
+      "answers" =>
+      [
+        "Oral contraceptive pills with oestrogen and progesterone (combined pill)",
+        "Oral contraceptive pills with oestrogen and cyproterone acetate",
+        "Finasteride",
+        "Cytomid",
+        "Metformin",
+        "I'm not taking any medications for PCOD"
+      ],
+      "field_type" => "select_all_other"
+    },
+    {
+      "question" => "Do you experience any of the following symptoms?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Irregular periods",
+        "Thinning of scalp hair",
+        "Facial hair",
+        "Weight gain in a short time",
+        "None of the above"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Do you have a family history of acne?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "When did your <b>current acne breakout</b> start, $name?",
+      "desc" => "We only need to know about the acne you have right now. If you have had acne breakouts in the past, you can tell us about those in later questions.",
+      "answers" =>
+      [
+        "Less than 1 week ago",
+        "1 - 3 weeks ago",
+        "3 weeks to 2 months ago",
+        "2 months to 1 year ago",
+        "Longer than 1 year ago"
+      ],
+      "field_type" => "select_all",
+      "variables" => ["name"]
+    },
+    {
+      "question" => "Have you had acne breakouts before?",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "How old were you when you first had acne?*",
+      "desc" => "",
+      "answers" =>
+      [
+        "Less than 20 years old",
+        "20 - 30 years old",
+        "30 - 40 years old",
+        "2 months to 1 year ago",
+        "Older than 40 years old"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Have you taken any of the following oral treatments (in the past or currently) for your acne?*",
+      "desc" => "",
+      "answers" =>
+      [
+        "Isotretinoin",
+        "Oral contraceptive pills",
+        "Azithromycin / Roxithromycin",
+        "Minocycline / Doxycycline",
+        "Oral steroids",
+        "None of the above"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "How long did you take the Isotretinoin for?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Less than 3 months",
+        "3 - 6 months",
+        "6 - 12 months",
+        "Longer than 12 months",
+        "I am still taking it"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Did the Isotretinoin help improve your acne?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "When did your Isotretinoin course end?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Longer than 12 months ago",
+        "6 - 12 months",
+        "Less than 6 months ago",
+        "I am still taking the treatment"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "How long did you take the oral contraceptive pills for?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Less than 3 months",
+        "3 - 6 months",
+        "6 - 12 months",
+        "Longer than 12 months",
+        "I am still taking it"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Did the oral contraceptive pills help improve your acne?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "When did your oral contraceptive pill course end?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Longer than 12 months ago",
+        "6 - 12 months",
+        "Less than 6 months ago",
+        "I am still taking the treatment"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "How long did you take the Azithromycin / Roxithromycin for?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Less than 1 month",
+        "1 -3 months",
+        "Longer than 3 months",
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Did the Azithromycin / Roxithromycin help improve your acne?",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "When did your Azithromycin / Roxithromycin course end?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Longer than 12 months ago",
+        "6 - 12 months",
+        "Less than 6 months ago",
+        "I am still taking the treatment"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "How long did you take the Minocycline / Doxycycline for?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Less than 1 month",
+        "1 -3 months",
+        "Longer than 3 months",
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Did the Minocycline / Doxycycline help improve your acne?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "When did your Minocycline / Doxycycline course end?*",
+      "desc" => "",
+      "answers" =>
+      [
+        "Longer than 12 months ago",
+        "6 - 12 months",
+        "Less than 6 months ago",
+        "I am still taking the treatment"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "How long did you take the oral steroids for?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Less than 3 months",
+        "3 - 6 months",
+        "6 - 12 months",
+        "Longer than 12 months",
+        "I am still taking it"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Did the oral steroids help improve your acne?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "When did your oral steroids course end?*",
+      "desc" => "",
+      "answers" =>
+      [
+        "Longer than 12 months ago",
+        "6 - 12 months",
+        "Less than 6 months ago",
+        "I am still taking the treatment"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Have you experienced any recent stress of the following kind?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Physical - recent illness",
+        "Physical - travel",
+        "Physical - decreased sleep",
+        "Physical - decreased appetite",
+        "Physical - excessive junk food or sugar in diet",
+        "Mental",
+        "No recent physical or mental stress"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "Almost there, $name! We need to ask you a few final questions about you and your lifestyle. This will help us to complete our patient profile, and to prepare a treatment plan for you.",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "statement",
+      "variables" => ["name"]
+    },
+    {
+      "question" => "What is your ethnicity / racial background?",
+      "desc" => "",
+      "answers" =>
+      [
+        "Indian / South Asian",
+        "Caucasian (e.g. European)",
+        "African",
+        "Middle Eastern",
+        "South East Asian (e.g. Thai, Vietnamese)",
+        "East Asian (e.g. Chinese, Korean, Japanese)",
+        "South or Central American"
+      ],
+      "field_type" => "select_all_other"
+    },
+    {
+      "question" => "Which city do you live in?",
+      "desc" => "Where you live affects the type of weather your skin is exposed to.",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "What's your occupation?",
+      "desc" => "We need to know what kind of conditions your skin is exposed to daily.",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Are you married and / or do you have any sexual partners?",
+      "desc" => "We need to ask this for legal reasons. As with all of our questions, we won't disclose it to anyone else.",
+      "answers" =>
+      [
+        "Married",
+        "Unmarried, with sexual partner(s)",
+        "Unmarried, with no sexual partners"
+      ],
+      "field_type" => "select_all"
+    },
+    {
+      "question" => "How much do you weigh (in kilograms)?",
+      "desc" => "We need this information so we can prescribe the right dosage for you, in case you need any medications.",
+      "answers" => nil,
+      "field_type" => "integer"
+    },
+    {
+      "question" => "Do you have any drug allergies?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "Which drug allergies are those?",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Do you have any food allergies?*",
+      "desc" => "",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "Which food allergies are those?",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Are you currently on any medication (other than what you've already told us)?*",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Let us know which medications you are taking, and how long you've been taking them for.*",
+      "desc" => "For example: Glycomet, since 3 months.",
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "How many times per week do you drink alcohol?*",
+      "desc" => "Understanding your lifestyle and habits help us understand your skin.",
+      "answers" =>
+      [ "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "I drink occasionally",
+        "I don't drink alcohol",
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "How many cigarettes do you smoke per day?*",
+      "desc" => "Understanding your lifestyle and habits helps us understand your skin.",
+      "answers" =>
+      [ "1 - 5",
+        "5 - 20",
+        "More than 20",
+        "I smoke occasionally",
+        "I don't smoke cigarettes",
+      ],
+      "field_type" => "radio"
+    },
+    {
+      "question" => "Great! Lastly, let us know your email ID.*",
+      "desc" => "We will send your treatment plan to this address, once your dermatologist has prepared it.",
+      "answers" => nil,
+      "field_type" => "string"
+    },
+    {
+      "question" => "Let us know if there are any other comments or information you would like to provide about yourself or your symptoms.*",
+      "desc" => "Also let us know if you were referred to a specific doctor. If you don't have anything more to provide, just leave the box blank.",
+      "answers" => nil,
+      "field_type" => "long_string"
+    },
+    {
+      "question" => "",
+      "desc" => "",
+      "answers" => nil,
+      "field_type" => "submit"
+    }
+  ]
+);
+
+
 
 print i
 puts " entries created"

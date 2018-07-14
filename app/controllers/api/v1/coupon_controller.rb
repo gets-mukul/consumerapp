@@ -5,7 +5,7 @@ class Api::V1::CouponController < Api::V1::ApiController
 		if ['SOCIAL150', 'REFER150'].include? params[:promo_code]
 			params[:promo_code] = params[:promo_code].sub '150', '100'
 		end
-		
+
 		@coupon = Coupon.find_by :coupon_code => params[:promo_code]
 
 		# check if coupon exists
@@ -14,13 +14,13 @@ class Api::V1::CouponController < Api::V1::ApiController
 			if ((@coupon.count<@coupon.max_count) && (@coupon.expires_on.present? ? Time.now <= @coupon.expires_on : true))
 				@coupon.update(status: 'coupon entered')
 				session[:coupon_applied] = true
-				session[:promo_code] = params[:promo_code]				
+				session[:promo_code] = params[:promo_code]
 				render json: { status: 'success', coupon: params[:promo_code], :discount_price => (350 - @coupon.discount_amount)}, status: :ok
 			else
 				render json: { status: 'coupon expired' }, status: :not_found
 			end
 		else
-			render json: { status: 'coupon not found' }, status: :not_found			
+			render json: { status: 'coupon not found' }, status: :not_found
 		end
 	end
 

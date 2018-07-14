@@ -23,10 +23,10 @@ Rails.application.routes.draw do
         get 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
 
         # questionnaire
-        get '/' => 'questionnaire#index'
+        get 'questionnaire' => 'questionnaire#index'
 
         # questionnaire_responses
-        post '/save' => 'questionnaire_response#save'
+        get 'questionnaire_response/save' => 'questionnaire_response#save'
 
         if Rails.env.development?
           get '/patients/get_patient_details' => 'patient#get_patient_details'
@@ -68,6 +68,7 @@ Rails.application.routes.draw do
       get '/success_free', to: 'payment#success_free'
       get '/instant_payment' => 'payment#instant_payment', defaults: {format: 'json'}
     end
+    get '/payment/:type', to: 'payment#index'
 
     get '/privacy_policy', to: 'static_pages#privacy_policy'
     get '/terms_of_use', to: 'static_pages#terms_of_use'
