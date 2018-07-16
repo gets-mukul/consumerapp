@@ -28,7 +28,7 @@ class Api::V1::PatientController < Api::V1::ApiController
   end
 
   def get_sendgrid_stats
-    if params['key'] == Rails.application.secrets.GOOGLE_CONTACTS_APP-SCRIPTS
+    if params['key'] == Rails.application.secrets.GOOGLE_CONTACTS_APP_SCRIPTS
       start_date = params['start_date'].to_s
       end_date = params['end_date'].to_s
       uri = URI.parse("https://api.sendgrid.com/v3/categories/stats/sums?start_date="+start_date+"&end_date="+end_date+"&limit=50")
