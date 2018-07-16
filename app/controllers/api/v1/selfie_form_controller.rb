@@ -55,6 +55,7 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
         end
 
         diagnosis = {
+          conditions: conditions.pluck(:key),
           inline_description: inline_description,
           login_link: login_link,
           description: description,
@@ -62,9 +63,13 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
             doctor: {
               code: selfie_form.doctor.code,
               full_name: selfie_form.doctor.full_name,
+              qualification: selfie_form.doctor.qualification,
+              description: selfie_form.doctor.desc
             },
             patient: {
               name: selfie_form.patient.name,
+              sex: selfie_form.patient.sex || '',
+              image_url: selfie_form.selfie_image.image
             }
           },
         }
