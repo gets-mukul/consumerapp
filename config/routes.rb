@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
         if Rails.env.development?
           get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
+          get '/patients/get_sendgrid_details' => 'patient#get_sendgrid_details', defaults: {format: 'json'}
+
         end
 
         get 'get-s3-policy' => 's3_bucket#get_s3_policy'

@@ -26,5 +26,16 @@ class Api::V1::PatientController < Api::V1::ApiController
 
     render :json => {"status": "Unauthorized", "code": 401}
   end
+  def get_sendgrid_details
+    if params['key']==Rails.application.secrets.GOOGLE_CONTACTS_APP_SCRIPTS
+      start_date = params['start_date'].to_s
+      end_date = params['end_date'].to_s
+      uri = URI.parse("https://api.sendgrid.com/v3/categories/stats/sums?start_date="+start_date+"&end_date="+end_date+"&limit=50")
+
+      response = HTTParty.get(uri,:headers =>{'Authorization'=> Rails.application.secrets.SENDGRID_API_KEY } )
+      render :json=>response
+    return
+    end
+  end
 
 end
