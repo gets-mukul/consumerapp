@@ -85,7 +85,7 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
         render json: {
           status: 'selfie found',
           diagnosis: diagnosis
-        }, status: :found
+        }, status: :ok
         return
       end
     end
