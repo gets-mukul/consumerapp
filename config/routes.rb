@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         get 'patient/unregister' => 'patient#unregister_patient', :as => 'unregister_patient'
 
         # consultations
-        get 'consultations' => 'consultation#fetch_consultations'
+        get 'consultations' => 'consultation#get_consultations'
 
         # selfie form
         post 'selfie-form/create' => 'selfie_form#create'
