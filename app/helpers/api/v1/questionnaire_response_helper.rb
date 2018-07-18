@@ -4,6 +4,6 @@ module Api::V1::QuestionnaireResponseHelper
   end
 
   def check_questionnaire_response
-    return (questionnaire_response.nil? and session[:questionnaire_response_id].nil?) || current_consultation.questionnaire_response.nil?
+    return (session[:questionnaire_response_id].present? && current_consultation.questionnaire_response.present?)
   end
 end

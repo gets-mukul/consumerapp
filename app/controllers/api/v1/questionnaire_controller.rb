@@ -16,7 +16,7 @@ class Api::V1::QuestionnaireController < Api::V1::ApiController
       :patient => {
         :name => current_user.name,
         :consultation_id => current_consultation.id,
-        :questionnaire_response => current_consultation.questionnaire_response,
+        :questionnaire_response => (current_consultation.questionnaire_response ? current_consultation.questionnaire_response.responses : nil ),
       }
     }, :status => :ok
   end
