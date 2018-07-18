@@ -26,7 +26,7 @@ Rails.application.routes.draw do
         get 'questionnaire/:condition' => 'questionnaire#index'
 
         # questionnaire_responses
-        get 'questionnaire_response/save' => 'questionnaire_response#save'
+        post 'questionnaire_response/save' => 'questionnaire_response#save'
 
         if Rails.env.development?
           get '/patients/get_patient_details' => 'patient#get_patient_details'

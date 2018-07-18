@@ -1,5 +1,5 @@
 class Api::V1::ConsultationController < Api::V1::ApiController
-  # skip_before_action :verify_authenticity_token, raise: false
+  skip_before_action :verify_authenticity_token
   before_filter :check_current_user
 
   def fetch_consultations

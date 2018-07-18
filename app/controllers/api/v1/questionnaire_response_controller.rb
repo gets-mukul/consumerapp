@@ -5,7 +5,6 @@ class Api::V1::QuestionnaireResponseController < Api::V1::ApiController
 
   def save
     unless current_consultation
-
       @consultation = Consultation.create({
         patient: current_user,
         category: @condition

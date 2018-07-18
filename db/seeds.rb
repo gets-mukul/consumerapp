@@ -1298,39 +1298,39 @@ Questionnaire.create(
       "question" => "You will need to provide us with a photo of your face <b>from front on.</b>",
       "desc" => "Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Pull your hair back and ensure your full face is visible.",
       "answers" => nil,
-      "field_type" => "statement_image"
+      "field_type" => "statement_image",
+      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_front.png"
     },
     {
       "question" => "Please take or attach a photo of your face <b>from front on</b>.",
       "desc" => "If you can't take one right now, you can send it to us later.",
       "answers" => nil,
       "field_type" => "image_upload",
-      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_front.png"
     },
     {
       "question" => "You will need to provide us with a photo of your face <b>from your left profile</b>.",
       "desc" => "Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Ensure your profile is fully visible. If hair is covering part of your face, hold it up as shown.",
       "answers" => nil,
       "field_type" => "statement_image",
+      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_left.png"
     },
     {
       "question" => "Please take or attach a photo of your face <b>from your left profile</b>.",
       "desc" => "If you can't take one right now, you can send it to us later.",
       "answers" => nil,
       "field_type" => "image_upload",
-      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_left.png"
     },
     {
       "question" => "You will need to provide us with a photo of your face <b>from your right profile</b>.",
       "desc" => "Make sure there is plenty of light. Keep the phone 20cm from you, and use the back camera if possible. Ensure your profile is fully visible. If hair is covering part of your face, hold it up as shown.",
       "answers" => nil,
       "field_type" => "statement_image",
+      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_right.png",
     },
     {
       "question" => "Please take or attach a photo of your face <b>from your right profile</b>.",
       "desc" => "If you can't take one right now, you can send it to us later.",
       "answers" => nil,
-      "image" => "https://s3-ap-southeast-1.amazonaws.com/remedicohealth/assets/images/upload_image_right.png",
       "field_type" => "image_upload"
     },
     {
@@ -1710,7 +1710,7 @@ Questionnaire.create(
         "East Asian (e.g. Chinese, Korean, Japanese)",
         "South or Central American"
       ],
-      "field_type" => "select_all_other"
+      "field_type" => "radio_other"
     },
     {
       "question" => "Which city do you live in?",
@@ -1774,8 +1774,11 @@ Questionnaire.create(
     {
       "question" => "Are you currently on any medication (other than what you've already told us)?",
       "desc" => "",
-      "answers" => nil,
-      "field_type" => "string"
+      "answers" =>
+      [ "Yes",
+        "No"
+      ],
+      "field_type" => "radio"
     },
     {
       "question" => "Let us know which medications you are taking, and how long you've been taking them for.",

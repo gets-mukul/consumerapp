@@ -1,5 +1,4 @@
 class Api::V1::PatientController < Api::V1::ApiController
-  # skip_before_action :verify_authenticity_token
   skip_before_action :verify_authenticity_token
   include ExternalConnectionHelper
 
