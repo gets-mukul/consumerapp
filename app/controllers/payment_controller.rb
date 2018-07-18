@@ -29,10 +29,10 @@ class PaymentController < ApplicationController
     Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
     logger.info params
-    if (params[:type]) {
+    if (params[:type])
       chatbot_handler
       return
-    }
+    end
     session[:error_msg] = ""
     # Rails.logger.info 'Payments Controller: Request Referrer'
     # Rails.logger.info request.referer
@@ -350,7 +350,24 @@ class PaymentController < ApplicationController
   end
 
   def chatbot_handler
-    
+    current_consultation.questionnaire_response.update(:form_finished_at => DateTime.now())
+    current_consultation.update(user_status: 'form filled', pay_status: 'payment pending')
+
+
+    current_user.sex = current_consultation.questionnaire_response.responses["2"]["answer"] if current_consultation.questionnaire_response.responses["2"]
+    current_user.email = current_consultation.questionnaire_response.responses["68"]["answer"] if current_consultation.questionnaire_response.responses["68"]
+    current_user.city = current_consultation.questionnaire_response.responses["56"]["answer"] if current_consultation.questionnaire_response.responses["56"]
+    current_user.save!
+
+    AdminTransactionMailer.send_user_form_filled_notifier_mail(current_consultation).deliver if Rails.env.production?
+
+    # fetch consultation fee
+    @amount = current_consultation.amount
+    # if amount is 0 then end the consultation and display success page
+    if @amount.zero?
+      redirect_to :success_free
+    end
+    # show him payments screen
   end
 
   private

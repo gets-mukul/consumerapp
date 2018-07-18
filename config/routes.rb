@@ -23,7 +23,7 @@ Rails.application.routes.draw do
         get 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
 
         # questionnaire
-        get 'questionnaire' => 'questionnaire#index'
+        get 'questionnaire/:condition' => 'questionnaire#index'
 
         # questionnaire_responses
         get 'questionnaire_response/save' => 'questionnaire_response#save'

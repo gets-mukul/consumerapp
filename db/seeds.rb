@@ -1169,7 +1169,7 @@ Questionnaire.create(
       "variables" => ["name"]
     },
     {
-      "question" => "What's your sex?*",
+      "question" => "What's your sex?",
       "desc" => "",
       "answers" =>
       [
@@ -1179,7 +1179,7 @@ Questionnaire.create(
       "field_type" => "radio_other"
     },
     {
-      "question" => "How old are you (in years)?*",
+      "question" => "How old are you (in years)?",
       "desc" => "For example: 18",
       "answers" => nil,
       "field_type" => "integer"
@@ -1202,7 +1202,7 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "Please tell us if <b>you</b> have a personal history of any of the following conditions.*",
+      "question" => "Please tell us if <b>you</b> have a personal history of any of the following conditions.",
       "desc" => 'If you do not have any personal history of any of the below, please select "None of the above".',
       "answers" =>
       [
@@ -1224,7 +1224,7 @@ Questionnaire.create(
       "field_type" => "select_all"
     },
     {
-      "question" => "Please tell us if <b>anyone in your family</b> has a history of any of the following conditions.*",
+      "question" => "Please tell us if <b>anyone in your family</b> has a history of any of the following conditions.",
       "desc" => 'If nobody in your family has a history of any of the below, please select "None of the above".',
       "answers" =>
       [
@@ -1246,7 +1246,7 @@ Questionnaire.create(
       "field_type" => "select_all"
     },
     {
-      "question" => "Do you have a personal or family history of skin cancer?*",
+      "question" => "Do you have a personal or family history of skin cancer?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1279,7 +1279,7 @@ Questionnaire.create(
       "variables" => ["name"]
     },
     {
-      "question" => "$name, where are you experiencing the acne ?*",
+      "question" => "$name, where are you experiencing the acne ?",
       "desc" => "",
       "answers" =>
       [
@@ -1403,7 +1403,7 @@ Questionnaire.create(
       "variables" => ["name"]
     },
     {
-      "question" => "Are you pregnant and / or lactating?*",
+      "question" => "Are you pregnant and / or lactating?",
       "desc" => "",
       "answers" =>
       [
@@ -1415,7 +1415,7 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "You mentioned that you have a personal history of PCOD. Do you still have it?*",
+      "question" => "You mentioned that you have a personal history of PCOD. Do you still have it?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1424,7 +1424,7 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "Which medications are you currently taking for it?*",
+      "question" => "Which medications are you currently taking for it?",
       "desc" => "",
       "answers" =>
       [
@@ -1451,7 +1451,7 @@ Questionnaire.create(
       "field_type" => "select_all"
     },
     {
-      "question" => "Do you have a family history of acne?*",
+      "question" => "Do you have a family history of acne?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1483,7 +1483,7 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "How old were you when you first had acne?*",
+      "question" => "How old were you when you first had acne?",
       "desc" => "",
       "answers" =>
       [
@@ -1496,7 +1496,7 @@ Questionnaire.create(
       "field_type" => "select_all"
     },
     {
-      "question" => "Have you taken any of the following oral treatments (in the past or currently) for your acne?*",
+      "question" => "Have you taken any of the following oral treatments (in the past or currently) for your acne?",
       "desc" => "",
       "answers" =>
       [
@@ -1523,7 +1523,7 @@ Questionnaire.create(
       "field_type" => "select_all"
     },
     {
-      "question" => "Did the Isotretinoin help improve your acne?*",
+      "question" => "Did the Isotretinoin help improve your acne?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1557,7 +1557,7 @@ Questionnaire.create(
       "field_type" => "select_all"
     },
     {
-      "question" => "Did the oral contraceptive pills help improve your acne?*",
+      "question" => "Did the oral contraceptive pills help improve your acne?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1621,7 +1621,7 @@ Questionnaire.create(
       "field_type" => "select_all"
     },
     {
-      "question" => "Did the Minocycline / Doxycycline help improve your acne?*",
+      "question" => "Did the Minocycline / Doxycycline help improve your acne?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1630,7 +1630,7 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "When did your Minocycline / Doxycycline course end?*",
+      "question" => "When did your Minocycline / Doxycycline course end?",
       "desc" => "",
       "answers" =>
       [
@@ -1655,7 +1655,7 @@ Questionnaire.create(
       "field_type" => "select_all"
     },
     {
-      "question" => "Did the oral steroids help improve your acne?*",
+      "question" => "Did the oral steroids help improve your acne?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1664,7 +1664,7 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "When did your oral steroids course end?*",
+      "question" => "When did your oral steroids course end?",
       "desc" => "",
       "answers" =>
       [
@@ -1742,7 +1742,7 @@ Questionnaire.create(
       "field_type" => "integer"
     },
     {
-      "question" => "Do you have any drug allergies?*",
+      "question" => "Do you have any drug allergies?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1757,7 +1757,7 @@ Questionnaire.create(
       "field_type" => "string"
     },
     {
-      "question" => "Do you have any food allergies?*",
+      "question" => "Do you have any food allergies?",
       "desc" => "",
       "answers" =>
       [ "Yes",
@@ -1772,13 +1772,13 @@ Questionnaire.create(
       "field_type" => "string"
     },
     {
-      "question" => "Are you currently on any medication (other than what you've already told us)?*",
+      "question" => "Are you currently on any medication (other than what you've already told us)?",
       "desc" => "",
       "answers" => nil,
       "field_type" => "string"
     },
     {
-      "question" => "Let us know which medications you are taking, and how long you've been taking them for.*",
+      "question" => "Let us know which medications you are taking, and how long you've been taking them for.",
       "desc" => "For example: Glycomet, since 3 months.",
       "answers" =>
       [ "Yes",
@@ -1787,7 +1787,7 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "How many times per week do you drink alcohol?*",
+      "question" => "How many times per week do you drink alcohol?",
       "desc" => "Understanding your lifestyle and habits help us understand your skin.",
       "answers" =>
       [ "1",
@@ -1803,7 +1803,7 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "How many cigarettes do you smoke per day?*",
+      "question" => "How many cigarettes do you smoke per day?",
       "desc" => "Understanding your lifestyle and habits helps us understand your skin.",
       "answers" =>
       [ "1 - 5",
@@ -1815,13 +1815,13 @@ Questionnaire.create(
       "field_type" => "radio"
     },
     {
-      "question" => "Great! Lastly, let us know your email ID.*",
+      "question" => "Great! Lastly, let us know your email ID.",
       "desc" => "We will send your treatment plan to this address, once your dermatologist has prepared it.",
       "answers" => nil,
       "field_type" => "string"
     },
     {
-      "question" => "Let us know if there are any other comments or information you would like to provide about yourself or your symptoms.*",
+      "question" => "Let us know if there are any other comments or information you would like to provide about yourself or your symptoms.",
       "desc" => "Also let us know if you were referred to a specific doctor. If you don't have anything more to provide, just leave the box blank.",
       "answers" => nil,
       "field_type" => "long_string"
@@ -1834,6 +1834,793 @@ Questionnaire.create(
     }
   ]
 );
+
+def get_questionnaire_by_contains pattern
+  Questionnaire.find_by("question like ?", pattern)
+end
+
+QuestionnaireLogic.create([
+    {
+        questionnaire: get_questionnaire_by_contains("%we're first going to ask some basic information about you%"),
+        go_to:
+        [
+          get_questionnaire_by_contains("%What's your sex%").id
+        ],
+        entry_type: :start
+    },
+    {
+        questionnaire: get_questionnaire_by_contains("%What's your sex%"),
+        is_mandatory: true,
+        go_to:
+        [
+          get_questionnaire_by_contains("%How old are you%").id
+        ],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How old are you%"),
+      is_mandatory: true,
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "<": [2, {
+            "var": "value"
+          }, 66]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%How old are you%").id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%if <b>you</b> have a personal history of any of the following conditions.%").id],
+        "value_f": [
+          get_questionnaire_by_contains("%We are sorry $name, but we cannot treat patients over the age 65 or under 2%").id,
+          Questionnaire.where("question like ?", "%If you've entered this in error%").first.id
+        ]
+      },
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%We are sorry $name, but we cannot treat patients over the age 65 or under 2%")
+    },
+    {
+      questionnaire: Questionnaire.where("question like ?", "%If you've entered this in error%").first,
+      is_mandatory: true,
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "Edit"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": Questionnaire.where("question like ?", "%If you've entered this in error%").first.id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%How old are you%").id],
+        "value_f": [get_questionnaire_by_contains("").id]
+      },
+      entry_type: :edit
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%if <b>you</b> have a personal history of any of the following conditions.%"),
+      is_mandatory: true,
+      go_to:
+      [
+        get_questionnaire_by_contains("%if <b>anyone in your family</b> has a history of any of the following conditions.%").id
+      ]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%if <b>anyone in your family</b> has a history of any of the following conditions%"),
+      is_mandatory: true,
+      go_to:
+      [
+        get_questionnaire_by_contains("%Do you have a personal or family history of skin cancer?%").id
+      ]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Do you have a personal or family history of skin cancer?%"),
+      is_mandatory: true,
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "No"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%Do you have a personal or family history of skin cancer?%").id
+      },
+      static_params: {
+        "value_t":
+        [
+          get_questionnaire_by_contains("%Thanks, $name. Now it would be great if you can help us understand more about your acne.%").id
+        ],
+        "value_f":
+        [
+          get_questionnaire_by_contains("%We are sorry $name, since you have a personal or family history of skin cancer, we won't be to treat you. We recommend that you see a doctor in person.%").id,
+          Questionnaire.where("question like ?", "%If you've entered this in error%").second.id
+        ]
+      },
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%We are sorry $name, since you have a personal or family history of skin cancer, we won't be to treat you. We recommend that you see a doctor in person.%"),
+    },
+    {
+      questionnaire: Questionnaire.where("question like ?", "%If you've entered this in error%").second,
+      is_mandatory: true,
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "Edit"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": Questionnaire.where("question like ?", "%If you've entered this in error%").second.id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%Do you have a personal or family history of skin cancer?%").id],
+        "value_f": [get_questionnaire_by_contains("").id]
+      },
+      entry_type: :edit
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Thanks, $name. Now it would be great if you can help us understand more about your acne.%"),
+      go_to: [get_questionnaire_by_contains("%$name, where are you experiencing the acne ?%").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%$name, where are you experiencing the acne ?%"),
+      is_mandatory: true,
+      requires_check: true,
+      jump_logic: {
+        "merge": [{
+          "if": [{
+              "in": ["Face - forehead", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_face_forehead"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Face - cheek", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_face_cheek"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Face - jawline", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_face_jawline"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Scalp", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_scalp"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Chest", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_chest"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Back", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_back"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Shoulders", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_shoulders"
+            },
+            []
+          ]
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%$name, where are you experiencing the acne ?%").id
+      },
+      static_params: {
+        "value_face_forehead":
+        [
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from front on.</b>%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from front on</b>.%").id,
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your left profile</b>.%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your left profile</b>.%").id,
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your right profile</b>.%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your right profile</b>.%").id
+        ],
+        "value_face_cheek":
+        [
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from front on.</b>%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from front on</b>.%").id,
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your left profile</b>.%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your left profile</b>.%").id,
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your right profile</b>.%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your right profile</b>.%").id
+        ],
+        "value_face_jawline":
+        [
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from front on.</b>%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from front on</b>.%").id,
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your left profile</b>.%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your left profile</b>.%").id,
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your right profile</b>.%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your right profile</b>.%").id
+        ],
+        "value_scalp":
+        [
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from front on.</b>%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from front on</b>.%").id,
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your left profile</b>.%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your left profile</b>.%").id,
+          get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your right profile</b>.%").id,
+          get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your right profile</b>.%").id
+        ],
+        "value_chest": [get_questionnaire_by_contains("%Please take or attach a photo of the acne on your chest.%").id],
+        "value_back": [get_questionnaire_by_contains("%Please take or attach a photo of the acne on your <b>back</b>.%").id],
+        "value_shoulders": [get_questionnaire_by_contains("%Please take or attach a photo of the acne on your <b>shoulders</b>.%").id]
+      },
+      go_to: [get_questionnaire_by_contains("%Which face products do you use (select and specify all that apply): %").id],
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from front on.</b>"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from front on</b>."),
+      save_checkpoint: true},
+    {
+      questionnaire: get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your left profile</b>.%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your left profile</b>."),
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your right profile</b>."),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your right profile</b>."),
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Please take or attach a photo of the acne on your chest."),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Please take or attach a photo of the acne on your <b>back</b>."),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Please take or attach a photo of the acne on your <b>shoulders</b>."),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which face products do you use (select and specify all that apply): "),
+      is_mandatory: true,
+      requires_check: true,
+      jump_logic: {
+        "merge": [{
+          "if": [{
+              "in": ["Face wash", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_facewash"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Sunscreen", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_sunscreen"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Day cream", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_day_cream"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Night cream", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_night_cream"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Medicated cream", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_medicated_cream"
+            },
+            []
+          ]
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%Which face products do you use (select and specify all that apply): ").id
+      },
+      static_params: {
+        "value_facewash": [get_questionnaire_by_contains("%Which brand / type of facewash do you use%").id],
+        "value_sunscreen": [get_questionnaire_by_contains("%Which brand / type of sunscreen do you use%").id],
+        "value_day_cream": [get_questionnaire_by_contains("%Which brand / type of day cream do you use on your face%").id],
+        "value_night_cream": [get_questionnaire_by_contains("%Which brand / type of night cream do you use on your face%").id],
+        "value_medicated_creams": [get_questionnaire_by_contains("%Which brand / type of medicated cream do you use on your face%").id],
+      },
+      go_to: [get_questionnaire_by_contains("%Thanks, $name").id],
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which brand / type of facewash do you use%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which brand / type of sunscreen do you use%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which brand / type of day cream do you use on your face%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which brand / type of night cream do you use on your face%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which brand / type of medicated cream do you use on your face%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Thanks, $name"),
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "Female"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%What's your sex?%").id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%Are you pregnant and / or lactating?%").id],
+        "value_f": [get_questionnaire_by_contains("%Do you have a family history of acne?%").id]
+      },
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Are you pregnant and / or lactating?%"),
+      is_mandatory: true,
+      requires_check: true,
+      jump_logic: {
+        "merge": [{
+          "if": [{
+              "in": ["Polycistic Ovarian Disease (PCOD)", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_pcod"
+            },
+            []
+          ]
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%Please tell us if <b>you</b> have a personal history of any of the following conditions.%").id
+      },
+      static_params: {
+        "value_pcod": [get_questionnaire_by_contains("%You mentioned that you have a personal history of PCOD. Do you still have it?%").id],
+      },
+      go_to: [get_questionnaire_by_contains("%Do you experience any of the following symptoms%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%You mentioned that you have a personal history of PCOD. Do you still have it?%"),
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "Yes"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%You mentioned that you have a personal history of PCOD. Do you still have it?%").id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%Which medications are you currently taking for it?%").id],
+        "value_f": [get_questionnaire_by_contains("%Do you experience any of the following symptoms%").id]
+      },
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which medications are you currently taking for it?%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Do you experience any of the following symptoms%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Do you experience any of the following symptoms%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Do you have a family history of acne?%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Do you have a family history of acne?%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%When did your <b>current acne breakout</b> start, $name%").id],
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%When did your <b>current acne breakout</b> start, $name%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Have you had acne breakouts before%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Have you had acne breakouts before%"),
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "Yes"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%Have you had acne breakouts before%").id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%How old were you when you first had acne?%").id],
+        "value_f": [get_questionnaire_by_contains("%Have you taken any of the following oral treatments (in the past or currently) for your acne?%").id]
+      },
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How old were you when you first had acne?%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Have you taken any of the following oral treatments (in the past or currently) for your acne?%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Have you taken any of the following oral treatments (in the past or currently) for your acne?%"),
+      is_mandatory: true,
+      requires_check: true,
+      jump_logic: {
+        "merge": [{
+          "if": [{
+              "in": ["Isotretinoin", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_isotretinoin"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Oral contraceptive pills", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_oral_contraceptive_pills"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Azithromycin / Roxithromycin", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_azithromycin_roxithromycin"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Minocycline / Doxycycline", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_minocycline_doxycycline"
+            },
+            []
+          ]
+        }, {
+          "if": [{
+              "in": ["Oral steroids", {
+                "var": "value"
+              }]
+            }, {
+              "var": "value_oral_steroids"
+            },
+            []
+          ]
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%Have you taken any of the following oral treatments (in the past or currently) for your acne?%").id
+      },
+      static_params: {
+        "value_isotretinoin":
+        [
+          get_questionnaire_by_contains("%How long did you take the Isotretinoin for%").id,
+          get_questionnaire_by_contains("%Did the Isotretinoin help improve your acne?%").id,
+          get_questionnaire_by_contains("%When did your Isotretinoin course end%").id
+        ],
+        "value_oral_contraceptive_pills": [
+          get_questionnaire_by_contains("%How long did you take the oral contraceptive pills for%").id,
+          get_questionnaire_by_contains("%Did the oral contraceptive pills help improve your acne?%").id,
+          get_questionnaire_by_contains("%When did your oral contraceptive pill course end%").id
+        ],
+        "value_azithromycin_roxithromycin": [
+          get_questionnaire_by_contains("%How long did you take the Azithromycin / Roxithromycin for%").id,
+          get_questionnaire_by_contains("%Did the Azithromycin / Roxithromycin help improve your acne%").id,
+          get_questionnaire_by_contains("%When did your Azithromycin / Roxithromycin course end%").id
+        ],
+        "value_minocycline_doxycycline": [
+          get_questionnaire_by_contains("%How long did you take the Minocycline / Doxycycline for%").id,
+          get_questionnaire_by_contains("%Did the Minocycline / Doxycycline help improve your acne?%").id,
+          get_questionnaire_by_contains("%When did your Minocycline / Doxycycline course end?%").id
+        ],
+        "value_oral_steroids": [
+          get_questionnaire_by_contains("%How long did you take the oral steroids for%").id,
+          get_questionnaire_by_contains("%Did the oral steroids help improve your acne?%").id,
+          get_questionnaire_by_contains("%When did your oral steroids course end?%").id
+        ],
+      },
+      go_to: [get_questionnaire_by_contains("%Have you experienced any recent stress of the following kind%").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How long did you take the Isotretinoin for%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Did the Isotretinoin help improve your acne?%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%When did your Isotretinoin course end%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How long did you take the oral contraceptive pills for%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Did the oral contraceptive pills help improve your acne?%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%When did your oral contraceptive pill course end%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How long did you take the Azithromycin / Roxithromycin for%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Did the Azithromycin / Roxithromycin help improve your acne%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%When did your Azithromycin / Roxithromycin course end%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How long did you take the Minocycline / Doxycycline for%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Did the Minocycline / Doxycycline help improve your acne?%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%When did your Minocycline / Doxycycline course end?%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How long did you take the oral steroids for%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Did the oral steroids help improve your acne?%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%When did your oral steroids course end?%"),
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Have you experienced any recent stress of the following kind%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Almost there, $name! We need to ask you a few final questions about you and your lifestyle. This will help us to complete our patient profile, and to prepare a treatment plan for you%").id],
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Almost there, $name! We need to ask you a few final questions about you and your lifestyle. This will help us to complete our patient profile, and to prepare a treatment plan for you."),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%What is your ethnicity / racial background%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%What is your ethnicity / racial background%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Which city do you live in%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which city do you live in%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%What's your occupation%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%What's your occupation%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Are you married and / or do you have any sexual partners%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Are you married and / or do you have any sexual partners%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%How much do you weigh (in kilograms)%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How much do you weigh (in kilograms)%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Do you have any drug allergies?%").id],
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Do you have any drug allergies?%"),
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "Yes"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%Do you have any drug allergies?%").id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%Which drug allergies are those%").id],
+        "value_f": [get_questionnaire_by_contains("%Do you have any food allergies?%").id]
+      },
+    },
+    {
+      questionnaire:  get_questionnaire_by_contains("%Which drug allergies are those%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Do you have any food allergies?%").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Do you have any food allergies?%"),
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "Yes"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%Do you have any food allergies?%").id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%Which food allergies are those%").id],
+        "value_f": [get_questionnaire_by_contains("%Are you currently on any medication (other than what you've already told us)?%").id]
+      },
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Which food allergies are those%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Are you currently on any medication (other than what you've already told us)?%").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Are you currently on any medication (other than what you've already told us)?%"),
+      requires_check: true,
+      jump_logic: {
+        "if": [{
+          "==": [{
+            "var": "value"
+          }, "Yes"]
+        }, {
+          "var": "value_t"
+        }, {
+          "var": "value_f"
+        }]
+      },
+      dynamic_params: {
+        "value": get_questionnaire_by_contains("%Are you currently on any medication (other than what you've already told us)?%").id
+      },
+      static_params: {
+        "value_t": [get_questionnaire_by_contains("%Let us know which medications you are taking, and how long you've been taking them for.%").id],
+        "value_f": [get_questionnaire_by_contains("%How many times per week do you drink alcohol?%").id]
+      },
+      save_checkpoint: true
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Let us know which medications you are taking, and how long you've been taking them for.%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%How many times per week do you drink alcohol?%").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How many times per week do you drink alcohol?%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%How many cigarettes do you smoke per day?%").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%How many cigarettes do you smoke per day?%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("%Great! Lastly, let us know your email ID.%").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Great! Lastly, let us know your email ID.%"),
+      go_to: [get_questionnaire_by_contains("%Let us know if there are any other comments or information you would like to provide about yourself or your symptoms.%").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains("%Let us know if there are any other comments or information you would like to provide about yourself or your symptoms.%"),
+      is_mandatory: true,
+      go_to: [get_questionnaire_by_contains("").id]
+    },
+    {
+      questionnaire: get_questionnaire_by_contains(""),
+      entry_type: :end
+    }
+]);
 
 
 

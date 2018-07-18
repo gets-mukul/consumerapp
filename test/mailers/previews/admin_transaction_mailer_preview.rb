@@ -28,4 +28,9 @@ class AdminTransactionMailerPreview < ActionMailer::Preview
     AdminTransactionMailer.error_email('There was a problem with your transaction')
   end
 
+  def send_user_form_filled_notifier_mail
+    @consultation = Consultation.find 4776
+    AdminTransactionMailer.send_user_form_filled_notifier_mail(@consultation)
+  end
+
 end
