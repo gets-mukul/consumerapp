@@ -55,7 +55,10 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
         end
 
         diagnosis = {
-          conditions: conditions.pluck(:key),
+          conditions: {
+            keys: conditions.pluck(:key),
+            title: conditions.pluck(:title)
+          },
           inline_description: inline_description,
           login_link: login_link,
           description: description,
