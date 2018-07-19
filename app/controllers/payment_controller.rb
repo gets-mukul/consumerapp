@@ -353,13 +353,23 @@ class PaymentController < ApplicationController
     current_consultation.questionnaire_response.update(:form_finished_at => DateTime.now())
     current_consultation.update(user_status: 'form filled', pay_status: 'payment pending')
 
-
     current_user.sex = current_consultation.questionnaire_response.responses["2"]["answer"] if current_consultation.questionnaire_response.responses["2"]
+    current_user.age = current_consultation.questionnaire_response.responses["3"]["answer"] if current_consultation.questionnaire_response.responses["2"]
     current_user.email = current_consultation.questionnaire_response.responses["68"]["answer"] if current_consultation.questionnaire_response.responses["68"]
     current_user.city = current_consultation.questionnaire_response.responses["56"]["answer"] if current_consultation.questionnaire_response.responses["56"]
     current_user.save!
 
     AdminTransactionMailer.send_user_form_filled_notifier_mail(current_consultation).deliver if Rails.env.production?
+
+    if current_user.city.empty?
+      session[:tmp_age] = nil
+      unless current_user.age.empty?
+        session[:tmp_age] = current_user.age if !current_user.age.to_i.between?(3, 65)
+      end
+      session[:tmp_red_flag] = 'Chatbot: red flag'
+      session[:tmp_red_flag_type] = 'chatbot'
+      redirect_to :flag
+    else
 
     # fetch consultation fee
     @amount = current_consultation.amount

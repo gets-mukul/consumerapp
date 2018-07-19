@@ -1279,7 +1279,7 @@ Questionnaire.create(
       "variables" => ["name"]
     },
     {
-      "question" => "$name, where are you experiencing the acne ?",
+      "question" => "$name, where are you experiencing the acne?",
       "desc" => "",
       "answers" =>
       [
@@ -1989,10 +1989,10 @@ QuestionnaireLogic.create([
     },
     {
       questionnaire: get_questionnaire_by_contains("%Thanks, $name. Now it would be great if you can help us understand more about your acne.%"),
-      go_to: [get_questionnaire_by_contains("%$name, where are you experiencing the acne ?%").id]
+      go_to: [get_questionnaire_by_contains("%$name, where are you experiencing the acne?%").id]
     },
     {
-      questionnaire: get_questionnaire_by_contains("%$name, where are you experiencing the acne ?%"),
+      questionnaire: get_questionnaire_by_contains("%$name, where are you experiencing the acne?%"),
       is_mandatory: true,
       requires_check: true,
       jump_logic: {
@@ -2069,7 +2069,7 @@ QuestionnaireLogic.create([
         }]
       },
       dynamic_params: {
-        "value": get_questionnaire_by_contains("%$name, where are you experiencing the acne ?%").id
+        "value": get_questionnaire_by_contains("%$name, where are you experiencing the acne?%").id
       },
       static_params: {
         "value_face_forehead":

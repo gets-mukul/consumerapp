@@ -46,10 +46,12 @@
             <td><b>Form for</b></td>
             <td><%= @consultation.category %></td>
           </tr>
+          <% if @consultation.questionnaire_response %>
           <tr>
             <td><b>Form filled at</b></td>
             <td><%= @consultation.questionnaire_response.form_finished_at %></td>
           </tr>
+          <% end %>
         </table>
       </td>
     </tr>
@@ -62,6 +64,7 @@
     <tr>
       <td width="56px"></td>
       <td style="padding: 0 24px;">
+      <% if @consultation.questionnaire_response %>
         <table style="color:#333; font-family: Helvetica, Arial, Verdana, Trebuchet MS; line-height: 22px; font-size: 16px;">
           <% @questionnaire_response.responses.each do |question| %>
             <tr>
@@ -92,6 +95,7 @@
           </tr>
 
         </table>
+      <% end %>
       </td>
     </tr>
   </tbody>

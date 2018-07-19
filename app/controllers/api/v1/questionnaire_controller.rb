@@ -1,6 +1,6 @@
 class Api::V1::QuestionnaireController < Api::V1::ApiController
   skip_before_action :verify_authenticity_token
-  before_filter :check_current_user
+  before_action :check_current_user
 
   def index
     unless current_consultation && current_consultation.user_status.start_with?('registered', 'red flag')

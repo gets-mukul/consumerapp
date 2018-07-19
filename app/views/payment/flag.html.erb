@@ -60,9 +60,11 @@
                             <% end %>
                         
                         <div>
-                            <p style="font-size: 16px">
-                                If you've entered this in error, please <%= link_to "click here", ('/consult/consultation_form/' + current_consultation.category) %> to restart your consultation.
-                            </p><br/>
+                            <% if session[:tmp_red_flag_type] %>
+                                <p style="font-size: 16px">
+                                    If you've entered this in error, please <%= link_to "click here", ('/consult/consultation_form/' + current_consultation.category) %> to restart your consultation.
+                                </p><br/>
+                            <% end %>
                         </div>
 						
 						<div class="space_top">
