@@ -110,12 +110,13 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
 
     # if patient exists, update their details, else create
     if patient
-      patient.update({ :email => params[:patient][:email].downcase.strip}) if patient.email.blank?
+      patient.update({ :email => params[:patient][:email].downcase.strip, :sex => params[:patient][:sex].downcase.titleize}) if patient.email.blank?
     else
       patient = Patient.create({
         :name => params[:patient][:fullname].downcase.titleize.strip,
         :mobile => params[:patient][:mobile],
         :email => params[:patient][:email].downcase.strip,
+        :sex => params[:patient][:sex].downcase.titleize,
         :pay_status => 'selfie checkup',
       })
     end
