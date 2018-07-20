@@ -369,7 +369,8 @@ class PaymentController < ApplicationController
       session[:tmp_red_flag] = 'Chatbot: red flag'
       session[:tmp_red_flag_type] = 'chatbot'
       redirect_to :flag
-    else
+      return
+    end
 
     # fetch consultation fee
     @amount = current_consultation.amount

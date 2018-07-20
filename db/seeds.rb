@@ -1470,7 +1470,7 @@ Questionnaire.create(
         "2 months to 1 year ago",
         "Longer than 1 year ago"
       ],
-      "field_type" => "select_all",
+      "field_type" => "radio",
       "variables" => ["name"]
     },
     {
@@ -1493,7 +1493,7 @@ Questionnaire.create(
         "2 months to 1 year ago",
         "Older than 40 years old"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "Have you taken any of the following oral treatments (in the past or currently) for your acne?",
@@ -1520,7 +1520,7 @@ Questionnaire.create(
         "Longer than 12 months",
         "I am still taking it"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "Did the Isotretinoin help improve your acne?",
@@ -1541,7 +1541,7 @@ Questionnaire.create(
         "Less than 6 months ago",
         "I am still taking the treatment"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "How long did you take the oral contraceptive pills for?",
@@ -1554,7 +1554,7 @@ Questionnaire.create(
         "Longer than 12 months",
         "I am still taking it"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "Did the oral contraceptive pills help improve your acne?",
@@ -1575,7 +1575,7 @@ Questionnaire.create(
         "Less than 6 months ago",
         "I am still taking the treatment"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "How long did you take the Azithromycin / Roxithromycin for?",
@@ -1586,7 +1586,7 @@ Questionnaire.create(
         "1 -3 months",
         "Longer than 3 months",
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "Did the Azithromycin / Roxithromycin help improve your acne?",
@@ -1607,7 +1607,7 @@ Questionnaire.create(
         "Less than 6 months ago",
         "I am still taking the treatment"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "How long did you take the Minocycline / Doxycycline for?",
@@ -1618,7 +1618,7 @@ Questionnaire.create(
         "1 -3 months",
         "Longer than 3 months",
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "Did the Minocycline / Doxycycline help improve your acne?",
@@ -1639,7 +1639,7 @@ Questionnaire.create(
         "Less than 6 months ago",
         "I am still taking the treatment"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "How long did you take the oral steroids for?",
@@ -1652,7 +1652,7 @@ Questionnaire.create(
         "Longer than 12 months",
         "I am still taking it"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "Did the oral steroids help improve your acne?",
@@ -1673,7 +1673,7 @@ Questionnaire.create(
         "Less than 6 months ago",
         "I am still taking the treatment"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "Have you experienced any recent stress of the following kind?",
