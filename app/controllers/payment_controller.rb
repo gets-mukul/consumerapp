@@ -354,9 +354,25 @@ class PaymentController < ApplicationController
     current_consultation.update(user_status: 'form filled', pay_status: 'payment pending')
 
     current_user.sex = current_consultation.questionnaire_response.responses["2"]["answer"] if current_consultation.questionnaire_response.responses["2"]
-    current_user.age = current_consultation.questionnaire_response.responses["3"]["answer"] if current_consultation.questionnaire_response.responses["2"]
+    current_user.age = current_consultation.questionnaire_response.responses["3"]["answer"] if current_consultation.questionnaire_response.responses["3"]
     current_user.email = current_consultation.questionnaire_response.responses["68"]["answer"] if current_consultation.questionnaire_response.responses["68"]
     current_user.city = current_consultation.questionnaire_response.responses["56"]["answer"] if current_consultation.questionnaire_response.responses["56"]
+
+    questionnaire_images = []
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["14"], :type => 'face front' }) if current_consultation.questionnaire_response.responses["14"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["16"], :type => 'face left' }) if current_consultation.questionnaire_response.responses["16"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["18"], :type => 'face right' }) if current_consultation.questionnaire_response.responses["18"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["19"], :type => 'chest' }) if current_consultation.questionnaire_response.responses["19"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["20"], :type => 'back' }) if current_consultation.questionnaire_response.responses["20"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["21"], :type => 'shoulders' }) if current_consultation.questionnaire_response.responses["21"]
+
+    current_consultation.questionnaire_response.questionnaire_images << questionnaire_images
+
     current_user.save!
 
     AdminTransactionMailer.send_user_form_filled_notifier_mail(current_consultation).deliver if Rails.env.production?

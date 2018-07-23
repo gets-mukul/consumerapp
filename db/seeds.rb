@@ -1733,7 +1733,7 @@ Questionnaire.create(
         "Unmarried, with sexual partner(s)",
         "Unmarried, with no sexual partners"
       ],
-      "field_type" => "select_all"
+      "field_type" => "radio"
     },
     {
       "question" => "How much do you weigh (in kilograms)?",

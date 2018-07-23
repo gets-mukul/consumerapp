@@ -225,6 +225,15 @@ ActiveRecord::Schema.define(version: 20180716093931) do
     t.index ["questionnaire_id"], name: "index_questionnaire_logics_on_questionnaire_id", using: :btree
   end
 
+  create_table "questionnaire_response_images", force: :cascade do |t|
+    t.integer  "questionnaire_responses_id"
+    t.string   "image"
+    t.string   "type"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.index ["questionnaire_responses_id"], name: "questionnaire_response_id", using: :btree
+  end
+
   create_table "questionnaire_responses", force: :cascade do |t|
     t.integer  "consultation_id"
     t.jsonb    "responses",        default: {}
