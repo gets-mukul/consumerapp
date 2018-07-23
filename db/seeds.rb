@@ -1911,7 +1911,8 @@ QuestionnaireLogic.create([
         "value_t": [get_questionnaire_by_contains("%How old are you%").id],
         "value_f": [get_questionnaire_by_contains("").id]
       },
-      entry_type: :edit
+      entry_type: :edit,
+      save_checkpoint: true
     },
     {
       questionnaire: get_questionnaire_by_contains("%if <b>you</b> have a personal history of any of the following conditions.%"),
@@ -1985,7 +1986,8 @@ QuestionnaireLogic.create([
         "value_t": [get_questionnaire_by_contains("%Do you have a personal or family history of skin cancer?%").id],
         "value_f": [get_questionnaire_by_contains("").id]
       },
-      entry_type: :edit
+      entry_type: :edit,
+      save_checkpoint: true
     },
     {
       questionnaire: get_questionnaire_by_contains("%Thanks, $name. Now it would be great if you can help us understand more about your acne.%"),
@@ -2008,11 +2010,11 @@ QuestionnaireLogic.create([
           ]
         }, {
           "if": [{
-              "in": ["Face - cheek", {
+              "in": ["Face - cheeks", {
                 "var": "value"
               }]
             }, {
-              "var": "value_face_cheek"
+              "var": "value_face_cheeks"
             },
             []
           ]
@@ -2081,7 +2083,7 @@ QuestionnaireLogic.create([
           get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from your right profile</b>.%").id,
           get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from your right profile</b>.%").id
         ],
-        "value_face_cheek":
+        "value_face_cheeks":
         [
           get_questionnaire_by_contains("%You will need to provide us with a photo of your face <b>from front on.</b>%").id,
           get_questionnaire_by_contains("%Please take or attach a photo of your face <b>from front on</b>.%").id,
