@@ -357,6 +357,7 @@ class PaymentController < ApplicationController
     current_user.age = current_consultation.questionnaire_response.responses["3"]["answer"] if current_consultation.questionnaire_response.responses["3"]
     current_user.email = current_consultation.questionnaire_response.responses["68"]["answer"] if current_consultation.questionnaire_response.responses["68"]
     current_user.city = current_consultation.questionnaire_response.responses["56"]["answer"] if current_consultation.questionnaire_response.responses["56"]
+    current_user.save!
 
     questionnaire_images = []
     questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["14"], :type => 'face front' }) if current_consultation.questionnaire_response.responses["14"]
@@ -371,9 +372,9 @@ class PaymentController < ApplicationController
 
     questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["21"], :type => 'shoulders' }) if current_consultation.questionnaire_response.responses["21"]
 
-    current_consultation.questionnaire_response.questionnaire_images << questionnaire_images
+    questionnaire_image_records = QuestionnaireImages.create(questionnaire_images)
+    current_consultation.questionnaire_response.questionnaire_images << questionnaire_image_records
 
-    current_user.save!
 
     AdminTransactionMailer.send_user_form_filled_notifier_mail(current_consultation).deliver if Rails.env.production?
 
