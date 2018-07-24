@@ -11,10 +11,5 @@ class QuestionnaireLogic < ApplicationRecord
     self.requires_check ||= false
     self.save_checkpoint ||= false
     self.name ||= 'Acne'
-    # if self.static_params
-    #   self.dependent_questions = self.static_params.values.flatten
-    #   if self.dynamic_params.values
-    #   end
-    # end
   end
 end
