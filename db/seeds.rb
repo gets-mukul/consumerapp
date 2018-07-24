@@ -2614,11 +2614,11 @@ QuestionnaireLogic.create([
     },
     {
       questionnaire: get_questionnaire_by_contains("%Great! Lastly, let us know your email ID.%"),
+      is_mandatory: true,
       go_to: [get_questionnaire_by_contains("%Let us know if there are any other comments or information you would like to provide about yourself or your symptoms.%").id]
     },
     {
       questionnaire: get_questionnaire_by_contains("%Let us know if there are any other comments or information you would like to provide about yourself or your symptoms.%"),
-      is_mandatory: true,
       go_to: [get_questionnaire_by_contains("").id]
     },
     {

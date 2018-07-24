@@ -10,9 +10,9 @@ class CreateQuestionnaireResponses < ActiveRecord::Migration[5.0]
     end
 
     create_table :questionnaire_response_images do |t|
-      t.belongs_to :questionnaire_responses, index: {:name => "questionnaire_response_id"}
+      t.belongs_to :questionnaire_response, index: {:name => "index_by_questionnaire_response"}
       t.string :image
-      t.string :type
+      t.string :image_type
       t.timestamps
     end
   end

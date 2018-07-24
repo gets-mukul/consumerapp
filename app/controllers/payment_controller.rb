@@ -360,23 +360,23 @@ class PaymentController < ApplicationController
     current_user.save!
 
     questionnaire_images = []
-    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["14"], :type => 'face front' }) if current_consultation.questionnaire_response.responses["14"]
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["14"], :image_type => 'face front' }) if current_consultation.questionnaire_response.responses["14"]
 
-    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["16"], :type => 'face left' }) if current_consultation.questionnaire_response.responses["16"]
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["16"], :image_type => 'face left' }) if current_consultation.questionnaire_response.responses["16"]
 
-    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["18"], :type => 'face right' }) if current_consultation.questionnaire_response.responses["18"]
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["18"], :image_type => 'face right' }) if current_consultation.questionnaire_response.responses["18"]
 
-    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["19"], :type => 'chest' }) if current_consultation.questionnaire_response.responses["19"]
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["19"], :image_type => 'chest' }) if current_consultation.questionnaire_response.responses["19"]
 
-    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["20"], :type => 'back' }) if current_consultation.questionnaire_response.responses["20"]
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["20"], :image_type => 'back' }) if current_consultation.questionnaire_response.responses["20"]
 
-    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["21"], :type => 'shoulders' }) if current_consultation.questionnaire_response.responses["21"]
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["21"], :image_type => 'shoulders' }) if current_consultation.questionnaire_response.responses["21"]
 
-    questionnaire_image_records = QuestionnaireImages.create(questionnaire_images)
-    current_consultation.questionnaire_response.questionnaire_images << questionnaire_image_records
-
+    questionnaire_image_records = questionnaire_images.map {|image| QuestionnaireResponseImage.new(image) }
+    current_consultation.questionnaire_response.questionnaire_response_images << questionnaire_image_records
 
     AdminTransactionMailer.send_user_form_filled_notifier_mail(current_consultation).deliver if Rails.env.production?
+
 
     if current_user.city.empty?
       session[:tmp_age] = nil
