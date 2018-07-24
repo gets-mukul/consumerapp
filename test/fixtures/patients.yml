@@ -1,13 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
-  email: MyString
-  mobile: MyString
-  pay_status: MyString
+# use this for new patient
+# name: Kelly
+# mobile: 9999999990
 
-two:
-  name: MyString
-  email: MyString
-  mobile: MyString
-  pay_status: MyString
+
+# patient_with_no_consultations
+patient1:
+  name: Aisha
+  mobile: 9999999991
+  pay_status: payment pending
+
+patient2:
+  name: Gajeel
+  mobile: 9999999992
+  pay_status: payment pending

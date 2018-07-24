@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<table style="padding:30px">
+  <tbody>
+    <tr>
+      <td style="background-color:#0F7277" width="70px" height="70px" align="center">
+        <img src="https://remedicohealth.com/favicon.png" width="32px" height="32px"/>
+      </td>
+      <td style="padding-left: 20px;">
+        <table>
+          <tr>
+            <td>
+              <span style="color:#0F7277; font-size:25px; font-weight:700; font-family: Helvetica, Arial, Verdana, Trebuchet MS">Remedico</span>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <span style="color:#888; font-size:14px; text-transform:uppercase; font-weight:300; font-family: Helvetica, Arial, Verdana, Trebuchet MS"></span>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td width="56px"></td>
+      <td style="padding: 24px 24px 10px;">
+        <div style="border-top:1px solid; border-color: #ccc;width:350px"><br></div>
+      </td>
+    </tr>
+    <tr>
+      <td width="56px"></td>
+      <td style="padding: 0 24px;">
+        <table style="color:#333; font-family: Helvetica, Arial, Verdana, Trebuchet MS; line-height: 22px; font-size: 16px;">
+          <tr>
+            <td width="165px"><b>Patient name</b></td>
+            <td><%= @consultation.patient %></td>
+          </tr>
+          <tr>
+            <td><b>Mobile</b></td>
+            <td><%= @consultation.patient.mobile %></td>
+          </tr>
+          <tr>
+            <td><b>Email</b></td>
+            <td><%= @consultation.patient.email %></td>
+          </tr>
+          <tr>
+            <td><b>Form for</b></td>
+            <td><%= @consultation.category %></td>
+          </tr>
+          <% if @consultation.questionnaire_response %>
+          <tr>
+            <td><b>Form filled at</b></td>
+            <td><%= @consultation.questionnaire_response.form_finished_at %></td>
+          </tr>
+          <% end %>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td width="56px"></td>
+      <td style="padding: 24px 24px 10px;">
+        <div style="border-top:1px solid; border-color: #ccc;width:350px"><br></div>
+      </td>
+    </tr>
+    <tr>
+      <td width="56px"></td>
+      <td style="padding: 0 24px;">
+      <% if @consultation.questionnaire_response %>
+        <table style="color:#333; font-family: Helvetica, Arial, Verdana, Trebuchet MS; line-height: 22px; font-size: 16px;">
+          <% @questionnaire_response.responses.each do |question| %>
+            <tr>
+              <td style="padding-bottom: 24px;">
+                <b><%= question[1]['question'].html_safe %></b>
+                <br />
+                <% if question[1]['answer'].class.equal?(Array) %>
+                  <%= question[1]['answer'].to_sentence %>
+                <% else %>
+                  <%= question[1]['answer'] %>
+                <% end %>
+                <br />
+                <div style="color:#888; font-size:14px; font-weight:300; font-family: Helvetica, Arial, Verdana, Trebuchet MS">
+                  <% if question[1]['displayed_options'] %>
+                    <% question[1]['displayed_options'].each do |option| %>
+                      <%= option %>
+                      <br />
+                    <% end %>
+                  <% end %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+          <tr>
+            <td style="padding: 24px 24px 10px 0;">
+              <div style="border-top:1px solid; border-color: #ccc; width:350px"></div>
+            </td>
+          </tr>
+
+        </table>
+      <% end %>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<table style="padding:30px;width: 100%;">
+  <tr>
+    <td style="padding: 24px 24px 10px 0;">
+      <div style="border-top:1px solid; border-color: #ccc;"></div>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding: 0 24px 0 0;">
+      <div style="color:#888; font-size:14px; font-weight:300; font-family: Helvetica, Arial, Verdana, Trebuchet MS">Team Remedico</div>
+    </td>
+  </tr>
+  <tr>
+    <td style="padding: 10px 24px 0 0;">
+      <div style="border-top:1px solid; border-color: #ccc;"><br></div>
+    </td>
+  </tr>
+  </tbody>
+</table>

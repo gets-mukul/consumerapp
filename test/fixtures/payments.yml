@@ -1,25 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  txnid: MyString
-  status: MyString
-  desc: MyString
-  amount: MyString
-  add_charge: MyString
-  mihpayid: MyString
-  mode: MyString
-  pg_type: MyString
-  bank_ref_num: MyString
-  references: 
+# one:
+#   txnid: MyString
+#   status: MyString
+#   desc: MyString
+#   amount: MyString
+#   add_charge: MyString
+#   mihpayid: MyString
+#   mode: MyString
+#   pg_type: MyString
+#   bank_ref_num: MyString
+#   references:
 
-two:
-  txnid: MyString
-  status: MyString
-  desc: MyString
-  amount: MyString
-  add_charge: MyString
-  mihpayid: MyString
-  mode: MyString
-  pg_type: MyString
-  bank_ref_num: MyString
-  references: 
+# two:
+#   txnid: MyString
+#   status: MyString
+#   desc: MyString
+#   amount: MyString
+#   add_charge: MyString
+#   mihpayid: MyString
+#   mode: MyString
+#   pg_type: MyString
+#   bank_ref_num: MyString
+#   references:

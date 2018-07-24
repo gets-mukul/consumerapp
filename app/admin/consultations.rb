@@ -258,6 +258,35 @@ ActiveAdmin.register Consultation do
         end
       end
     end
+
+    div class: "row" do
+      div class: "col-md-12 col-sm-12 col-xs-12" do
+        panel "Questionnaire responses" do
+          attributes_table_for consultation.questionnaire_response do
+            row :created_at
+            row :consultation
+            row :id
+            row :status
+            row :form_finished_at
+            row :updated_at
+            row "responses" do
+              panel "Questionnaire responses" do
+                consultation.questionnaire_response.responses.each do |question|
+                  columns do
+                    column span: 3 do
+                      span question[1]["question"].html_safe
+                    end
+                    column span: 2 do
+                      span question[1]["answer"]
+                    end
+                  end
+                end
+              end
+            end
+          end
+        end
+      end
+    end
   end
 
   form do |f|
