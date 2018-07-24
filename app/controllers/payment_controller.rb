@@ -378,9 +378,9 @@ class PaymentController < ApplicationController
     AdminTransactionMailer.send_user_form_filled_notifier_mail(current_consultation).deliver if Rails.env.production?
 
 
-    if current_user.city.empty?
+    if current_user.city.nil?
       session[:tmp_age] = nil
-      unless current_user.age.empty?
+      unless current_user.age.nil?
         session[:tmp_age] = current_user.age if !current_user.age.to_i.between?(3, 65)
       end
       session[:tmp_red_flag] = 'Chatbot: red flag'
