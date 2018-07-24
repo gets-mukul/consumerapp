@@ -57,7 +57,7 @@ Rails.application.configure do
 
   # For connecting with react app
   config.action_dispatch.default_headers = {
-    'Access-Control-Allow-Origin' => 'http://dev.remedicohealth.com',
+    'Access-Control-Allow-Origin' => 'https://remedicohealth.com',
     'Access-Control-Allow-Headers' => 'Content-Type, Authorization, Content-Length, X-Requested-With',
     'Access-Control-Request-Method' => '*',
     'Access-Control-Allow-Methods' => 'GET, POST, PUT, DELETE, OPTIONS, PATCH',
