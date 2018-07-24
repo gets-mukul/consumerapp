@@ -383,7 +383,7 @@ class PaymentController < ApplicationController
       unless current_user.age.nil?
         session[:tmp_age] = current_user.age if !current_user.age.to_i.between?(3, 65)
       end
-      session[:tmp_red_flag] = 'Chatbot: red flag'
+      session[:tmp_red_flag] = 'Yes'
       session[:tmp_red_flag_type] = 'chatbot'
       redirect_to :flag
       return
