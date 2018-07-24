@@ -351,6 +351,7 @@ $(function() {
       "Page URL": "payment/index",
     });
     window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
+    qp('track', 'InitiateCheckout');
   });
 
   $('.sticky-footer').on('click', '#paytmPayBtn', function () {
@@ -380,6 +381,7 @@ $(function() {
           "Page URL": "payment/index",
         });
         window._fbq.push(['track', 'Payment Button Clicked',{'Page URL':'payment/index'}]);
+        qp('track', 'InitiateCheckout');
   });
 
   mixpanel.track("Page Loaded", {
@@ -387,6 +389,7 @@ $(function() {
     "Condition Name": 'n/a',
   });
   window._fbq.push(['track', 'Payments Page Load',{'Page URL':'payment/index'}]);
+  qp('track', 'AddToCart');
 
   /* save the current window state on load */
   if (window.history && window.history.pushState) {
