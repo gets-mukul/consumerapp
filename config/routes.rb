@@ -29,7 +29,8 @@ Rails.application.routes.draw do
         post 'questionnaire_response/save' => 'questionnaire_response#save'
 
         if Rails.env.development?
-          get '/patients/get_patient_details' => 'patient#get_patient_details'
+          get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
+          get 'patients/get_sendgrid_stats' => 'patient#get_sendgrid_stats', defaults: {format: 'json'}
         end
 
         get 'get-s3-policy' => 's3_bucket#get_s3_policy'
