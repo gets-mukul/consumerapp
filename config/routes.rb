@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
         # consultations
         get 'consultations' => 'consultation#get_consultations'
+        get 'consultation/:id/register' => 'consultation#register'
 
         # selfie form
         post 'selfie-form/create' => 'selfie_form#create'
