@@ -1,16 +1,32 @@
 Rails.application.routes.draw do
+
   scope '/consult' do
 
-    namespace :api do
+    namespace :api, defaults: {format: 'json'} do
       namespace :v1 do
-        scope 'selfie-form' do
-          post '/create' => 'selfie_form#create', defaults: {format: 'json'}
-          get '/get-skin-type-quiz' => 'selfie_form#get_skin_type_quiz', defaults: {format: 'json'}
 
-          get '/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
-          post '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
-          get '/save-my-skin-type' => 'selfie_form#save_my_skin_type'
-        end
+        get 'coupon/apply/:promo_code' => 'coupon#apply', :as => 'coupon_apply'
+
+        # patients
+        post 'patient/create' => 'patient#create'
+        get 'patient/create' => 'patient#create'
+        get 'patient/unregister' => 'patient#unregister_patient', :as => 'unregister_patient'
+
+        # consultations
+        get 'consultations' => 'consultation#get_consultations'
+
+        # selfie form
+        post 'selfie-form/create' => 'selfie_form#create'
+        get 'selfie-form/get-skin-type-quiz' => 'selfie_form#get_skin_type_quiz'
+        get 'selfie-form/get-diagnosis/:selfie_id' => 'selfie_form#get_diagnosis', :as => 'selfie_form_get_diagnosis_path'
+        post 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+        get 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
+
+        # questionnaire
+        get 'questionnaire/:condition' => 'questionnaire#index'
+
+        # questionnaire_responses
+        post 'questionnaire_response/save' => 'questionnaire_response#save'
 
         if Rails.env.development?
           get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
@@ -18,7 +34,6 @@ Rails.application.routes.draw do
         end
 
         get 'get-s3-policy' => 's3_bucket#get_s3_policy'
-
       end
     end
 
@@ -54,6 +69,7 @@ Rails.application.routes.draw do
       get '/success_free', to: 'payment#success_free'
       get '/instant_payment' => 'payment#instant_payment', defaults: {format: 'json'}
     end
+    get '/payment/:type', to: 'payment#index'
 
     get '/privacy_policy', to: 'static_pages#privacy_policy'
     get '/terms_of_use', to: 'static_pages#terms_of_use'

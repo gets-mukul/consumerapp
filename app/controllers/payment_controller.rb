@@ -29,6 +29,10 @@ class PaymentController < ApplicationController
     Rails.logger.info("Payments Controller: Payments index");
     logger.info "Payment Controller: in payment index for #{current_consultation.id}"
     logger.info params
+    if (params[:type])
+      chatbot_handler
+      return
+    end
     session[:error_msg] = ""
     # Rails.logger.info 'Payments Controller: Request Referrer'
     # Rails.logger.info request.referer
@@ -323,7 +327,6 @@ class PaymentController < ApplicationController
     end
     current_user.update({pay_status: "red flag: #{session[:error_status]}"})
     current_consultation.update({ pay_status: "red flag: #{session[:error_status]}", user_status: "red flag" })
-
   end
 
   def instant_payment
@@ -344,6 +347,55 @@ class PaymentController < ApplicationController
         redirect_to "/?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
       end
     end
+  end
+
+  def chatbot_handler
+    current_consultation.questionnaire_response.update(:form_finished_at => DateTime.now())
+    current_consultation.update(user_status: 'form filled', pay_status: 'payment pending')
+
+    current_user.sex = current_consultation.questionnaire_response.responses["2"]["answer"] if current_consultation.questionnaire_response.responses["2"]
+    current_user.age = current_consultation.questionnaire_response.responses["3"]["answer"] if current_consultation.questionnaire_response.responses["3"]
+    current_user.email = current_consultation.questionnaire_response.responses["68"]["answer"] if current_consultation.questionnaire_response.responses["68"]
+    current_user.city = current_consultation.questionnaire_response.responses["56"]["answer"] if current_consultation.questionnaire_response.responses["56"]
+    current_user.save!
+
+    questionnaire_images = []
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["14"], :image_type => 'face front' }) if current_consultation.questionnaire_response.responses["14"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["16"], :image_type => 'face left' }) if current_consultation.questionnaire_response.responses["16"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["18"], :image_type => 'face right' }) if current_consultation.questionnaire_response.responses["18"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["19"], :image_type => 'chest' }) if current_consultation.questionnaire_response.responses["19"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["20"], :image_type => 'back' }) if current_consultation.questionnaire_response.responses["20"]
+
+    questionnaire_images.push({ :image => current_consultation.questionnaire_response.responses["21"], :image_type => 'shoulders' }) if current_consultation.questionnaire_response.responses["21"]
+
+    questionnaire_image_records = questionnaire_images.map {|image| QuestionnaireResponseImage.new(image) }
+    current_consultation.questionnaire_response.questionnaire_response_images << questionnaire_image_records
+
+    AdminTransactionMailer.send_user_form_filled_notifier_mail(current_consultation).deliver if Rails.env.production?
+
+
+    if current_user.city.nil?
+      session[:tmp_age] = nil
+      unless current_user.age.nil?
+        session[:tmp_age] = current_user.age if !current_user.age.to_i.between?(3, 65)
+      end
+      session[:tmp_red_flag] = 'Yes'
+      session[:tmp_red_flag_type] = 'chatbot'
+      redirect_to :flag
+      return
+    end
+
+    # fetch consultation fee
+    @amount = current_consultation.amount
+    # if amount is 0 then end the consultation and display success page
+    if @amount.zero?
+      redirect_to :success_free
+    end
+    # show him payments screen
   end
 
   private

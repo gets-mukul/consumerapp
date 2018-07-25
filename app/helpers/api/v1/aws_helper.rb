@@ -9,7 +9,6 @@ module Api::V1::AwsHelper
       
       post_helper = DirectPostHelper.new bucket
       folder = "uploads/"
-      Rails.logger.info folder
       # custom_params = {'content-type' => 'image/*', 'acl' => 'public-read'}
       custom_params = {'acl' => 'public-read'}
 
