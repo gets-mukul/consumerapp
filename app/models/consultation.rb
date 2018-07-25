@@ -5,7 +5,7 @@ class Consultation < ApplicationRecord
   has_one :questionnaire_response
 
   validates_presence_of :user_status, :pay_status, :amount, :category, :patient
-  
+
   scope "Registered", -> { where(user_status: 'registered') }
   scope "Form filled", -> { where(user_status: 'form filled') }
   scope "Paid", -> { where(pay_status: 'paid') }
@@ -17,7 +17,7 @@ class Consultation < ApplicationRecord
   scope :created_between, lambda {|start_day, end_day| where('updated_at >= :start and updated_at < :end', :start => (start_day).days.from_now.beginning_of_day, :end   => (end_day+1).days.from_now.beginning_of_day)}
 
   after_initialize :set_defaults, unless: :persisted?
-  
+
   def set_defaults
 	self.amount ||= '350'
     self.pay_status ||= 'payment pending'

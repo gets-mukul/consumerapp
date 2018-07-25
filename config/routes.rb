@@ -13,7 +13,7 @@ Rails.application.routes.draw do
         get 'patient/unregister' => 'patient#unregister_patient', :as => 'unregister_patient'
 
         # consultations
-        get 'consultations' => 'consultation#fetch_consultations'
+        get 'consultations' => 'consultation#get_consultations'
 
         # selfie form
         post 'selfie-form/create' => 'selfie_form#create'
@@ -23,13 +23,14 @@ Rails.application.routes.draw do
         get 'selfie-form/save-my-skin-type' => 'selfie_form#save_my_skin_type'
 
         # questionnaire
-        get 'questionnaire' => 'questionnaire#index'
+        get 'questionnaire/:condition' => 'questionnaire#index'
 
         # questionnaire_responses
-        get 'questionnaire_response/save' => 'questionnaire_response#save'
+        post 'questionnaire_response/save' => 'questionnaire_response#save'
 
         if Rails.env.development?
-          get '/patients/get_patient_details' => 'patient#get_patient_details'
+          get '/patients/get_patient_details' => 'patient#get_patient_details', defaults: {format: 'json'}
+          get 'patients/get_sendgrid_stats' => 'patient#get_sendgrid_stats', defaults: {format: 'json'}
         end
 
         get 'get-s3-policy' => 's3_bucket#get_s3_policy'

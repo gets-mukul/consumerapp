@@ -8,5 +8,12 @@ class CreateQuestionnaireResponses < ActiveRecord::Migration[5.0]
       t.string :status
       t.timestamps
     end
+
+    create_table :questionnaire_response_images do |t|
+      t.belongs_to :questionnaire_response, index: {:name => "index_by_questionnaire_response"}
+      t.string :image
+      t.string :image_type
+      t.timestamps
+    end
   end
 end

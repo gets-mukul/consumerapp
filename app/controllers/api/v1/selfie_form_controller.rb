@@ -55,6 +55,10 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
         end
 
         diagnosis = {
+          conditions: {
+            keys: conditions.pluck(:key),
+            title: conditions.pluck(:title)
+          },
           inline_description: inline_description,
           login_link: login_link,
           description: description,
@@ -62,9 +66,13 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
             doctor: {
               code: selfie_form.doctor.code,
               full_name: selfie_form.doctor.full_name,
+              qualification: selfie_form.doctor.qualification,
+              description: selfie_form.doctor.desc
             },
             patient: {
               name: selfie_form.patient.name,
+              sex: selfie_form.patient.sex || '',
+              image_url: selfie_form.selfie_image.image
             }
           },
         }
@@ -102,12 +110,13 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
 
     # if patient exists, update their details, else create
     if patient
-      patient.update({ :email => params[:patient][:email].downcase.strip}) if patient.email.blank?
+      patient.update({ :email => params[:patient][:email].downcase.strip, :sex => params[:patient][:sex].downcase.titleize}) if patient.email.blank?
     else
       patient = Patient.create({
         :name => params[:patient][:fullname].downcase.titleize.strip,
         :mobile => params[:patient][:mobile],
         :email => params[:patient][:email].downcase.strip,
+        :sex => params[:patient][:sex].downcase.titleize,
         :pay_status => 'selfie checkup',
       })
     end
