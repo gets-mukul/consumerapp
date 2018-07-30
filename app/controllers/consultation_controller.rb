@@ -55,9 +55,6 @@ class ConsultationController < ApplicationController
   end
 
   def consultation_form
-    Rails.logger.info 'in consultation form------------'
-    Rails.logger.info params[:condition]
-    Rails.logger.info current_consultation
     if params[:condition]
       session[:condition] = @condition = params[:condition]
       create unless current_consultation.present?
@@ -90,15 +87,11 @@ class ConsultationController < ApplicationController
   end
 
   def create
-    Rails.logger.info 'in create------------'
-    # check if this patient started a consultation exists in the last ~30 mins
-    consultation = Consultation.where(patient_id: current_user.id).where("created_at >= ?", DateTime.now-0.02).order('id desc')
-    if consultation.present?
+    # fetch his 3 latest consultations and pick the one thats first according to @@latest_order
+    @consultation = Consultation.where(patient_id: current_user.id).order('created_at DESC').limit(3).sort_by{|x| ConsultationController.latest_order.index x.user_status}.first
 
-      # get the consultation with latest status from these consultations
-      @consultation = consultation.sort_by{|x| ConsultationController.latest_order.index x.user_status}[0]
-
-      unless @consultation.pay_status == 'paid'
+    if @consultation.present?
+      if @consultation.user_status.start_with?('registered', 'red flag')
 
         # update consultation details
 

@@ -8,7 +8,6 @@ class CreateQuestionnaires < ActiveRecord::Migration[5.0]
       t.string    :variables,         array: true
       t.string    :image
       t.timestamps
-
     end
   end
 end

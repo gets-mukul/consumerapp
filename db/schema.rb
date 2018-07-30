@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180627070335) do
+ActiveRecord::Schema.define(version: 20180716093931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -207,6 +207,31 @@ ActiveRecord::Schema.define(version: 20180627070335) do
     t.datetime "updated_at"
     t.index ["consultation_id"], name: "index_payments_on_consultation_id", using: :btree
     t.index ["patient_id"], name: "index_payments_on_patient_id", using: :btree
+  end
+
+  create_table "questionnaire_logics", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "questionnaire_id"
+    t.boolean  "is_mandatory"
+    t.boolean  "requires_check"
+    t.jsonb    "jump_logic"
+    t.jsonb    "static_params"
+    t.jsonb    "dynamic_params"
+    t.integer  "go_to",                         array: true
+    t.boolean  "save_checkpoint"
+    t.integer  "entry_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["questionnaire_id"], name: "index_questionnaire_logics_on_questionnaire_id", using: :btree
+  end
+
+  create_table "questionnaire_response_images", force: :cascade do |t|
+    t.integer  "questionnaire_response_id"
+    t.string   "image"
+    t.string   "image_type"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.index ["questionnaire_response_id"], name: "index_by_questionnaire_response", using: :btree
   end
 
   create_table "questionnaire_responses", force: :cascade do |t|
