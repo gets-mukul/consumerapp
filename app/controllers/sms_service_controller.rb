@@ -23,7 +23,7 @@ class SmsServiceController < ApplicationController
       return sms
     when "paid_follow_up"
       name = patient.name.split[0]
-      sms = "Hey #{name}, a quick reminder that your follow-up is due. Don't worry follow-ups are just Rs.100. Just msg us on https://bit.do/flwp when you're ready"
+      sms = "Hey #{name}, your follow-up is due. Don't worry follow-ups are just Rs.150, or get a pack of 3 for just Rs.300. Msg us on https://bit.do/flwp when ready!"
       return sms
     else
       return ""
