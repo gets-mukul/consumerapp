@@ -25,14 +25,20 @@ class PatientsController < ApplicationController
   # GET /patients
   def login_with_coupon
     @coupon = Coupon.find_by coupon_code: params[:promo]
-    if @coupon and @coupon.status != 'coupon used' and @coupon.count < @coupon.max_count
+    if @coupon && ((@coupon.count<@coupon.max_count) && (@coupon.expires_on.present? ? Time.new <= @coupon.expires_on : true))
       @coupon.update(status: 'coupon entered')
       session[:coupon_applied] = true
       session[:promo_code] = params[:promo]
     end
 
     if params[:url]=='patients'
-      @patient = Patient.find_by_mobile(patient_params[:mobile])
+      if params[:p]
+        id = decrypt(params[:p], 0)
+        redirect_to "/?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query if id.nil?
+        @patient = Patient.find_by_id id
+      else
+        @patient = Patient.find_by_mobile(patient_params[:mobile])
+      end
       register @patient
       redirect_to "/consult?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
     elsif params[:url]=='payment'

@@ -84,11 +84,11 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
             category: simple_quiz_response.diagnosis.sub_category
           }
         end
-
         render json: {
           status: 'selfie found',
           diagnosis: diagnosis
         }, status: :ok
+        selfie_form.update({ :status => "#{selfie_form.status}-viewed" })
         return
       end
     end
