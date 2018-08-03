@@ -11,7 +11,7 @@ class SendOutDailySelfieCheckupStatsWorker
 				:overdue => SelfieForm.all.where(:doctor => doctor, :status => 'pending').where('created_at <= ?', (Time.now - 24.hours)).count
 			}
 			puts "SENDING EMAILS TO #{doctor.email}"
-			unless stats[:overdue].zero?
+			unless stats[:pending].zero?
 				DoctorNotifierMailer.send_selfie_stats_mail(doctor, stats).deliver_later()
 				SmsServiceController.send_doctor_stats_sms(doctor, stats)
 			end
