@@ -14,7 +14,8 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
         # if key is valid render the diagnosis page
         conditions = selfie_form.conditions.select(:key, :title, :inline_desc, :desc)
         inline_descriptors = conditions.collect(&:inline_desc)
-        login_link = "/consult/patients?name=#{selfie_form.patient.name}&mobile=#{selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
+        # login_link = "/consult/patients?name=#{selfie_form.patient.name}&mobile=#{selfie_form.patient.mobile}&referrer=SelfieCheckupDiagnosis&utm_source=SelfieCheckupDiagnosis&utm_medium=cpa&utm_campaign=SelfieCheckupDiagnosis"
+        login_link = "/consult/patients?name=#{selfie_form.patient.name}&mobile=#{selfie_form.patient.mobile}"
 
         inline_description = ''
         description = ''
@@ -89,7 +90,7 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
           diagnosis: diagnosis
         }, status: :ok
 
-        selfie_form.update({ :status => "#{selfie_form.status}-viewed" }) unless selfie_form.end_with? "viewed"
+        selfie_form.update({ :status => "#{selfie_form.status}-viewed" }) unless selfie_form.status.end_with? "viewed"
         return
       end
     end
