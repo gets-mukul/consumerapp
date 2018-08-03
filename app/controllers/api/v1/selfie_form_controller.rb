@@ -88,7 +88,8 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
           status: 'selfie found',
           diagnosis: diagnosis
         }, status: :ok
-        selfie_form.update({ :status => "#{selfie_form.status}-viewed" })
+
+        selfie_form.update({ :status => "#{selfie_form.status}-viewed" }) unless selfie_form.end_with? "viewed"
         return
       end
     end
