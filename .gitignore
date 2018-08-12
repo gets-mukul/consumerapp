@@ -8,7 +8,7 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
-/shared/logs/*
+/shared/log/*
 /shared/pids/*
 /shared/sockets/*
 !/shared/logs/.keep
