@@ -323,7 +323,13 @@ ActiveAdmin.register Consultation do
 
   csv force_quotes: true, col_sep: ',' do
     column :created_at
-    column :id, :label => 'Consultation id'
+    column "Consultation id" do |cs|
+      cs.id
+    end
+    column "Patient id" do |cs|
+      cs.patient.id
+    end
+
     column :patient
     column "Mobile" do |cs|
       cs.patient.mobile

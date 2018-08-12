@@ -350,7 +350,7 @@ class PaymentController < ApplicationController
   end
 
   def chatbot_handler
-    current_consultation.questionnaire_response.update(:form_finished_at => DateTime.now())
+    current_consultation.questionnaire_response.update({:status => 'form filled', :form_finished_at => DateTime.now()})
     current_consultation.update(user_status: 'form filled', pay_status: 'payment pending')
 
     current_user.sex = current_consultation.questionnaire_response.responses["2"]["answer"] if current_consultation.questionnaire_response.responses["2"]

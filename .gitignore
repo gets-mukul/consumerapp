@@ -19,6 +19,7 @@ shared/sockets/*
 !/log/.keep
 !/tmp/.keep
 Gemfile.lock
+public/consult
 
 # Ignore Byebug command history file.
 .byebug_history

@@ -30,22 +30,29 @@
       <td width="56px"></td>
       <td style="padding: 0 24px;">
         <table style="color:#555; font-family: Helvetica, Arial, Verdana, Trebuchet MS">
-          <% @msgs.each do |key, value| %>
-          <tr>
-            <td>
-              <span style="font-size:18px; font-weight:700;"><%= key %></span>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <ul style="font-size: 14px; line-height:20px;color:#777;">
-
-                <% value.each do |msg| %>
-                  <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </td>
-          </tr>
+          <% if @msgs.class == Array %>
+            <% @msgs.each do |key, value| %>
+            <tr>
+              <td>
+                <span style="font-size:18px; font-weight:700;"><%= key %></span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <ul style="font-size: 14px; line-height:20px;color:#777;">
+                  <% value.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </td>
+            </tr>
+            <% end %>
+          <% else %>
+            <tr>
+              <td>
+                <span style="font-size:18px; font-weight:700;"><%= @msgs %></span>
+              </td>
+            </tr>
           <% end %>
           <tr>
             <td style="padding: 24px 24px 10px 0;">
