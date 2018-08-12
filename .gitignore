@@ -8,6 +8,12 @@
 /.bundle
 
 # Ignore all logfiles and tempfiles.
+shared/logs/*
+shared/pids/*
+shared/sockets/*
+!shared/logs/.keep
+!shared/pids/.keep
+!shared/sockets/.keep
 /log/*
 /tmp/*
 !/log/.keep
@@ -35,7 +41,6 @@ config/initializers/secret_token.rb
 ## Environment normalization:
 /.bundle
 /vendor/bundle
-#config/puma.rb
-shared
+config/puma.rb
 *.swp
 vendor/*
