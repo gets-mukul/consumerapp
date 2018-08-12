@@ -12,6 +12,10 @@ class SelfieForm < ApplicationRecord
   scope "No conditions", -> { where("status like 'no-cond%'") }
   scope "Diagnosed", -> { where("status like 'diag%'") }
   scope "Diagnosis sent", -> { where("(status like 'diag%') and (status like '%sms%' or status like '%mail%') ") }
+  scope :updated_between, lambda {|start_day, end_day| where('updated_at >= :start and updated_at < :end', :start => (start_day).days.from_now.beginning_of_day, :end   => (end_day+1).days.from_now.beginning_of_day)}
+  scope :diagnosis_sent, -> { where("status similar to ?", "diag%(sms|mail)%") }
+  scope :viewed, -> { where("status LIKE ?", "%-viewed%") }
+  scope :not_viewed, -> { diagnosis_sent.where("status NOT LIKE ?", "%-viewed%") }
 
   def set_defaults
 	  self.status ||= 'pending'

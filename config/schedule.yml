@@ -1,5 +1,5 @@
 admin_form_fill_mails_job:
-  cron: "0 18 * * *" # execute at every day 6 p.m. 
+  cron: "0 18 * * *" # execute at every day 6 p.m.
   class: "DeliverAdminFormFillsMailWorker"
   queue: default
 
@@ -14,8 +14,13 @@ send_out_selfie_diagnosis_job:
   queue: default
 
 send_out_daily_emails_job:
-  cron: "0 18 * * *" # execute every day at 7pm
+  cron: "0 18 * * *" # execute every day at 6pm
   class: "SendOutDailyEmailsWorker"
+  queue: default
+
+send_out_daily_sms_job:
+  cron: "0 19 * * *" # execute every day at 7pm
+  class: "SendOutDailySmsWorker"
   queue: default
 
 # update_google_sheets_job:

@@ -1,5 +1,6 @@
 class SendOutSelfieDiagnosisWorker
   include Sidekiq::Worker
+  include SmsServiceHelper
   sidekiq_options :queue => :low, :retry => 1
 
   def perform()
@@ -7,9 +8,14 @@ class SendOutSelfieDiagnosisWorker
 
     # get all the diagnosed selfies
     selfie_forms = SelfieForm.where(:status => 'diagnosed')
-    
+
     selfie_forms.each do |selfie_form|
-      SmsServiceController.send_selfie_diagnosis_sms(selfie_form.id)
+      SmsServiceController.send_sms(
+        message: SelfieDiagnosis::HasNotViewed.day_0_sms(selfie_form.patient.name, selfie_form.diagnosis_link),
+        mobile: selfie_form.patient.mobile,
+        sms_type: 'selfie diagnosis',
+        patient_id: selfie_form.patient.id
+      )
       if selfie_form.patient.email.present?
         CustomerSelfieCheckupMailer.send_customer_diagnosis_mail(selfie_form.patient, selfie_form.diagnosis_link).deliver_later()
         selfie_form.update(:status => 'diagonsed-sms-mailed')
