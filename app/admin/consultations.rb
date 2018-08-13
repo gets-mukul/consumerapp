@@ -179,6 +179,16 @@ ActiveAdmin.register Consultation do
             row("Login link") { "https://bit.do/rme?p=" + encrypt(consultation.patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish" }
           end
 
+          attributes_table  do
+            row("Payment link") {
+                if consultation.user_status != 'registered'
+                   "https://remedicohealth.com/consult/payment/instant_payment?p=" + encrypt(consultation) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish"
+                else
+                   ""
+                end
+            }
+            row("Login link") { "https://remedicohealth.com/consult/patients/instant_login?p=" + encrypt(consultation.patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish" }
+          end
 
           panel "Patient" do
             table_for Patient.select(:id, :mobile, :email).where(:id => consultation.patient_id)  do
