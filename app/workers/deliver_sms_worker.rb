@@ -8,14 +8,14 @@ class DeliverSMSWorker
 
 		if selfie_form_id
 			# day 0 viewed but no FF
-			if (selfie_form = SelfieForm.where(:id => selfie_form_id).viewed.where.not(:patient_id => Consultation.where.not(:user_status => ['form filled', 'free consultation done', 'red flag', 'payment failed', 'paid']).select(:patient_id))) {
+			if (selfie_form = SelfieForm.where(:id => selfie_form_id).viewed.where.not(:patient_id => Consultation.where.not(:user_status => ['form filled', 'free consultation done', 'red flag', 'payment failed', 'paid']).select(:patient_id)))
 				SmsServiceController.sens_sms_new(
 					message: SelfieDiagnosis::ViewedButNoFF.day_0_sms(selfie_form.patient),
 					mobile: selfie_form.patient.mobile,
 					sms_type: 'sms_sc_diagnosis_viewed_no_ff_d0_v1',
 					patient_id: selfie_form.patient.id,
 				)
-		} elsif (consultation = Consultation.where("user_status similar to ?", "form filled|payment failed").where(:patient_id => SelfieForm.where(:id => selfie_form_id).viewed.select(:patient_id))) {
+			elsif (consultation = Consultation.where("user_status similar to ?", "form filled|payment failed").where(:patient_id => SelfieForm.where(:id => selfie_form_id).viewed.select(:patient_id)))
 				SmsServiceController.sens_sms_new(
 					message: SelfieDiagnosis::ViewedButNoFF.day_0_sms(consultation.patient),
 					mobile: consultation.patient.mobile,
@@ -23,7 +23,6 @@ class DeliverSMSWorker
 					patient_id: consultation.patient.id,
 					consultation_id: consultation.id
 				)
-			}
 			end
 		elsif patient_id
 			sent_sms = SmsService.where(patient_id: patient_id).where("created_at >= ?", DateTime.now-0.25)
