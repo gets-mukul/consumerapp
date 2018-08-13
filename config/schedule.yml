@@ -23,11 +23,6 @@ send_out_daily_sms_job:
   class: "SendOutDailySmsWorker"
   queue: default
 
-# update_google_sheets_job:
-#   cron: "0 */3 * * *" # execute every 3 hours
-#   class: "UpdateSheetsWorker"
-#   queue: default
-
 send_out_doctor_daily_selfie_checkup_stats_job_06:
   cron: "0 6 * * *" # execute every day at  6am for Dr. Asmita
   class: "SendOutDailySelfieCheckupStatsWorker"

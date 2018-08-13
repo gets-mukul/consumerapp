@@ -58,7 +58,8 @@ ActiveAdmin.register Patient do
       }
 
       attributes_table do
-        row("Login link full") { "https://bit.do/rme?p=" + encrypt(patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish"}
+        row("Login link full shortened") { "https://bit.do/rme?p=" + encrypt(patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish"}
+        row("Login link full") { "https://remedicohealth.com/consult/patients/instant_login?p=" + encrypt(patient) + "&utm_source=crm&utm_medium=whatsapp&referrer=crm&utm_campaign=crm_wa_aish" }
       end
 
       active_admin_comments
