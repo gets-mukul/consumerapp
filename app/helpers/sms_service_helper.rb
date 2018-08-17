@@ -2,11 +2,6 @@ module SmsServiceHelper
   extend ActiveSupport::Concern
   require 'encrypt'
 
-  def send_sms(message: '', sms: '')
-    puts message
-    puts sms
-  end
-
   class SelfieDiagnosis
 
     module HasNotViewed

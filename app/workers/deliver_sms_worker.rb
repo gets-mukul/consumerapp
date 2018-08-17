@@ -1,5 +1,6 @@
 class DeliverSMSWorker
 	include Sidekiq::Worker
+	include SmsServiceHelper
 	sidekiq_options :retry => false
 
 	def perform(patient_id: nil, selfie_form_id: nil)

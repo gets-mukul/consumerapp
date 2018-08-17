@@ -1,5 +1,6 @@
 class SendOutDailySmsWorker
   include Sidekiq::Worker
+  include SmsServiceHelper
   sidekiq_options :queue => :low, :retry => 1
 
   def perform()
