@@ -8,15 +8,15 @@ module SmsServiceHelper
       class << self
 
         def day_0_sms(name, link)
-          "Hi #{shorten_name(name)}! Your selfie diagnosis is ready. Check it out at #{day_n_sms_link(0, link)} -Remedico"
+          "Hi #{SmsServiceHelper.shorten_name(name)}! Your selfie diagnosis is ready. Check it out at #{day_n_sms_link(0, link)} -Remedico"
         end
 
         def day_3_sms(name, link)
-          "Hi #{shorten_name(name)}! Got a chance to check ur selfie checkup diagnosis yet? Click #{day_n_sms_link(3, link)} to check it out -Remedico"
+          "Hi #{SmsServiceHelper.shorten_name(name)}! Got a chance to check ur selfie checkup diagnosis yet? Click #{day_n_sms_link(3, link)} to check it out -Remedico"
         end
 
         def day_5_sms(name, link)
-          "Hey #{shorten_name(name)}, your skin diagnosis is ready! Learn what the doctors had to say about your skin - #{day_n_sms_link(5, link)} -Remedico"
+          "Hey #{SmsServiceHelper.shorten_name(name)}, your skin diagnosis is ready! Learn what the doctors had to say about your skin - #{day_n_sms_link(5, link)} -Remedico"
         end
 
         def day_7_sms(link)
@@ -27,7 +27,6 @@ module SmsServiceHelper
           def day_n_sms_link nth_day, link
             "https://bit.do/scnv#{nth_day.to_s}?s=#{link.split('=').last}"
           end
-
       end
     end
 
@@ -35,7 +34,7 @@ module SmsServiceHelper
       class << self
 
         def day_0_sms patient
-          "Hey #{shorten_name(patient.name)}! Now that you've checked ur diagnosis, take ur first steps towards great skin & hair by consulting our doctors online - #{day_n_sms_link(0, patient)} -Remedico"
+          "Hey #{SmsServiceHelper.shorten_name(patient.name)}! Now that you've checked ur diagnosis, take ur first steps towards great skin & hair by consulting our doctors online - #{day_n_sms_link(0, patient)} -Remedico"
         end
 
         def day_3_sms patient
@@ -43,7 +42,7 @@ module SmsServiceHelper
         end
 
         def day_7_sms patient
-          "Hey #{shorten_name(patient.name)}! Did u know that our dermatologists personalize ur treatment plan? Get your treatment plan today - #{day_n_sms_link(7, patient)} -Remedico"
+          "Hey #{SmsServiceHelper.shorten_name(patient.name)}! Did u know that our dermatologists personalize ur treatment plan? Get your treatment plan today - #{day_n_sms_link(7, patient)} -Remedico"
         end
 
         private
@@ -57,7 +56,7 @@ module SmsServiceHelper
       class << self
 
         def day_0_sms patient
-          "Hi #{shorten_name(patient.name)}! Thanks for trying out Remedico! You filled in a questionnaire but we didn't receive the payment. To get ur treatment plan from our dermatologists within %d hours, click here to pay #{day_n_sms_link(0, patient)} Questions? whatsapp us at 8433848969"
+          "Hi #{SmsServiceHelper.shorten_name(patient.name)}! Thanks for trying out Remedico! You filled in a questionnaire but we didn't receive the payment. To get ur treatment plan from our dermatologists within %d hours, click here to pay #{day_n_sms_link(0, patient)} Questions? whatsapp us at 8433848969"
         end
 
         def day_3_sms patient
@@ -76,7 +75,7 @@ module SmsServiceHelper
     end
   end
 
-  def shorten_name name
+  def self.shorten_name name
     name.split.first
   end
 
