@@ -10,7 +10,7 @@ class SendOutSelfieDiagnosisWorker
     selfie_forms = SelfieForm.where(:status => 'diagnosed')
 
     selfie_forms.each do |selfie_form|
-      SmsServiceController.send_sms(
+      SmsServiceController.sens_sms_new(
         message: SelfieDiagnosis::HasNotViewed.day_0_sms(selfie_form.patient.name, selfie_form.diagnosis_link),
         mobile: selfie_form.patient.mobile,
         sms_type: 'selfie diagnosis',
