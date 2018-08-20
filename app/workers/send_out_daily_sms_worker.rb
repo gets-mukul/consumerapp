@@ -40,7 +40,7 @@ class SendOutDailySmsWorker
     selfie_forms = SelfieForm.not_viewed.updated_between(-7, -7)
     selfie_forms.each do |selfie_form|
       SmsServiceController.send_sms_new(
-        message: SelfieDiagnosis::HasNotViewed.day_7_sms(selfie_form.patient.name, selfie_form.diagnosis_link),
+        message: SelfieDiagnosis::HasNotViewed.day_7_sms(selfie_form.diagnosis_link),
         mobile: selfie_form.patient.mobile,
         sms_type: 'sms_sc_diagnosis_not_viewed_d7_v1',
         patient_id: selfie_form.patient.id
