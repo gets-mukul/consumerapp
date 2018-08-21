@@ -23,7 +23,7 @@ class SmsServiceController < ApplicationController
       return sms
     when "paid_follow_up"
       name = patient.name.split[0]
-      sms = "Hey #{name}, a quick reminder that your follow-up is due. Don't worry follow-ups are just Rs.100. Just msg us on https://bit.do/flwp when you're ready"
+      sms = "Hey #{name}, your follow-up is due. Don't worry follow-ups are just Rs.150, or get a pack of 3 for just Rs.300. Msg us on https://bit.do/flwp when ready!"
       return sms
     else
       return ""
@@ -74,50 +74,9 @@ class SmsServiceController < ApplicationController
     end
   end
 
-  # usage: message_body("Kelly", 1234)
-  def self.selfie_diagnosis_message_body(name, selfie_link)
-    login_link = "https://bit.do/rmselfie?s=" + selfie_link.split('=').last
-    sms = "Hi #{name}! Your selfie diagnosis is ready. Check it out at #{login_link} -Team Remedico"
-    return sms
-  end
-
-  def self.send_selfie_diagnosis_sms(selfie_id)
-    selfie_form = SelfieForm.find(selfie_id)
-    message = SmsServiceController.selfie_diagnosis_message_body(selfie_form.patient.name.split[0], selfie_form.diagnosis_link)
-    puts "SENDING SELFIE SMS >"
-    uri = URI.parse("https://api.exotel.com/v1/Accounts/"+Rails.application.secrets.EXOTEL_SID+"/Sms/send.json")
-    request = Net::HTTP::Post.new(uri)
-    request.basic_auth(Rails.application.secrets.EXOTEL_SID, Rails.application.secrets.EXOTEL_TOKEN);
-    request.body = "From=02233756413&To="+selfie_form.patient.mobile+"&Body="+message
-
-    req_options = {
-      use_ssl: uri.scheme == "https",
-    }
-
-    json = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
-      http.request(request)
-    end
-    response = ""
-    response = JSON.parse(json.body)
-
-    @sms = SmsService.new({
-      patient_id: selfie_form.patient.id,
-      sms_type: "selfie diagnosis"
-    })
-    unless response["SMSMessage"].nil?
-      @sms.assign_attributes({
-        sms_id: response["SMSMessage"]["Sid"],
-        detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
-        status: response["SMSMessage"]["Status"],
-        date_sent: response["SMSMessage"]["DateSent"]
-      })
-      selfie_form.update({status: 'diagonsed-sms'})
-    end
-    @sms.save!
-  end
-
   def self.send_doctor_stats_sms(doctor, stats)
-    message = "Remedico: Selfie checkup stats\r\n\r\nPending Selfies: " + stats[:overdue].to_s + "\r\nOverdue Selfies: " + stats[:pending].to_s + "\r\nVisit https://remedicohealth.com/docsapp to check"
+    message = "Remedico: Selfie checkup stats - Pending Selfies: " + stats[:overdue].to_s + " Overdue Selfies: " + stats[:pending].to_s + " Visit https://remedicohealth.com/docsapp to check"
+
 
     puts "SENDING DOCTOR SMS >"
     uri = URI.parse("https://api.exotel.com/v1/Accounts/"+Rails.application.secrets.EXOTEL_SID+"/Sms/send.json")
@@ -146,7 +105,40 @@ class SmsServiceController < ApplicationController
         date_sent: response["SMSMessage"]["DateSent"]
       })
     end
-    @sms.save!
+    @sms.save
+  end
+
+  def self.send_sms_new(message: '', mobile: '', sms_type: '', patient_id: nil, consultation_id: nil)
+    puts "SENDING SMS >"
+    uri = URI.parse("https://api.exotel.com/v1/Accounts/"+Rails.application.secrets.EXOTEL_SID+"/Sms/send.json")
+    request = Net::HTTP::Post.new(uri)
+    request.basic_auth(Rails.application.secrets.EXOTEL_SID, Rails.application.secrets.EXOTEL_TOKEN);
+    request.body = "From=02233756413&To="+mobile+"&Body="+message
+
+    req_options = {
+      use_ssl: uri.scheme == "https",
+    }
+
+    json = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+      http.request(request)
+    end
+    response = ""
+    response = JSON.parse(json.body)
+
+    @sms = SmsService.new({
+      patient_id: patient_id,
+      consultation_id: consultation_id,
+      sms_type: sms_type
+    })
+    unless response["SMSMessage"].nil?
+      @sms.assign_attributes({
+        sms_id: response["SMSMessage"]["Sid"],
+        detailed_status_code: response["SMSMessage"]["DetailedStatusCode"],
+        status: response["SMSMessage"]["Status"],
+        date_sent: response["SMSMessage"]["DateSent"]
+      })
+    end
+    @sms.save
   end
 
 end

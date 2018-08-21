@@ -358,11 +358,6 @@ table.billing-information {
   }
 }
 
-.satisfactio-text{
-  p {
-    width: 229px;
-  }
-}
 @media only screen and (max-width: 600px){
   .guaranteed-img {
     max-width: 170px;
@@ -378,12 +373,4 @@ table.billing-information {
       margin-left: 6px;
     }
   }
-}
-
-.old-guaranteed-section {
-  display: block;
-}
-
-.new-guaranteed-section {
-  display: none;
 }

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
         # consultations
         get 'consultations' => 'consultation#get_consultations'
+        get 'consultation/:id/register' => 'consultation#register'
 
         # selfie form
         post 'selfie-form/create' => 'selfie_form#create'
@@ -78,15 +79,6 @@ Rails.application.routes.draw do
     get '/selfie_form', to: redirect('/selfie-form')
     get '/selfie_form/new', to: redirect('/selfie-form')
     get '/selfie-diagnosis', to: redirect('/selfie-diagnosis')
-    # get '/selfie_form', to: '/selfie-checkup-form'
-    # get '/selfie_form/new', to: '/selfie-checkup-form'
-
-    # get '/selfie_form', to: 'selfie_form#new'
-    # get '/selfie_form/new', to: 'selfie_form#new'
-    # post '/selfie_form/create_image', to: 'selfie_form#create_image', defaults: {format: 'json'}
-    # post '/selfie_form/create_patient', to: 'selfie_form#create_patient', defaults: {format: 'json'}
-    # get '/selfie_form/thank_you', to: 'selfie_form#thank_you'
-    # get '/selfie-diagnosis', to: 'selfie_form#selfie_diagnosis'
   end
   
   scope '/docsapp' do
