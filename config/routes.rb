@@ -101,14 +101,14 @@ Rails.application.routes.draw do
     get 'diagnose', to: 'docsapp/dashboard#diagnose_selfie'
     post '/save_condition', to: 'docsapp/dashboard#save_condition'
   end
-  
-  scope '/internal' do
+
+  scope '/' do
     devise_for :admin_users, path: 'admin', controllers: {
       sessions: 'admin_users/sessions',
       registrations: 'admin_users/registrations'
     }
     ActiveAdmin.routes(self)
-  
+
     scope '/admin' do
       devise_scope :admin_user do
 
@@ -118,7 +118,7 @@ Rails.application.routes.draw do
         authenticated :admin do
           root to: 'dashboard#index', as: 'authenticated_admin_user_root'
         end
-    
+
         unauthenticated :admin do
           root to: 'admin_users/sessions#new', as: 'unauthenticated_admin_user_root'
         end
