@@ -2,17 +2,17 @@ class S3BucketImageResize
   require 'aws-sdk'
   require "mini_magick"
 
-  BUCKET_NAME = 'remedico-test'
-  SQS_REGION = 'ap-southeast-1'
-  SQS_URL = 'https://sqs.ap-southeast-1.amazonaws.com/115711937214/selfie-diagnosis-image-upload-test'
-  ACCESS_KEY_ID = 'AKIAJTZX33GX4MBHGRIQ'
-  ACCESS_KEY_SECRET = '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'
+  S3_BUCKET = Rails.application.secrets.S3_BUCKET
+  SQS_REGION = Rails.application.secrets.SQS_REGION
+  SQS_URL = Rails.application.secrets.SQS_URL
+  AWS_ACCESS_KEY_ID = Rails.application.secrets.AWS_ACCESS_KEY_ID
+  AWS_SECRET_ACCESS_KEY = Rails.application.secrets.AWS_SECRET_ACCESS_KEY
 
   def read_sqs_messages
     sqs = Aws::SQS::Client.new(
       region: SQS_REGION,
-      access_key_id: ACCESS_KEY_ID,
-      secret_access_key: ACCESS_KEY_SECRET
+      access_key_id: AWS_ACCESS_KEY_ID,
+      secret_access_key: AWS_SECRET_ACCESS_KEY
     )
     resp = sqs.receive_message(queue_url: SQS_URL, max_number_of_messages: 10)
     puts resp.length
@@ -49,8 +49,8 @@ class S3BucketImageResize
     # code to upload compressed image to s3
     s3 = Aws::S3::Resource.new(
       region: SQS_REGION,
-      access_key_id: ACCESS_KEY_ID,
-      secret_access_key: ACCESS_KEY_SECRET
+      AWS_ACCESS_KEY_ID: AWS_ACCESS_KEY_ID,
+      secret_access_key: AWS_SECRET_ACCESS_KEY
     )
     url.sub! '/image/', '/image-min/'
     s3.bucket(ENV["S3_BUCKET"]).object(url).upload_file(file, {:acl => 'public-read'})
