@@ -43,7 +43,7 @@ class SendOutDailyEmailsWorker
     end
     
     # day 7
-    consultations = Consultation.created_between(-7, -7).where("user_status like 'form filled%' or user_status like 'payment failed%' or user_status like 'processing%'").in_groups(2)
+    consultations = Consultation.created_between(-7, -7).where("user_status like 'form filled%' or user_status like 'payment failed%' or user_status like 'processing%'").in_groups(2, false)
     consultations[0].each do |consultation|
       CustomerFormFilledMailer.send_customer_benefits_treatment_plan_mail(consultation).deliver_later if consultation.patient.email.present?
     end
