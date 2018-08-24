@@ -1,4 +1,4 @@
-class S3BucketImageResize
+module S3BucketImageResize
   require 'aws-sdk'
   require "mini_magick"
 
