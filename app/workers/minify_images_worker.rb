@@ -3,7 +3,7 @@ class MinifyImagesWorker
   include S3BucketImageResize
   sidekiq_options :retry => false
 
-  def perform(patient_id: nil, selfie_form_id: nil)
+  def perform(*args)
     puts "SIDEKIQ WORKER RUNNING"
     puts "MINIFY IMAGES"
     read_sqs_messages
