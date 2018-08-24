@@ -1,26 +1,31 @@
 admin_form_fill_mails_job:
-  cron: "0 18 * * *" # execute at every day 6 p.m.
+  cron: "0 18 * * *"
   class: "DeliverAdminFormFillsMailWorker"
   queue: default
 
 allocate_doctors_to_selfies_job:
-  cron: "0 */4 * * *" # execute every 1 hour
+  cron: "0 */4 * * *"
   class: "AllocateDoctorsToSelfiesWorker"
   queue: default
 
 send_out_selfie_diagnosis_job:
-  cron: "0 */2 * * *" # execute every 2 hours
+  cron: "0 */2 * * *"
   class: "SendOutSelfieDiagnosisWorker"
   queue: default
 
 send_out_daily_emails_job:
-  cron: "0 18 * * *" # execute every day at 6pm
+  cron: "0 18 * * *"
   class: "SendOutDailyEmailsWorker"
   queue: default
 
 send_out_daily_sms_job:
-  cron: "0 19 * * *" # execute every day at 7pm
+  cron: "0 19 * * *"
   class: "SendOutDailySmsWorker"
+  queue: default
+
+minify_s3_images_job:
+  cron: "30 */2 * * *"
+  class: "MinifyImagesWorker"
   queue: default
 
 send_out_doctor_daily_selfie_checkup_stats_job_06:
