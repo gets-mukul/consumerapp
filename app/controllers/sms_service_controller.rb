@@ -108,7 +108,7 @@ class SmsServiceController < ApplicationController
     @sms.save
   end
 
-  def self.send_sms_new(message: '', mobile: '', sms_type: '', patient_id: nil, consultation_id: nil)
+  def self.send_sms_new(message='', mobile='', sms_type='', patient_id=nil, consultation_id=nil)
     puts "SENDING SMS >"
     uri = URI.parse("https://api.exotel.com/v1/Accounts/"+Rails.application.secrets.EXOTEL_SID+"/Sms/send.json")
     request = Net::HTTP::Post.new(uri)
