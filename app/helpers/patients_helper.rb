@@ -7,7 +7,7 @@ module PatientsHelper
     session[:user_id] = user.id
     session[:consultation_id] = nil
     session[:condition] = params[:condition]
-    logger.info "Registered #{user.name}, condition: #{params[:condition]}"
+    logger.info "Registered #{user.name}, condition: #{session[:condition]}"
     setup_patient_source
     DeliverSMSWorker.perform_in(1.hours, user.id) if Rails.env.production?
     setup_patient_referrals if params[:refpt].present?
