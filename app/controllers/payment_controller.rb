@@ -16,7 +16,7 @@ class PaymentController < ApplicationController
   before_filter :check_current_user, :check_current_consultation, except: [:instant_payment, :new, :create]
   # before_action :fetch_matched_consultation_doctor, except: [:instant_payment]
   after_action :update_payment, only: [:failure]
-  skip_before_action :verify_authenticity_token, only: [:success, :failure, :initiate_payment]
+  skip_before_action :verify_authenticity_token, only: [:success, :failure, :initiate_payment, :payment_paytm_update]
 
   def check_if_reverse_flow
     if session[:my_consultation_id]

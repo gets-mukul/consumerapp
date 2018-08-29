@@ -92,7 +92,7 @@ class Api::V1::SelfieFormController < Api::V1::ApiController
 
         unless selfie_form.status.end_with? "viewed"
           selfie_form.update({ :status => "#{selfie_form.status}-viewed" })
-          DeliverSmsWorker.perform_in(24.hours, nil, selfie_form.id) if Rails.env.production?
+          DeliverSMSWorker.perform_in(24.hours, nil, selfie_form.id) if Rails.env.production?
         end
         return
       end
