@@ -75,7 +75,7 @@ class SmsServiceController < ApplicationController
   end
 
   def self.send_doctor_stats_sms(doctor, stats)
-    message = "Remedico: Selfie checkup stats - Pending Selfies: " + stats[:overdue].to_s + " Overdue Selfies: " + stats[:pending].to_s + " Visit https://admin.remedicohealth.com/docsapp to check"
+    message = "Remedico: Selfie checkup stats - Pending Selfies: " + stats[:overdue].to_s + " Overdue Selfies: " + stats[:pending].to_s + " Visit http://admin.remedicohealth.com/docsapp to check"
 
 
     puts "SENDING DOCTOR SMS >"

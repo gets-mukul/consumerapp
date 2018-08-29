@@ -340,8 +340,8 @@ class PaymentController < ApplicationController
        # id exists, get consultation with that id
       @consultation = Consultation.find_by_id id
       if @consultation
-        register_consultation @consultation
         register @consultation.patient
+        register_consultation @consultation
         return redirect_to "/consult/payment?city=null&"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
       else
         redirect_to "/?"+params.permit(:utm_source, :utm_medium, :utm_campaign).to_query
