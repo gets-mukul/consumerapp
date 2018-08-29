@@ -4,6 +4,7 @@ ActiveAdmin.register SelfieForm do
 
   filter :id
   filter :patient_name, as: :string
+  filter :patient_mobile, as: :string
   filter :status, :as => :select
   filter :doctor, :as => :select
   filter :created_at
