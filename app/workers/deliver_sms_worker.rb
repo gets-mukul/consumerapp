@@ -3,7 +3,7 @@ class DeliverSMSWorker
 	include SmsServiceHelper
 	sidekiq_options :retry => false
 
-	def perform(patient_id: nil, selfie_form_id: nil)
+	def perform(patient_id=nil, selfie_form_id=nil)
 		puts "SIDEKIQ WORKER RUNNING"
 		puts "DELIVER SMS"
 

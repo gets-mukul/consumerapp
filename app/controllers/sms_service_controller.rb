@@ -75,7 +75,7 @@ class SmsServiceController < ApplicationController
   end
 
   def self.send_doctor_stats_sms(doctor, stats)
-    message = "Remedico: Selfie checkup stats - Pending Selfies: " + stats[:overdue].to_s + " Overdue Selfies: " + stats[:pending].to_s + " Visit https://admin.remedicohealth.com/docsapp to check"
+    message = "Remedico: Selfie checkup stats - Pending Selfies: " + stats[:overdue].to_s + " Overdue Selfies: " + stats[:pending].to_s + " Visit http://admin.remedicohealth.com/docsapp to check"
 
 
     puts "SENDING DOCTOR SMS >"
@@ -108,7 +108,7 @@ class SmsServiceController < ApplicationController
     @sms.save
   end
 
-  def self.send_sms_new(message: '', mobile: '', sms_type: '', patient_id: nil, consultation_id: nil)
+  def self.send_sms_new(message='', mobile='', sms_type='', patient_id=nil, consultation_id=nil)
     puts "SENDING SMS >"
     uri = URI.parse("https://api.exotel.com/v1/Accounts/"+Rails.application.secrets.EXOTEL_SID+"/Sms/send.json")
     request = Net::HTTP::Post.new(uri)
